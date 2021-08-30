@@ -1,0 +1,7 @@
+﻿{
+    "speed": 15.0,
+    "maxspeed": 17.0,
+    "friction": 7.0,
+    "downGravityOn": false,
+    "jump": 0.0
+}
