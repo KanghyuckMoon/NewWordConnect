@@ -1351,6 +1351,7 @@ MonoBehaviour:
     friction: 0
     downGravityOn: 0
     jump: 0
+    gravityScale: 1
 --- !u!61 &717279633
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1391,7 +1392,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 7
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0

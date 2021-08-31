@@ -16,6 +16,7 @@ public class PlayerMove : MonoBehaviour
     private float maxSpeed; //원하는 최대이동속도
     private float velocityX = 0;
     private float friction = 0; //마찰력
+    private float gravityScale = 0; // 중력
     private bool downGravity = false; //떨어지는 속도에 제한을 둘지
     private float jump = 0;
 
@@ -61,7 +62,9 @@ public class PlayerMove : MonoBehaviour
         maxSpeed = user.maxspeed;
         friction = user.friction;
         downGravity = user.downGravityOn;
+        gravityScale = user.gravityScale;
         rigid.drag = friction; // 마찰력 설정
+        rigid.gravityScale = gravityScale;
     }
 
     private void InputMove()

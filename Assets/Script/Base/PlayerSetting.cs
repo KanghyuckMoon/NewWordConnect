@@ -8,4 +8,5 @@ public class PlayerSetting
     public float friction;
     public bool downGravityOn;
     public float jump;
+    public float gravityScale;
 }
