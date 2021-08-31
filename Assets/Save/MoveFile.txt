@@ -3,6 +3,6 @@
     "maxspeed": 27.5,
     "friction": 7.5,
     "downGravityOn": true,
-    "jump": 0.0,
-    "gravityScale": 0.0
+    "jump": 20.0,
+    "gravityScale": 1.0
 }

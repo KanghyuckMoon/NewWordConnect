@@ -18,6 +18,7 @@ public class PlayerMove : MonoBehaviour
     private float friction = 0; //마찰력
     private float gravityScale = 0; // 중력
     private bool downGravity = false; //떨어지는 속도에 제한을 둘지
+    private bool jumpOn;
     private float jump = 0;
 
     private Rigidbody2D rigid;
@@ -46,6 +47,7 @@ public class PlayerMove : MonoBehaviour
     {
         //관리자전용 함수
         Setting(); // 설정 함순
+        InputJump();
 
         //입력 받는 곳
         InputMove();
@@ -63,8 +65,17 @@ public class PlayerMove : MonoBehaviour
         friction = user.friction;
         downGravity = user.downGravityOn;
         gravityScale = user.gravityScale;
+        jump = user.jump;
         rigid.drag = friction; // 마찰력 설정
         rigid.gravityScale = gravityScale;
+    }
+    private void InputJump()
+    {
+            if(Input.GetKeyDown(KeyCode.Space))
+            {
+                Debug.Log("asd");
+                Jump();
+            }
     }
 
     private void InputMove()
@@ -84,7 +95,11 @@ public class PlayerMove : MonoBehaviour
             rigid.velocity = new Vector2(Mathf.Clamp(rigid.velocity.x, -maxSpeed, maxSpeed), rigid.velocity.y);
         }
     }
-
+    private void Jump()
+    {
+        rigid.AddForce(Vector2.up * jump,ForceMode2D.Impulse);
+        jumpOn = true;
+    }
 
     //저장관련
     private void LoadToJson()
@@ -104,5 +119,10 @@ public class PlayerMove : MonoBehaviour
     private void OnApplicationQuit()
     {
         SaveToJson();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        jumpOn = false;
     }
 }
