@@ -22,49 +22,12 @@ public class WordManager : MonoBehaviour
     private List<string> conditionlist = new List<string>() { " ","1초 마다", "가만히 있을 때", "충돌할 때", "블록을 밟을 때", "입력할 때", "떨어질 때", "카메라에 보일 때", "소리를 낼 때", "특수" };
     private List<string> executionlist = new List<string>() { " ","뛰어 오른다", "1초 동안 빨라진다", "1초 동안 정지한다", "1초 동안 느려진다", "떨어진다", "커진다", "작아진다", "충돌하지 않는다", "특수" };
 
-
-
     [SerializeField]
-    private List<int> subjectUnlock = new List<int>(){ 
-        0,
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9
-    };
+    private List<int> subjectUnlock = new List<int>();//주어
     [SerializeField]
-    private List<int> conditionUnlock = new List<int>()
-         {
-        0,
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9
-    }; // 조건어
+    private List<int> conditionUnlock = new List<int>();// 조건어
     [SerializeField]
-    private List<int> executionUnlock = new List<int>()
-         {
-        0,
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9
-    }; // 실행어
+    private List<int> executionUnlock = new List<int>(); // 실행어
 
     [SerializeField]
     private int subjectWord = 0;
@@ -83,8 +46,6 @@ public class WordManager : MonoBehaviour
     [SerializeField]
     private int selectCount;
 
-    [SerializeField]
-    private UIManager uIManager;
 
     [SerializeField]
     private Text subjectText = null;
@@ -92,6 +53,19 @@ public class WordManager : MonoBehaviour
     private Text conditionText = null;
     [SerializeField]
     private Text executionText = null;
+
+    //UI
+    [SerializeField]
+    private GameObject scrollbar;
+    [SerializeField]
+    private GameObject panel; //패널
+    [SerializeField]
+    private List<GameObject> panellist;
+
+    private void Start()
+    {
+
+    }
 
     private void Update()
     {
@@ -101,7 +75,110 @@ public class WordManager : MonoBehaviour
         SelectCount();
     }
 
+    public void CreatePanel()
+    {
+        GameObject newPanel = null;
+        newPanel = Instantiate(panel, panel.transform.parent);
+        panellist.Add(newPanel);
+        SetListUI();
+        SetSizeListUI();
+    }
+    public void BackPanel()
+    {
+        if (scrollbar.transform.childCount == 1) return;
+        GameObject backPanel = null;
+        backPanel = scrollbar.transform.GetChild(scrollbar.transform.childCount - 1).gameObject;
+        Destroy(backPanel);
+        SetListUI();
+        SetSizeListUI();
+        panellist.RemoveAt(panellist.Count - 1);
+    }
+    public void ClearPanel()
+    {
+        int count = scrollbar.transform.childCount;
+        for (int i = 1; i < count; i++)
+        {
+            Destroy(scrollbar.transform.GetChild(i).gameObject);
+            panellist.RemoveAt(panellist.Count - 1);
+        }
+        SetSizeListUI();
+    }
+    private void SetListUI()
+    {
+        panellist.Clear();
+        for (int i = 0; i < scrollbar.transform.childCount; i++)
+        {
+            panellist.Add(scrollbar.transform.GetChild(i).gameObject);
+        }
+    }
+    private void SetSizeListUI()
+    {
+        SetSizeListImage();
+        SetSizeListText();
+    }
 
+    private void SetSizeListImage()
+    {
+        for (int i = 0; i < panellist.Count; i++)
+        {
+            if (panellist.Count == 1)
+            {
+                panellist[i].transform.GetChild(0).GetComponent<Image>().rectTransform.sizeDelta = new Vector2(100, 100);
+                return;
+            }
+            if (panellist.Count == 0)
+            {
+                return;
+            }
+            panellist[i].transform.GetChild(0).GetComponent<Image>().rectTransform.sizeDelta =
+                new Vector2(100 / (panellist.Count * 0.5f),
+                100 / (panellist.Count * 0.5f));
+        }
+    }
+    private void SetSizeListText()
+    {
+        for (int i = 0; i < panellist.Count; i++)
+        {
+            if (panellist.Count == 1)
+            {
+                panellist[i].transform.GetChild(1).GetComponent<Text>().rectTransform.sizeDelta =
+                       new Vector2(640 / panellist.Count,
+                       panellist[i].transform.GetChild(1).GetComponent<Text>().rectTransform.rect.height);
+                panellist[i].transform.GetChild(1).GetComponent<Text>().fontSize = 60;
+                return;
+            }
+            panellist[i].transform.GetChild(1).GetComponent<Text>().rectTransform.sizeDelta =
+                   new Vector2(640 / panellist.Count,
+                   panellist[i].transform.GetChild(1).GetComponent<Text>().rectTransform.rect.height);
+            panellist[i].transform.GetChild(1).GetComponent<Text>().fontSize = OuttoFontSize();
+        }
+    }
+    private int OuttoFontSize()
+    {
+        switch (panellist.Count)
+        {
+            case 1:
+                return 60;
+            case 2:
+                return 50;
+            case 3:
+                return 40;
+            case 4:
+                return 35;
+            case 5:
+                return 30;
+            case 6:
+                return 26;
+            case 7:
+                return 24;
+            case 8:
+                return 22;
+            case 9:
+                return 20;
+            default:
+                return 20;
+        }
+    }
 
     //테스트용 함수
     private void SelectCount()
@@ -117,6 +194,9 @@ public class WordManager : MonoBehaviour
         conditionWord = 0;
         executionWord = 0;
         nowWord = 0;
+        subjectText.text = " ";
+        conditionText.text = " ";
+        executionText.text = " ";
         wordSelect.Clear();
     }
 
@@ -128,7 +208,7 @@ public class WordManager : MonoBehaviour
             {
                 int numberPressed = i;
                 //Debug.Log(numberPressed);
-                if (uIManager.panelCount < numberPressed) return;
+                if (panellist.Count < numberPressed) return;
                 if (numberPressed == 0)
                 {
                     CleanSelect();
@@ -189,25 +269,6 @@ public class WordManager : MonoBehaviour
         }
     }
 
-    public void GetkeyNum(int num)
-    {
-        switch(num)
-        {
-            case 1:
-                One();
-                break;
-            case 2:
-                Two();
-                break;
-            case 3:
-                Three();
-                break;
-            default:
-                Debug.Log("asdsadsa");
-                break;
-        }
-    }
-
     private int OutToNowWord(int i,int type)
     {
         Debug.Log(subjectUnlock.Count);
@@ -225,17 +286,5 @@ public class WordManager : MonoBehaviour
                 return executionUnlock[i];
         }
         return 0;
-    }
-    public void One()
-    {
-        Debug.Log("11");
-    }
-    public void Two()
-    {
-        Debug.Log("22");
-    }
-    public void Three()
-    {
-        Debug.Log("33");
     }
 }
