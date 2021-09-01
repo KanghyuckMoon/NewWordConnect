@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,12 +17,15 @@ public class WordManager : MonoBehaviour
     KeyCode.Keypad9,
     };
 
+    private List<string> subjectlist = new List<string>() { "í”Œë ˆì´ì–´ê°€", "ëª¨ë“  ì ì´" };
+
+
     [SerializeField]
-    private List<int> subjectUnlock = new List<int>(); // ÁÖ¾î
+    private List<int> subjectUnlock = new List<int>(); // ì£¼ì–´
     [SerializeField]
-    private List<int> conditionUnlock = new List<int>(); // Á¶°Ç¾î
+    private List<int> conditionUnlock = new List<int>(); // ì¡°ê±´ì–´
     [SerializeField]
-    private List<int> executionUnlock = new List<int>(); // ½ÇÇà¾î
+    private List<int> executionUnlock = new List<int>(); // ì‹¤í–‰ì–´
 
     [SerializeField]
     private int subjectWord = 0;
@@ -37,7 +40,7 @@ public class WordManager : MonoBehaviour
     private int nowWord = 0;
 
     [SerializeField]
-    private List<GameObject> wordSelect = new List<GameObject>(); // ¼±ÅÃµÇ´Â ¿ÀºêÁ§Æ®
+    private List<GameObject> wordSelect = new List<GameObject>(); // ì„ íƒë˜ëŠ” ì˜¤ë¸Œì íŠ¸
     [SerializeField]
     private int selectCount;
 
@@ -48,20 +51,20 @@ public class WordManager : MonoBehaviour
     {
         InputWordKey();
 
-        //Å×½ºÆ®¿ë
+        //í…ŒìŠ¤íŠ¸ìš©
         SelectCount();
     }
 
 
 
-    //Å×½ºÆ®¿ë ÇÔ¼ö
+    //í…ŒìŠ¤íŠ¸ìš© í•¨ìˆ˜
     private void SelectCount()
     {
         selectCount = wordSelect.Count;
     }
 
 
-    //Á÷Á¢ »ç¿ëÇÒ ÇÔ¼ö
+    //ì§ì ‘ ì‚¬ìš©í•  í•¨ìˆ˜
     private void CleanSelect()
     {
         subjectWord = 0;
