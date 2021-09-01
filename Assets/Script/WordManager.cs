@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WordManager : MonoBehaviour
 {
@@ -17,15 +18,53 @@ public class WordManager : MonoBehaviour
     KeyCode.Keypad9,
     };
 
-    private List<string> subjectlist = new List<string>() { "플레이어가", "모든 적이" };
+    private List<string> subjectlist = new List<string>() { " ","용사가", "모든 적이", "스테이지가", "카메라가", "날씨가", "온도가", "게임창이", "소리가", "특수"};
+    private List<string> conditionlist = new List<string>() { " ","1초 마다", "가만히 있을 때", "충돌할 때", "블록을 밟을 때", "입력할 때", "떨어질 때", "카메라에 보일 때", "소리를 낼 때", "특수" };
+    private List<string> executionlist = new List<string>() { " ","뛰어 오른다", "1초 동안 빨라진다", "1초 동안 정지한다", "1초 동안 느려진다", "떨어진다", "커진다", "작아진다", "충돌하지 않는다", "특수" };
 
 
+
     [SerializeField]
-    private List<int> subjectUnlock = new List<int>(); // 주어
+    private List<int> subjectUnlock = new List<int>(){ 
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+    };
     [SerializeField]
-    private List<int> conditionUnlock = new List<int>(); // 조건어
+    private List<int> conditionUnlock = new List<int>()
+         {
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+    }; // 조건어
     [SerializeField]
-    private List<int> executionUnlock = new List<int>(); // 실행어
+    private List<int> executionUnlock = new List<int>()
+         {
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+    }; // 실행어
 
     [SerializeField]
     private int subjectWord = 0;
@@ -46,6 +85,13 @@ public class WordManager : MonoBehaviour
 
     [SerializeField]
     private UIManager uIManager;
+
+    [SerializeField]
+    private Text subjectText = null;
+    [SerializeField]
+    private Text conditionText = null;
+    [SerializeField]
+    private Text executionText = null;
 
     private void Update()
     {
@@ -82,11 +128,7 @@ public class WordManager : MonoBehaviour
             {
                 int numberPressed = i;
                 //Debug.Log(numberPressed);
-                if (uIManager.panelCount >= numberPressed)
-                {
-                    GetkeyNum(numberPressed);
-                }
-                else return;
+                if (uIManager.panelCount < numberPressed) return;
                 if (numberPressed == 0)
                 {
                     CleanSelect();
@@ -97,15 +139,15 @@ public class WordManager : MonoBehaviour
                 switch(nowWord)
                 {
                     case 0:
-                        subjectWord = i;
+                        subjectWord = OutToNowWord(numberPressed, 0);
                         nowWord = 1;
                         break;
                     case 1:
-                        conditionWord = i;
+                        conditionWord = OutToNowWord(numberPressed, 1);
                         nowWord = 2;
                         break;
                     case 2:
-                        executionWord = i;
+                        executionWord = OutToNowWord(numberPressed, 2);
                         nowWord = 3;
                         break;
                     default:
@@ -127,14 +169,17 @@ public class WordManager : MonoBehaviour
                         case 1:
                             nowWord = 0;
                             subjectWord = 0;
+                            subjectText.text = " ";
                             return;
                         case 2:
                             nowWord = 1;
                             conditionWord = 0;
+                            conditionText.text = " ";
                             return;
                         case 3:
                             nowWord = 2;
                             executionWord = 0;
+                            executionText.text = " ";
                             return;
                         default:
                             return;
@@ -163,6 +208,24 @@ public class WordManager : MonoBehaviour
         }
     }
 
+    private int OutToNowWord(int i,int type)
+    {
+        Debug.Log(subjectUnlock.Count);
+        Debug.Log(subjectlist.Count);
+        switch (type)
+        {
+            case 0://주어
+                subjectText.text = string.Format("{0}", subjectlist[subjectUnlock[i]]);
+                return subjectUnlock[i];
+            case 1://조건어
+                conditionText.text = string.Format("{0}", conditionlist[conditionUnlock[i]]);
+                return conditionUnlock[i];
+            case 2://실행어
+                executionText.text = string.Format("{0}", executionlist[executionUnlock[i]]);
+                return executionUnlock[i];
+        }
+        return 0;
+    }
     public void One()
     {
         Debug.Log("11");

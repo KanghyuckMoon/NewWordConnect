@@ -658,7 +658,7 @@ GameObject:
   - component: {fileID: 474447377}
   - component: {fileID: 474447376}
   m_Layer: 5
-  m_Name: Text
+  m_Name: subjectText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -827,7 +827,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.01, y: -0.18, z: -10}
+  m_LocalPosition: {x: 0, y: -0.1875, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1430363709}
@@ -1882,9 +1882,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1a0d9c3799234b409b7729f80d5b2d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subjectUnlock: 
-  conditionUnlock: 
-  executionUnlock: 
+  subjectUnlock: 00000000010000000200000003000000040000000500000006000000070000000800000009000000
+  conditionUnlock: 00000000010000000200000003000000040000000500000006000000070000000800000009000000
+  executionUnlock: 00000000010000000200000003000000040000000500000006000000070000000800000009000000
   subjectWord: 0
   conditionWord: 0
   executionWord: 0
@@ -1892,6 +1892,9 @@ MonoBehaviour:
   wordSelect: []
   selectCount: 0
   uIManager: {fileID: 681842092}
+  subjectText: {fileID: 474447376}
+  conditionText: {fileID: 959218728}
+  executionText: {fileID: 1553981867}
 --- !u!1 &717279629
 GameObject:
   m_ObjectHideFlags: 0
@@ -2376,10 +2379,10 @@ RectTransform:
   m_Father: {fileID: 353190888}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 310, y: -50}
-  m_SizeDelta: {x: 620, y: 80}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &938176545
 MonoBehaviour:
@@ -2475,7 +2478,7 @@ GameObject:
   - component: {fileID: 959218729}
   - component: {fileID: 959218728}
   m_Layer: 5
-  m_Name: Text (1)
+  m_Name: conditionText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2929,7 +2932,7 @@ GameObject:
   - component: {fileID: 1553981868}
   - component: {fileID: 1553981867}
   m_Layer: 5
-  m_Name: Text (2)
+  m_Name: executionText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
