@@ -1,36 +1,37 @@
-using System.IO;
+ï»¿using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    //ÀúÀå °ü·Ã ¼³Á¤
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     [SerializeField]
     private PlayerSetting user = null;
     private string Save_Path = "";
     private string Save_FileName = "/MoveFile.txt";
 
 
-    private float speed; //¿øÇÏ´Â ÀÌµ¿¼Óµµ
-    private float maxSpeed; //¿øÇÏ´Â ÃÖ´ëÀÌµ¿¼Óµµ
+    private float speed; //ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ìµï¿½ï¿½Óµï¿½
+    private float maxSpeed; //ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ö´ï¿½ï¿½Ìµï¿½ï¿½Óµï¿½
     private float velocityX = 0;
-    private float friction = 0; //¸¶Âû·Â
-    private float gravityScale = 0; // Áß·Â
-    private bool downGravity = false; //¶³¾îÁö´Â ¼Óµµ¿¡ Á¦ÇÑÀ» µÑÁö
+    private float friction = 0; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    private float airfriction = 0; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    private float gravityScale = 0; // ï¿½ß·ï¿½
+    private bool downGravity = false; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Óµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     private bool jumpOn;
     private float jump = 0;
 
     private Rigidbody2D rigid;
     private BoxCollider2D collider;
 
-    //´Ü¾îÀÇ Èû
-    private float realspeed = 0; //½ÇÁ¦ ÀÌµ¿¼Óµµ
+    //ï¿½Ü¾ï¿½ï¿½ï¿½ ï¿½ï¿½
+    private float realspeed = 0; //ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½Óµï¿½
 
     private void Awake()
     {
         Save_Path = Application.dataPath + "/Save";
-        //¾Èµå·ÎÀÌµå ºôµå¿¡¼­´Â  Application.dataPath ´ë½Å¿¡ Application.persistentDataPath
+        //ï¿½Èµï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½å¿¡ï¿½ï¿½ï¿½ï¿½  Application.dataPath ï¿½ï¿½Å¿ï¿½ Application.persistentDataPath
         if (!Directory.Exists(Save_Path))
         {
             Directory.CreateDirectory(Save_Path);
@@ -45,11 +46,11 @@ public class PlayerMove : MonoBehaviour
 
     private void Update()
     {
-        //°ü¸®ÀÚÀü¿ë ÇÔ¼ö
-        Setting(); // ¼³Á¤ ÇÔ¼ø
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
+        Setting(); // ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
         InputJump();
 
-        //ÀÔ·Â ¹Þ´Â °÷
+        //ï¿½Ô·ï¿½ ï¿½Þ´ï¿½ ï¿½ï¿½
         InputMove();
     }
 
@@ -63,10 +64,18 @@ public class PlayerMove : MonoBehaviour
         speed = user.speed;
         maxSpeed = user.maxspeed;
         friction = user.friction;
+        airfriction = user.aitfriction;
         downGravity = user.downGravityOn;
         gravityScale = user.gravityScale;
         jump = user.jump;
-        rigid.drag = friction; // ¸¶Âû·Â ¼³Á¤
+        if(jumpOn)
+        {
+            rigid.drag = airfriction; // ë§ˆì°°ë ¥ ì„¤ì •
+        }
+        else
+        {
+            rigid.drag = friction; // ê³µê¸° ë§ˆì°°ë ¥ ì„¤ì •
+        }
         rigid.gravityScale = gravityScale;
     }
     private void InputJump()
@@ -100,7 +109,8 @@ public class PlayerMove : MonoBehaviour
         jumpOn = true;
     }
 
-    //ÀúÀå°ü·Ã
+
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     private void LoadToJson()
     {
         if (File.Exists(Save_Path + Save_FileName))
@@ -119,9 +129,12 @@ public class PlayerMove : MonoBehaviour
     {
         SaveToJson();
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         jumpOn = false;
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        jumpOn = true;
     }
 }
