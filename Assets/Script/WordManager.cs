@@ -64,7 +64,9 @@ public class WordManager : MonoBehaviour
 
     private void Start()
     {
-
+        SetListUI();
+        SetSizeListUI();
+        AllChangeTexts();
     }
 
     private void Update()
@@ -74,12 +76,21 @@ public class WordManager : MonoBehaviour
         //테스트용
         SelectCount();
     }
+    public void AllChangeTexts()
+    {
+        for(int i = 0; i<panellist.Count;i++)
+        {
+            scrollbar.transform.GetChild(i).transform.GetChild(1).GetComponent<Text>().text =
+                subjectlist[subjectUnlock[panellist.Count]];
+        }
+    }
 
     public void CreatePanel()
     {
         GameObject newPanel = null;
         newPanel = Instantiate(panel, panel.transform.parent);
         panellist.Add(newPanel);
+        newPanel.transform.GetChild(1).GetComponent<Text>().text = subjectlist[subjectUnlock[panellist.Count]];
         SetListUI();
         SetSizeListUI();
     }
@@ -271,8 +282,6 @@ public class WordManager : MonoBehaviour
 
     private int OutToNowWord(int i,int type)
     {
-        Debug.Log(subjectUnlock.Count);
-        Debug.Log(subjectlist.Count);
         switch (type)
         {
             case 0://주어
