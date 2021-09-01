@@ -176,8 +176,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Content: {fileID: 353190888}
   m_Horizontal: 0
-  m_Vertical: 1
-  m_MovementType: 1
+  m_Vertical: 0
+  m_MovementType: 0
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
@@ -528,6 +528,7 @@ GameObject:
   - component: {fileID: 519420033}
   - component: {fileID: 519420034}
   - component: {fileID: 519420035}
+  - component: {fileID: 519420036}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -723,6 +724,19 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 1430363709}
+--- !u!114 &519420036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12c56c9dada565047ab4333a241bb499, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PPU: 32
 --- !u!1 &581419026
 GameObject:
   m_ObjectHideFlags: 0
@@ -1611,7 +1625,6 @@ MonoBehaviour:
   panelCount: 0
   scrollbar: {fileID: 353190887}
   images: []
-  game: []
   panel: {fileID: 938176543}
 --- !u!1 &704011402
 GameObject:
