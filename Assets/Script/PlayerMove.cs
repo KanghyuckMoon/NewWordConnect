@@ -73,7 +73,6 @@ public class PlayerMove : MonoBehaviour
     {
             if(Input.GetKeyDown(KeyCode.Space))
             {
-                Debug.Log("asd");
                 Jump();
             }
     }
