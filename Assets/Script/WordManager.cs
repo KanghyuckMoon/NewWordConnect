@@ -41,6 +41,9 @@ public class WordManager : MonoBehaviour
     [SerializeField]
     private int selectCount;
 
+    [SerializeField]
+    private UIManager uIManager;
+
     private void Update()
     {
         InputWordKey();
@@ -75,8 +78,12 @@ public class WordManager : MonoBehaviour
             if (Input.GetKeyDown(keyCodes[i]) || Input.GetKeyDown(keyCodes[i] - 208))
             {
                 int numberPressed = i;
-                Debug.Log(numberPressed);
-
+                //Debug.Log(numberPressed);
+                if (uIManager.panelCount >= numberPressed)
+                {
+                    GetkeyNum(numberPressed);
+                }
+                else return;
                 if (numberPressed == 0)
                 {
                     CleanSelect();
@@ -132,5 +139,37 @@ public class WordManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void GetkeyNum(int num)
+    {
+        switch(num)
+        {
+            case 1:
+                One();
+                break;
+            case 2:
+                Two();
+                break;
+            case 3:
+                Three();
+                break;
+            default:
+                Debug.Log("asdsadsa");
+                break;
+        }
+    }
+
+    public void One()
+    {
+        Debug.Log("11");
+    }
+    public void Two()
+    {
+        Debug.Log("22");
+    }
+    public void Three()
+    {
+        Debug.Log("33");
     }
 }

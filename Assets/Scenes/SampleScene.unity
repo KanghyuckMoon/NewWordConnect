@@ -1811,6 +1811,7 @@ MonoBehaviour:
   nowWord: 0
   wordSelect: []
   selectCount: 0
+  uIManager: {fileID: 681842092}
 --- !u!1 &717279629
 GameObject:
   m_ObjectHideFlags: 0
@@ -2062,10 +2063,10 @@ RectTransform:
   m_Father: {fileID: 353190888}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 310, y: -50}
-  m_SizeDelta: {x: 620, y: 80}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &938176545
 MonoBehaviour:

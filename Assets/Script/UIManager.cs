@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField]
-    private int panelCount = 0;
+    public int panelCount = 0;
 
     [SerializeField]
     private GameObject scrollbar;
@@ -15,6 +14,7 @@ public class UIManager : MonoBehaviour
     private List<Image> images;
     [SerializeField]
     private GameObject panel;
+
 
     private void Start()
     {
@@ -89,4 +89,6 @@ public class UIManager : MonoBehaviour
                 100 / (images.Count * 0.5f));
         }
     }
+
+    
 }
