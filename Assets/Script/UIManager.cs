@@ -14,7 +14,7 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private List<Image> images;
     [SerializeField]
-    private List<GameObject> game;
+    private GameObject panel;
 
     private void Start()
     {
@@ -27,6 +27,14 @@ public class UIManager : MonoBehaviour
         CountPanel();
     }
 
+    public void CreatePanel()
+    {
+        GameObject newPanel = null;
+        newPanel = Instantiate(panel, panel.transform.parent);
+        SetListImages();
+        SetSizeListImages();
+    }
+
     private void CountPanel()
     {
         panelCount = scrollbar.transform.childCount;
@@ -35,10 +43,9 @@ public class UIManager : MonoBehaviour
 
     private void SetListImages()
     {
+        images.Clear();
         for(int i = 0; i <scrollbar.transform.childCount;i++)
         {
-            Debug.Log(scrollbar.transform.GetChild(i).transform.GetChild(0));
-            game.Add(scrollbar.transform.GetChild(i).transform.GetChild(0).gameObject);
             images.Add(scrollbar.transform.GetChild(i).transform.GetChild(0).transform.GetComponent<Image>());
         }
     }
@@ -50,8 +57,8 @@ public class UIManager : MonoBehaviour
             if (images.Count == 1) return;
             if (images.Count == 0) return;
             images[i].rectTransform.sizeDelta = 
-                new Vector2(images[i].rectTransform.rect.width / (images.Count * 0.5f),
-                images[i].rectTransform.rect.height / (images.Count * 0.5f));
+                new Vector2(100 / (images.Count * 0.5f),
+                100 / (images.Count * 0.5f));
 
         }
     }
