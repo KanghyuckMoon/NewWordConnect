@@ -18,8 +18,11 @@ public class WordManager : MonoBehaviour
     KeyCode.Keypad9,
     };
 
+    [SerializeField]
     private List<string> subjectlist = new List<string>() { " ","용사가", "모든 적이", "스테이지가", "카메라가", "날씨가", "온도가", "게임창이", "소리가", "특수"};
+    [SerializeField]
     private List<string> conditionlist = new List<string>() { " ","1초 마다", "가만히 있을 때", "충돌할 때", "블록을 밟을 때", "입력할 때", "떨어질 때", "카메라에 보일 때", "소리를 낼 때", "특수" };
+    [SerializeField]
     private List<string> executionlist = new List<string>() { " ","뛰어 오른다", "1초 동안 빨라진다", "1초 동안 정지한다", "1초 동안 느려진다", "떨어진다", "커진다", "작아진다", "충돌하지 않는다", "특수" };
 
     [SerializeField]
@@ -56,17 +59,25 @@ public class WordManager : MonoBehaviour
 
     //UI
     [SerializeField]
-    private GameObject scrollbar;
+    private GameObject subjectScroll;
     [SerializeField]
-    private GameObject panel; //패널
+    private GameObject conditionScroll;
+    [SerializeField]    
+    private GameObject executionScroll;
     [SerializeField]
-    private List<GameObject> panellist;
+    private List<GameObject> panellistSubject;
+    [SerializeField]
+    private List<GameObject> panellistCondition;
+    [SerializeField]
+    private List<GameObject> panellistExecution;
 
     private void Start()
     {
-        SetListUI();
-        SetSizeListUI();
-        AllChangeTexts();
+        SetListUI(); //UI 갯수 세는 함수
+        SetSizeListUI(); //UI 크기 맞추는 함수
+        AllChangeTexts(); //텍스트 바꾸는 함수
+        OnOffScroll(); //스크롤 껐다 키는 함수
+        ResetOnClick(); // 버튼 기능들 리셋시키고 다시 부여
     }
 
     private void Update()
@@ -78,49 +89,179 @@ public class WordManager : MonoBehaviour
     }
     public void AllChangeTexts()
     {
-        for(int i = 0; i<panellist.Count;i++)
+        switch(nowWord)
         {
-            scrollbar.transform.GetChild(i).transform.GetChild(1).GetComponent<Text>().text =
-                subjectlist[subjectUnlock[panellist.Count]];
+            case 0:
+                for (int i = 0; i < panellistSubject.Count; i++)
+                {
+                    subjectScroll.transform.GetChild(i).transform.GetChild(1).GetComponent<Text>().text =
+                        subjectlist[subjectUnlock[i + 1]];
+                }
+                break;
+            case 1:
+                for (int i = 0; i < panellistCondition.Count; i++)
+                {
+                    conditionScroll.transform.GetChild(i).transform.GetChild(1).GetComponent<Text>().text =
+                        conditionlist[conditionUnlock[i + 1]];
+                }
+                break;
+            case 2:
+                for (int i = 0; i < panellistExecution.Count; i++)
+                {
+                    executionScroll.transform.GetChild(i).transform.GetChild(1).GetComponent<Text>().text =
+                        executionlist[executionUnlock[i + 1]];
+                }
+                break;
+            case 3:
+                break;
+            default:
+                break;
         }
+        
     }
 
     public void CreatePanel()
     {
         GameObject newPanel = null;
-        newPanel = Instantiate(panel, panel.transform.parent);
-        panellist.Add(newPanel);
-        newPanel.transform.GetChild(1).GetComponent<Text>().text = subjectlist[subjectUnlock[panellist.Count]];
+        switch (nowWord)
+        {
+            case 0:
+                newPanel = Instantiate(subjectScroll.transform.GetChild(0).gameObject, subjectScroll.transform.GetChild(0).transform.parent);
+                panellistSubject.Add(newPanel);
+                newPanel.transform.GetChild(1).GetComponent<Text>().text = subjectlist[subjectUnlock[panellistSubject.Count]];
+                newPanel.GetComponent<Button>().onClick.AddListener(delegate{ClickOnWordSelect(panellistSubject.Count); });
+                break;
+            case 1:
+                newPanel = Instantiate(conditionScroll.transform.GetChild(0).gameObject, conditionScroll.transform.GetChild(0).transform.parent);
+                panellistCondition.Add(newPanel);
+                newPanel.transform.GetChild(1).GetComponent<Text>().text = conditionlist[conditionUnlock[panellistCondition.Count]];
+                newPanel.GetComponent<Button>().onClick.AddListener(delegate { ClickOnWordSelect(panellistCondition.Count); });
+                break;
+            case 2:
+                newPanel = Instantiate(executionScroll.transform.GetChild(0).gameObject, executionScroll.transform.GetChild(0).transform.parent);
+                panellistCondition.Add(newPanel);
+                newPanel.transform.GetChild(1).GetComponent<Text>().text = executionlist[executionUnlock[panellistExecution.Count]];    
+                newPanel.GetComponent<Button>().onClick.AddListener(delegate { ClickOnWordSelect(panellistExecution.Count); });
+                break;
+            case 3:
+                break;
+            default:
+                break;
+        }
         SetListUI();
         SetSizeListUI();
+    }
+    public void ResetOnClick()
+    {
+        for(int i = 0; i < subjectScroll.transform.childCount;i++)
+        {
+            subjectScroll.transform.GetChild(i).GetComponent<Button>().onClick.RemoveAllListeners();
+            subjectScroll.transform.GetChild(i).GetComponent<Button>().onClick.AddListener(delegate { ClickOnWordSelect(i); });
+        }
+        for (int i = 0; i < conditionScroll.transform.childCount; i++)
+        {
+            conditionScroll.transform.GetChild(i).GetComponent<Button>().onClick.RemoveAllListeners();
+            conditionScroll.transform.GetChild(i).GetComponent<Button>().onClick.AddListener(delegate { ClickOnWordSelect(i); });
+        }
+        for (int i = 0; i < executionScroll.transform.childCount; i++)
+        {
+           executionScroll.transform.GetChild(i).GetComponent<Button>().onClick.RemoveAllListeners();
+            executionScroll.transform.GetChild(i).GetComponent<Button>().onClick.AddListener(delegate { ClickOnWordSelect(i); });
+        }
     }
     public void BackPanel()
     {
-        if (scrollbar.transform.childCount == 1) return;
         GameObject backPanel = null;
-        backPanel = scrollbar.transform.GetChild(scrollbar.transform.childCount - 1).gameObject;
-        Destroy(backPanel);
+        switch (nowWord)
+        {
+            case 0:
+                if (subjectScroll.transform.childCount == 1) return;
+                
+                backPanel = subjectScroll.transform.GetChild(subjectScroll.transform.childCount - 1).gameObject;
+                Destroy(backPanel);
+                break;
+            case 1:
+                if (conditionScroll.transform.childCount == 1) return;
+                backPanel = conditionScroll.transform.GetChild(conditionScroll.transform.childCount - 1).gameObject;
+                Destroy(backPanel);
+                break;
+            case 2:
+                if (executionScroll.transform.childCount == 1) return;
+
+                backPanel = executionScroll.transform.GetChild(executionScroll.transform.childCount - 1).gameObject;
+                Destroy(backPanel);
+                break;
+
+        }
         SetListUI();
         SetSizeListUI();
-        panellist.RemoveAt(panellist.Count - 1);
+        switch(nowWord)
+        {
+            case 0:
+                panellistSubject.RemoveAt(panellistSubject.Count - 1);
+                break;
+
+            case 1:
+                panellistSubject.RemoveAt(panellistCondition.Count - 1);
+                break;
+
+            case 2:
+                panellistSubject.RemoveAt(panellistExecution.Count - 1);
+                break;
+        }
     }
     public void ClearPanel()
     {
-        int count = scrollbar.transform.childCount;
-        for (int i = 1; i < count; i++)
+        int count = 0;
+        switch (nowWord)
         {
-            Destroy(scrollbar.transform.GetChild(i).gameObject);
-            panellist.RemoveAt(panellist.Count - 1);
+            case 0:
+                count = subjectScroll.transform.childCount;
+                for (int i = 1; i < count; i++)
+                {
+                    Destroy(subjectScroll.transform.GetChild(i).gameObject);
+                    panellistSubject.RemoveAt(panellistSubject.Count - 1);
+                }
+                break;
+            case 1:
+                count = conditionScroll.transform.childCount;
+                for (int i = 1; i < count; i++)
+                {
+                    Destroy(conditionScroll.transform.GetChild(i).gameObject);
+                    panellistCondition.RemoveAt(panellistCondition.Count - 1);
+                }
+                break;
+            case 2:
+                count = executionScroll.transform.childCount;
+                for (int i = 1; i < count; i++)
+                {
+                    Destroy(executionScroll.transform.GetChild(i).gameObject);
+                    panellistExecution.RemoveAt(panellistExecution.Count - 1);
+                }
+                break;
+            default:
+                break;
         }
+        
         SetSizeListUI();
     }
     private void SetListUI()
     {
-        panellist.Clear();
-        for (int i = 0; i < scrollbar.transform.childCount; i++)
-        {
-            panellist.Add(scrollbar.transform.GetChild(i).gameObject);
-        }
+                panellistSubject.Clear();
+                for (int i = 0; i < subjectScroll.transform.childCount; i++)
+                {
+                    panellistSubject.Add(subjectScroll.transform.GetChild(i).gameObject);
+                };
+                panellistCondition.Clear();
+                for (int i = 0; i < conditionScroll.transform.childCount; i++)
+                {
+                    panellistCondition.Add(conditionScroll.transform.GetChild(i).gameObject);
+                };
+                panellistExecution.Clear();
+                for (int i = 0; i < executionScroll.transform.childCount; i++)
+                {
+                    panellistExecution.Add(executionScroll.transform.GetChild(i).gameObject);
+                };
     }
     private void SetSizeListUI()
     {
@@ -128,45 +269,130 @@ public class WordManager : MonoBehaviour
         SetSizeListText();
     }
 
-    private void SetSizeListImage()
+    private void SetSizeListImage() // 패널의 이미지 조절
     {
-        for (int i = 0; i < panellist.Count; i++)
+        switch(nowWord)
         {
-            if (panellist.Count == 1)
-            {
-                panellist[i].transform.GetChild(0).GetComponent<Image>().rectTransform.sizeDelta = new Vector2(100, 100);
-                return;
-            }
-            if (panellist.Count == 0)
-            {
-                return;
-            }
-            panellist[i].transform.GetChild(0).GetComponent<Image>().rectTransform.sizeDelta =
-                new Vector2(100 / (panellist.Count * 0.5f),
-                100 / (panellist.Count * 0.5f));
+            case 0:
+                for (int i = 0; i < panellistSubject.Count; i++)
+                {
+                    if (panellistSubject.Count == 1)
+                    {
+                        panellistSubject[i].transform.GetChild(0).GetComponent<Image>().rectTransform.sizeDelta = new Vector2(100, 100);
+                        return;
+                    }
+                    if (panellistSubject.Count == 0) return;
+                    panellistSubject[i].transform.GetChild(0).GetComponent<Image>().rectTransform.sizeDelta =
+                        new Vector2(100 / (panellistSubject.Count * 0.5f),
+                        100 / (panellistSubject.Count * 0.5f));
+                }
+                break;
+
+            case 1:
+                for (int i = 0; i < panellistCondition.Count; i++)
+                {
+                    if (panellistCondition.Count == 1)
+                    {
+                        panellistCondition[i].transform.GetChild(0).GetComponent<Image>().rectTransform.sizeDelta = new Vector2(100, 100);
+                        return;
+                    }
+                    if (panellistCondition.Count == 0) return;
+                    panellistCondition[i].transform.GetChild(0).GetComponent<Image>().rectTransform.sizeDelta =
+                        new Vector2(100 / (panellistCondition.Count * 0.5f),
+                        100 / (panellistCondition.Count * 0.5f));
+                }
+                break;
+
+            case 2:
+                for (int i = 0; i < panellistExecution.Count; i++)
+                {
+                    if (panellistExecution.Count == 1)
+                    {
+                        panellistExecution[i].transform.GetChild(0).GetComponent<Image>().rectTransform.sizeDelta = new Vector2(100, 100);
+                        return;
+                    }
+                    if (panellistExecution.Count == 0) return;
+                    panellistExecution[i].transform.GetChild(0).GetComponent<Image>().rectTransform.sizeDelta =
+                        new Vector2(100 / (panellistExecution.Count * 0.5f),
+                        100 / (panellistExecution.Count * 0.5f));
+                }
+                break;
+            case 3:
+                break;
+            default:
+                break;
         }
+        
     }
-    private void SetSizeListText()
+    private void SetSizeListText() //패널의 텍스트 사이즈 조절
     {
-        for (int i = 0; i < panellist.Count; i++)
+        switch(nowWord)
         {
-            if (panellist.Count == 1)
-            {
-                panellist[i].transform.GetChild(1).GetComponent<Text>().rectTransform.sizeDelta =
-                       new Vector2(640 / panellist.Count,
-                       panellist[i].transform.GetChild(1).GetComponent<Text>().rectTransform.rect.height);
-                panellist[i].transform.GetChild(1).GetComponent<Text>().fontSize = 60;
-                return;
-            }
-            panellist[i].transform.GetChild(1).GetComponent<Text>().rectTransform.sizeDelta =
-                   new Vector2(640 / panellist.Count,
-                   panellist[i].transform.GetChild(1).GetComponent<Text>().rectTransform.rect.height);
-            panellist[i].transform.GetChild(1).GetComponent<Text>().fontSize = OuttoFontSize();
+            case 0:
+                for (int i = 0; i < panellistSubject.Count; i++)
+                {
+                    if (panellistSubject.Count == 1)
+                    {
+                        panellistSubject[i].transform.GetChild(1).GetComponent<Text>().rectTransform.sizeDelta =
+                               new Vector2(640 / panellistSubject.Count,
+                               panellistSubject[i].transform.GetChild(1).GetComponent<Text>().rectTransform.rect.height);
+                        panellistSubject[i].transform.GetChild(1).GetComponent<Text>().fontSize = 60;
+                        return;
+                    }
+                    panellistSubject[i].transform.GetChild(1).GetComponent<Text>().rectTransform.sizeDelta =
+                           new Vector2(640 / panellistSubject.Count,
+                           panellistSubject[i].transform.GetChild(1).GetComponent<Text>().rectTransform.rect.height);
+                    panellistSubject[i].transform.GetChild(1).GetComponent<Text>().fontSize = OuttoFontSize(panellistSubject.Count);
+                }
+                break;
+
+            case 1:
+                for (int i = 0; i < panellistCondition.Count; i++)
+                {
+                    if (panellistCondition.Count == 1)
+                    {
+                        panellistCondition[i].transform.GetChild(1).GetComponent<Text>().rectTransform.sizeDelta =
+                               new Vector2(640 / panellistCondition.Count,
+                               panellistCondition[i].transform.GetChild(1).GetComponent<Text>().rectTransform.rect.height);
+                        panellistCondition[i].transform.GetChild(1).GetComponent<Text>().fontSize = 60;
+                        return;
+                    }
+                    panellistCondition[i].transform.GetChild(1).GetComponent<Text>().rectTransform.sizeDelta =
+                           new Vector2(640 / panellistCondition.Count,
+                           panellistCondition[i].transform.GetChild(1).GetComponent<Text>().rectTransform.rect.height);
+                    panellistCondition[i].transform.GetChild(1).GetComponent<Text>().fontSize = OuttoFontSize(panellistCondition.Count);
+                }
+                break;
+
+            case 2:
+                for (int i = 0; i < panellistExecution.Count; i++)
+                {
+                    if (panellistExecution.Count == 1)
+                    {
+                        panellistExecution[i].transform.GetChild(1).GetComponent<Text>().rectTransform.sizeDelta =
+                               new Vector2(640 / panellistExecution.Count,
+                               panellistExecution[i].transform.GetChild(1).GetComponent<Text>().rectTransform.rect.height);
+                        panellistExecution[i].transform.GetChild(1).GetComponent<Text>().fontSize = 60;
+                        return;
+                    }
+                    panellistExecution[i].transform.GetChild(1).GetComponent<Text>().rectTransform.sizeDelta =
+                           new Vector2(640 / panellistExecution.Count,
+                           panellistExecution[i].transform.GetChild(1).GetComponent<Text>().rectTransform.rect.height);
+                    panellistExecution[i].transform.GetChild(1).GetComponent<Text>().fontSize = OuttoFontSize(panellistExecution.Count);
+                }
+                break;
+
+            case 3:
+                break;
+
+            default:
+                break;
         }
+        
     }
-    private int OuttoFontSize()
+    private int OuttoFontSize(int count) // 폰트 수치
     {
-        switch (panellist.Count)
+        switch (count)
         {
             case 1:
                 return 60;
@@ -192,14 +418,14 @@ public class WordManager : MonoBehaviour
     }
 
     //테스트용 함수
-    private void SelectCount()
+    private void SelectCount() //선택된 오브젝트 수
     {
         selectCount = wordSelect.Count;
     }
 
 
     //직접 사용할 함수
-    private void CleanSelect()
+    private void CleanSelect() // 초기화
     {
         subjectWord = 0;
         conditionWord = 0;
@@ -209,17 +435,32 @@ public class WordManager : MonoBehaviour
         conditionText.text = " ";
         executionText.text = " ";
         wordSelect.Clear();
+        OnOffScroll();
     }
 
-    private void InputWordKey()
+    private void InputWordKey() // 키입력
     {
         for (int i = 0; i < keyCodes.Length; i++)
         {
             if (Input.GetKeyDown(keyCodes[i]) || Input.GetKeyDown(keyCodes[i] - 208))
             {
                 int numberPressed = i;
-                //Debug.Log(numberPressed);
-                if (panellist.Count < numberPressed) return;
+                switch(nowWord)
+                {
+                    case 0:
+                        if (panellistSubject.Count < numberPressed) return;
+                        break;
+                    case 1:
+                        if (panellistCondition.Count < numberPressed) return;
+                        break;
+                    case 2:
+                        if (panellistExecution.Count < numberPressed) return;
+                        break;
+                    case 3:
+                        return;
+                    default:
+                        break;
+                }
                 if (numberPressed == 0)
                 {
                     CleanSelect();
@@ -232,17 +473,25 @@ public class WordManager : MonoBehaviour
                     case 0:
                         subjectWord = OutToNowWord(numberPressed, 0);
                         nowWord = 1;
+                        OnOffScroll();
+                        AllChangeTexts();
                         break;
                     case 1:
                         conditionWord = OutToNowWord(numberPressed, 1);
                         nowWord = 2;
+                        OnOffScroll();
+                        AllChangeTexts();
                         break;
                     case 2:
                         executionWord = OutToNowWord(numberPressed, 2);
                         nowWord = 3;
+                        OnOffScroll();
+                        AllChangeTexts();
                         break;
                     default:
                         nowWord = 3;
+                        OnOffScroll();
+                        AllChangeTexts();
                         break;
                 }
             }
@@ -261,22 +510,93 @@ public class WordManager : MonoBehaviour
                             nowWord = 0;
                             subjectWord = 0;
                             subjectText.text = " ";
+                            OnOffScroll();
+                            AllChangeTexts();
                             return;
                         case 2:
                             nowWord = 1;
                             conditionWord = 0;
                             conditionText.text = " ";
+                            OnOffScroll();
+                            AllChangeTexts();
                             return;
                         case 3:
                             nowWord = 2;
                             executionWord = 0;
                             executionText.text = " ";
+                            OnOffScroll();
+                            AllChangeTexts();
                             return;
                         default:
+                            OnOffScroll();
+                            AllChangeTexts();
                             return;
                     }
                 }
             }
+        }
+    }
+
+    public void ClickOnWordSelect(int num)
+    {
+        switch (nowWord)
+        {
+            case 0:
+                Debug.Log("a");
+                subjectWord = OutToNowWord(num, 0);
+                nowWord = 1;
+                OnOffScroll();
+                AllChangeTexts();
+                break;
+            case 1:
+                Debug.Log("b");
+                conditionWord = OutToNowWord(num, 1);
+                nowWord = 2;
+                OnOffScroll();
+                AllChangeTexts();
+                break;
+            case 2:
+                Debug.Log("c");
+                executionWord = OutToNowWord(num, 2);
+                nowWord = 3;
+                OnOffScroll();
+                AllChangeTexts();
+                break;
+            default:
+                Debug.Log("d");
+                nowWord = 3;
+                OnOffScroll();
+                AllChangeTexts();
+                break;
+        }
+    }
+
+    private void OnOffScroll()
+    {
+        switch(nowWord)
+        {
+            case 0:
+                subjectScroll.SetActive(true);
+                conditionScroll.SetActive(false);
+                executionScroll.SetActive(false);
+                break;
+            case 1:
+                subjectScroll.SetActive(false);
+                conditionScroll.SetActive(true);
+                executionScroll.SetActive(false);
+                break;
+            case 2:
+                subjectScroll.SetActive(false);
+                conditionScroll.SetActive(false);
+                executionScroll.SetActive(true);
+                break;
+            case 3:
+                subjectScroll.SetActive(false);
+                conditionScroll.SetActive(false);
+                executionScroll.SetActive(false);
+                break;
+            default:
+                break;
         }
     }
 
