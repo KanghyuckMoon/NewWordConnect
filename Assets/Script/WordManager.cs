@@ -126,47 +126,52 @@ public class WordManager : MonoBehaviour
         switch (nowWord)
         {
             case 0:
+                if (subjectScroll.transform.childCount >= 9) return;
                 newPanel = Instantiate(subjectScroll.transform.GetChild(0).gameObject, subjectScroll.transform.GetChild(0).transform.parent);
                 panellistSubject.Add(newPanel);
                 newPanel.transform.GetChild(1).GetComponent<Text>().text = subjectlist[subjectUnlock[panellistSubject.Count]];
-                newPanel.GetComponent<Button>().onClick.AddListener(delegate{ClickOnWordSelect(panellistSubject.Count); });
                 break;
             case 1:
+                if (conditionScroll.transform.childCount >= 9) return;
                 newPanel = Instantiate(conditionScroll.transform.GetChild(0).gameObject, conditionScroll.transform.GetChild(0).transform.parent);
                 panellistCondition.Add(newPanel);
                 newPanel.transform.GetChild(1).GetComponent<Text>().text = conditionlist[conditionUnlock[panellistCondition.Count]];
-                newPanel.GetComponent<Button>().onClick.AddListener(delegate { ClickOnWordSelect(panellistCondition.Count); });
                 break;
             case 2:
+                if (executionScroll.transform.childCount >= 9) return;
                 newPanel = Instantiate(executionScroll.transform.GetChild(0).gameObject, executionScroll.transform.GetChild(0).transform.parent);
                 panellistCondition.Add(newPanel);
-                newPanel.transform.GetChild(1).GetComponent<Text>().text = executionlist[executionUnlock[panellistExecution.Count]];    
-                newPanel.GetComponent<Button>().onClick.AddListener(delegate { ClickOnWordSelect(panellistExecution.Count); });
+                newPanel.transform.GetChild(1).GetComponent<Text>().text = executionlist[executionUnlock[panellistExecution.Count]]; 
                 break;
             case 3:
                 break;
             default:
                 break;
         }
+        ResetOnClick();
         SetListUI();
         SetSizeListUI();
+        AllChangeTexts();
     }
     public void ResetOnClick()
     {
         for(int i = 0; i < subjectScroll.transform.childCount;i++)
         {
-            subjectScroll.transform.GetChild(i).GetComponent<Button>().onClick.RemoveAllListeners();
-            subjectScroll.transform.GetChild(i).GetComponent<Button>().onClick.AddListener(delegate { ClickOnWordSelect(i); });
+            int temp = i;
+            subjectScroll.transform.GetChild(temp).GetComponent<Button>().onClick.RemoveAllListeners();
+            subjectScroll.transform.GetChild(temp).GetComponent<Button>().onClick.AddListener(delegate { ClickOnWordSelect(temp + 1); });
         }
         for (int i = 0; i < conditionScroll.transform.childCount; i++)
         {
-            conditionScroll.transform.GetChild(i).GetComponent<Button>().onClick.RemoveAllListeners();
-            conditionScroll.transform.GetChild(i).GetComponent<Button>().onClick.AddListener(delegate { ClickOnWordSelect(i); });
+            int temp = i;
+            conditionScroll.transform.GetChild(temp).GetComponent<Button>().onClick.RemoveAllListeners();
+            conditionScroll.transform.GetChild(temp).GetComponent<Button>().onClick.AddListener(delegate { ClickOnWordSelect(temp + 1); });
         }
         for (int i = 0; i < executionScroll.transform.childCount; i++)
         {
-           executionScroll.transform.GetChild(i).GetComponent<Button>().onClick.RemoveAllListeners();
-            executionScroll.transform.GetChild(i).GetComponent<Button>().onClick.AddListener(delegate { ClickOnWordSelect(i); });
+            int temp = i;
+            executionScroll.transform.GetChild(temp).GetComponent<Button>().onClick.RemoveAllListeners();
+            executionScroll.transform.GetChild(temp).GetComponent<Button>().onClick.AddListener(delegate { ClickOnWordSelect(temp + 1); });
         }
     }
     public void BackPanel()
@@ -542,28 +547,25 @@ public class WordManager : MonoBehaviour
         switch (nowWord)
         {
             case 0:
-                Debug.Log("a");
                 subjectWord = OutToNowWord(num, 0);
+                Debug.Log(subjectWord);
                 nowWord = 1;
                 OnOffScroll();
                 AllChangeTexts();
                 break;
             case 1:
-                Debug.Log("b");
                 conditionWord = OutToNowWord(num, 1);
                 nowWord = 2;
                 OnOffScroll();
                 AllChangeTexts();
                 break;
             case 2:
-                Debug.Log("c");
                 executionWord = OutToNowWord(num, 2);
                 nowWord = 3;
                 OnOffScroll();
                 AllChangeTexts();
                 break;
             default:
-                Debug.Log("d");
                 nowWord = 3;
                 OnOffScroll();
                 AllChangeTexts();
