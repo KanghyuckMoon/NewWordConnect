@@ -2187,39 +2187,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1a0d9c3799234b409b7729f80d5b2d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subjectlist:
-  - ' '
-  - "\uC6A9\uC0AC\uAC00"
-  - "\uBAA8\uB4E0 \uC801\uC774"
-  - "\uC2A4\uD14C\uC774\uC9C0\uAC00"
-  - "\uCE74\uBA54\uB77C\uAC00"
-  - "\uB0A0\uC528\uAC00"
-  - "\uC628\uB3C4\uAC00"
-  - "\uAC8C\uC784\uCC3D\uC774"
-  - "\uC18C\uB9AC\uAC00"
-  - "\uD2B9\uC218"
-  conditionlist:
-  - ' '
-  - "1\uCD08 \uB9C8\uB2E4"
-  - "\uAC00\uB9CC\uD788 \uC788\uC744 \uB54C"
-  - "\uCDA9\uB3CC\uD560 \uB54C"
-  - "\uBE14\uB85D\uC744 \uBC1F\uC744 \uB54C"
-  - "\uC785\uB825\uD560 \uB54C"
-  - "\uB5A8\uC5B4\uC9C8 \uB54C"
-  - "\uCE74\uBA54\uB77C\uC5D0 \uBCF4\uC77C \uB54C"
-  - "\uC18C\uB9AC\uB97C \uB0BC \uB54C"
-  - "\uD2B9\uC218"
-  executionlist:
-  - ' '
-  - "\uB6F0\uC5B4 \uC624\uB978\uB2E4"
-  - "1\uCD08 \uB3D9\uC548 \uBE68\uB77C\uC9C4\uB2E4"
-  - "1\uCD08 \uB3D9\uC548 \uC815\uC9C0\uD55C\uB2E4"
-  - "1\uCD08 \uB3D9\uC548 \uB290\uB824\uC9C4\uB2E4"
-  - "\uB5A8\uC5B4\uC9C4\uB2E4"
-  - "\uCEE4\uC9C4\uB2E4"
-  - "\uC791\uC544\uC9C4\uB2E4"
-  - "\uCDA9\uB3CC\uD558\uC9C0 \uC54A\uB294\uB2E4"
-  - "\uD2B9\uC218"
   subjectUnlock: 00000000010000000200000003000000040000000500000006000000070000000800000009000000
   conditionUnlock: 00000000010000000200000003000000040000000500000006000000070000000800000009000000
   executionUnlock: 00000000010000000200000003000000040000000500000006000000070000000800000009000000
@@ -2232,12 +2199,9 @@ MonoBehaviour:
   subjectText: {fileID: 474447376}
   conditionText: {fileID: 959218728}
   executionText: {fileID: 1553981867}
-  subjectScroll: {fileID: 353190887}
-  conditionScroll: {fileID: 615492377}
-  executionScroll: {fileID: 435185186}
-  panellistSubject: []
-  panellistCondition: []
-  panellistExecution: []
+  subjectScroll: {fileID: 353190888}
+  conditionScroll: {fileID: 615492378}
+  executionScroll: {fileID: 435185187}
 --- !u!1 &717279629
 GameObject:
   m_ObjectHideFlags: 0
