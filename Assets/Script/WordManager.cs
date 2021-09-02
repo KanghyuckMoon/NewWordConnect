@@ -500,7 +500,7 @@ public class WordManager : MonoBehaviour
                         break;
                 }
             }
-            else if(Input.GetKeyDown(KeyCode.Backspace) || Input.GetKeyDown(KeyCode.KeypadPeriod))
+            else if(Input.GetKeyDown(KeyCode.Backspace) || Input.GetKeyDown(KeyCode.KeypadPeriod) || Input.GetMouseButtonDown(1))
             {
                 if(nowWord <= 0)
                 {
