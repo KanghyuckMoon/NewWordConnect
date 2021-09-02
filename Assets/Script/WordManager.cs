@@ -351,11 +351,11 @@ public class WordManager : MonoBehaviour
                     tempSetSizeText = panellistSubject[i].transform.GetChild(1).GetComponent<Text>();
                     if (panellistSubject.Count == 1)
                     {
-                        tempSetSizeText.rectTransform.sizeDelta = SetSizeListText_OutVector(i);
+                        tempSetSizeText.rectTransform.sizeDelta = SetSizeListText_OutVector(i,0);
                         panellistSubject[i].transform.GetChild(1).GetComponent<Text>().fontSize = 60;
                         return;
                     }
-                    tempSetSizeText.rectTransform.sizeDelta = SetSizeListText_OutVector(i);
+                    tempSetSizeText.rectTransform.sizeDelta = SetSizeListText_OutVector(i,0);
                     tempSetSizeText.fontSize = SetSizeListText_OutFontSize(panellistSubject.Count);
                 }
                 break;
@@ -366,11 +366,11 @@ public class WordManager : MonoBehaviour
                     tempSetSizeText = panellistCondition[i].transform.GetChild(1).GetComponent<Text>();
                     if (panellistCondition.Count == 1)
                     {
-                        tempSetSizeText.rectTransform.sizeDelta = SetSizeListText_OutVector(i);
+                        tempSetSizeText.rectTransform.sizeDelta = SetSizeListText_OutVector(i,1);
                         tempSetSizeText.fontSize = 60;
                         return;
                     }
-                    tempSetSizeText.rectTransform.sizeDelta = SetSizeListText_OutVector(i);
+                    tempSetSizeText.rectTransform.sizeDelta = SetSizeListText_OutVector(i,1);
                     tempSetSizeText.fontSize = SetSizeListText_OutFontSize(panellistCondition.Count);
                 }
                 break;
@@ -381,20 +381,33 @@ public class WordManager : MonoBehaviour
                     tempSetSizeText = panellistExecution[i].transform.GetChild(1).GetComponent<Text>();
                     if (panellistExecution.Count == 1)
                     {
-                        tempSetSizeText.rectTransform.sizeDelta = SetSizeListText_OutVector(i);
+                        tempSetSizeText.rectTransform.sizeDelta = SetSizeListText_OutVector(i,2);
                         tempSetSizeText.fontSize = 60;
                         return;
                     }
-                    tempSetSizeText.rectTransform.sizeDelta = SetSizeListText_OutVector(i);
+                    tempSetSizeText.rectTransform.sizeDelta = SetSizeListText_OutVector(i,2);
                     tempSetSizeText.fontSize = SetSizeListText_OutFontSize(panellistExecution.Count);
                 }
                 break;
         }
 
     }
-    private Vector2 SetSizeListText_OutVector(int i)
+    private Vector2 SetSizeListText_OutVector(int i, int type)
     {
-        return new Vector2(640 / panellistSubject.Count, panellistSubject[i].transform.GetChild(1).GetComponent<Text>().rectTransform.rect.height);
+        switch(type)
+        {
+            case 0:
+                return new Vector2(640 / panellistSubject.Count, panellistSubject[i].transform.GetChild(1).GetComponent<Text>().rectTransform.rect.height);
+
+            case 1:
+                return new Vector2(640 / panellistCondition.Count, panellistCondition[i].transform.GetChild(1).GetComponent<Text>().rectTransform.rect.height);
+
+            case 2:
+                return new Vector2(640 / panellistExecution.Count, panellistExecution[i].transform.GetChild(1).GetComponent<Text>().rectTransform.rect.height);
+            default:
+                return new Vector2(0,0);
+        }
+        
     } // 하위 함수
     private int SetSizeListText_OutFontSize(int count) // 하위 함수 폰트 수치
     {
