@@ -207,11 +207,11 @@ public class WordManager : MonoBehaviour
                 break;
 
             case 1:
-                panellistSubject.RemoveAt(panellistCondition.Count - 1);
+                panellistCondition.RemoveAt(panellistCondition.Count - 1);
                 break;
 
             case 2:
-                panellistSubject.RemoveAt(panellistExecution.Count - 1);
+                panellistExecution.RemoveAt(panellistExecution.Count - 1);
                 break;
         }
     }
