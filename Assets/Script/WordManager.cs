@@ -62,7 +62,6 @@ public class WordManager : MonoBehaviour
     [SerializeField]
     private Transform executionScroll = null;
 
-    [SerializeField]
     private List<GameObject> panellistSubject = new List<GameObject>();
     private List<GameObject> panellistCondition = new List<GameObject>();
     private List<GameObject> panellistExecution = new List<GameObject>();
@@ -134,20 +133,23 @@ public class WordManager : MonoBehaviour
         switch (nowWord)
         {
             case 0:
-                if (subjectScroll.childCount >= 9) return;
-                newPanel = Instantiate(subjectScrollsPanel, subjectScrollsPanel.transform.parent);
+                if (panellistSubject.Count >= 9) return;
+                newPanel = CreatePanel_Pull(0);
+                newPanel.SetActive(true);
                 panellistSubject.Add(newPanel);
                 newPanel.transform.GetChild(1).GetComponent<Text>().text = subjectlist[subjectUnlock[panellistSubject.Count]];
                 break;
             case 1:
-                if (conditionScroll.childCount >= 9) return;
-                newPanel = Instantiate(conditionScrollsPanel, conditionScrollsPanel.transform.parent);
+                if (panellistCondition.Count >= 9) return;
+                newPanel = CreatePanel_Pull(1);
+                newPanel.SetActive(true);
                 panellistCondition.Add(newPanel);
                 newPanel.transform.GetChild(1).GetComponent<Text>().text = conditionlist[conditionUnlock[panellistCondition.Count]];
                 break;
             case 2:
-                if (executionScroll.childCount >= 9) return;
-                newPanel = Instantiate(executionScrollsPanel, executionScrollsPanel.transform.parent);
+                if (panellistExecution.Count >= 9) return;
+                newPanel = CreatePanel_Pull(2);
+                newPanel.SetActive(true);
                 panellistCondition.Add(newPanel);
                 newPanel.transform.GetChild(1).GetComponent<Text>().text = executionlist[executionUnlock[panellistExecution.Count]];
                 break;
@@ -157,6 +159,48 @@ public class WordManager : MonoBehaviour
         SetSizeListUI();
         AllChangeTexts();
     } // 완료
+
+    private GameObject CreatePanel_Pull(int type)
+    {
+        switch(type)
+        {
+            case 0:
+                if(subjectScroll.childCount == 0)
+                {
+                    return subjectScrollsPanel;
+                }
+                else if(subjectScroll.childCount > panellistSubject.Count)
+                {
+                    return subjectScroll.GetChild(panellistSubject.Count).gameObject;
+                }
+                return Instantiate(subjectScrollsPanel, subjectScrollsPanel.transform.parent);
+
+            case 1:
+                if (conditionScroll.childCount == 0)
+                {
+                    return conditionScrollsPanel;
+                }
+                else if (conditionScroll.childCount > panellistCondition.Count)
+                {
+                    return conditionScroll.GetChild(panellistCondition.Count).gameObject;
+                }
+                return Instantiate(conditionScrollsPanel, conditionScrollsPanel.transform.parent);
+
+            case 2:
+                if (executionScroll.childCount == 0)
+                {
+                    return executionScrollsPanel;
+                }
+                else if (executionScroll.childCount > panellistExecution.Count)
+                {
+                    return executionScroll.GetChild(panellistExecution.Count).gameObject;
+                }
+                return Instantiate(executionScrollsPanel, executionScrollsPanel.transform.parent);
+        }
+        return null;
+    } //하위 함수
+
+
     public void ResetOnClick()
     {
         resetOnClick = null;
@@ -188,40 +232,29 @@ public class WordManager : MonoBehaviour
         switch (nowWord)
         {
             case 0:
-                if (subjectScroll.childCount == 1) return;
+                if (panellistSubject.Count == 0) return;
 
-                backPanel = subjectScroll.GetChild(subjectScroll.childCount - 1).gameObject;
-                Destroy(backPanel);
+                backPanel = subjectScroll.GetChild(panellistSubject.Count - 1).gameObject;
+                backPanel.SetActive(false);
+                panellistSubject.RemoveAt(panellistSubject.Count - 1);
                 break;
             case 1:
-                if (conditionScroll.childCount == 1) return;
-                backPanel = conditionScroll.GetChild(conditionScroll.childCount - 1).gameObject;
-                Destroy(backPanel);
+                if (panellistCondition.Count == 0) return;
+                backPanel = conditionScroll.GetChild(panellistCondition.Count - 1).gameObject;
+                backPanel.SetActive(false);
+                panellistCondition.RemoveAt(panellistCondition.Count - 1);
                 break;
             case 2:
-                if (executionScroll.childCount == 1) return;
+                if (panellistExecution.Count == 0) return;
 
-                backPanel = executionScroll.GetChild(executionScroll.childCount - 1).gameObject;
-                Destroy(backPanel);
+                backPanel = executionScroll.GetChild(panellistExecution.Count - 1).gameObject;
+                backPanel.SetActive(false);
+                panellistExecution.RemoveAt(panellistExecution.Count - 1);
                 break;
 
         }
         SetListUI();
         SetSizeListUI();
-        switch (nowWord)
-        {
-            case 0:
-                panellistSubject.RemoveAt(panellistSubject.Count - 1);
-                break;
-
-            case 1:
-                panellistCondition.RemoveAt(panellistCondition.Count - 1);
-                break;
-
-            case 2:
-                panellistExecution.RemoveAt(panellistExecution.Count - 1);
-                break;
-        }
     }
     public void ClearPanel()
     {
@@ -229,30 +262,31 @@ public class WordManager : MonoBehaviour
         switch (nowWord)
         {
             case 0:
-                count = subjectScroll.childCount;
+                count = panellistSubject.Count;
+                if (count == 1) return;
                 for (int i = 1; i < count; i++)
                 {
-                    Destroy(subjectScroll.GetChild(i).gameObject);
+                    subjectScroll.GetChild(i).gameObject.SetActive(false);
                     panellistSubject.RemoveAt(panellistSubject.Count - 1);
                 }
                 break;
             case 1:
-                count = conditionScroll.childCount;
+                count = panellistCondition.Count;
+                if (count == 1) return;
                 for (int i = 1; i < count; i++)
                 {
-                    Destroy(conditionScroll.GetChild(i).gameObject);
+                    conditionScroll.GetChild(i).gameObject.SetActive(false);
                     panellistCondition.RemoveAt(panellistCondition.Count - 1);
                 }
                 break;
             case 2:
-                count = executionScroll.childCount;
+                count = panellistExecution.Count;
+                if (count == 1) return;
                 for (int i = 1; i < count; i++)
                 {
-                    Destroy(executionScroll.GetChild(i).gameObject);
+                    executionScroll.GetChild(i).gameObject.SetActive(false);
                     panellistExecution.RemoveAt(panellistExecution.Count - 1);
                 }
-                break;
-            default:
                 break;
         }
 
@@ -263,19 +297,28 @@ public class WordManager : MonoBehaviour
         panellistSubject.Clear();
         for (int i = 0; i < subjectScroll.childCount; i++)
         {
-            panellistSubject.Add(subjectScroll.GetChild(i).gameObject);
+            if(subjectScroll.GetChild(i).gameObject.activeSelf)
+            {
+                panellistSubject.Add(subjectScroll.GetChild(i).gameObject);
+            }
         };
 
         panellistCondition.Clear();
         for (int i = 0; i < conditionScroll.childCount; i++)
         {
-            panellistCondition.Add(conditionScroll.GetChild(i).gameObject);
+            if(conditionScroll.GetChild(i).gameObject.activeSelf)
+            {
+                panellistCondition.Add(conditionScroll.GetChild(i).gameObject);
+            }
         };
 
         panellistExecution.Clear();
         for (int i = 0; i < executionScroll.childCount; i++)
         {
-            panellistExecution.Add(executionScroll.GetChild(i).gameObject);
+            if(executionScroll.GetChild(i).gameObject.activeSelf)
+            {
+                panellistExecution.Add(executionScroll.GetChild(i).gameObject);
+            }
         };
     }
     private void SetSizeListUI()
