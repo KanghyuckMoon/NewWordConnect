@@ -14,8 +14,8 @@ public enum Type
 public class FadeObject
 {
     public Type type;
-    public float lodingTime;
-    public float endTime;
+    public float lodingAmount;
+    public float endAmount;
     public float delayTime;
     public float holdingTime;
     public GameObject fadeObj;
@@ -54,8 +54,9 @@ public class ImageLoding : MonoBehaviour
     
     private IEnumerator FadeInOutImage(int index)
     {
-        float a = fadeObjects[index].lodingTime * 0.016f;
-        float b = fadeObjects[index].endTime * 0.016f;
+        fadeObjects[index].fadeObj.SetActive(true);
+        float a = fadeObjects[index].lodingAmount * 0.016f;
+        float b = fadeObjects[index].endAmount * 0.016f;
         Image obj = fadeObjects[index].fadeObj.GetComponent<Image>();
         for(float i = 0; i<=1;i+=a)
         {
@@ -70,14 +71,16 @@ public class ImageLoding : MonoBehaviour
             yield return waitForSecondsDelay;
         }
         obj.color = new Color(1, 1, 1, 0);
+        fadeObjects[index].fadeObj.SetActive(false);
         OrderDraw();
         yield return null;
     }
 
     private IEnumerator FadeInOutSprite(int index)
     {
-        float a = fadeObjects[index].lodingTime * 0.016f;
-        float b = fadeObjects[index].endTime * 0.016f;
+        fadeObjects[index].fadeObj.SetActive(true);
+        float a = fadeObjects[index].lodingAmount * 0.016f;
+        float b = fadeObjects[index].endAmount * 0.016f;
         SpriteRenderer obj = fadeObjects[index].fadeObj.GetComponent<SpriteRenderer>();
         for (float i = 0; i <= 1; i += a)
         {
@@ -92,14 +95,16 @@ public class ImageLoding : MonoBehaviour
             yield return waitForSecondsDelay;
         }
         obj.color = new Color(1, 1, 1, 0);
+        fadeObjects[index].fadeObj.SetActive(false);
         OrderDraw();
         yield return null;
     }
 
     private IEnumerator FadeInOutText(int index)
     {
-        float a = fadeObjects[index].lodingTime * 0.016f;
-        float b = fadeObjects[index].endTime * 0.016f;
+        fadeObjects[index].fadeObj.SetActive(true);
+        float a = fadeObjects[index].lodingAmount * 0.016f;
+        float b = fadeObjects[index].endAmount * 0.016f;
         Text obj = fadeObjects[index].fadeObj.GetComponent<Text>();
         for (float i = 0; i <= 1; i += a)
         {
@@ -114,6 +119,7 @@ public class ImageLoding : MonoBehaviour
             yield return waitForSecondsDelay;
         }
         obj.color = new Color(1, 1, 1, 0);
+        fadeObjects[index].fadeObj.SetActive(false);
         OrderDraw();
         yield return null;
     }
