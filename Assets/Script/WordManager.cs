@@ -67,6 +67,13 @@ public class WordManager : MonoBehaviour
     private List<GameObject> panellistCondition = new List<GameObject>();
     private List<GameObject> panellistExecution = new List<GameObject>();
 
+    [SerializeField]
+    private GameObject barSubject = null;
+    [SerializeField]
+    private GameObject barCondition = null;
+    [SerializeField]
+    private GameObject barExecution = null;
+
     //캐싱용 멤버변수
     private Text tempSetSizeText = null;
     private Image tempSetSizeImage = null;
@@ -233,7 +240,7 @@ public class WordManager : MonoBehaviour
             resetOnClick.onClick.AddListener(() => { ClickOnWordSelect(temp + 1); });
         }
     } // 완료
-    public void BackPanel() // 최적화 필요함 풀링 필요함
+    public void BackPanel() // 
     {
         backPanel = null;
         switch (nowWord)
@@ -298,7 +305,7 @@ public class WordManager : MonoBehaviour
         }
 
         SetSizeListUI();
-    } // 최적화 필요함 풀링 필요함
+    } // 
     private void SetListUI()
     {
         panellistSubject.Clear();
@@ -390,7 +397,7 @@ public class WordManager : MonoBehaviour
         return new Vector2(100 / (count * 0.5f), 100 / (count * 0.5f));
     } //하위 함수
 
-    private void SetSizeListText() //패널의 텍스트 사이즈 조절 최적화 필요
+    private void SetSizeListText() //패널의 텍스트 사이즈 조절
     {
         tempSetSizeText = null;
         switch (nowWord)
@@ -499,7 +506,7 @@ public class WordManager : MonoBehaviour
         OnOffScroll();
     }
 
-    private void InputWordKey() // 키입력 최적화 필요
+    private void InputWordKey() // 키입력
     {
         for (int i = 0; i < keyCodes.Length; i++)
         {
@@ -528,28 +535,16 @@ public class WordManager : MonoBehaviour
                 switch (nowWord)
                 {
                     case 0:
-                        subjectWord = OutToNowWord(numberPressed, 0);
-                        nowWord = 1;
-                        OnOffScroll();
-                        AllChangeTexts();
+                        InputSubject(numberPressed);
                         break;
                     case 1:
-                        conditionWord = OutToNowWord(numberPressed, 1);
-                        nowWord = 2;
-                        OnOffScroll();
-                        AllChangeTexts();
+                        InputCondition(numberPressed);
                         break;
                     case 2:
-                        executionWord = OutToNowWord(numberPressed, 2);
-                        nowWord = 3;
-                        OnOffScroll();
-                        AllChangeTexts();
-                        panelBar.SetBool("PanelOn",false);
+                        InputExecution(numberPressed);
                         break;
                     default:
-                        nowWord = 3;
-                        OnOffScroll();
-                        AllChangeTexts();
+                        InputDefault();
                         break;
                 }
             }
@@ -570,6 +565,7 @@ public class WordManager : MonoBehaviour
                             subjectText.text = null;
                             OnOffScroll();
                             AllChangeTexts();
+                            BackAnimationSubject();
                             return;
                         case 2:
                             nowWord = 1;
@@ -577,6 +573,7 @@ public class WordManager : MonoBehaviour
                             conditionText.text = null;
                             OnOffScroll();
                             AllChangeTexts();
+                            BackAnimationCondition();
                             return;
                         case 3:
                             nowWord = 2;
@@ -585,6 +582,7 @@ public class WordManager : MonoBehaviour
                             OnOffScroll();
                             AllChangeTexts();
                             panelBar.SetBool("PanelOn", true);
+                            BackAnimationExecution();
                             return;
                         default:
                             OnOffScroll();
@@ -601,30 +599,87 @@ public class WordManager : MonoBehaviour
         switch (nowWord)
         {
             case 0:
-                subjectWord = OutToNowWord(num, 0);
-                nowWord = 1;
-                OnOffScroll();
-                AllChangeTexts();
+                InputSubject(num);
                 break;
             case 1:
-                conditionWord = OutToNowWord(num, 1);
-                nowWord = 2;
-                OnOffScroll();
-                AllChangeTexts();
+                InputCondition(num);
                 break;
             case 2:
-                executionWord = OutToNowWord(num, 2);
-                nowWord = 3;
-                OnOffScroll();
-                AllChangeTexts();
-                panelBar.SetBool("PanelOn", false);
+                InputExecution(num);
                 break;
             default:
-                nowWord = 3;
-                OnOffScroll();
-                AllChangeTexts();
+                InputDefault();
                 break;
         }
+    }
+
+    private void InputSubject(int num)
+    {
+        subjectWord = OutToNowWord(num, 0);
+        nowWord = 1;
+        OnOffScroll();
+        AllChangeTexts();
+        AnimationSubject();
+    }
+
+    private void InputCondition(int num)
+    {
+        conditionWord = OutToNowWord(num, 1);
+        nowWord = 2;
+        OnOffScroll();
+        AllChangeTexts();
+        AnimationCondition();
+    }
+
+    private void InputExecution(int num)
+    {
+        executionWord = OutToNowWord(num, 2);
+        nowWord = 3;
+        OnOffScroll();
+        AllChangeTexts();
+        panelBar.SetBool("PanelOn", false);
+        AnimationExecution();
+    }
+
+    private void InputDefault()
+    {
+        nowWord = 3;
+        OnOffScroll();
+        AllChangeTexts();
+    }
+
+    private void AnimationSubject()
+    {
+        barSubject.GetComponent<Animator>().SetBool("PanelOn",true);
+    }
+    private void AnimationCondition()
+    {
+        barCondition.GetComponent<Animator>().SetBool("PanelOn", true);
+        barSubject.transform.GetChild(1).GetComponent<Animator>().SetBool("ChainOn", true);
+        //사슬 움직임
+    }
+    private void AnimationExecution()
+    {
+        barExecution.GetComponent<Animator>().SetBool("PanelOn", true);
+        barCondition.transform.GetChild(1).GetComponent<Animator>().SetBool("ChainOn", true);
+        //사슬 움직임
+    }
+
+    private void BackAnimationSubject()
+    {
+        barSubject.GetComponent<Animator>().SetBool("PanelOn", false);
+    }
+    private void BackAnimationCondition()
+    {
+        barCondition.GetComponent<Animator>().SetBool("PanelOn", false);
+        barSubject.transform.GetChild(1).GetComponent<Animator>().SetBool("ChainOn", false);
+        //사슬 움직임
+    }
+    private void BackAnimationExecution()
+    {
+        barExecution.GetComponent<Animator>().SetBool("PanelOn", false);
+        barCondition.transform.GetChild(1).GetComponent<Animator>().SetBool("ChainOn", false);
+        //사슬 움직임
     }
 
     private void OnOffScroll()
