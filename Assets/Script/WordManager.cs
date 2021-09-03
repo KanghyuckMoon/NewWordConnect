@@ -78,6 +78,12 @@ public class WordManager : MonoBehaviour
     private GameObject executionScrollsPanel = null;
     private int numberPressed = 0;
 
+    //주어용 변수
+    
+    //조건어용 변수
+
+    //실행어용 변수
+
     private void Start()
     {
         SetListUI(); //UI 갯수 세는 함수
