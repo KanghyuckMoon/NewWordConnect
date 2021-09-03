@@ -4,6 +4,6 @@
     "friction": 7.5,
     "aitfriction": 4.0,
     "downGravityOn": true,
-    "jump": 14.100000381469727,
-    "gravityScale": 4.099999904632568
+    "jump": 22.5,
+    "gravityScale": 4.300000190734863
 }
