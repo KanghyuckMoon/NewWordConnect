@@ -47,7 +47,8 @@ public class WordManager : MonoBehaviour
     private int selectCount = 0;
 
     //UI
-
+    [SerializeField]
+    private Animator panelBar = null;
     [SerializeField]
     private Text subjectText = null;
     [SerializeField]
@@ -537,6 +538,7 @@ public class WordManager : MonoBehaviour
                         nowWord = 3;
                         OnOffScroll();
                         AllChangeTexts();
+                        panelBar.SetBool("PanelOn",false);
                         break;
                     default:
                         nowWord = 3;
@@ -576,6 +578,7 @@ public class WordManager : MonoBehaviour
                             executionText.text = null;
                             OnOffScroll();
                             AllChangeTexts();
+                            panelBar.SetBool("PanelOn", true);
                             return;
                         default:
                             OnOffScroll();
@@ -608,6 +611,7 @@ public class WordManager : MonoBehaviour
                 nowWord = 3;
                 OnOffScroll();
                 AllChangeTexts();
+                panelBar.SetBool("PanelOn", false);
                 break;
             default:
                 nowWord = 3;
