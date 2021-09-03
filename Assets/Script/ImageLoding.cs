@@ -27,6 +27,12 @@ public class ImageLoding : MonoBehaviour
     private List<FadeObject> fadeObjects = new List<FadeObject>();
     private WaitForSeconds waitForSecondsDelay;
     private int orderindex = 0;
+    private bool endfade = false;
+
+    public bool GetEnd()
+    {
+        return endfade;
+    }
 
     private void Start()
     {
@@ -35,7 +41,11 @@ public class ImageLoding : MonoBehaviour
 
     private void OrderDraw()
     {
-        if (orderindex >= fadeObjects.Count) return;
+        if (orderindex >= fadeObjects.Count)
+        {
+            endfade = true;
+            return;
+        }
         waitForSecondsDelay = new WaitForSeconds(fadeObjects[orderindex].delayTime);
         switch (fadeObjects[orderindex].type)
         {
