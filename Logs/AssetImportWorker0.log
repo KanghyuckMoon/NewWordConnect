@@ -26070,3 +26070,179 @@ AssetImportParameters requested are different than current active one (requested
   custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 5080.007862 seconds.
+  path: Assets/Resources/DOTweenSettings.asset
+  artifactKey: Guid(137bb40166c8d8148b499328fb55ef73) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/DOTweenSettings.asset using Guid(137bb40166c8d8148b499328fb55ef73) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '46397ba482aa234b05cfda2c49c40b0d') in 0.050791 seconds 
+  Import took 0.069456 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 74779.937288 seconds.
+  path: Assets/Script/WordManager.cs
+  artifactKey: Guid(e1a0d9c3799234b409b7729f80d5b2d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/WordManager.cs using Guid(e1a0d9c3799234b409b7729f80d5b2d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '278665569beada6ae4540d4646318cc8') in 0.019099 seconds 
+  Import took 0.110246 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 15.660402 seconds.
+  path: Assets/Script/Base/WordObject.cs
+  artifactKey: Guid(ccc8bdfd38891ed46b22176ad269e0a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/Base/WordObject.cs using Guid(ccc8bdfd38891ed46b22176ad269e0a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0eb6d38120051850e42b6a201fbdba75') in 0.015547 seconds 
+  Import took 0.024707 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 5.921501 seconds.
+  path: Assets/Script/Base/WordObject.cs
+  artifactKey: Guid(ccc8bdfd38891ed46b22176ad269e0a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/Base/WordObject.cs using Guid(ccc8bdfd38891ed46b22176ad269e0a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '383c3125d303fe46da0aec75d8b36de2') in 0.015394 seconds 
+  Import took 0.027108 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.904694 seconds.
+  path: Assets/Script/Base/WordObject.cs
+  artifactKey: Guid(ccc8bdfd38891ed46b22176ad269e0a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/Base/WordObject.cs using Guid(ccc8bdfd38891ed46b22176ad269e0a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '37220caeb5183badcb09a2b2ec5c8827') in 0.006358 seconds 
+  Import took 0.015136 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 6.635089 seconds.
+  path: Assets/Script/Base/WordObject.cs
+  artifactKey: Guid(ccc8bdfd38891ed46b22176ad269e0a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/Base/WordObject.cs using Guid(ccc8bdfd38891ed46b22176ad269e0a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '10e42d31dffdba0da552f9710235713e') in 0.007626 seconds 
+  Import took 0.023891 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 42.310621 seconds.
+  path: Assets/Script/Base/WordObject.cs
+  artifactKey: Guid(ccc8bdfd38891ed46b22176ad269e0a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/Base/WordObject.cs using Guid(ccc8bdfd38891ed46b22176ad269e0a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '379b79dd44c19048fc44459a4afd1d4b') in 0.006622 seconds 
+  Import took 0.015265 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 6.708096 seconds.
+  path: Assets/Script/Base/WordObject.cs
+  artifactKey: Guid(ccc8bdfd38891ed46b22176ad269e0a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/Base/WordObject.cs using Guid(ccc8bdfd38891ed46b22176ad269e0a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '153bb1912b8aea01431806e0cfe8df87') in 0.006996 seconds 
+  Import took 0.014788 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.791427 seconds.
+  path: Assets/Script/Base/WordObject.cs
+  artifactKey: Guid(ccc8bdfd38891ed46b22176ad269e0a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/Base/WordObject.cs using Guid(ccc8bdfd38891ed46b22176ad269e0a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dd6861aa4181e283897b8ed7b603f272') in 0.008093 seconds 
+  Import took 0.016129 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 13.972516 seconds.
+  path: Assets/Script/Base/WordObject.cs
+  artifactKey: Guid(ccc8bdfd38891ed46b22176ad269e0a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/Base/WordObject.cs using Guid(ccc8bdfd38891ed46b22176ad269e0a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '85388b65119d14cb35286eb7ff4cd4a3') in 0.006117 seconds 
+  Import took 0.023167 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 6.875723 seconds.
+  path: Assets/Script/Base/WordObject.cs
+  artifactKey: Guid(ccc8bdfd38891ed46b22176ad269e0a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/Base/WordObject.cs using Guid(ccc8bdfd38891ed46b22176ad269e0a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fa506f313a066a6aa3f8f8462dbd7ea3') in 0.007140 seconds 
+  Import took 0.015306 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.817030 seconds.
+  path: Assets/Script/Base/WordObject.cs
+  artifactKey: Guid(ccc8bdfd38891ed46b22176ad269e0a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/Base/WordObject.cs using Guid(ccc8bdfd38891ed46b22176ad269e0a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e9a02cc85a48769997151f59c9ade2ca') in 0.007144 seconds 
+  Import took 0.022998 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1003.350601 seconds.
+  path: Assets/Script/Base/WordObject.cs
+  artifactKey: Guid(ccc8bdfd38891ed46b22176ad269e0a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/Base/WordObject.cs using Guid(ccc8bdfd38891ed46b22176ad269e0a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6698ee9e0c68353068642d36a279dea6') in 0.007206 seconds 
+  Import took 0.018514 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.002176 seconds.
+  path: Assets/Script/Base/WordObject.cs
+  artifactKey: Guid(ccc8bdfd38891ed46b22176ad269e0a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/Base/WordObject.cs using Guid(ccc8bdfd38891ed46b22176ad269e0a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6698ee9e0c68353068642d36a279dea6') in 0.009574 seconds 
+  Import took 0.018051 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.763122 seconds.
+  path: Assets/Script/Base/WordObject.cs
+  artifactKey: Guid(ccc8bdfd38891ed46b22176ad269e0a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/Base/WordObject.cs using Guid(ccc8bdfd38891ed46b22176ad269e0a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'da69ca54d7849c1ced0af4e9b4f97fbe') in 0.007928 seconds 
+  Import took 0.016608 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 16.164094 seconds.
+  path: Assets/Script/Base/WordObject.cs
+  artifactKey: Guid(ccc8bdfd38891ed46b22176ad269e0a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/Base/WordObject.cs using Guid(ccc8bdfd38891ed46b22176ad269e0a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6faf46aaf983c63545f6f5db93e32ab5') in 0.013067 seconds 
+  Import took 0.024155 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 25.532179 seconds.
+  path: Assets/Script/Base/WordObject.cs
+  artifactKey: Guid(ccc8bdfd38891ed46b22176ad269e0a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/Base/WordObject.cs using Guid(ccc8bdfd38891ed46b22176ad269e0a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '54eb9cd01c4a0e1842793b2e085163c4') in 0.008134 seconds 
+  Import took 0.016950 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 13.461265 seconds.
+  path: Assets/Script/Base/WordObject.cs
+  artifactKey: Guid(ccc8bdfd38891ed46b22176ad269e0a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/Base/WordObject.cs using Guid(ccc8bdfd38891ed46b22176ad269e0a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e86ff4f96cce6f7c3d5668d9d19ea6dd') in 0.007932 seconds 
+  Import took 0.018607 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.575474 seconds.
+  path: Assets/Script/Base/WordObject.cs
+  artifactKey: Guid(ccc8bdfd38891ed46b22176ad269e0a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/Base/WordObject.cs using Guid(ccc8bdfd38891ed46b22176ad269e0a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e5644900e2789c01bad191a9c951f5b3') in 0.006550 seconds 
+  Import took 0.023424 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 18.485972 seconds.
+  path: Assets/Script/Base/WordObject.cs
+  artifactKey: Guid(ccc8bdfd38891ed46b22176ad269e0a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/Base/WordObject.cs using Guid(ccc8bdfd38891ed46b22176ad269e0a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '70814f1e043195ffc15ce2e5d7e163c5') in 0.006760 seconds 
+  Import took 0.014764 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 17.364861 seconds.
+  path: Assets/Script/Base/WordObject.cs
+  artifactKey: Guid(ccc8bdfd38891ed46b22176ad269e0a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/Base/WordObject.cs using Guid(ccc8bdfd38891ed46b22176ad269e0a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4d753190a5ecbe2d6f3380de0a249434') in 0.007606 seconds 
+  Import took 0.018695 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.894899 seconds.
+  path: Assets/Script/Base/WordObject.cs
+  artifactKey: Guid(ccc8bdfd38891ed46b22176ad269e0a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/Base/WordObject.cs using Guid(ccc8bdfd38891ed46b22176ad269e0a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6bfd1100de5417a5f78543091499aa6c') in 0.006874 seconds 
+  Import took 0.015129 seconds .
+
