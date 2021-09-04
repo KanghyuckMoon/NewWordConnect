@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Cinemachine;
 
 public class WordManager : MonoBehaviour
 {
@@ -74,6 +75,9 @@ public class WordManager : MonoBehaviour
     [SerializeField]
     private GameObject barExecution = null;
 
+    [SerializeField]
+    private Canvas canvas;
+
     //쿨타임
     [SerializeField]
     private Image cooltimeImage = null;
@@ -126,6 +130,8 @@ public class WordManager : MonoBehaviour
 
         //주어 찾기
         s_player = FindObjectOfType<PlayerMove>();
+        s_mainCamera = FindObjectOfType<Camera>();
+        canvas.worldCamera = s_mainCamera;
     }
 
     private void Update()

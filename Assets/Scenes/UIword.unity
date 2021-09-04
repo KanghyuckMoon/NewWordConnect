@@ -1088,6 +1088,7 @@ MonoBehaviour:
   barSubject: {fileID: 1985511300}
   barCondition: {fileID: 876085954}
   barExecution: {fileID: 775532802}
+  canvas: {fileID: 1922849417}
   cooltimeImage: {fileID: 1330774593}
   cooltime: 0
   cooltimeSpeed: 2
