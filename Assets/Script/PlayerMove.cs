@@ -3,26 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMove : MonoBehaviour
+public class PlayerMove : WordGameObject
 {
     //���� ���� ����
-    [SerializeField]
-    private PlayerSetting user = null;
-    private string Save_Path = "";
-    private string Save_FileName = "/MoveFile.txt";
 
-
-    private float speed; //���ϴ� �̵��ӵ�
-    private float maxSpeed; //���ϴ� �ִ��̵��ӵ�
     private float velocityX = 0;
-    private float friction = 0; //������
-    private float airfriction = 0; //������
-    private float gravityScale = 0; // �߷�
     private bool downGravity = false; //�������� �ӵ��� ������ ����
     private bool jumpOn;
-    private float jump = 0;
 
-    private Rigidbody2D rigid;
     private BoxCollider2D collider;
 
     //�ܾ��� ��
@@ -49,6 +37,7 @@ public class PlayerMove : MonoBehaviour
         //���������� �Լ�
         Setting(); // ���� �Լ�
         InputJump();
+        JumpDrag();
 
         //�Է� �޴� ��
         InputMove();
@@ -59,16 +48,9 @@ public class PlayerMove : MonoBehaviour
         Move();
     }
     
-    private void Setting()
+    private void JumpDrag()
     {
-        speed = user.speed;
-        maxSpeed = user.maxspeed;
-        friction = user.friction;
-        airfriction = user.aitfriction;
-        downGravity = user.downGravityOn;
-        gravityScale = user.gravityScale;
-        jump = user.jump;
-        if(jumpOn)
+        if (jumpOn)
         {
             rigid.drag = airfriction; // 마찰력 설정
         }
@@ -76,8 +58,8 @@ public class PlayerMove : MonoBehaviour
         {
             rigid.drag = friction; // 공기 마찰력 설정
         }
-        rigid.gravityScale = gravityScale;
     }
+
     private void InputJump()
     {
             if(Input.GetKeyDown(KeyCode.Space))
@@ -103,7 +85,7 @@ public class PlayerMove : MonoBehaviour
             rigid.velocity = new Vector2(Mathf.Clamp(rigid.velocity.x, -maxSpeed, maxSpeed), rigid.velocity.y);
         }
     }
-    private void Jump()
+    public override void Jump()
     {
         rigid.AddForce(Vector2.up * jump,ForceMode2D.Impulse);
         jumpOn = true;
@@ -111,14 +93,6 @@ public class PlayerMove : MonoBehaviour
 
 
     //�������
-    private void LoadToJson()
-    {
-        if (File.Exists(Save_Path + Save_FileName))
-        {
-            string json = File.ReadAllText(Save_Path + Save_FileName);
-            user = JsonUtility.FromJson<PlayerSetting>(json);
-        }
-    }
     private void SaveToJson()
     {
         string json = JsonUtility.ToJson(user, true);

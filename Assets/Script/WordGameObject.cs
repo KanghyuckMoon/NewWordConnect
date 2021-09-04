@@ -1,15 +1,29 @@
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class WordGameObject : MonoBehaviour
 {
-    //워드게임오브젝트
-    private PlayerSetting user = null;
+    //물리설정 가져오기
+    [SerializeField]
+    protected PlayerSetting user = null;
+    protected string Save_Path = "";
+    protected string Save_FileName = "/MoveFile.txt";
+
+
+    protected float speed;
+    protected float maxSpeed;
+    protected float friction;
+    protected float airfriction;
+    protected bool downGravityOn;
+    protected float jump;
+    protected float gravityScale;
 
     protected float w_speed = 1;
     protected float w_size = 1;
     protected bool w_notcollider = false;
+
 
     //공용
     protected Rigidbody2D rigid = null;
@@ -23,7 +37,7 @@ public class WordGameObject : MonoBehaviour
 
     private void Start()
     {
-        if(gameObject.GetComponent<Rigidbody2D>() == null)
+        if (gameObject.GetComponent<Rigidbody2D>() == null)
         {
             gameObject.AddComponent<Rigidbody2D>();
         }
@@ -31,11 +45,42 @@ public class WordGameObject : MonoBehaviour
         {
             rigid = GetComponent<Rigidbody2D>();
         }
+        LoadToJson();
+        Setting();
+    }
+
+    public virtual void Setting()
+    {
+        speed = user.speed;
+        maxSpeed = user.maxspeed;
+        friction = user.friction;
+        airfriction = user.aitfriction;
+        downGravityOn = user.downGravityOn;
+        gravityScale = user.gravityScale;
+        jump = user.jump;
+        rigid.gravityScale = gravityScale;
+    }
+
+    public virtual void LoadToJson()
+    {
+        if (File.Exists(Save_Path + Save_FileName))
+        {
+            string json = File.ReadAllText(Save_Path + Save_FileName);
+            user = JsonUtility.FromJson<PlayerSetting>(json);
+        }
     }
 
 
+
+
     //실행어
-    private void TimePause()
+
+    public virtual void Jump()
+    {
+        rigid.AddForce(Vector2.up * jump, ForceMode2D.Impulse);
+    }
+
+    public virtual void TimePause()
     {
         pausevector = rigid.velocity;//현재 속도 저장
         w_speed = 0;//이동속도 0
@@ -45,7 +90,7 @@ public class WordGameObject : MonoBehaviour
         Invoke("TimeCountinue", 1);
         
     }
-    private void TimeCountinue()
+    public virtual void TimeCountinue()
     {
         rigid.velocity = pausevector; //속도 불어오기
         w_speed = 1;//이동속도 정상
