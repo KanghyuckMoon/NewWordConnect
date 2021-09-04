@@ -42,7 +42,7 @@ public class WordManager : MonoBehaviour
     private int nowWord = 0;
 
     [SerializeField]
-    private List<GameObject> wordSelect = new List<GameObject>(); // 선택되는 오브젝트
+    private List<WordGameObject> wordSelect = new List<WordGameObject>(); // 선택되는 오브젝트
     [SerializeField]
     private int selectCount = 0;
 
@@ -80,6 +80,7 @@ public class WordManager : MonoBehaviour
     [SerializeField]
     private float cooltime = 0f;
     private bool coolOn = false;
+    private bool wordSetOn = false;
     [SerializeField]
     private float cooltimeSpeed = 1f;
 
@@ -95,8 +96,18 @@ public class WordManager : MonoBehaviour
     private int numberPressed = 0;
 
     //주어용 변수
-    
+    private WordGameObject s_player;
+    private GameObject s_stage;
+    private GameObject s_enemys;
+    private Camera s_mainCamera;
+    //날씨
+    //온도
+    //소리
+    //게임창
+    //특수
+
     //조건어용 변수
+    private float onesecondCoolTime = 0f;
 
     //실행어용 변수
 
@@ -112,12 +123,20 @@ public class WordManager : MonoBehaviour
         subjectScrollsPanel = subjectScroll.GetChild(0).gameObject;
         conditionScrollsPanel = conditionScroll.GetChild(0).gameObject;
         executionScrollsPanel = executionScroll.GetChild(0).gameObject;
+
+        //주어 찾기
+        s_player = FindObjectOfType<PlayerMove>();
     }
 
     private void Update()
     {
         InputWordKey();
         Cooldown();
+        if(wordSetOn)
+        {
+            ConditionWordObject();
+        }
+
         //테스트용
         SelectCount();
     }
@@ -136,11 +155,13 @@ public class WordManager : MonoBehaviour
             coolOn = false;
             if (cooltimeImage.color.a > 0)
             cooltimeImage.GetComponent<Animator>().SetBool("CoolTimeOn", false);
+            wordSetOn = true;
         }
     }
     private void CoolTimefalse()
     {
         coolOn = false;
+        wordSetOn = false;
         cooltimeImage.GetComponent<Animator>().SetBool("CoolTimeOn", false);
         cooltimeImage.GetComponent<Animator>().Play("CoolTimeOff");
     }
@@ -575,7 +596,8 @@ public class WordManager : MonoBehaviour
                         break;
                     case 2:
                         InputExecution(numberPressed);
-                        
+                        AllReset();
+                        SelectWordObject();
                         break;
                     default:
                         InputDefault();
@@ -765,9 +787,124 @@ public class WordManager : MonoBehaviour
         return 0;
     }
 
+    //리셋함수
+    private void AllReset()
+    {
+        onesecondCoolTime = 0;
+    }
 
-
-
+    //선택함수
+    private void SelectWordObject()
+    {
+        wordSelect.Clear();
+        switch(subjectWord)
+        {
+            case 0: // 없음
+                break;
+            case 1: // 용사가
+                wordSelect.Add(s_player);
+                break;
+            case 2:  // 모든적이
+                for(int i = 0; i < s_enemys.transform.childCount;i++)
+                {
+                    wordSelect.Add(s_enemys.transform.GetChild(i).GetComponent<WordGameObject>());
+                }
+                break;
+            case 3: // 스테이지가
+                for (int i = 0; i < s_stage.transform.childCount; i++)
+                {
+                    wordSelect.Add(s_stage.transform.GetChild(i).GetComponent<WordGameObject>());
+                }
+                break;
+            case 4: // 카메라가
+                wordSelect.Add(s_mainCamera.GetComponent<WordGameObject>());
+                break;
+            case 5: // 날씨가
+                break;
+            case 6: // 온도가
+                break;
+            case 7: // 소리가
+                break;
+            case 8: // 게임창이
+                break;
+            case 9: // 여기서부터 특수
+                break;
+        }
+    }
+    //조건 함수
+    private void ConditionWordObject()
+    {
+        //충돌체크 변수 끄기
+        switch(conditionWord)
+        {
+            case 0: // 없음
+                break;
+            case 1: // 1초마다
+                Condition_OneSencond();
+                break;
+            case 2:  
+                break;
+            case 3: // 스테이지가
+                break;
+            case 4: // 카메라가
+                break;
+            case 5: // 날씨가
+                break;
+            case 6: // 온도가
+                break;
+            case 7: // 소리가
+                break;
+            case 8: // 게임창이
+                break;
+            case 9: // 여기서부터 특수
+                break;
+        }
+    }
+    private void Condition_OneSencond()
+    {
+        if(onesecondCoolTime < 1)
+        {
+            onesecondCoolTime += Time.deltaTime;
+            return;
+        }
+        ExecutionWordObject();
+        onesecondCoolTime = 0;
+    }
+    //실행 함수
+    private void ExecutionWordObject()
+    {
+        switch (executionWord)
+        {
+            case 0: // 없음
+                break;
+            case 1: // 뛰어오른다
+                Execution_Jump();
+                break;
+            case 2:
+                break;
+            case 3: // 스테이지가
+                break;
+            case 4: // 카메라가
+                break;
+            case 5: // 날씨가
+                break;
+            case 6: // 온도가
+                break;
+            case 7: // 소리가
+                break;
+            case 8: // 게임창이
+                break;
+            case 9: // 여기서부터 특수
+                break;
+        }
+    }
+    private void Execution_Jump()
+    {
+        for(int i = 0; i<wordSelect.Count;i++)
+        {
+            wordSelect[i].Jump();
+        }
+    }
     //테스트용 함수
     private void SelectCount() //선택된 오브젝트 수
     {
