@@ -74,6 +74,15 @@ public class WordManager : MonoBehaviour
     [SerializeField]
     private GameObject barExecution = null;
 
+    //쿨타임
+    [SerializeField]
+    private Image cooltimeImage = null;
+    [SerializeField]
+    private float cooltime = 0f;
+    private bool coolOn = false;
+    [SerializeField]
+    private float cooltimeSpeed = 1f;
+
     //캐싱용 멤버변수
     private Text tempSetSizeText = null;
     private Image tempSetSizeImage = null;
@@ -108,10 +117,34 @@ public class WordManager : MonoBehaviour
     private void Update()
     {
         InputWordKey();
-
+        Cooldown();
         //테스트용
         SelectCount();
     }
+    private void Cooldown()
+    {
+        if (!coolOn) return; 
+        if (nowWord != 3) return;
+        cooltimeImage.GetComponent<Animator>().SetBool("CoolTimeOn", true);
+        if (cooltime <= 1)
+        {
+            cooltime += Time.deltaTime * cooltimeSpeed;
+            cooltimeImage.fillAmount = cooltime;
+        }
+        else
+        {
+            coolOn = false;
+            if (cooltimeImage.color.a > 0)
+            cooltimeImage.GetComponent<Animator>().SetBool("CoolTimeOn", false);
+        }
+    }
+    private void CoolTimefalse()
+    {
+        coolOn = false;
+        cooltimeImage.GetComponent<Animator>().SetBool("CoolTimeOn", false);
+        cooltimeImage.GetComponent<Animator>().Play("CoolTimeOff");
+    }
+
     public void AllChangeTexts()
     {
         switch (nowWord)
@@ -542,6 +575,7 @@ public class WordManager : MonoBehaviour
                         break;
                     case 2:
                         InputExecution(numberPressed);
+                        
                         break;
                     default:
                         InputDefault();
@@ -583,6 +617,7 @@ public class WordManager : MonoBehaviour
                             AllChangeTexts();
                             panelBar.SetBool("PanelOn", true);
                             BackAnimationExecution();
+                            CoolTimefalse();
                             return;
                         default:
                             OnOffScroll();
@@ -639,6 +674,8 @@ public class WordManager : MonoBehaviour
         AllChangeTexts();
         panelBar.SetBool("PanelOn", false);
         AnimationExecution();
+        cooltime = 0f;
+        coolOn = true;
     }
 
     private void InputDefault()
