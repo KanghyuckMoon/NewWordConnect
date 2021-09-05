@@ -111,7 +111,8 @@ public class WordManager : MonoBehaviour
     //특수
 
     //조건어용 변수
-    private float onesecondCoolTime = 0f;
+    private float c_onesecondCoolTime = 0f;
+    private float c_cameratime = 0f; // 카메라 쿨타임
 
     //실행어용 변수
 
@@ -798,7 +799,7 @@ public class WordManager : MonoBehaviour
     //리셋함수
     private void AllReset()
     {
-        onesecondCoolTime = 0;
+        c_onesecondCoolTime = 0;
     }
 
     //단어의 힘 --------------------------------------------------------------
@@ -864,6 +865,7 @@ public class WordManager : MonoBehaviour
             case 6: // 떨어질 때
                 break;
             case 7: // 카메라안에 들어 올때
+                Condition_InCamera();
                 break;
             case 8: // 소리를 낼 때
                 break;
@@ -873,19 +875,36 @@ public class WordManager : MonoBehaviour
     }
     private void Condition_OneSencond() // 1번 1초마다
     {
-        if(onesecondCoolTime < 1)
+        if(c_onesecondCoolTime < 1)
         {
-            onesecondCoolTime += Time.deltaTime;
+            c_onesecondCoolTime += Time.deltaTime;
             return;
         }
         ExecutionWordObject();
-        onesecondCoolTime = 0;
+        c_onesecondCoolTime = 0;
     } 
     private void Condition_Input() // 5번 입력할 때
     {
         if(Input.anyKeyDown)
         {
             ExecutionWordObject();
+        }
+    }
+
+    private void Condition_InCamera() // 7번 카메라 안에 들어올때
+    {
+        if (c_cameratime < 0.2f)
+        {
+            c_cameratime += Time.deltaTime;
+            return;
+        }
+        c_cameratime = 0;
+        for(int i = 0; i < wordSelect.Count; i++)
+        {
+            if(wordSelect[i].w_visible)
+            {
+                ExecutionWordObject(i);
+            }
         }
     }
     //실행 함수
@@ -916,12 +935,43 @@ public class WordManager : MonoBehaviour
                 break;
         }
     }
+    private void ExecutionWordObject(int i)
+    {
+        switch (executionWord)
+        {
+            case 0: // 없음
+                break;
+            case 1: // 뛰어오른다
+                Execution_Jump(i);
+                break;
+            case 2:
+                break;
+            case 3: // 스테이지가
+                break;
+            case 4: // 카메라가
+                break;
+            case 5: // 날씨가
+                break;
+            case 6: // 온도가
+                break;
+            case 7: // 소리가
+                break;
+            case 8: // 게임창이
+                break;
+            case 9: // 여기서부터 특수
+                break;
+        }
+    }
     private void Execution_Jump()
     {
         for(int i = 0; i<wordSelect.Count;i++)
         {
             wordSelect[i].Jump();
         }
+    }
+    private void Execution_Jump(int i)
+    {
+            wordSelect[i].Jump();
     }
     //테스트용 함수
     private void SelectCount() //선택된 오브젝트 수

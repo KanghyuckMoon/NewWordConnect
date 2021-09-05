@@ -23,7 +23,7 @@ public class WordGameObject : MonoBehaviour
     protected float w_speed = 1;
     protected float w_size = 1;
     protected bool w_notcollider = false;
-
+    public bool w_visible = false;
 
     //공용
     protected Rigidbody2D rigid = null;
@@ -95,5 +95,14 @@ public class WordGameObject : MonoBehaviour
         rigid.velocity = pausevector; //속도 불어오기
         w_speed = 1;//이동속도 정상
         gravityscale = rigid.gravityScale; //중력 크기 저장
+    }
+
+    public void OnBecameVisible()
+    {
+        w_visible = true;
+    }
+    public void OnBecameInvisible()
+    {
+        w_visible = false;
     }
 }
