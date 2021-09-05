@@ -107,4 +107,9 @@ public class WordGameObject : MonoBehaviour
         w_visible = false;
         w_visibleEffect = false;
     }
+
+    public float ReturnVelocityY()
+    {
+        return rigid.velocity.y;
+    }
 }

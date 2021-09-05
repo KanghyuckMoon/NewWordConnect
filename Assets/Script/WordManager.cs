@@ -853,7 +853,7 @@ public class WordManager : MonoBehaviour
         {
             case 0: // 없음
                 break;
-            case 1: // 1초마다
+            case 1: // 1초마다 개발완료
                 Condition_OneSencond();
                 break;
             case 2: // 가만히 있을 때
@@ -862,12 +862,13 @@ public class WordManager : MonoBehaviour
                 break;
             case 4: // 블록을 밟을 때
                 break;
-            case 5: // 입력할 때
+            case 5: // 입력할 때 개발안료
                 Condition_Input();
                 break;
             case 6: // 떨어질 때
+                Condition_Fall();
                 break;
-            case 7: // 카메라안에 들어 올때
+            case 7: // 카메라안에 들어 올때 개발완료
                 Condition_InCamera();
                 break;
             case 8: // 소리를 낼 때
@@ -886,11 +887,24 @@ public class WordManager : MonoBehaviour
         ExecutionWordObject();
         c_onesecondCoolTime = 0;
     } 
+
+
     private void Condition_Input() // 5번 입력할 때
     {
         if(Input.anyKeyDown)
         {
             ExecutionWordObject();
+        }
+    }
+
+    private void Condition_Fall() // 6번 떨어질 때
+    {
+        for (int i = 0; i < wordSelect.Count; i++)
+        {
+            if(wordSelect[i].ReturnVelocityY() < -3f)
+            {
+                ExecutionWordObject(i);
+            }
         }
     }
 
