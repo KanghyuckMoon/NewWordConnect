@@ -705,6 +705,8 @@ public class WordManager : MonoBehaviour
         AllChangeTexts();
         panelBar.SetBool("PanelOn", false);
         AnimationExecution();
+        SelectWordObject();
+        AllReset();
         cooltime = 0f;
         coolOn = true;
     }
