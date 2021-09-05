@@ -11,7 +11,7 @@ public class PlayerMove : WordGameObject
     private bool downGravity = false; //�������� �ӵ��� ������ ����
     private bool jumpOn;
 
-    private BoxCollider2D collider;
+    private BoxCollider2D collider2d;
 
     //�ܾ��� ��
     private float realspeed = 0; //���� �̵��ӵ�

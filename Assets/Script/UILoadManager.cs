@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class StageManager : MonoBehaviour
+public class UILoadManager : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()

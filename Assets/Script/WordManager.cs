@@ -101,8 +101,8 @@ public class WordManager : MonoBehaviour
 
     //주어용 변수
     private WordGameObject s_player;
-    private GameObject s_stage;
-    private GameObject s_enemys;
+    private EnemyManager s_enemys;
+    private StageManager s_stage;
     private Camera s_mainCamera;
     //날씨
     //온도
@@ -130,6 +130,8 @@ public class WordManager : MonoBehaviour
 
         //주어 찾기
         s_player = FindObjectOfType<PlayerMove>();
+        s_enemys = FindObjectOfType<EnemyManager>();
+        s_stage = FindObjectOfType<StageManager>();
         s_mainCamera = FindObjectOfType<Camera>();
         canvas.worldCamera = s_mainCamera;
     }
@@ -799,24 +801,26 @@ public class WordManager : MonoBehaviour
         onesecondCoolTime = 0;
     }
 
+    //단어의 힘 --------------------------------------------------------------
+
     //선택함수
     private void SelectWordObject()
     {
         wordSelect.Clear();
         switch(subjectWord)
         {
-            case 0: // 없음
+            case 0: // 없음 개발 완료
                 break;
-            case 1: // 용사가
+            case 1: // 용사가 개발 완료
                 wordSelect.Add(s_player);
                 break;
-            case 2:  // 모든적이
+            case 2:  // 모든적이 개발완료
                 for(int i = 0; i < s_enemys.transform.childCount;i++)
                 {
                     wordSelect.Add(s_enemys.transform.GetChild(i).GetComponent<WordGameObject>());
                 }
                 break;
-            case 3: // 스테이지가
+            case 3: // 스테이지가 
                 for (int i = 0; i < s_stage.transform.childCount; i++)
                 {
                     wordSelect.Add(s_stage.transform.GetChild(i).GetComponent<WordGameObject>());
@@ -848,25 +852,26 @@ public class WordManager : MonoBehaviour
             case 1: // 1초마다
                 Condition_OneSencond();
                 break;
-            case 2:  
+            case 2: // 가만히 있을 때
                 break;
-            case 3: // 스테이지가
+            case 3: // 충돌할 때 
                 break;
-            case 4: // 카메라가
+            case 4: // 블록을 밟을 때
                 break;
-            case 5: // 날씨가
+            case 5: // 입력할 때
+                Condition_Input();
                 break;
-            case 6: // 온도가
+            case 6: // 떨어질 때
                 break;
-            case 7: // 소리가
+            case 7: // 카메라안에 들어 올때
                 break;
-            case 8: // 게임창이
+            case 8: // 소리를 낼 때
                 break;
             case 9: // 여기서부터 특수
                 break;
         }
     }
-    private void Condition_OneSencond()
+    private void Condition_OneSencond() // 1번 1초마다
     {
         if(onesecondCoolTime < 1)
         {
@@ -875,6 +880,13 @@ public class WordManager : MonoBehaviour
         }
         ExecutionWordObject();
         onesecondCoolTime = 0;
+    } 
+    private void Condition_Input() // 5번 입력할 때
+    {
+        if(Input.anyKeyDown)
+        {
+            ExecutionWordObject();
+        }
     }
     //실행 함수
     private void ExecutionWordObject()
