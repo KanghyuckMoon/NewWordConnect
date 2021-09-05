@@ -82,7 +82,7 @@ public class WordGameObject : MonoBehaviour
     {
         while(true)
         {
-            if (w_Movetime < 0.05f)
+            if (w_Movetime < 0.02f)
             {
                 w_Movetime += Time.deltaTime;
 
