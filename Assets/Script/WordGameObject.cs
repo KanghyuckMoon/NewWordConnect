@@ -31,6 +31,9 @@ public class WordGameObject : MonoBehaviour
     public bool w_ColliderEffect = false;
     public bool w_ColliderOn = false;
 
+
+    public bool w_BlockOn = false;
+
     [SerializeField]
     private float w_Movetime = 0f;
     private WaitForSeconds waitForSeconds = new WaitForSeconds(0.1f);
@@ -43,6 +46,10 @@ public class WordGameObject : MonoBehaviour
     private float cooltime;
     private float gravityscale;
     private Vector2 pausevector;
+
+    //블럭을 밟을 때 마다
+    public float w_tile = 0;
+    protected float w_vector1 = 0;
 
 
     private void Start()
@@ -114,6 +121,7 @@ public class WordGameObject : MonoBehaviour
         rigid.AddForce(Vector2.up * jump, ForceMode2D.Impulse);
         w_MoveOn = true;
         w_MoveOnEffect = false;
+        w_tile = 0;
     }
 
     public virtual void TimePause()
@@ -152,21 +160,36 @@ public class WordGameObject : MonoBehaviour
     {
         w_Collider = true;
         w_ColliderEffect = false;
+        w_tile = 0;
+        w_vector1 = transform.position.x;
+        w_BlockOn = true;
     }
     protected virtual void OnCollisionStay2D(Collision2D collision)
     {
         w_Collider = true;
         w_ColliderEffect = true;
+        if(w_BlockOn)
+        {
+            w_tile = Mathf.Abs(w_vector1 - transform.position.x);
+        }
     }
 
     protected virtual void OnCollisionExit2D(Collision2D collision)
     {
         w_Collider = false;
         w_ColliderEffect = false;
+        w_BlockOn = false;
+        w_tile = 0;
     }
 
     public void SetCollider()
     {
         w_ColliderEffect = true;
+    }
+
+    public void SetMoveZero()
+    {
+        w_BlockOn = false;
+        w_tile = 0;
     }
 }

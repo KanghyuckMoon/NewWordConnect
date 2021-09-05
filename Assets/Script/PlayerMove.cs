@@ -92,6 +92,7 @@ public class PlayerMove : WordGameObject
         jumpOn = true;
         w_MoveOn = true;
         w_MoveOnEffect = false;
+        w_tile = 0;
     }
 
 
@@ -111,11 +112,16 @@ public class PlayerMove : WordGameObject
         w_Collider = true;
         w_ColliderEffect = false;
         jumpOn = false;
+        w_tile = 0;
+        w_vector1 = transform.position.x;
+        w_BlockOn = true;
     }
     protected override void OnCollisionExit2D(Collision2D collision)
     {
         w_Collider = false;
         w_ColliderEffect = false;
         jumpOn = true;
+        w_BlockOn = false;
+        w_tile = 0;
     }
 }

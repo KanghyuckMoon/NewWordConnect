@@ -858,10 +858,11 @@ public class WordManager : MonoBehaviour
             case 2: // 가만히 있을 때 개발완료
                 Condition_Stand();
                 break;
-            case 3: // 충돌할 때
+            case 3: // 충돌할 때 개발완료
                 Condition_Collider();
                 break;
-            case 4: // 블록을 밟을 때
+            case 4: // 블록을 밟을 때 
+                Condition_Block();
                 break;
             case 5: // 입력할 때 개발안료
                 Condition_Input();
@@ -911,6 +912,21 @@ public class WordManager : MonoBehaviour
             {
                 if (!wordSelect[i].w_ColliderEffect)
                 {
+                    ExecutionWordObject(i);
+                }
+            }
+        }
+    }
+
+    private void Condition_Block() // 4번 블록을 밟을 때
+    {
+        for (int i = 0; i < wordSelect.Count; i++)
+        {
+            if (wordSelect[i].w_tile > 1)
+            {
+                if(wordSelect[i].w_BlockOn)
+                {
+                    wordSelect[i].SetMoveZero();
                     ExecutionWordObject(i);
                 }
             }
