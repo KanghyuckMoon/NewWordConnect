@@ -807,6 +807,7 @@ public class WordManager : MonoBehaviour
     //선택함수
     private void SelectWordObject()
     {
+        Debug.Log("a");
         wordSelect.Clear();
         switch(subjectWord)
         {
@@ -893,17 +894,15 @@ public class WordManager : MonoBehaviour
 
     private void Condition_InCamera() // 7번 카메라 안에 들어올때
     {
-        if (c_cameratime < 0.2f)
-        {
-            c_cameratime += Time.deltaTime;
-            return;
-        }
-        c_cameratime = 0;
         for(int i = 0; i < wordSelect.Count; i++)
         {
             if(wordSelect[i].w_visible)
             {
-                ExecutionWordObject(i);
+                if(wordSelect[i].w_visibleEffect == false)
+                {
+                    wordSelect[i].w_visibleEffect = true;
+                    ExecutionWordObject(i);
+                }
             }
         }
     }

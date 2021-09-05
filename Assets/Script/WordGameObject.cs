@@ -24,6 +24,7 @@ public class WordGameObject : MonoBehaviour
     protected float w_size = 1;
     protected bool w_notcollider = false;
     public bool w_visible = false;
+    public bool w_visibleEffect = false;
 
     //°ø¿ë
     protected Rigidbody2D rigid = null;
@@ -104,5 +105,6 @@ public class WordGameObject : MonoBehaviour
     public void OnBecameInvisible()
     {
         w_visible = false;
+        w_visibleEffect = false;
     }
 }
