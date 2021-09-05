@@ -112,7 +112,7 @@ public class WordManager : MonoBehaviour
 
     //조건어용 변수
     private float c_onesecondCoolTime = 0f;
-    private float c_cameratime = 0f; // 카메라 쿨타임
+    private float c_StandTime = 0f;
 
     //실행어용 변수
 
@@ -809,7 +809,6 @@ public class WordManager : MonoBehaviour
     //선택함수
     private void SelectWordObject()
     {
-        Debug.Log("a");
         wordSelect.Clear();
         switch(subjectWord)
         {
@@ -857,6 +856,7 @@ public class WordManager : MonoBehaviour
                 Condition_OneSencond();
                 break;
             case 2: // 가만히 있을 때
+                Condition_Stand();
                 break;
             case 3: // 충돌할 때 
                 break;
@@ -865,7 +865,7 @@ public class WordManager : MonoBehaviour
             case 5: // 입력할 때 개발안료
                 Condition_Input();
                 break;
-            case 6: // 떨어질 때
+            case 6: // 떨어질 때 개발완료
                 Condition_Fall();
                 break;
             case 7: // 카메라안에 들어 올때 개발완료
@@ -888,6 +888,19 @@ public class WordManager : MonoBehaviour
         c_onesecondCoolTime = 0;
     } 
 
+    private void Condition_Stand() // 2번 가만히 있을 때
+    {
+        for (int i = 0; i < wordSelect.Count; i++)
+        {
+            if (!wordSelect[i].w_MoveOn)
+            {
+                if(wordSelect[i].w_MoveOnEffect)
+                {
+                    ExecutionWordObject(i);
+                }
+            }
+        }
+    }
 
     private void Condition_Input() // 5번 입력할 때
     {

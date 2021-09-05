@@ -25,6 +25,11 @@ public class WordGameObject : MonoBehaviour
     protected bool w_notcollider = false;
     public bool w_visible = false;
     public bool w_visibleEffect = false;
+    public bool w_MoveOn = false;
+    public bool w_MoveOnEffect = false;
+    [SerializeField]
+    private float w_Movetime = 0f;
+    private WaitForSeconds waitForSeconds = new WaitForSeconds(0.1f);
 
     //공용
     protected Rigidbody2D rigid = null;
@@ -48,6 +53,7 @@ public class WordGameObject : MonoBehaviour
         }
         LoadToJson();
         Setting();
+        StartCoroutine(OnMoveDetect());
     }
 
     public virtual void Setting()
@@ -72,13 +78,38 @@ public class WordGameObject : MonoBehaviour
     }
 
 
+    protected IEnumerator OnMoveDetect()
+    {
+        while(true)
+        {
+            if (w_Movetime < 0.05f)
+            {
+                w_Movetime += Time.deltaTime;
 
+            }
+            else
+            {
+                w_MoveOn = false;
+                w_MoveOnEffect = true;
+            }
+            if ( !(rigid.velocity.x > -1.502492e-05 * 10 && rigid.velocity.x < 1.502492e-05 * 10) || rigid.velocity.y != 0)
+            {
+                    w_MoveOn = true;
+                    w_Movetime = 0f;
+            }
+
+            yield return waitForSeconds;
+        }
+        
+    }
 
     //실행어
 
     public virtual void Jump()
     {
         rigid.AddForce(Vector2.up * jump, ForceMode2D.Impulse);
+        w_MoveOn = true;
+        w_MoveOnEffect = false;
     }
 
     public virtual void TimePause()

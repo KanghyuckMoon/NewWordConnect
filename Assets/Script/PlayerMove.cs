@@ -30,6 +30,7 @@ public class PlayerMove : WordGameObject
     {
         rigid = GetComponent<Rigidbody2D>();
         LoadToJson();
+        StartCoroutine(OnMoveDetect());
     }
 
     private void Update()
@@ -87,8 +88,11 @@ public class PlayerMove : WordGameObject
     }
     public override void Jump()
     {
+        Debug.Log("a3");
         rigid.AddForce(Vector2.up * jump,ForceMode2D.Impulse);
         jumpOn = true;
+        w_MoveOn = true;
+        w_MoveOnEffect = false;
     }
 
 
