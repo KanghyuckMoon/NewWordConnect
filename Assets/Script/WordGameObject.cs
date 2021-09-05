@@ -27,6 +27,10 @@ public class WordGameObject : MonoBehaviour
     public bool w_visibleEffect = false;
     public bool w_MoveOn = false;
     public bool w_MoveOnEffect = false;
+    public bool w_Collider = false;
+    public bool w_ColliderEffect = false;
+    public bool w_ColliderOn = false;
+
     [SerializeField]
     private float w_Movetime = 0f;
     private WaitForSeconds waitForSeconds = new WaitForSeconds(0.1f);
@@ -142,5 +146,27 @@ public class WordGameObject : MonoBehaviour
     public float ReturnVelocityY()
     {
         return rigid.velocity.y;
+    }
+
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
+    {
+        w_Collider = true;
+        w_ColliderEffect = false;
+    }
+    protected virtual void OnCollisionStay2D(Collision2D collision)
+    {
+        w_Collider = true;
+        w_ColliderEffect = true;
+    }
+
+    protected virtual void OnCollisionExit2D(Collision2D collision)
+    {
+        w_Collider = false;
+        w_ColliderEffect = false;
+    }
+
+    public void SetCollider()
+    {
+        w_ColliderEffect = true;
     }
 }

@@ -88,7 +88,6 @@ public class PlayerMove : WordGameObject
     }
     public override void Jump()
     {
-        Debug.Log("a3");
         rigid.AddForce(Vector2.up * jump,ForceMode2D.Impulse);
         jumpOn = true;
         w_MoveOn = true;
@@ -107,12 +106,16 @@ public class PlayerMove : WordGameObject
     {
         SaveToJson();
     }
-    private void OnCollisionStay2D(Collision2D collision)
+    protected override void OnCollisionEnter2D(Collision2D collision)
     {
+        w_Collider = true;
+        w_ColliderEffect = false;
         jumpOn = false;
     }
-    private void OnCollisionExit2D(Collision2D collision)
+    protected override void OnCollisionExit2D(Collision2D collision)
     {
+        w_Collider = false;
+        w_ColliderEffect = false;
         jumpOn = true;
     }
 }
