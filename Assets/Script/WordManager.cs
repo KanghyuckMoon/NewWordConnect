@@ -21,7 +21,7 @@ public class WordManager : MonoBehaviour
 
     readonly private List<string> subjectlist = new List<string>() { " ", "용사가", "모든 적이", "스테이지가", "카메라가", "날씨가", "온도가", "게임창이", "소리가", "특수" };
     readonly private List<string> conditionlist = new List<string>() { " ", "1초 마다", "가만히 있을 때", "충돌할 때", "블록을 밟을 때", "입력할 때", "떨어질 때", "카메라에 보일 때", "소리를 낼 때", "특수" };
-    readonly private List<string> executionlist = new List<string>() { " ", "뛰어 오른다", "1초 동안 빨라진다", "1초 동안 정지한다", "1초 동안 느려진다", "떨어진다", "커진다", "작아진다", "충돌하지 않는다", "특수" };
+    readonly private List<string> executionlist = new List<string>() { " ", "뛰어 오른다", "1초 동안 빨라진다", "1초 동안 정지한다", "1초 동안 느려진다", "떨어진다", "커진다", "작아진다", "1초 동안 충돌하지 않는다", "특수" };
 
     [SerializeField]
     private List<int> subjectUnlock = new List<int>();//주어
@@ -104,9 +104,15 @@ public class WordManager : MonoBehaviour
     private EnemyManager s_enemys;
     private StageManager s_stage;
     private Camera s_mainCamera;
+
+    //스테이지에서 가져오는 변수
+    private StageSettingManager s_settingManager;
     //날씨
+    private float s_Weather;
     //온도
+    private float s_Temperature;
     //소리
+    private float s_Sound;
     //게임창
     //특수
 
@@ -134,6 +140,7 @@ public class WordManager : MonoBehaviour
         s_enemys = FindObjectOfType<EnemyManager>();
         s_stage = FindObjectOfType<StageManager>();
         s_mainCamera = FindObjectOfType<Camera>();
+        s_settingManager = FindObjectOfType<StageSettingManager>();
         canvas.worldCamera = s_mainCamera;
     }
 
@@ -989,6 +996,8 @@ public class WordManager : MonoBehaviour
             case 7: // 소리가
                 break;
             case 8: // 게임창이
+                Execution_ColliderOff();
+                c_onesecondCoolTime = -1f;
                 break;
             case 9: // 여기서부터 특수
                 break;
@@ -1004,24 +1013,26 @@ public class WordManager : MonoBehaviour
                 wordSelect[i].SetCollider();
                 Execution_Jump(i);
                 break;
-            case 2:
+            case 2:// 1초 동안 빨라진다
                 break;
-            case 3: // 스테이지가
+            case 3: // 1초 동안 정지한다
                 break;
-            case 4: // 카메라가
+            case 4: // 1초 동안 느려진다
                 break;
-            case 5: // 날씨가
+            case 5: // 내려간다
                 break;
-            case 6: // 온도가
+            case 6: // 커진다
                 break;
-            case 7: // 소리가
+            case 7: // 작아진다
                 break;
-            case 8: // 게임창이
+            case 8: //1초 동안 충돌하지 않는다
                 break;
             case 9: // 여기서부터 특수
                 break;
         }
     }
+
+
     private void Execution_Jump()
     {
         for(int i = 0; i<wordSelect.Count;i++)
@@ -1033,6 +1044,16 @@ public class WordManager : MonoBehaviour
     {
             wordSelect[i].Jump();
     }
+
+    private void Execution_ColliderOff()
+    {
+        for (int i = 0; i < wordSelect.Count; i++)
+        {
+            wordSelect[i].ColliderOff();
+        }
+    }
+
+
     //테스트용 함수
     private void SelectCount() //선택된 오브젝트 수
     {

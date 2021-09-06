@@ -54,6 +54,9 @@ public class WordGameObject : MonoBehaviour
 
     private float realspeed = 0; //���� �̵��ӵ�
 
+    //콜라이더
+    protected Collider2D w_collider;
+
     private void Awake()
     {
         Save_Path = Application.dataPath + "/Save";
@@ -62,6 +65,7 @@ public class WordGameObject : MonoBehaviour
         {
             Directory.CreateDirectory(Save_Path);
         }
+        w_collider = GetComponent<Collider2D>();
     }
 
     protected virtual void Start()
@@ -133,6 +137,17 @@ public class WordGameObject : MonoBehaviour
         w_MoveOn = true;
         w_MoveOnEffect = false;
         w_tile = 0;
+    }
+
+    public virtual void ColliderOff()
+    {
+        w_collider.enabled = false;
+        Invoke("ColliderOn",1f);
+    }
+    public virtual void ColliderOn()
+    {
+
+        w_collider.enabled = true;
     }
 
     public virtual void TimePause()

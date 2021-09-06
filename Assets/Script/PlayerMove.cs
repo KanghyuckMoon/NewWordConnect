@@ -24,6 +24,7 @@ public class PlayerMove : WordGameObject
         {
             Directory.CreateDirectory(Save_Path);
         }
+        w_collider = GetComponent<Collider2D>();
     }
 
     protected override void Start()
