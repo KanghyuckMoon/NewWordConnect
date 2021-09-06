@@ -41,6 +41,7 @@ public class WordGameObject : MonoBehaviour
 
     //공용
     protected Rigidbody2D rigid = null;
+    protected int sizeIndex = 0;
 
     //1초동안 정지한다
     private bool pause;
@@ -143,6 +144,42 @@ public class WordGameObject : MonoBehaviour
         rigid.AddForce(Vector2.down * (jump * 0.8f), ForceMode2D.Impulse);
         w_MoveOn = true;
         w_MoveOnEffect = false;
+    }
+
+    public virtual void SizeUp()
+    {
+        if(sizeIndex == 0)
+        {
+            sizeIndex = 1;
+            transform.localScale = new Vector2(1.2f, 1.2f);
+        }
+        else if(sizeIndex == -1)
+        {
+            sizeIndex = 0;
+            transform.localScale = new Vector2(1, 1);
+        }
+        else if(sizeIndex == 1)
+        {
+            sizeIndex = 1;
+        }
+    }
+
+    public virtual void SizeDown()
+    {
+        if (sizeIndex == 0)
+        {
+            sizeIndex = -1;
+            transform.localScale = new Vector2(0.8f, 0.8f);
+        }
+        else if (sizeIndex == -1)
+        {
+            sizeIndex = -1;
+        }
+        else if (sizeIndex == 1)
+        {
+            sizeIndex = 0;
+            transform.localScale = new Vector2(1, 1);
+        }
     }
 
     public virtual void ColliderOff()

@@ -992,9 +992,11 @@ public class WordManager : MonoBehaviour
             case 5: // 내려간다
                 Execution_Down();
                 break;
-            case 6: // 온도가
+            case 6: // 커진다
+                Execution_SizeUp();
                 break;
-            case 7: // 소리가
+            case 7: // 작아진다
+                Execution_SizeDown();
                 break;
             case 8: // 1초동안 충돌하지 않는다
                 Execution_ColliderOff();
@@ -1024,8 +1026,10 @@ public class WordManager : MonoBehaviour
                 Execution_Down(i);
                 break;
             case 6: // 커진다
+                Execution_SizeUp(i);
                 break;
             case 7: // 작아진다
+                Execution_SizeDown(i);
                 break;
             case 8: //1초 동안 충돌하지 않는다
                 Execution_ColliderOff(i);
@@ -1058,6 +1062,29 @@ public class WordManager : MonoBehaviour
     private void Execution_Down(int i)
     {
         wordSelect[i].Down();
+    }
+
+    private void Execution_SizeUp()
+    {
+        for (int i = 0; i < wordSelect.Count; i++)
+        {
+            wordSelect[i].SizeUp();
+        }
+    }
+    private void Execution_SizeUp(int i)
+    {
+        wordSelect[i].SizeUp();
+    }
+    private void Execution_SizeDown()
+    {
+        for (int i = 0; i < wordSelect.Count; i++)
+        {
+            wordSelect[i].SizeDown();
+        }
+    }
+    private void Execution_SizeDown(int i)
+    {
+        wordSelect[i].SizeUp();
     }
 
     private void Execution_ColliderOff()
