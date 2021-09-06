@@ -833,7 +833,10 @@ public class WordManager : MonoBehaviour
             case 3: // 스테이지가 개발완료
                 for (int i = 0; i < s_stage.transform.childCount; i++)
                 {
-                    wordSelect.Add(s_stage.transform.GetChild(i).GetComponent<WordGameObject>());
+                    if(s_stage.transform.GetChild(i).GetComponent<WordGameObject>() != null)
+                    {
+                        wordSelect.Add(s_stage.transform.GetChild(i).GetComponent<WordGameObject>());
+                    }
                 }
                 break;
             case 4: // 카메라가 개발완료

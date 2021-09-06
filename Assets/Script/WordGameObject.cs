@@ -65,21 +65,23 @@ public class WordGameObject : MonoBehaviour
         if (!Directory.Exists(Save_Path))
         {
             Directory.CreateDirectory(Save_Path);
-        }
-        w_collider = GetComponent<Collider2D>();
-    }
-
-    protected virtual void Start()
-    {
-        if (gameObject.GetComponent<Rigidbody2D>() == null)
+        } if (gameObject.GetComponent<Rigidbody2D>() == null)
         {
             gameObject.AddComponent<Rigidbody2D>();
+            rigid = GetComponent<Rigidbody2D>();
         }
         else
         {
             rigid = GetComponent<Rigidbody2D>();
         }
+        w_collider = GetComponent<Collider2D>();
         LoadToJson();
+        Setting();
+    }
+
+    protected virtual void Start()
+    {
+       
         StartCoroutine(OnMoveDetect());
     }
 
@@ -119,7 +121,7 @@ public class WordGameObject : MonoBehaviour
                 w_MoveOn = false;
                 w_MoveOnEffect = true;
             }
-            if ( !(rigid.velocity.x > -1.502492e-05 * 10 && rigid.velocity.x < 1.502492e-05 * 10) || rigid.velocity.y != 0)
+            if ( !(rigid.velocity.x > -0.0002191039 * 10 && rigid.velocity.x < 0.0002191039 * 10) || rigid.velocity.y != 0)
             {
                     w_MoveOn = true;
                     w_Movetime = 0f;
