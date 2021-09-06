@@ -829,7 +829,7 @@ public class WordManager : MonoBehaviour
                     wordSelect.Add(s_stage.transform.GetChild(i).GetComponent<WordGameObject>());
                 }
                 break;
-            case 4: // 카메라가 
+            case 4: // 카메라가 개발완료
                 wordSelect.Add(s_mainCamera.GetComponent<WordGameObject>());
                 break;
             case 5: // 날씨가

@@ -43,7 +43,7 @@ public class CameraMove : WordGameObject
         w_MoveOn = true;
         w_MoveOnEffect = false;
         w_tile = 0;
-        Invoke("ResetCam", 1f);
+        //Invoke("ResetCam", 1f);
     }
 
     protected IEnumerator JumpCam()
@@ -52,12 +52,28 @@ public class CameraMove : WordGameObject
         {
             if(jumpOn)
             {
-                for(float i = 0; i < 10; i++)
+                for(float i = 0; i < 11; i++)
                 {
                     virtualCameraTrans.m_TrackedObjectOffset.y = Mathf.Lerp(0, jump / (friction * 0.5f), i / 10);
                     yield return WaitForSeconds;
                 }
                 jumpOn = false;
+                virtualCameraTrans.m_TrackedObjectOffset.y = jump / (friction * 0.5f);
+                virtualCameraTrans.m_SoftZoneHeight = 2f;
+                virtualCameraTrans.m_BiasY = -0.36f;
+            }
+            else if(!jumpOn && virtualCameraTrans.m_TrackedObjectOffset.y != 0)
+            {
+                for (float i = 0; i < 20; i++)
+                {
+                    virtualCameraTrans.m_TrackedObjectOffset.y = Mathf.Lerp(virtualCameraTrans.m_TrackedObjectOffset.y, 0, i / 20);
+                    virtualCameraTrans.m_BiasY = Mathf.Lerp(-0.36f, 0, i / 20);
+                    virtualCameraTrans.m_SoftZoneHeight = Mathf.Lerp(2, 0.5f, i / 20);
+                    yield return WaitForSeconds;
+                }
+                virtualCameraTrans.m_TrackedObjectOffset.y = 0;
+                virtualCameraTrans.m_SoftZoneHeight = 0.5f;
+                virtualCameraTrans.m_BiasY = 0;
             }
             yield return null;
         }
