@@ -26,7 +26,7 @@ public class PlayerMove : WordGameObject
         }
     }
 
-    private void Start()
+    protected override void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
         LoadToJson();

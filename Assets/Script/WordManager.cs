@@ -823,13 +823,13 @@ public class WordManager : MonoBehaviour
                     wordSelect.Add(s_enemys.transform.GetChild(i).GetComponent<WordGameObject>());
                 }
                 break;
-            case 3: // 스테이지가 
+            case 3: // 스테이지가 개발완료
                 for (int i = 0; i < s_stage.transform.childCount; i++)
                 {
                     wordSelect.Add(s_stage.transform.GetChild(i).GetComponent<WordGameObject>());
                 }
                 break;
-            case 4: // 카메라가
+            case 4: // 카메라가 
                 wordSelect.Add(s_mainCamera.GetComponent<WordGameObject>());
                 break;
             case 5: // 날씨가
@@ -861,7 +861,7 @@ public class WordManager : MonoBehaviour
             case 3: // 충돌할 때 개발완료
                 Condition_Collider();
                 break;
-            case 4: // 블록을 밟을 때 
+            case 4: // 블록을 밟을 때 개발완료
                 Condition_Block();
                 break;
             case 5: // 입력할 때 개발안료
@@ -873,7 +873,7 @@ public class WordManager : MonoBehaviour
             case 7: // 카메라안에 들어 올때 개발완료
                 Condition_InCamera();
                 break;
-            case 8: // 소리를 낼 때
+            case 8: // 소리를 낼 때 
                 break;
             case 9: // 여기서부터 특수
                 break;

@@ -1,17 +1,18 @@
-using System.IO;
+ï»¿using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class WordGameObject : MonoBehaviour
 {
-    //¹°¸®¼³Á¤ °¡Á®¿À±â
+    //ë¬¼ë¦¬ì„¤ì • ê°€ì ¸ì˜¤ê¸°
     [SerializeField]
     protected PlayerSetting user = null;
     protected string Save_Path = "";
     protected string Save_FileName = "/MoveFile.txt";
 
 
+    [SerializeField]
     protected float speed;
     protected float maxSpeed;
     protected float friction;
@@ -38,21 +39,32 @@ public class WordGameObject : MonoBehaviour
     private float w_Movetime = 0f;
     private WaitForSeconds waitForSeconds = new WaitForSeconds(0.1f);
 
-    //°ø¿ë
+    //ê³µìš©
     protected Rigidbody2D rigid = null;
 
-    //1ÃÊµ¿¾È Á¤ÁöÇÑ´Ù
+    //1ì´ˆë™ì•ˆ ì •ì§€í•œë‹¤
     private bool pause;
     private float cooltime;
     private float gravityscale;
     private Vector2 pausevector;
 
-    //ºí·°À» ¹âÀ» ¶§ ¸¶´Ù
+    //ë¸”ëŸ­ì„ ë°Ÿì„ ë•Œ ë§ˆë‹¤
     public float w_tile = 0;
     protected float w_vector1 = 0;
 
+    private float realspeed = 0; //ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½Óµï¿½
 
-    private void Start()
+    private void Awake()
+    {
+        Save_Path = Application.dataPath + "/Save";
+        //ï¿½Èµï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½å¿¡ï¿½ï¿½ï¿½ï¿½  Application.dataPath ï¿½ï¿½Å¿ï¿½ Application.persistentDataPath
+        if (!Directory.Exists(Save_Path))
+        {
+            Directory.CreateDirectory(Save_Path);
+        }
+    }
+
+    protected virtual void Start()
     {
         if (gameObject.GetComponent<Rigidbody2D>() == null)
         {
@@ -63,7 +75,6 @@ public class WordGameObject : MonoBehaviour
             rigid = GetComponent<Rigidbody2D>();
         }
         LoadToJson();
-        Setting();
         StartCoroutine(OnMoveDetect());
     }
 
@@ -114,7 +125,7 @@ public class WordGameObject : MonoBehaviour
         
     }
 
-    //½ÇÇà¾î
+    //ì‹¤í–‰ì–´
 
     public virtual void Jump()
     {
@@ -126,19 +137,19 @@ public class WordGameObject : MonoBehaviour
 
     public virtual void TimePause()
     {
-        pausevector = rigid.velocity;//ÇöÀç ¼Óµµ ÀúÀå
-        w_speed = 0;//ÀÌµ¿¼Óµµ 0
-        gravityscale = rigid.gravityScale; //Áß·Â Å©±â ÀúÀå
-        rigid.gravityScale = 0; // Áß·Â Å©±â 0
-        rigid.velocity = Vector2.zero;//ÇöÀç ¼Óµµ 0À¸·Î ¸¸µë
+        pausevector = rigid.velocity;//í˜„ì¬ ì†ë„ ì €ì¥
+        w_speed = 0;//ì´ë™ì†ë„ 0
+        gravityscale = rigid.gravityScale; //ì¤‘ë ¥ í¬ê¸° ì €ì¥
+        rigid.gravityScale = 0; // ì¤‘ë ¥ í¬ê¸° 0
+        rigid.velocity = Vector2.zero;//í˜„ì¬ ì†ë„ 0ìœ¼ë¡œ ë§Œë“¬
         Invoke("TimeCountinue", 1);
         
     }
     public virtual void TimeCountinue()
     {
-        rigid.velocity = pausevector; //¼Óµµ ºÒ¾î¿À±â
-        w_speed = 1;//ÀÌµ¿¼Óµµ Á¤»ó
-        gravityscale = rigid.gravityScale; //Áß·Â Å©±â ÀúÀå
+        rigid.velocity = pausevector; //ì†ë„ ë¶ˆì–´ì˜¤ê¸°
+        w_speed = 1;//ì´ë™ì†ë„ ì •ìƒ
+        gravityscale = rigid.gravityScale; //ì¤‘ë ¥ í¬ê¸° ì €ì¥
     }
 
     public void OnBecameVisible()
