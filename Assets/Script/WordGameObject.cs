@@ -153,32 +153,50 @@ public class WordGameObject : MonoBehaviour
             sizeIndex = 1;
             transform.localScale = new Vector2(1.2f, 1.2f);
         }
+        else if (sizeIndex == 1)
+        {
+            sizeIndex = 2;
+            transform.localScale = new Vector2(1.4f, 1.4f);
+        }
         else if(sizeIndex == -1)
         {
             sizeIndex = 0;
             transform.localScale = new Vector2(1, 1);
         }
-        else if(sizeIndex == 1)
-        {
-            sizeIndex = 1;
-        }
-    }
-
-    public virtual void SizeDown()
-    {
-        if (sizeIndex == 0)
+        else if (sizeIndex == -2)
         {
             sizeIndex = -1;
             transform.localScale = new Vector2(0.8f, 0.8f);
         }
-        else if (sizeIndex == -1)
+        
+    }
+
+    public virtual void SizeDown()
+    {
+        if (sizeIndex == 2)
         {
-            sizeIndex = -1;
+            sizeIndex = 1;
+            transform.localScale = new Vector2(1.2f, 1.2f);
         }
         else if (sizeIndex == 1)
         {
             sizeIndex = 0;
             transform.localScale = new Vector2(1, 1);
+        }
+        else if (sizeIndex == 0)
+        {
+            sizeIndex = -1;
+            transform.localScale = new Vector2(0.8f, 0.8f);
+        }
+        else if (sizeIndex == 1)
+        {
+            sizeIndex = 0;
+            transform.localScale = new Vector2(1, 1);
+        }
+        else if (sizeIndex == -1)
+        {
+            sizeIndex = -2;
+            transform.localScale = new Vector2(0.6f, 0.6f);
         }
     }
 
