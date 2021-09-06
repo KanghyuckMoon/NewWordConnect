@@ -989,13 +989,14 @@ public class WordManager : MonoBehaviour
                 break;
             case 4: // 카메라가
                 break;
-            case 5: // 날씨가
+            case 5: // 내려간다
+                Execution_Down();
                 break;
             case 6: // 온도가
                 break;
             case 7: // 소리가
                 break;
-            case 8: // 게임창이
+            case 8: // 1초동안 충돌하지 않는다
                 Execution_ColliderOff();
                 c_onesecondCoolTime = -1f;
                 break;
@@ -1020,12 +1021,14 @@ public class WordManager : MonoBehaviour
             case 4: // 1초 동안 느려진다
                 break;
             case 5: // 내려간다
+                Execution_Down(i);
                 break;
             case 6: // 커진다
                 break;
             case 7: // 작아진다
                 break;
             case 8: //1초 동안 충돌하지 않는다
+                Execution_ColliderOff(i);
                 break;
             case 9: // 여기서부터 특수
                 break;
@@ -1039,10 +1042,22 @@ public class WordManager : MonoBehaviour
         {
             wordSelect[i].Jump();
         }
-    }
+    }//1번 뛰어오른다
     private void Execution_Jump(int i)
     {
             wordSelect[i].Jump();
+    }
+
+    private void Execution_Down() // 5번 내려간다
+    {
+        for (int i = 0; i < wordSelect.Count; i++)
+        {
+            wordSelect[i].Down();
+        }
+    }
+    private void Execution_Down(int i)
+    {
+        wordSelect[i].Down();
     }
 
     private void Execution_ColliderOff()
@@ -1051,8 +1066,11 @@ public class WordManager : MonoBehaviour
         {
             wordSelect[i].ColliderOff();
         }
+    } // 8번 1초동안 충돌하지 않는다
+    private void Execution_ColliderOff(int i)
+    {
+        wordSelect[i].ColliderOff();
     }
-
 
     //테스트용 함수
     private void SelectCount() //선택된 오브젝트 수

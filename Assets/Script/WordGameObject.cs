@@ -138,6 +138,12 @@ public class WordGameObject : MonoBehaviour
         w_MoveOnEffect = false;
         w_tile = 0;
     }
+    public virtual void Down()
+    {
+        rigid.AddForce(Vector2.down * (jump * 0.8f), ForceMode2D.Impulse);
+        w_MoveOn = true;
+        w_MoveOnEffect = false;
+    }
 
     public virtual void ColliderOff()
     {
