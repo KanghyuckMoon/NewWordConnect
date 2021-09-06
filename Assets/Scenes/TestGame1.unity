@@ -745,6 +745,7 @@ GameObject:
   - component: {fileID: 623076846}
   - component: {fileID: 623076848}
   - component: {fileID: 623076847}
+  - component: {fileID: 623076849}
   m_Layer: 0
   m_Name: Tilemap
   m_TagString: Untagged
@@ -1655,6 +1656,37 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &623076849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 623076842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02f7db7709da429489a0e5c4e5cf3f7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  user:
+    speed: 0
+    maxspeed: 0
+    friction: 0
+    aitfriction: 0
+    downGravityOn: 0
+    jump: 0
+    gravityScale: 0
+  speed: 0
+  w_visible: 0
+  w_visibleEffect: 0
+  w_MoveOn: 0
+  w_MoveOnEffect: 0
+  w_Collider: 0
+  w_ColliderEffect: 0
+  w_ColliderOn: 0
+  w_BlockOn: 0
+  w_Movetime: 0
+  w_tile: 0
 --- !u!1 &717279629
 GameObject:
   m_ObjectHideFlags: 0
