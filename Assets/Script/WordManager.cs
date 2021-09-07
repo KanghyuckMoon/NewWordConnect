@@ -863,10 +863,10 @@ public class WordManager : MonoBehaviour
                 break;
             case 5: // 날씨가
                 break;
-            case 6: // 온도가
+            case 6: // 온도가 개발완료
                 wordSelect.Add(s_settingManager);
                 break;
-            case 7: // 소리가
+            case 7: // 시간이
                 break;
             case 8: // 게임창이
                 break;
