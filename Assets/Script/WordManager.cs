@@ -117,6 +117,7 @@ public class WordManager : MonoBehaviour
     //특수
 
     //조건어용 변수
+    [SerializeField]
     private float c_onesecondCoolTime = 0f;
     private float c_StandTime = 0f;
 
@@ -916,8 +917,8 @@ public class WordManager : MonoBehaviour
             c_onesecondCoolTime += Time.deltaTime;
             return;
         }
-        ExecutionWordObject();
         c_onesecondCoolTime = 0;
+        ExecutionWordObject();
     } 
 
     private void Condition_Stand() // 2번 가만히 있을 때
@@ -1003,25 +1004,31 @@ public class WordManager : MonoBehaviour
         {
             case 0: // 없음
                 break;
-            case 1: // 뛰어오른다
+            case 1: // 뛰어오른다 개발완료
                 Execution_Jump();
                 break;
-            case 2:
+            case 2: // 1초동안 빨라진다
+                Execution_SpeedUp();
+                c_onesecondCoolTime = -1f;
                 break;
-            case 3: // 스테이지가
+            case 3: // 1초동안 정지한다
+
+                c_onesecondCoolTime = -1f;
                 break;
-            case 4: // 카메라가
+            case 4: // 1초동안 느려진다
+                Execution_SpeedDown();
+                c_onesecondCoolTime = -1f;
                 break;
-            case 5: // 내려간다
+            case 5: // 떨어어진다 개발완료
                 Execution_Down();
                 break;
-            case 6: // 커진다
+            case 6: // 커진다 개발완료
                 Execution_SizeUp();
                 break;
-            case 7: // 작아진다
+            case 7: // 작아진다 개발완료
                 Execution_SizeDown();
                 break;
-            case 8: // 1초동안 충돌하지 않는다
+            case 8: // 1초동안 충돌하지 않는다 개발완료
                 Execution_ColliderOff();
                 c_onesecondCoolTime = -1f;
                 break;
@@ -1040,10 +1047,14 @@ public class WordManager : MonoBehaviour
                 Execution_Jump(i);
                 break;
             case 2:// 1초 동안 빨라진다
+                Execution_SpeedUp(i);
+                c_onesecondCoolTime = -1;
                 break;
             case 3: // 1초 동안 정지한다
                 break;
             case 4: // 1초 동안 느려진다
+                Execution_SpeedDown(i);
+                c_onesecondCoolTime = -1;
                 break;
             case 5: // 내려간다
                 Execution_Down(i);
@@ -1056,6 +1067,7 @@ public class WordManager : MonoBehaviour
                 break;
             case 8: //1초 동안 충돌하지 않는다
                 Execution_ColliderOff(i);
+                c_onesecondCoolTime = -1;
                 break;
             case 9: // 여기서부터 특수
                 break;
@@ -1063,18 +1075,41 @@ public class WordManager : MonoBehaviour
     }
 
 
-    private void Execution_Jump()
+    private void Execution_Jump() // 1번 뛰어오른다
     {
         for(int i = 0; i<wordSelect.Count;i++)
         {
             wordSelect[i].Jump();
         }
-    }//1번 뛰어오른다
+    }
     private void Execution_Jump(int i)
     {
             wordSelect[i].Jump();
     }
-
+    private void Execution_SpeedUp() // 2번 스피드
+    {
+        for (int i = 0; i < wordSelect.Count; i++)
+        {
+            wordSelect[i].SpeedUp();
+        }
+    }
+    private void Execution_SpeedUp(int i) // 2번 스피드
+    {
+        
+            wordSelect[i].SpeedUp();
+        
+    }
+    private void Execution_SpeedDown() // 4번 스피드 떨어짐
+    {
+        for (int i = 0; i < wordSelect.Count; i++)
+        {
+            wordSelect[i].SpeedDown();
+        }
+    }
+    private void Execution_SpeedDown(int i) // 4번 스피드 떨어짐
+    {
+            wordSelect[i].SpeedDown();
+    }
     private void Execution_Down() // 5번 내려간다
     {
         for (int i = 0; i < wordSelect.Count; i++)

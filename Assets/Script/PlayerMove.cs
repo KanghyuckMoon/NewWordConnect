@@ -13,8 +13,6 @@ public class PlayerMove : WordGameObject
 
     private BoxCollider2D collider2d;
 
-    //�ܾ��� ��
-    private float realspeed = 0; //���� �̵��ӵ�
 
     private void Awake()
     {
@@ -32,6 +30,7 @@ public class PlayerMove : WordGameObject
         rigid = GetComponent<Rigidbody2D>();
         LoadToJson();
         StartCoroutine(OnMoveDetect());
+        realspeed = user.speed;  
     }
 
     private void Update()
@@ -77,7 +76,7 @@ public class PlayerMove : WordGameObject
 
     private void Move()
     {
-        rigid.AddForce(Vector2.right * (velocityX * speed));
+        rigid.AddForce(Vector2.right * (velocityX * realspeed));
         if(downGravity)
         {
             rigid.velocity = new Vector2(Mathf.Clamp(rigid.velocity.x, -maxSpeed, maxSpeed), Mathf.Clamp(rigid.velocity.y, -maxSpeed, maxSpeed));

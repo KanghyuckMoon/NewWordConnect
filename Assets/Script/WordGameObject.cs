@@ -20,6 +20,7 @@ public class WordGameObject : MonoBehaviour
     protected bool downGravityOn;
     protected float jump;
     protected float gravityScale;
+    protected float realspeed;
 
     protected float w_speed = 1;
     protected float w_size = 1;
@@ -53,8 +54,6 @@ public class WordGameObject : MonoBehaviour
     public float w_tile = 0;
     protected float w_vector1 = 0;
 
-    private float realspeed = 0; //���� �̵��ӵ�
-
     //콜라이더
     protected Collider2D w_collider;
 
@@ -81,8 +80,9 @@ public class WordGameObject : MonoBehaviour
 
     protected virtual void Start()
     {
-       
+        realspeed = speed;
         StartCoroutine(OnMoveDetect());
+        realspeed = speed;
     }
 
     public virtual void Setting()
@@ -200,6 +200,21 @@ public class WordGameObject : MonoBehaviour
             sizeIndex = -2;
             transform.localScale = new Vector2(0.6f, 0.6f);
         }
+    }
+
+    public virtual void SpeedUp()
+    {
+        realspeed = speed * 2f;
+        Invoke("SpeedReset", 1f);
+    }
+    public virtual void SpeedDown()
+    {
+        realspeed = speed * 0.5f;
+        Invoke("SpeedReset", 1f);
+    }
+    public virtual void SpeedReset()
+    {
+        realspeed = speed;
     }
 
     public virtual void ColliderOff()
