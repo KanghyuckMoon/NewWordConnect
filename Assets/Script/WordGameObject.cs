@@ -276,6 +276,15 @@ public class WordGameObject : MonoBehaviour
         {
             w_tile = Mathf.Abs(w_vector1 - transform.position.x);
         }
+        
+    }
+
+    protected void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Wind"))
+        {
+            rigid.AddForce(Vector2.right * 2f);
+        }
     }
 
     protected virtual void OnCollisionExit2D(Collision2D collision)

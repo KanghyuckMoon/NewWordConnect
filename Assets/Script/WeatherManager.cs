@@ -32,7 +32,6 @@ public class WeatherManager : WordGameObject
             }
             if ((100 / s_Weather.Count) * (i + 1) >= s_WeatherPersent && (100 / s_Weather.Count) * (i) <= s_WeatherPersent)
             {
-                Debug.Log((100 / s_Weather.Count) * (i + 1));
                 s_WeatherCode = s_Weather[i];
             }
         }
