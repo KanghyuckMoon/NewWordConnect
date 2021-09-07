@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class TemperObject : MonoBehaviour
 {
-    private StageSettingManager settingManager;
+    private TemperentManager settingManager;
 
     [SerializeField]
     private int destroyTemper = 1;
 
     void Start()
     {
-        settingManager = FindObjectOfType<StageSettingManager>();
+        settingManager = FindObjectOfType<TemperentManager>();
     }
 
     private void Update()

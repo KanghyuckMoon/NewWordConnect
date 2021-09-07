@@ -2,11 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StageSettingManager : WordGameObject
+public class TemperentManager : WordGameObject
 {
-    //³¯¾¾
-    [SerializeField]
-    public int s_Weather = 0;
     //¿Âµµ
     [SerializeField]
     public int s_Temperature = 50;

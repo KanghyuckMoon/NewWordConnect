@@ -111,7 +111,8 @@ public class WordManager : MonoBehaviour
     private TimeManager s_timeManager;
 
     //스테이지에서 가져오는 변수
-    private StageSettingManager s_settingManager;
+    private TemperentManager s_temperentManager;
+    private WeatherManager s_weatherManager;
     //소리
     private float s_Sound;
     //게임창
@@ -142,8 +143,9 @@ public class WordManager : MonoBehaviour
         s_enemys = FindObjectOfType<EnemyManager>();
         s_stage = FindObjectOfType<StageManager>();
         s_mainCamera = FindObjectOfType<Camera>();
-        s_settingManager = FindObjectOfType<StageSettingManager>();
+        s_temperentManager = FindObjectOfType<TemperentManager>();
         s_timeManager = FindObjectOfType<TimeManager>();
+        s_weatherManager = FindObjectOfType<WeatherManager>();
         canvas.worldCamera = s_mainCamera;
     }
 
@@ -152,6 +154,7 @@ public class WordManager : MonoBehaviour
         InputWordKey();
         Cooldown();
         Temperature();
+        //Weather();
         if (wordSetOn)
         {
             ConditionWordObject();
@@ -818,21 +821,20 @@ public class WordManager : MonoBehaviour
 
     private void Temperature()
     {
-        temperImage.rectTransform.eulerAngles = new Vector3(0,0, ((float)s_settingManager.s_Temperature * 2.4f) - 120);
-        if ((float)s_settingManager.s_Temperature / 100 <= 0)
+        temperImage.rectTransform.eulerAngles = new Vector3(0,0, ((float)s_temperentManager.s_Temperature * 2.4f) - 120);
+        if ((float)s_temperentManager.s_Temperature / 100 <= 0)
         {
-            s_settingManager.tempdan = -1;
+            s_temperentManager.tempdan = -1;
         }
-        else if((float)s_settingManager.s_Temperature / 100 >= 1)
+        else if((float)s_temperentManager.s_Temperature / 100 >= 1)
         {
-            s_settingManager.tempdan = 1;
+            s_temperentManager.tempdan = 1;
         }
         else 
         {
-            s_settingManager.tempdan = 0;
+            s_temperentManager.tempdan = 0;
         }
     }
-
 
     //단어의 힘 --------------------------------------------------------------
 
@@ -866,9 +868,10 @@ public class WordManager : MonoBehaviour
                 wordSelect.Add(s_mainCamera.GetComponent<WordGameObject>());
                 break;
             case 5: // 날씨가
+                wordSelect.Add(s_weatherManager);
                 break;
             case 6: // 온도가 개발완료
-                wordSelect.Add(s_settingManager);
+                wordSelect.Add(s_temperentManager);
                 break;
             case 7: // 게임창이
                 break;
