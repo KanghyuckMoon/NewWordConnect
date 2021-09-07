@@ -88,6 +88,10 @@ public class WordManager : MonoBehaviour
     [SerializeField]
     private float cooltimeSpeed = 1f;
 
+    //온도
+    [SerializeField]
+    private Image iceImage = null;
+
     //캐싱용 멤버변수
     private Text tempSetSizeText = null;
     private Image tempSetSizeImage = null;
@@ -107,10 +111,6 @@ public class WordManager : MonoBehaviour
 
     //스테이지에서 가져오는 변수
     private StageSettingManager s_settingManager;
-    //날씨
-    private float s_Weather;
-    //온도
-    private float s_Temperature;
     //소리
     private float s_Sound;
     //게임창
@@ -148,7 +148,8 @@ public class WordManager : MonoBehaviour
     {
         InputWordKey();
         Cooldown();
-        if(wordSetOn)
+        Temperature();
+        if (wordSetOn)
         {
             ConditionWordObject();
         }
@@ -811,6 +812,24 @@ public class WordManager : MonoBehaviour
         c_onesecondCoolTime = 0;
     }
 
+    private void Temperature()
+    {
+        iceImage.fillAmount = (float)s_settingManager.s_Temperature / 100;
+        if ((float)s_settingManager.s_Temperature / 100 <= 0)
+        {
+            s_settingManager.tempdan = -1;
+        }
+        else if((float)s_settingManager.s_Temperature / 100 >= 1)
+        {
+            s_settingManager.tempdan = 1;
+        }
+        else 
+        {
+            s_settingManager.tempdan = 0;
+        }
+    }
+
+
     //단어의 힘 --------------------------------------------------------------
 
     //선택함수
@@ -845,6 +864,7 @@ public class WordManager : MonoBehaviour
             case 5: // 날씨가
                 break;
             case 6: // 온도가
+                wordSelect.Add(s_settingManager);
                 break;
             case 7: // 소리가
                 break;
