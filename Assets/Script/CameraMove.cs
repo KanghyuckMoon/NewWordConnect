@@ -79,6 +79,55 @@ public class CameraMove : WordGameObject
         }
     }
 
+    public override void SizeUp()
+    {
+        if (sizeIndex == 0)
+        {
+            sizeIndex = 1;
+            virtualCamera.m_Lens.OrthographicSize = 4.5f;
+        }
+        else if (sizeIndex == 1)
+        {
+            sizeIndex = 2;
+            virtualCamera.m_Lens.OrthographicSize = 5.25f;
+        }
+        else if (sizeIndex == -1)
+        {
+            sizeIndex = 0;
+            virtualCamera.m_Lens.OrthographicSize = 3.75f;
+        }
+        else if (sizeIndex == -2)
+        {
+            sizeIndex = -1;
+            virtualCamera.m_Lens.OrthographicSize = 3;
+        }
+
+    }
+
+    public override void SizeDown()
+    {
+        if (sizeIndex == 2)
+        {
+            sizeIndex = 1;
+            virtualCamera.m_Lens.OrthographicSize = 4.5f;
+        }
+        else if (sizeIndex == 1)
+        {
+            sizeIndex = 0;
+            virtualCamera.m_Lens.OrthographicSize = 3.75f;
+        }
+        else if (sizeIndex == 0)
+        {
+            sizeIndex = -1;
+            virtualCamera.m_Lens.OrthographicSize = 3;
+        }
+        else if (sizeIndex == -1)
+        {
+            sizeIndex = -2;
+            virtualCamera.m_Lens.OrthographicSize = 2.25f;
+        }
+    }
+
     private void ResetCam()
     {
         virtualCameraTrans.m_TrackedObjectOffset.y = 0;
