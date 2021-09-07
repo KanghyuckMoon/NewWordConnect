@@ -1012,8 +1012,8 @@ public class WordManager : MonoBehaviour
                 c_onesecondCoolTime = -1f;
                 break;
             case 3: // 1초동안 정지한다
-
-                c_onesecondCoolTime = -1f;
+                Execution_TimeStop();
+                c_onesecondCoolTime = -1;
                 break;
             case 4: // 1초동안 느려진다
                 Execution_SpeedDown();
@@ -1051,6 +1051,8 @@ public class WordManager : MonoBehaviour
                 c_onesecondCoolTime = -1;
                 break;
             case 3: // 1초 동안 정지한다
+                Execution_TimeStop(i);
+                c_onesecondCoolTime = -1;
                 break;
             case 4: // 1초 동안 느려진다
                 Execution_SpeedDown(i);
@@ -1098,6 +1100,17 @@ public class WordManager : MonoBehaviour
         
             wordSelect[i].SpeedUp();
         
+    }
+    private void Execution_TimeStop() // 3번 시간 정지
+    {
+        for (int i = 0; i < wordSelect.Count; i++)
+        {
+            wordSelect[i].SpeedStop();
+        }
+    }
+    private void Execution_TimeStop(int i) // 
+    {
+       wordSelect[i].SpeedStop();
     }
     private void Execution_SpeedDown() // 4번 스피드 떨어짐
     {

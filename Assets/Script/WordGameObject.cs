@@ -45,7 +45,7 @@ public class WordGameObject : MonoBehaviour
     protected int sizeIndex = 0;
 
     //1초동안 정지한다
-    private bool pause;
+    private bool w_pause;
     private float cooltime;
     private float gravityscale;
     private Vector2 pausevector;
@@ -87,6 +87,7 @@ public class WordGameObject : MonoBehaviour
 
     public virtual void Setting()
     {
+        if (w_pause) return;
         speed = user.speed;
         maxSpeed = user.maxspeed;
         friction = user.friction;
@@ -212,9 +213,27 @@ public class WordGameObject : MonoBehaviour
         realspeed = speed * 0.5f;
         Invoke("SpeedReset", 1f);
     }
+    public virtual void SpeedStop()
+    {
+        w_pause = true;
+        realspeed = 0;
+        gravityScale = 0;
+        jump = 0;
+        rigid.gravityScale = 0;
+        pausevector = rigid.velocity;
+        rigid.velocity = Vector2.zero;
+        realspeed = 0;
+        Invoke("TimeReset", 1f);
+    }
     public virtual void SpeedReset()
     {
         realspeed = speed;
+    }
+    public virtual void TimeReset()
+    {
+        w_pause = false;
+        realspeed = speed;
+        rigid.velocity = pausevector;
     }
 
     public virtual void ColliderOff()
@@ -226,23 +245,6 @@ public class WordGameObject : MonoBehaviour
     {
 
         w_collider.enabled = true;
-    }
-
-    public virtual void TimePause()
-    {
-        pausevector = rigid.velocity;//현재 속도 저장
-        w_speed = 0;//이동속도 0
-        gravityscale = rigid.gravityScale; //중력 크기 저장
-        rigid.gravityScale = 0; // 중력 크기 0
-        rigid.velocity = Vector2.zero;//현재 속도 0으로 만듬
-        Invoke("TimeCountinue", 1);
-        
-    }
-    public virtual void TimeCountinue()
-    {
-        rigid.velocity = pausevector; //속도 불어오기
-        w_speed = 1;//이동속도 정상
-        gravityscale = rigid.gravityScale; //중력 크기 저장
     }
 
     public void OnBecameVisible()
