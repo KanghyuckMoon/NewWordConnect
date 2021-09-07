@@ -90,7 +90,7 @@ public class WordManager : MonoBehaviour
 
     //온도
     [SerializeField]
-    private Image iceImage = null;
+    private Image temperImage = null;
 
     //캐싱용 멤버변수
     private Text tempSetSizeText = null;
@@ -818,7 +818,7 @@ public class WordManager : MonoBehaviour
 
     private void Temperature()
     {
-        iceImage.fillAmount = (float)s_settingManager.s_Temperature / 100;
+        temperImage.rectTransform.eulerAngles = new Vector3(0,0, ((float)s_settingManager.s_Temperature * 2.4f) - 120);
         if ((float)s_settingManager.s_Temperature / 100 <= 0)
         {
             s_settingManager.tempdan = -1;

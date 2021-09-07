@@ -29,25 +29,29 @@ public class StageSettingManager : WordGameObject
 
     public override void Jump()
     {
-        s_Temperature += 10;
+        s_Temperature -= 10;
+        if (s_Temperature <= 0) s_Temperature = 0;
         if (s_Temperature >= 100) s_Temperature = 100;
     }
 
     public override void Down()
     {
-        s_Temperature -= 10;
+        s_Temperature += 10;
         if (s_Temperature <= 0) s_Temperature = 0;
+        if (s_Temperature >= 100) s_Temperature = 100;
     }
 
     public override void SizeUp()
     {
-        s_Temperature += 10;
+        s_Temperature -= 10;
+        if (s_Temperature <= 0) s_Temperature = 0;
         if (s_Temperature >= 100) s_Temperature = 100;
     }
 
     public override void SizeDown()
     {
-        s_Temperature -= 10;
+        s_Temperature += 10;
         if (s_Temperature <= 0) s_Temperature = 0;
+        if (s_Temperature >= 100) s_Temperature = 100;
     }
 }
