@@ -19,7 +19,7 @@ public class WordManager : MonoBehaviour
     KeyCode.Keypad9,
     };
 
-    readonly private List<string> subjectlist = new List<string>() { " ", "용사가", "모든 적이", "스테이지가", "카메라가", "날씨가", "온도가", "게임창이", "소리가", "특수" };
+    readonly private List<string> subjectlist = new List<string>() { " ", "용사가", "모든 적이", "스테이지가", "카메라가", "날씨가", "온도가", "게임창이", "시간이", "특수" };
     readonly private List<string> conditionlist = new List<string>() { " ", "1초 마다", "가만히 있을 때", "충돌할 때", "블록을 밟을 때", "입력할 때", "떨어질 때", "카메라에 보일 때", "소리를 낼 때", "특수" };
     readonly private List<string> executionlist = new List<string>() { " ", "뛰어 오른다", "1초 동안 빨라진다", "1초 동안 정지한다", "1초 동안 느려진다", "떨어진다", "커진다", "작아진다", "1초 동안 충돌하지 않는다", "특수" };
 
@@ -108,6 +108,7 @@ public class WordManager : MonoBehaviour
     private EnemyManager s_enemys;
     private StageManager s_stage;
     private Camera s_mainCamera;
+    private TimeManager s_timeManager;
 
     //스테이지에서 가져오는 변수
     private StageSettingManager s_settingManager;
@@ -142,6 +143,7 @@ public class WordManager : MonoBehaviour
         s_stage = FindObjectOfType<StageManager>();
         s_mainCamera = FindObjectOfType<Camera>();
         s_settingManager = FindObjectOfType<StageSettingManager>();
+        s_timeManager = FindObjectOfType<TimeManager>();
         canvas.worldCamera = s_mainCamera;
     }
 
@@ -580,6 +582,7 @@ public class WordManager : MonoBehaviour
 
     private void InputWordKey() // 키입력
     {
+        if (Time.timeScale == 0) return;
         for (int i = 0; i < keyCodes.Length; i++)
         {
             if (Input.GetKeyDown(keyCodes[i]) || Input.GetKeyDown(keyCodes[i] - 208))
@@ -867,9 +870,10 @@ public class WordManager : MonoBehaviour
             case 6: // 온도가 개발완료
                 wordSelect.Add(s_settingManager);
                 break;
-            case 7: // 시간이
+            case 7: // 게임창이
                 break;
-            case 8: // 게임창이
+            case 8: // 시간이
+                wordSelect.Add(s_timeManager);
                 break;
             case 9: // 여기서부터 특수
                 break;
@@ -1007,15 +1011,15 @@ public class WordManager : MonoBehaviour
             case 1: // 뛰어오른다 개발완료
                 Execution_Jump();
                 break;
-            case 2: // 1초동안 빨라진다
+            case 2: // 1초동안 빨라진다 개발완료
                 Execution_SpeedUp();
                 c_onesecondCoolTime = -1f;
                 break;
-            case 3: // 1초동안 정지한다
+            case 3: // 1초동안 정지한다 개발완료
                 Execution_TimeStop();
                 c_onesecondCoolTime = -1;
                 break;
-            case 4: // 1초동안 느려진다
+            case 4: // 1초동안 느려진다 개발완료
                 Execution_SpeedDown();
                 c_onesecondCoolTime = -1f;
                 break;
@@ -1042,32 +1046,32 @@ public class WordManager : MonoBehaviour
         {
             case 0: // 없음
                 break;
-            case 1: // 뛰어오른다
+            case 1: // 뛰어오른다 개발완료
                 wordSelect[i].SetCollider();
                 Execution_Jump(i);
                 break;
-            case 2:// 1초 동안 빨라진다
+            case 2:// 1초 동안 빨라진다 개발완료
                 Execution_SpeedUp(i);
                 c_onesecondCoolTime = -1;
                 break;
-            case 3: // 1초 동안 정지한다
+            case 3: // 1초 동안 정지한다 개발완료
                 Execution_TimeStop(i);
                 c_onesecondCoolTime = -1;
                 break;
-            case 4: // 1초 동안 느려진다
+            case 4: // 1초 동안 느려진다 개발완료
                 Execution_SpeedDown(i);
                 c_onesecondCoolTime = -1;
                 break;
-            case 5: // 내려간다
+            case 5: // 내려간다 개발완료
                 Execution_Down(i);
                 break;
-            case 6: // 커진다
+            case 6: // 커진다 개발완료
                 Execution_SizeUp(i);
                 break;
-            case 7: // 작아진다
+            case 7: // 작아진다 개발완료
                 Execution_SizeDown(i);
                 break;
-            case 8: //1초 동안 충돌하지 않는다
+            case 8: //1초 동안 충돌하지 않는다 개발완료
                 Execution_ColliderOff(i);
                 c_onesecondCoolTime = -1;
                 break;

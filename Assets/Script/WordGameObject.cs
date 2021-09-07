@@ -46,8 +46,6 @@ public class WordGameObject : MonoBehaviour
 
     //1초동안 정지한다
     private bool w_pause;
-    private float cooltime;
-    private float gravityscale;
     private Vector2 pausevector;
 
     //블럭을 밟을 때 마다
