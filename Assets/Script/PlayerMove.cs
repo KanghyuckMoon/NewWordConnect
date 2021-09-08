@@ -9,7 +9,6 @@ public class PlayerMove : WordGameObject
 
     private float velocityX = 0;
     private bool downGravity = false; //�������� �ӵ��� ������ ����
-    private bool jumpOn;
 
     private BoxCollider2D collider2d;
 
@@ -49,17 +48,6 @@ public class PlayerMove : WordGameObject
         Move();
     }
     
-    private void JumpDrag()
-    {
-        if (jumpOn)
-        {
-            rigid.drag = airfriction; // 마찰력 설정
-        }
-        else
-        {
-            rigid.drag = friction; // 공기 마찰력 설정
-        }
-    }
 
     private void InputJump()
     {
@@ -124,5 +112,17 @@ public class PlayerMove : WordGameObject
         jumpOn = true;
         w_BlockOn = false;
         w_tile = 0;
+    }
+
+    protected void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Wind"))
+        {
+            rigid.AddForce(Vector2.right * 2f);
+        }
+        if (collision.gameObject.CompareTag("CameraLock"))
+        {
+            collision.GetComponent<CameraSettingObject>().SetCameraMoveSetting();
+        }
     }
 }

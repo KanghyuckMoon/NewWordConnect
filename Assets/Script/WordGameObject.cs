@@ -36,6 +36,7 @@ public class WordGameObject : MonoBehaviour
     public bool w_Collider = false;
     public bool w_ColliderEffect = false;
     public bool w_ColliderOn = false;
+    public bool jumpOn;
 
 
     public bool w_BlockOn = false;
@@ -110,6 +111,17 @@ public class WordGameObject : MonoBehaviour
         {
             string json = File.ReadAllText(Save_Path + Save_FileName);
             user = JsonUtility.FromJson<PlayerSetting>(json);
+        }
+    }
+    protected virtual void JumpDrag()
+    {
+        if (jumpOn)
+        {
+            rigid.drag = airfriction; // 마찰력 설정
+        }
+        else
+        {
+            rigid.drag = friction; // 공기 마찰력 설정
         }
     }
 
@@ -295,7 +307,7 @@ public class WordGameObject : MonoBehaviour
         
     }
 
-    protected void OnTriggerStay2D(Collider2D collision)
+    protected virtual void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Wind"))
         {
