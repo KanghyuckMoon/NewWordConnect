@@ -108,7 +108,7 @@ public class WordManager : MonoBehaviour
     private EnemyManager s_enemys;
     private StageManager s_stage;
     private Camera s_mainCamera;
-    private TimeManager s_timeManager;
+    public TimeManager s_timeManager;
 
     //스테이지에서 가져오는 변수
     private TemperentManager s_temperentManager;
@@ -154,6 +154,7 @@ public class WordManager : MonoBehaviour
         InputWordKey();
         Cooldown();
         Temperature();
+        TimeRewind();
         //Weather();
         if (wordSetOn)
         {
@@ -817,6 +818,7 @@ public class WordManager : MonoBehaviour
     private void AllReset()
     {
         c_onesecondCoolTime = 0;
+        s_timeManager.ResetPositions();
     }
 
     private void Temperature()
@@ -834,6 +836,22 @@ public class WordManager : MonoBehaviour
         {
             s_temperentManager.tempdan = 0;
         }
+    }
+
+    private void TimeRewind()
+    {
+        if(s_timeManager.isStartRecord)
+        {
+            if (s_timeManager.isRewinding)
+            {
+                s_player.SpeedStopnotinvoke();
+            }
+            else
+            {
+                s_player.TimeReset();
+            }
+        }
+        
     }
 
     //단어의 힘 --------------------------------------------------------------
@@ -1141,6 +1159,10 @@ public class WordManager : MonoBehaviour
             else
             {
                 wordSelect[i].Down();
+            }
+            if(subjectWord == 8)
+            {
+                c_onesecondCoolTime = -1;
             }
         }
     }

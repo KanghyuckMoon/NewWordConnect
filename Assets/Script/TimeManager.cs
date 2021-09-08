@@ -8,9 +8,62 @@ public class TimeManager : WordGameObject
     [SerializeField]
     private float times = 0;
 
+    public bool isRewinding = false;
+    public bool isStartRecord = false;
+    private WaitForSecondsRealtime waitForSeconds;
+    [SerializeField]
+    private List<Vector2> positions = new List<Vector2>();
+    private Transform playerTransform;
+
+
+    protected override void Start()
+    {
+        base.Start();
+        waitForSeconds = new WaitForSecondsRealtime(0.1f);
+        playerTransform = FindObjectOfType<PlayerMove>().transform;
+        StartCoroutine(RewindRepeat());
+    }
+
     private void Update()
     {
         times = Time.timeScale;
+        if (isStartRecord)
+        {
+            if (isRewinding)
+            {
+                StartRewind();
+            }
+            else
+            {
+                StopRewind();
+            }
+        }
+    }
+
+    private IEnumerator RewindRepeat()
+    {
+        while(true)
+        {
+            if(isStartRecord)
+            {
+                if(isRewinding)
+                {
+                    Rewind();
+                }
+                else
+                {
+                    Debug.Log("a");
+                    Record();
+                }
+            }
+            yield return waitForSeconds;
+        }
+    }
+
+    public void ResetPositions()
+    {
+        isStartRecord = false;
+        positions.Clear();
     }
 
     public override void Setting()
@@ -38,7 +91,18 @@ public class TimeManager : WordGameObject
     }
     public override void Down()
     {
-
+        isStartRecord = true;
+        isRewinding = false;
+        DOVirtual.DelayedCall(1f, ResetBool, true);
+    }
+    public void firStartRewind()
+    {
+        isRewinding = true;
+        //DOVirtual.DelayedCall(0.5f, ResetBool, true);
+    }
+    public void ResetBool()
+    {
+        isRewinding = true;
     }
     public override void SpeedUp()
     {
@@ -53,7 +117,7 @@ public class TimeManager : WordGameObject
     public override void SpeedStop()
     {
         Time.timeScale = 0;
-        DOVirtual.DelayedCall(1, SpeedReset,true);
+        DOVirtual.DelayedCall(1, SpeedReset, true);
     }
     public override void SpeedReset()
     {
@@ -62,17 +126,17 @@ public class TimeManager : WordGameObject
 
     public override void SizeUp()
     {
-        if(sizeIndex == 0)
+        if (sizeIndex == 0)
         {
             sizeIndex = 1;
             Time.timeScale = 1.2f;
         }
-        else if(sizeIndex == -1)
+        else if (sizeIndex == -1)
         {
             sizeIndex = 0;
             Time.timeScale = 1;
         }
-        
+
     }
     public override void SizeDown()
     {
@@ -86,6 +150,34 @@ public class TimeManager : WordGameObject
             sizeIndex = 0;
             Time.timeScale = 1;
         }
+    }
 
+    public void StartRewind()
+    {
+        isRewinding = true;
+    }
+
+    public void StopRewind()
+    {
+        isRewinding = false;
+        //isStartRecord = false;
+    }
+
+    public void Record()
+    {
+        positions.Insert(0, playerTransform.position);
+    }
+
+    public void Rewind()
+    {
+        if (positions.Count > 0)
+        {
+            playerTransform.position = positions[0];
+            positions.RemoveAt(0);
+        }
+        else
+        {
+            StopRewind();
+        }
     }
 }

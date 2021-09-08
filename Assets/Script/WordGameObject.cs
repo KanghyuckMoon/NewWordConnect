@@ -38,7 +38,6 @@ public class WordGameObject : MonoBehaviour
     public bool w_ColliderOn = false;
     public bool jumpOn;
 
-
     public bool w_BlockOn = false;
 
     [SerializeField]
@@ -249,6 +248,17 @@ public class WordGameObject : MonoBehaviour
         rigid.velocity = Vector2.zero;
         realspeed = 0;
         Invoke("TimeReset", 1f);
+    }
+    public virtual void SpeedStopnotinvoke()
+    {
+        w_pause = true;
+        realspeed = 0;
+        gravityScale = 0;
+        jump = 0;
+        rigid.gravityScale = 0;
+        pausevector = rigid.velocity;
+        rigid.velocity = Vector2.zero;
+        realspeed = 0;
     }
     public virtual void SpeedReset()
     {
