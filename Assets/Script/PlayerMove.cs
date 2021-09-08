@@ -115,6 +115,7 @@ public class PlayerMove : WordGameObject
         w_tile = 0;
         w_vector1 = transform.position.x;
         w_BlockOn = true;
+        superDownOn = false;
     }
     protected override void OnCollisionExit2D(Collision2D collision)
     {

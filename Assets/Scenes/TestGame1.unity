@@ -421,7 +421,11 @@ MonoBehaviour:
     downGravityOn: 0
     jump: 0
     gravityScale: 0
+    wheather_WindSpeed: 0
+    wheather_WindAirSpeed: 0
   speed: 0
+  wheather_WindSpeed: 0
+  wheather_WindAirSpeed: 0
   w_visible: 0
   w_visibleEffect: 0
   w_MoveOn: 0
@@ -432,6 +436,7 @@ MonoBehaviour:
   w_BlockOn: 0
   w_Movetime: 0
   w_tile: 0
+  superDownOn: 0
   times: 0
 --- !u!1 &453538689
 GameObject:
@@ -488,7 +493,11 @@ MonoBehaviour:
     downGravityOn: 0
     jump: 0
     gravityScale: 0
+    wheather_WindSpeed: 0
+    wheather_WindAirSpeed: 0
   speed: 0
+  wheather_WindSpeed: 0
+  wheather_WindAirSpeed: 0
   w_visible: 0
   w_visibleEffect: 0
   w_MoveOn: 0
@@ -499,6 +508,7 @@ MonoBehaviour:
   w_BlockOn: 0
   w_Movetime: 0
   w_tile: 0
+  superDownOn: 0
   s_Temperature: 50
   tempdan: 0
 --- !u!114 &453538692
@@ -521,7 +531,11 @@ MonoBehaviour:
     downGravityOn: 0
     jump: 0
     gravityScale: 0
+    wheather_WindSpeed: 0
+    wheather_WindAirSpeed: 0
   speed: 0
+  wheather_WindSpeed: 0
+  wheather_WindAirSpeed: 0
   w_visible: 0
   w_visibleEffect: 0
   w_MoveOn: 0
@@ -532,13 +546,13 @@ MonoBehaviour:
   w_BlockOn: 0
   w_Movetime: 0
   w_tile: 0
+  superDownOn: 0
   s_Weather: 000000000100000002000000
-  s_WeatherPersent: 0
-  s_WeatherCode: 0
   weatherObjects:
   - {fileID: 1336475265}
   - {fileID: 2001482707}
   - {fileID: 273633000}
+  autoWeatherPlus: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -550,7 +564,6 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
-  - component: {fileID: 519420030}
   - component: {fileID: 519420033}
   - component: {fileID: 519420034}
   - component: {fileID: 519420035}
@@ -573,26 +586,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
---- !u!114 &519420030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c88f5cead0c0b2a4eb05b5900433f8d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AssetsPPU: 32
-  m_RefResolutionX: 320
-  m_RefResolutionY: 180
-  m_UpscaleRT: 0
-  m_PixelSnapping: 0
-  m_CropFrameX: 0
-  m_CropFrameY: 0
-  m_StretchFill: 0
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -786,7 +779,11 @@ MonoBehaviour:
     downGravityOn: 0
     jump: 0
     gravityScale: 0
+    wheather_WindSpeed: 0
+    wheather_WindAirSpeed: 0
   speed: 0
+  wheather_WindSpeed: 0
+  wheather_WindAirSpeed: 0
   w_visible: 0
   w_visibleEffect: 0
   w_MoveOn: 0
@@ -797,6 +794,7 @@ MonoBehaviour:
   w_BlockOn: 0
   w_Movetime: 0
   w_tile: 0
+  superDownOn: 0
 --- !u!50 &519420038
 Rigidbody2D:
   serializedVersion: 4
@@ -1894,7 +1892,11 @@ MonoBehaviour:
     downGravityOn: 0
     jump: 0
     gravityScale: 0
+    wheather_WindSpeed: 0
+    wheather_WindAirSpeed: 0
   speed: 0
+  wheather_WindSpeed: 0
+  wheather_WindAirSpeed: 0
   w_visible: 0
   w_visibleEffect: 0
   w_MoveOn: 0
@@ -1905,6 +1907,7 @@ MonoBehaviour:
   w_BlockOn: 0
   w_Movetime: 0
   w_tile: 0
+  superDownOn: 0
 --- !u!1 &717279629
 GameObject:
   m_ObjectHideFlags: 0
@@ -2011,7 +2014,11 @@ MonoBehaviour:
     downGravityOn: 0
     jump: 0
     gravityScale: 0
+    wheather_WindSpeed: 0
+    wheather_WindAirSpeed: 0
   speed: 0
+  wheather_WindSpeed: 0
+  wheather_WindAirSpeed: 0
   w_visible: 0
   w_visibleEffect: 0
   w_MoveOn: 0
@@ -2022,6 +2029,7 @@ MonoBehaviour:
   w_BlockOn: 0
   w_Movetime: 0
   w_tile: 0
+  superDownOn: 0
 --- !u!61 &717279633
 BoxCollider2D:
   m_ObjectHideFlags: 0

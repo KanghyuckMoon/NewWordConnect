@@ -59,6 +59,10 @@ public class WordGameObject : MonoBehaviour
     //콜라이더
     protected Collider2D w_collider;
 
+    //떨어진다
+    [SerializeField]
+    protected bool superDownOn = false;
+
     private void Awake()
     {
         Save_Path = Application.dataPath + "/Save";
@@ -149,6 +153,13 @@ public class WordGameObject : MonoBehaviour
         rigid.AddForce(Vector2.down * (jump * 0.8f), ForceMode2D.Impulse);
         w_MoveOn = true;
         w_MoveOnEffect = false;
+    }
+    public virtual void SuperDown()
+    {
+        //rigid.AddForce(Vector2.down * (jump * 0.8f), ForceMode2D.Impulse);
+        w_MoveOn = true;
+        w_MoveOnEffect = false;
+        superDownOn = true;
     }
 
     public virtual void SizeUp()
@@ -271,6 +282,7 @@ public class WordGameObject : MonoBehaviour
         w_tile = 0;
         w_vector1 = transform.position.x;
         w_BlockOn = true;
+        superDownOn = false;
     }
     protected virtual void OnCollisionStay2D(Collision2D collision)
     {

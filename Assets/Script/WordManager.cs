@@ -1134,12 +1134,26 @@ public class WordManager : MonoBehaviour
     {
         for (int i = 0; i < wordSelect.Count; i++)
         {
-            wordSelect[i].Down();
+            if(conditionWord == 6)
+            {
+                wordSelect[i].SuperDown();
+            }
+            else
+            {
+                wordSelect[i].Down();
+            }
         }
     }
     private void Execution_Down(int i)
     {
-        wordSelect[i].Down();
+        if (conditionWord == 6)
+        {
+            wordSelect[i].SuperDown();
+        }
+        else
+        {
+            wordSelect[i].Down();
+        }
     }
 
     private void Execution_SizeUp()
