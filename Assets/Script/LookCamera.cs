@@ -27,11 +27,6 @@ public class LookCamera : CinemachineExtension
 
     }
 
-    public ref CameraState ExChangeToRef(ref CameraState state)
-    {
-        return ref state;
-    }
-
     protected override void PostPipelineStageCallback(
         CinemachineVirtualCameraBase vcam,
         CinemachineCore.Stage stage, ref CameraState state, float deltaTime)

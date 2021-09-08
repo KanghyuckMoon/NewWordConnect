@@ -5,7 +5,14 @@ using Cinemachine;
 
 public class CameraSettingObject : MonoBehaviour
 {
-
+    [SerializeField]
+    private Transform verticalObj;
+    [SerializeField]
+    private Transform horizontalObj;
+    [SerializeField]
+    private bool horizontalOn = false;
+    [SerializeField]
+    private bool verticalOn = false;
     [SerializeField]
     private bool cameraLock = false;
     [SerializeField]
@@ -22,13 +29,17 @@ public class CameraSettingObject : MonoBehaviour
 
     public void SetCameraMoveSetting()
     {
+        if(horizontalOn)
+        {
+            mainCamera.GetComponent<CinemachineVirtualCamera>().Follow = horizontalObj;
+        }
+        if(verticalOn)
+        {
+            mainCamera.GetComponent<CinemachineVirtualCamera>().Follow = verticalObj;
+        }
         if(cameraLock)
         {
             mainCamera.GetComponent<CinemachineVirtualCamera>().Follow = lockTransform;
-        }
-        else
-        {
-            mainCamera.GetComponent<CinemachineVirtualCamera>().Follow = playerTransform;
         }
     }
 }
