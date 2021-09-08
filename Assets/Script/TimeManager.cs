@@ -10,6 +10,7 @@ public class TimeManager : WordGameObject
 
     public bool isRewinding = false;
     public bool isStartRecord = false;
+    public bool isRecord = false;
     private WaitForSecondsRealtime waitForSeconds;
     [SerializeField]
     private List<Vector2> positions = new List<Vector2>();
@@ -21,22 +22,42 @@ public class TimeManager : WordGameObject
         base.Start();
         waitForSeconds = new WaitForSecondsRealtime(0.1f);
         playerTransform = FindObjectOfType<PlayerMove>().transform;
-        StartCoroutine(RewindRepeat());
+        //StartCoroutine(RewindRepeat());
     }
 
     private void Update()
     {
         times = Time.timeScale;
-        if (isStartRecord)
+        //if (isStartRecord)
+        //{
+        //    if (isRewinding)
+        //    {
+        //        StartRewind();
+        //    }
+        //    else
+        //    {
+        //        StopRewind();
+        //    }
+        //}
+        if(Input.GetKeyDown(KeyCode.Return))
         {
-            if (isRewinding)
-            {
-                StartRewind();
-            }
-            else
-            {
-                StopRewind();
-            }
+            StartRewind();
+        }
+        if(Input.GetKeyUp(KeyCode.Return))
+        {
+            StopRewind();
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (isRewinding)
+        {
+            Rewind();
+        }
+        if(isRecord)
+        {
+            Record();
         }
     }
 
@@ -91,8 +112,7 @@ public class TimeManager : WordGameObject
     }
     public override void Down()
     {
-        isStartRecord = true;
-        isRewinding = false;
+        isRecord = true;
         DOVirtual.DelayedCall(1f, ResetBool, true);
     }
     public void firStartRewind()
@@ -102,6 +122,7 @@ public class TimeManager : WordGameObject
     }
     public void ResetBool()
     {
+        isRecord = false;
         isRewinding = true;
     }
     public override void SpeedUp()

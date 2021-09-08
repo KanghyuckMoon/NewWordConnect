@@ -1162,7 +1162,7 @@ public class WordManager : MonoBehaviour
             }
             if(subjectWord == 8)
             {
-                c_onesecondCoolTime = -1;
+                c_onesecondCoolTime = -2;
             }
         }
     }
@@ -1175,6 +1175,10 @@ public class WordManager : MonoBehaviour
         else
         {
             wordSelect[i].Down();
+        }
+        if (subjectWord == 8)
+        {
+            c_onesecondCoolTime = -2;
         }
     }
 
