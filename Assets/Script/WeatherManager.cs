@@ -7,11 +7,16 @@ public class WeatherManager : WordGameObject
 
     //³¯¾¾
     [SerializeField]
-    public List<int> s_Weather;
-    public int s_WeatherPersent = 0;
-    public int s_WeatherCode = 0;
+    private List<int> s_Weather;
+    private float s_WeatherPersent = 0;
+    private int s_WeatherCode = 0;
 
     public List<GameObject> weatherObjects;
+
+    [SerializeField]
+    private float autoWeatherPlus = 0;
+    private float realautoWeatherPlus = 0;
+
 
     private void Update()
     {
@@ -35,12 +40,15 @@ public class WeatherManager : WordGameObject
                 s_WeatherCode = s_Weather[i];
             }
         }
-
+        s_WeatherPersent += realautoWeatherPlus;
+        if (s_WeatherPersent <= 0) s_WeatherPersent = 100;
+        if (s_WeatherPersent >= 100) s_WeatherPersent = 0;
     }
 
     protected override void Start()
     {
         base.Start();
+        realautoWeatherPlus = autoWeatherPlus;
     }
 
     public override void Setting()
@@ -54,28 +62,41 @@ public class WeatherManager : WordGameObject
     public override void SizeUp()
     {
         s_WeatherPersent += 10;
-        if (s_WeatherPersent <= 0) s_WeatherPersent = 100;
-        if (s_WeatherPersent >= 100) s_WeatherPersent = 0;
     }
 
     public override void SizeDown()
     {
         s_WeatherPersent -= 10;
-        if (s_WeatherPersent <= 0) s_WeatherPersent = 100;
-        if (s_WeatherPersent >= 100) s_WeatherPersent = 0;
+    }
+
+    public override void SpeedUp()
+    {
+        realautoWeatherPlus = autoWeatherPlus * 1.5f;
+        Invoke("ResetSpeed",1);
+    }
+    public override void SpeedDown()
+    {
+        realautoWeatherPlus = autoWeatherPlus * 0.5f;
+        Invoke("ResetSpeed", 1);
+    }
+    public override void SpeedStop()
+    {
+        realautoWeatherPlus = 0;
+        Invoke("ResetSpeed", 1);
+    }
+
+    public void ResetSpeed()
+    {
+        realautoWeatherPlus = autoWeatherPlus;
     }
 
     public override void Jump()
     {
         s_WeatherPersent += 10;
-        if (s_WeatherPersent <= 0) s_WeatherPersent = 100;
-        if (s_WeatherPersent >= 100) s_WeatherPersent = 0;
     }
 
     public override void Down()
     {
         s_WeatherPersent -= 10;
-        if (s_WeatherPersent <= 0) s_WeatherPersent = 100;
-        if (s_WeatherPersent >= 100) s_WeatherPersent = 0;
     }
 }

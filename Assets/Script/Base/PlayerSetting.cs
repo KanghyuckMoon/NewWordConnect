@@ -10,4 +10,7 @@ public class PlayerSetting
     public bool downGravityOn;
     public float jump;
     public float gravityScale;
+
+    public float wheather_WindSpeed;
+    public float wheather_WindAirSpeed;
 }

@@ -22,6 +22,10 @@ public class WordGameObject : MonoBehaviour
     protected float gravityScale;
     protected float realspeed;
 
+    //날씨 속도
+    public float wheather_WindSpeed;
+    public float wheather_WindAirSpeed;
+
     protected float w_speed = 1;
     protected float w_size = 1;
     protected bool w_notcollider = false;

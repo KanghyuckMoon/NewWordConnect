@@ -5,5 +5,7 @@
     "aitfriction": 4.0,
     "downGravityOn": true,
     "jump": 22.5,
-    "gravityScale": 4.300000190734863
+    "gravityScale": 4.300000190734863,
+    "wheather_WindSpeed": 0.0,
+    "wheather_WindAirSpeed": 0.0
 }
