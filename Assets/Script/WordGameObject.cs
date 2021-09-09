@@ -77,7 +77,6 @@ public class WordGameObject : MonoBehaviour
     protected Collider2D w_collider;
 
     //떨어진다
-    [SerializeField]
     protected bool superDownOn = false;
 
     protected WordGameObject player;

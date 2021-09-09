@@ -6,11 +6,13 @@ public class WeatherManager : WordGameObject
 {
 
     //날씨
+    [Header("[날씨 순서] 날씨 오브젝트들 갯수보다 높은 숫자를 쓰지마시오")]
     [SerializeField]
     private List<int> s_Weather;
     private float s_WeatherPersent = 0;
     private int s_WeatherCode = 0;
 
+    [Header("[날씨 오브젝트들]")]
     public List<GameObject> weatherObjects;
 
     [SerializeField]
