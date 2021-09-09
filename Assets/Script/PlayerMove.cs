@@ -15,7 +15,7 @@ public class PlayerMove : WordGameObject
 
     private void Awake()
     {
-        Save_Path = Application.dataPath + "/Save";
+        Save_Path = Application.persistentDataPath + "/Save";
         //�ȵ���̵� ��忡����  Application.dataPath ��ſ� Application.persistentDataPath
         if (!Directory.Exists(Save_Path))
         {

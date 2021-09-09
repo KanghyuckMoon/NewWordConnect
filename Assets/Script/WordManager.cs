@@ -116,6 +116,7 @@ public class WordManager : MonoBehaviour
     //소리
     private float s_Sound;
     //게임창
+    private DisplayManager s_displayManager;
     //특수
 
     //조건어용 변수
@@ -146,6 +147,7 @@ public class WordManager : MonoBehaviour
         s_temperentManager = FindObjectOfType<TemperentManager>();
         s_timeManager = FindObjectOfType<TimeManager>();
         s_weatherManager = FindObjectOfType<WeatherManager>();
+        s_displayManager = FindObjectOfType<DisplayManager>();
         canvas.worldCamera = s_mainCamera;
     }
 
@@ -885,15 +887,16 @@ public class WordManager : MonoBehaviour
             case 4: // 카메라가 개발완료
                 wordSelect.Add(s_mainCamera.GetComponent<WordGameObject>());
                 break;
-            case 5: // 날씨가
+            case 5: // 날씨가 개발완료
                 wordSelect.Add(s_weatherManager);
                 break;
             case 6: // 온도가 개발완료
                 wordSelect.Add(s_temperentManager);
                 break;
             case 7: // 게임창이
+                wordSelect.Add(s_displayManager);
                 break;
-            case 8: // 시간이
+            case 8: // 시간이 개발완료
                 wordSelect.Add(s_timeManager);
                 break;
             case 9: // 여기서부터 특수

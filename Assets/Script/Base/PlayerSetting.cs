@@ -13,4 +13,7 @@ public class PlayerSetting
 
     public float wheather_WindSpeed;
     public float wheather_WindAirSpeed;
+
+    public float display_x;
+    public float display_y;
 }
