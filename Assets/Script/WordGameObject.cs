@@ -297,6 +297,9 @@ public class WordGameObject : MonoBehaviour
         w_pause = false;
         realspeed = speed;
         rigid.velocity = pausevector;
+        gravityScale = 4.300000190734863f;
+        jump = 22.5f;
+        rigid.gravityScale = 4.300000190734863f;
     }
 
     public virtual void ColliderOff()
