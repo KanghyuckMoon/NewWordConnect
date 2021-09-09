@@ -5,40 +5,56 @@ using UnityEngine;
 
 public class WordGameObject : MonoBehaviour
 {
-    //물리설정 가져오기
-    [SerializeField]
-    protected PlayerSetting user = null;
     protected string Save_Path = "";
     protected string Save_FileName = "/MoveFile.txt";
 
-
-    [SerializeField]
-    protected float speed;
-    protected float maxSpeed;
-    protected float friction;
-    protected float airfriction;
-    protected bool downGravityOn;
-    protected float jump;
-    protected float gravityScale;
+    //물리 변수
+    protected float speed = 24.5f;
+    protected float maxSpeed = 27.5f;
+    protected float friction = 7.5f;
+    protected float airfriction = 4.0f;
+    protected bool downGravityOn = true;
+    protected float jump = 22.5f;
+    protected float gravityScale = 4.300000190734863f;
     protected float realspeed;
 
     //날씨 속도
-    public float wheather_WindSpeed;
-    public float wheather_WindAirSpeed;
+    protected float wheather_WindSpeed;
+    protected float wheather_WindAirSpeed;
 
+
+    //변수들
     protected float w_speed = 1;
     protected float w_size = 1;
     protected bool w_notcollider = false;
-    public bool w_visible = false;
-    public bool w_visibleEffect = false;
-    public bool w_MoveOn = false;
-    public bool w_MoveOnEffect = false;
-    public bool w_Collider = false;
-    public bool w_ColliderEffect = false;
-    public bool w_ColliderOn = false;
-    public bool jumpOn;
 
-    public bool w_BlockOn = false;
+    protected bool w_visible = false;
+    public bool W_Visible {get { return w_visible; } }
+
+    protected bool w_visibleEffect = false;
+    public bool W_VisibleEffect { get { return w_visibleEffect; } }
+    public void W_VisibleEffectOntrue() { w_visibleEffect = true;}
+
+    protected bool w_MoveOn = false;
+    public bool W_MoveOn { get { return w_MoveOn; } }
+
+    protected bool w_MoveOnEffect = false;
+    public bool W_MoveOnEffect { get { return w_MoveOnEffect; } }
+
+    protected bool w_Collider = false;
+    public bool W_Collider { get { return w_Collider; } }
+
+    protected bool w_ColliderEffect = false;
+    public bool W_ColliderEffect { get { return w_ColliderEffect; } }
+
+    protected bool w_ColliderOn = false;
+    public bool W_ColliderOn { get { return w_ColliderOn; } }
+
+    protected bool jumpOn;
+    public bool JumpOn { get { return jumpOn; } }
+
+    protected bool w_BlockOn = false;
+    public bool W_BlockOn { get { return w_BlockOn; } }
 
     [SerializeField]
     private float w_Movetime = 0f;
@@ -53,7 +69,8 @@ public class WordGameObject : MonoBehaviour
     private Vector2 pausevector;
 
     //블럭을 밟을 때 마다
-    public float w_tile = 0;
+    protected float w_tile = 0;
+    public float W_Tile { get { return w_tile; } }
     protected float w_vector1 = 0;
 
     //콜라이더
@@ -63,14 +80,26 @@ public class WordGameObject : MonoBehaviour
     [SerializeField]
     protected bool superDownOn = false;
 
-    private void Awake()
+    protected WordGameObject player;
+    //private void Awake()
+    //{
+    //    //StartSetJsonSetting();
+    //}
+
+    public void SetPlayer(WordGameObject player)
+    {
+        this.player = player;
+    }
+
+    private void StartSetJsonSetting()
     {
         Save_Path = Application.persistentDataPath + "/Save";
         //�ȵ���̵� ��忡����  Application.dataPath ��ſ� Application.persistentDataPath
         if (!Directory.Exists(Save_Path))
         {
             Directory.CreateDirectory(Save_Path);
-        } if (gameObject.GetComponent<Rigidbody2D>() == null)
+        }
+        if (gameObject.GetComponent<Rigidbody2D>() == null)
         {
             gameObject.AddComponent<Rigidbody2D>();
             rigid = GetComponent<Rigidbody2D>();
@@ -80,38 +109,37 @@ public class WordGameObject : MonoBehaviour
             rigid = GetComponent<Rigidbody2D>();
         }
         w_collider = GetComponent<Collider2D>();
-        LoadToJson();
-        Setting();
+        //LoadToJson();
+        //Setting();
     }
 
     protected virtual void Start()
     {
         realspeed = speed;
         StartCoroutine(OnMoveDetect());
-        realspeed = speed;
     }
 
-    public virtual void Setting()
-    {
-        if (w_pause) return;
-        speed = user.speed;
-        maxSpeed = user.maxspeed;
-        friction = user.friction;
-        airfriction = user.aitfriction;
-        downGravityOn = user.downGravityOn;
-        gravityScale = user.gravityScale;
-        jump = user.jump;
-        rigid.gravityScale = gravityScale;
-    }
+    //public virtual void Setting()
+    //{
+    //    if (w_pause) return;
+    //    speed = user.speed;
+    //    maxSpeed = user.maxspeed;
+    //    friction = user.friction;
+    //    airfriction = user.aitfriction;
+    //    downGravityOn = user.downGravityOn;
+    //    gravityScale = user.gravityScale;
+    //    jump = user.jump;
+    //    rigid.gravityScale = gravityScale;
+    //}
 
-    public virtual void LoadToJson()
-    {
-        if (File.Exists(Save_Path + Save_FileName))
-        {
-            string json = File.ReadAllText(Save_Path + Save_FileName);
-            user = JsonUtility.FromJson<PlayerSetting>(json);
-        }
-    }
+    //public virtual void LoadToJson()
+    //{
+    //    if (File.Exists(Save_Path + Save_FileName))
+    //    {
+    //        string json = File.ReadAllText(Save_Path + Save_FileName);
+    //        user = JsonUtility.FromJson<PlayerSetting>(json);
+    //    }
+    //}
     protected virtual void JumpDrag()
     {
         if (jumpOn)
@@ -140,7 +168,7 @@ public class WordGameObject : MonoBehaviour
                 w_MoveOnEffect = true;
             }
             if ( !(rigid.velocity.x > -0.0002191039 * 10 && rigid.velocity.x < 0.0002191039 * 10) || rigid.velocity.y != 0)
-            {
+            {   
                     w_MoveOn = true;
                     w_Movetime = 0f;
             }

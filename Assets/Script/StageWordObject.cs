@@ -9,7 +9,7 @@ public class StageWordObject : WordGameObject
 
     protected override void Start()
     {
-        base.Start();
+        //base.Start();
         stageManager = FindObjectOfType<StageManager>();
     }
 

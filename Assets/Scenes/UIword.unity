@@ -1115,6 +1115,8 @@ GameObject:
   m_Component:
   - component: {fileID: 704011403}
   - component: {fileID: 704011405}
+  - component: {fileID: 704011406}
+  - component: {fileID: 704011408}
   m_Layer: 0
   m_Name: WordManager
   m_TagString: Untagged
@@ -1172,7 +1174,45 @@ MonoBehaviour:
   cooltime: 0
   cooltimeSpeed: 2
   temperImage: {fileID: 707846780}
+  s_timeManager: {fileID: 0}
   c_onesecondCoolTime: 0
+--- !u!114 &704011406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704011402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 327d524edab46e743bbf3bbc8d6a315b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  w_Movetime: 0
+  superDownOn: 0
+  times: 0
+  isRewinding: 0
+  isStartRecord: 0
+  isRecord: 0
+  positions: []
+--- !u!114 &704011408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704011402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9f35023611b063408e8800aed1cb8b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  w_Movetime: 0
+  superDownOn: 0
+  x: 0
+  y: 0
+  ax: 0
+  ay: 0
 --- !u!1 &707846778
 GameObject:
   m_ObjectHideFlags: 0

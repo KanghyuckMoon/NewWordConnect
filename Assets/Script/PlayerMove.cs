@@ -15,27 +15,27 @@ public class PlayerMove : WordGameObject
 
     private void Awake()
     {
-        Save_Path = Application.persistentDataPath + "/Save";
-        //�ȵ���̵� ��忡����  Application.dataPath ��ſ� Application.persistentDataPath
-        if (!Directory.Exists(Save_Path))
-        {
-            Directory.CreateDirectory(Save_Path);
-        }
-        w_collider = GetComponent<Collider2D>();
+        //Save_Path = Application.persistentDataPath + "/Save";
+        ////�ȵ���̵� ��忡����  Application.dataPath ��ſ� Application.persistentDataPath
+        //if (!Directory.Exists(Save_Path))
+        //{
+        //    Directory.CreateDirectory(Save_Path);
+        //}
+        //w_collider = GetComponent<Collider2D>();
     }
 
     protected override void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
-        LoadToJson();
+        //LoadToJson();
         StartCoroutine(OnMoveDetect());
-        realspeed = user.speed;  
+        realspeed = speed;
+        rigid.gravityScale = gravityScale;
     }
 
     private void Update()
     {
         //���������� �Լ�
-        Setting(); // ���� �Լ�
         InputJump();
         JumpDrag();
 
@@ -85,15 +85,15 @@ public class PlayerMove : WordGameObject
 
 
     //�������
-    private void SaveToJson()
-    {
-        string json = JsonUtility.ToJson(user, true);
-        File.WriteAllText(Save_Path + Save_FileName, json, System.Text.Encoding.UTF8);
-    }
+    //private void SaveToJson()
+    //{
+    //    string json = JsonUtility.ToJson(user, true);
+    //    File.WriteAllText(Save_Path + Save_FileName, json, System.Text.Encoding.UTF8);
+    //}
 
     private void OnApplicationQuit()
     {
-        SaveToJson();
+        //SaveToJson();
     }
     protected override void OnCollisionEnter2D(Collision2D collision)
     {

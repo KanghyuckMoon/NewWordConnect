@@ -47,15 +47,15 @@ public class WeatherManager : WordGameObject
 
     protected override void Start()
     {
-        base.Start();
+        //base.Start();
         realautoWeatherPlus = autoWeatherPlus;
     }
 
-    public override void Setting()
-    {
-        gravityScale = 0;
-        rigid.gravityScale = 0;
-    }
+    //public override void Setting()
+    //{
+    //    gravityScale = 0;
+    //    rigid.gravityScale = 0;
+    //}
 
 
 

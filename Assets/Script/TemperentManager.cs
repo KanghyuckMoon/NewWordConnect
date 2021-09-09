@@ -6,22 +6,27 @@ public class TemperentManager : WordGameObject
 {
     //¿Âµµ
     [SerializeField]
-    public int s_Temperature = 50;
+    public float s_Temperature = 50;
 
     public int tempdan = 0;
 
-    public override void Setting()
-    {
-        speed = user.speed;
-        maxSpeed = user.maxspeed;
-        friction = user.friction;
-        airfriction = user.aitfriction;
-        downGravityOn = user.downGravityOn;
-        gravityScale = 0;
-        jump = user.jump;
+    //public override void Setting()
+    //{
+    //    speed = user.speed;
+    //    maxSpeed = user.maxspeed;
+    //    friction = user.friction;
+    //    airfriction = user.aitfriction;
+    //    downGravityOn = user.downGravityOn;
+    //    gravityScale = 0;
+    //    jump = user.jump;
 
-        rigid.drag = friction;
-        rigid.gravityScale = 0;
+    //    rigid.drag = friction;
+    //    rigid.gravityScale = 0;
+    //}
+
+    protected override void Start()
+    {
+
     }
 
     public override void Jump()

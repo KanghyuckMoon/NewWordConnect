@@ -7,19 +7,14 @@ using System.Runtime.InteropServices;
 public class DisplayManager : WordGameObject
 {
 
-
-    public InputField inputx;
-    public InputField inputy;
     public int x;
     public int y;
     public int ax;
     public int ay;
-    public Text text;
 
     public void Set1()
     {
         SetPosition(x, y);
-        //Display.displays[1].SetParams(1920,1080,x,y);
     }
 
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR
@@ -36,26 +31,20 @@ public class DisplayManager : WordGameObject
 
     // Use this for initialization
     void Awake()
-    {
-        var popWidth = 702;
-        var popHeight = 630;
+    { 
         x = 1250 / 2;
         y = 520 / 2;
         SetPosition(x, y);
     }
 
+    protected override void Start()
+    {
+
+    }
+
     private void Update()
     {
-        var mousePos = Input.mousePosition; 
-        var worldPos = Camera.main.ScreenToWorldPoint(mousePos);
-
-        //SetPosition(Mathf.Clamp((int)(mousePos.x * 1),0, 1920), Mathf.Clamp((int)(mousePos.y / 2f), 0, 520)); // 크기 조절
         SetPosition(x,y + ay); // 크기 조절
-        text.text = string.Format("{0}", ay); // 텍스트로 알려줌
-        int a = (int)Input.GetAxisRaw("Horizontal");
-        int b = (int)Input.GetAxisRaw("Vertical");
-        //x += a;
-        //y += -b;
     }
 
     public override void Jump()

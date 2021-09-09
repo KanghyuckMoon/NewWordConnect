@@ -13,15 +13,14 @@ public class CameraMove : WordGameObject
     private LookCamera lookCamera = null;
     private Vector3 lockPosition = new Vector3(1,10,0);
 
-
     protected override void Start()
     {
-        base.Start();
+        //base.Start();
         virtualCamera = GetComponent<CinemachineVirtualCamera>();
         virtualCameraTrans = virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
         lookCamera = GetComponent<LookCamera>();
-        LoadToJson();
-        Setting();
+        //LoadToJson();
+        //Setting();
 
         //state = virtualCamera.GetComponent<CinemachineFramingTransposer>().VirtualCamera.State;
         //state = virtualCamera.GetComponent<CinemachineFramingTransposer>().VcamState;
@@ -33,19 +32,21 @@ public class CameraMove : WordGameObject
     }
 
 
-    public override void Setting()
-    {
-        speed = user.speed;
-        maxSpeed = user.maxspeed;
-        friction = user.friction;
-        airfriction = user.aitfriction;
-        downGravityOn = user.downGravityOn;
-        gravityScale = 0;
-        jump = user.jump;
+    //public override void Setting()
+    //{
+    //    speed = user.speed;
+    //    maxSpeed = user.maxspeed;
+    //    friction = user.friction;
+    //    airfriction = user.aitfriction;
+    //    downGravityOn = user.downGravityOn;
+    //    gravityScale = 0;
+    //    jump = user.jump;
 
-        rigid.drag = friction;
-        rigid.gravityScale = 0;
-    }
+    //    rigid.drag = friction;
+    //    rigid.gravityScale = 0;
+    //}
+
+
     public override void Jump()
     {
         virtualCameraTrans.m_SoftZoneHeight = 2f;

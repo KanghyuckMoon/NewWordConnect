@@ -19,26 +19,14 @@ public class TimeManager : WordGameObject
 
     protected override void Start()
     {
-        base.Start();
         waitForSeconds = new WaitForSecondsRealtime(0.1f);
-        playerTransform = FindObjectOfType<PlayerMove>().transform;
-        //StartCoroutine(RewindRepeat());
+        playerTransform = player.transform;
     }
 
     private void Update()
     {
         times = Time.timeScale;
-        //if (isStartRecord)
-        //{
-        //    if (isRewinding)
-        //    {
-        //        StartRewind();
-        //    }
-        //    else
-        //    {
-        //        StopRewind();
-        //    }
-        //}
+
         if(Input.GetKeyDown(KeyCode.Return))
         {
             StartRewind();
@@ -61,44 +49,10 @@ public class TimeManager : WordGameObject
         }
     }
 
-    private IEnumerator RewindRepeat()
-    {
-        while(true)
-        {
-            if(isStartRecord)
-            {
-                if(isRewinding)
-                {
-                    Rewind();
-                }
-                else
-                {
-                    Debug.Log("a");
-                    Record();
-                }
-            }
-            yield return waitForSeconds;
-        }
-    }
-
     public void ResetPositions()
     {
         isStartRecord = false;
         positions.Clear();
-    }
-
-    public override void Setting()
-    {
-        speed = user.speed;
-        maxSpeed = user.maxspeed;
-        friction = user.friction;
-        airfriction = user.aitfriction;
-        downGravityOn = user.downGravityOn;
-        gravityScale = 0;
-        jump = user.jump;
-
-        rigid.drag = friction;
-        rigid.gravityScale = 0;
     }
 
     public override void Jump()
@@ -118,7 +72,6 @@ public class TimeManager : WordGameObject
     public void firStartRewind()
     {
         isRewinding = true;
-        //DOVirtual.DelayedCall(0.5f, ResetBool, true);
     }
     public void ResetBool()
     {
@@ -181,7 +134,6 @@ public class TimeManager : WordGameObject
     public void StopRewind()
     {
         isRewinding = false;
-        //isStartRecord = false;
     }
 
     public void Record()

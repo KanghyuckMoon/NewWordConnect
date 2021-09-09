@@ -81,6 +81,7 @@ public class WordManager : MonoBehaviour
     //쿨타임
     [SerializeField]
     private Image cooltimeImage = null;
+    private Animator cooltimeAnimator = null;
     [SerializeField]
     private float cooltime = 0f;
     private bool coolOn = false;
@@ -126,6 +127,12 @@ public class WordManager : MonoBehaviour
 
     //실행어용 변수
 
+    private void Awake()
+    {
+        //주어 찾기
+        FindSubjects();
+    }
+
     private void Start()
     {
         SetListUI(); //UI 갯수 세는 함수
@@ -138,17 +145,26 @@ public class WordManager : MonoBehaviour
         subjectScrollsPanel = subjectScroll.GetChild(0).gameObject;
         conditionScrollsPanel = conditionScroll.GetChild(0).gameObject;
         executionScrollsPanel = executionScroll.GetChild(0).gameObject;
+        cooltimeAnimator = cooltimeImage.GetComponent<Animator>();
+    }
 
-        //주어 찾기
-        s_player = FindObjectOfType<PlayerMove>();
-        s_enemys = FindObjectOfType<EnemyManager>();
-        s_stage = FindObjectOfType<StageManager>();
-        s_mainCamera = FindObjectOfType<Camera>();
-        s_temperentManager = FindObjectOfType<TemperentManager>();
-        s_timeManager = FindObjectOfType<TimeManager>();
-        s_weatherManager = FindObjectOfType<WeatherManager>();
-        s_displayManager = FindObjectOfType<DisplayManager>();
+    private void FindSubjects()
+    {
+        s_player = FindObjectOfType<PlayerMove>(); //안됨
+        s_enemys = FindObjectOfType<EnemyManager>(); // 안됨
+        s_stage = FindObjectOfType<StageManager>(); // 안됨
+        s_mainCamera = FindObjectOfType<Camera>(); // 안됨
+        s_temperentManager = FindObjectOfType<TemperentManager>(); // 안ㄴ됨
+        s_weatherManager = FindObjectOfType<WeatherManager>(); // 안됨ㄴ
+
+        s_timeManager = GetComponent<TimeManager>(); // 됨
+        s_displayManager = GetComponent<DisplayManager>(); // 됨
         canvas.worldCamera = s_mainCamera;
+
+        s_temperentManager.SetPlayer(s_player);
+        s_timeManager.SetPlayer(s_player);
+        s_weatherManager.SetPlayer(s_player);
+        s_displayManager.SetPlayer(s_player);
     }
 
     private void Update()
@@ -157,20 +173,17 @@ public class WordManager : MonoBehaviour
         Cooldown();
         Temperature();
         TimeRewind();
-        //Weather();
         if (wordSetOn)
         {
             ConditionWordObject();
         }
-
-        //테스트용
-        SelectCount();
     }
+
     private void Cooldown()
     {
         if (!coolOn) return; 
         if (nowWord != 3) return;
-        cooltimeImage.GetComponent<Animator>().SetBool("CoolTimeOn", true);
+        cooltimeAnimator.SetBool("CoolTimeOn", true);
         if (cooltime <= 1)
         {
             cooltime += Time.deltaTime * cooltimeSpeed;
@@ -180,7 +193,7 @@ public class WordManager : MonoBehaviour
         {
             coolOn = false;
             if (cooltimeImage.color.a > 0)
-            cooltimeImage.GetComponent<Animator>().SetBool("CoolTimeOn", false);
+            cooltimeAnimator.SetBool("CoolTimeOn", false);
             wordSetOn = true;
         }
     }
@@ -188,8 +201,8 @@ public class WordManager : MonoBehaviour
     {
         coolOn = false;
         wordSetOn = false;
-        cooltimeImage.GetComponent<Animator>().SetBool("CoolTimeOn", false);
-        cooltimeImage.GetComponent<Animator>().Play("CoolTimeOff");
+        cooltimeAnimator.SetBool("CoolTimeOn", false);
+        cooltimeAnimator.Play("CoolTimeOff");
     }
 
     public void AllChangeTexts()
@@ -825,12 +838,12 @@ public class WordManager : MonoBehaviour
 
     private void Temperature()
     {
-        temperImage.rectTransform.eulerAngles = new Vector3(0,0, ((float)s_temperentManager.s_Temperature * 2.4f) - 120);
-        if ((float)s_temperentManager.s_Temperature / 100 <= 0)
+        temperImage.rectTransform.eulerAngles = new Vector3(0,0, (s_temperentManager.s_Temperature * 2.4f) - 120);
+        if (s_temperentManager.s_Temperature / 100 <= 0)
         {
             s_temperentManager.tempdan = -1;
         }
-        else if((float)s_temperentManager.s_Temperature / 100 >= 1)
+        else if(s_temperentManager.s_Temperature / 100 >= 1)
         {
             s_temperentManager.tempdan = 1;
         }
@@ -953,9 +966,9 @@ public class WordManager : MonoBehaviour
     {
         for (int i = 0; i < wordSelect.Count; i++)
         {
-            if (!wordSelect[i].w_MoveOn)
+            if (!wordSelect[i].W_MoveOn)
             {
-                if(wordSelect[i].w_MoveOnEffect)
+                if(wordSelect[i].W_MoveOnEffect)
                 {
                     ExecutionWordObject(i);
                 }
@@ -967,9 +980,9 @@ public class WordManager : MonoBehaviour
     {
         for (int i = 0; i < wordSelect.Count; i++)
         {
-            if (wordSelect[i].w_Collider)
+            if (wordSelect[i].W_Collider)
             {
-                if (!wordSelect[i].w_ColliderEffect)
+                if (!wordSelect[i].W_ColliderEffect)
                 {
                     ExecutionWordObject(i);
                 }
@@ -981,9 +994,9 @@ public class WordManager : MonoBehaviour
     {
         for (int i = 0; i < wordSelect.Count; i++)
         {
-            if (wordSelect[i].w_tile > 1)
+            if (wordSelect[i].W_Tile > 1)
             {
-                if(wordSelect[i].w_BlockOn)
+                if(wordSelect[i].W_BlockOn)
                 {
                     wordSelect[i].SetMoveZero();
                     ExecutionWordObject(i);
@@ -1015,11 +1028,11 @@ public class WordManager : MonoBehaviour
     {
         for(int i = 0; i < wordSelect.Count; i++)
         {
-            if(wordSelect[i].w_visible)
+            if(wordSelect[i].W_Visible)
             {
-                if(wordSelect[i].w_visibleEffect == false)
+                if(!wordSelect[i].W_VisibleEffect)
                 {
-                    wordSelect[i].w_visibleEffect = true;
+                    wordSelect[i].W_VisibleEffectOntrue();
                     ExecutionWordObject(i);
                 }
             }
@@ -1218,11 +1231,5 @@ public class WordManager : MonoBehaviour
     private void Execution_ColliderOff(int i)
     {
         wordSelect[i].ColliderOff();
-    }
-
-    //테스트용 함수
-    private void SelectCount() //선택된 오브젝트 수
-    {
-        selectCount = wordSelect.Count;
     }
 }
