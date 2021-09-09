@@ -32,14 +32,21 @@ public class CameraSettingObject : MonoBehaviour
         if(horizontalOn)
         {
             mainCamera.GetComponent<CinemachineVirtualCamera>().Follow = horizontalObj;
+            return;
         }
         if(verticalOn)
         {
             mainCamera.GetComponent<CinemachineVirtualCamera>().Follow = verticalObj;
+            return;
         }
         if(cameraLock)
         {
             mainCamera.GetComponent<CinemachineVirtualCamera>().Follow = lockTransform;
+            return;
+        }
+        else
+        {
+            mainCamera.GetComponent<CinemachineVirtualCamera>().Follow = playerTransform;
         }
     }
 }

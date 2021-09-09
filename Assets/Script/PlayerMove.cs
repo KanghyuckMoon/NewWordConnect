@@ -32,6 +32,7 @@ public class PlayerMove : WordGameObject
         realspeed = speed;
         rigid.gravityScale = gravityScale;
         w_collider = GetComponent<Collider2D>();
+
     }
 
     private void Update()
