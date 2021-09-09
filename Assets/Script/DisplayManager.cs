@@ -12,6 +12,8 @@ public class DisplayManager : WordGameObject
     public InputField inputy;
     public int x;
     public int y;
+    public int ax;
+    public int ay;
     public Text text;
 
     public void Set1()
@@ -48,8 +50,8 @@ public class DisplayManager : WordGameObject
         var worldPos = Camera.main.ScreenToWorldPoint(mousePos);
 
         //SetPosition(Mathf.Clamp((int)(mousePos.x * 1),0, 1920), Mathf.Clamp((int)(mousePos.y / 2f), 0, 520)); // 크기 조절
-        SetPosition(x,y); // 크기 조절
-        //text.text = string.Format((int)mousePos.x + " " + Mathf.Clamp((int)mousePos.y / 2 > 0 ? -(int)mousePos.y / 2 : (int)mousePos.y / 2, 0, 520)); // 텍스트로 알려줌
+        SetPosition(x,y + ay); // 크기 조절
+        text.text = string.Format("{0}", ay); // 텍스트로 알려줌
         int a = (int)Input.GetAxisRaw("Horizontal");
         int b = (int)Input.GetAxisRaw("Vertical");
         //x += a;
@@ -58,11 +60,11 @@ public class DisplayManager : WordGameObject
 
     public override void Jump()
     {
-        y += -50;
+        ay += -50;
     }
     public override void Down()
     {
-        y += 50;
+        ay += 50;
     }
     public override void SizeUp()
     {
