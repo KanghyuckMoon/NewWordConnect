@@ -131,6 +131,17 @@ public class WordGameObject : MonoBehaviour
     //    jump = user.jump;
     //    rigid.gravityScale = gravityScale;
     //}
+    public void Settingvalue()
+    {
+     speed = 24.5f;
+     maxSpeed = 27.5f;
+     friction = 7.5f;
+     airfriction = 4.0f;
+     downGravityOn = true;
+      jump = 22.5f;
+     gravityScale = 4.300000190734863f;
+        rigid.gravityScale = gravityScale;
+}
 
     //public virtual void LoadToJson()
     //{

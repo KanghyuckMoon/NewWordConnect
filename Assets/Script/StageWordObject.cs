@@ -11,6 +11,8 @@ public class StageWordObject : WordGameObject
     {
         //base.Start();
         stageManager = FindObjectOfType<StageManager>();
+        rigid = GetComponent<Rigidbody2D>();
+        Settingvalue();
     }
 
     public override void SizeUp()
