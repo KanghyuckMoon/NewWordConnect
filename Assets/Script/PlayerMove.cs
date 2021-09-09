@@ -9,6 +9,7 @@ public class PlayerMove : WordGameObject
 
     private float velocityX = 0;
     private bool downGravity = false; //�������� �ӵ��� ������ ����
+    private Transform savePoint;
 
     private BoxCollider2D collider2d;
 
@@ -126,5 +127,14 @@ public class PlayerMove : WordGameObject
         {
             collision.GetComponent<CameraSettingObject>().SetCameraMoveSetting();
         }
+    }
+
+    public void Died()
+    {
+        transform.position = savePoint.position;
+    }
+    public void SetSavePoint(Transform transform)
+    {
+        savePoint = transform;
     }
 }

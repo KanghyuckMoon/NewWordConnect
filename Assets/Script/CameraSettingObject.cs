@@ -17,6 +17,8 @@ public class CameraSettingObject : MonoBehaviour
     private bool cameraLock = false;
     [SerializeField]
     private Transform lockTransform = null;
+    [SerializeField]
+    private Transform savePoint = null;
     private Transform playerTransform = null;
 
     private Camera mainCamera = null;
@@ -29,6 +31,7 @@ public class CameraSettingObject : MonoBehaviour
 
     public void SetCameraMoveSetting()
     {
+        playerTransform.GetComponent<PlayerMove>().SetSavePoint(savePoint);
         if(horizontalOn)
         {
             mainCamera.GetComponent<CinemachineVirtualCamera>().Follow = horizontalObj;
