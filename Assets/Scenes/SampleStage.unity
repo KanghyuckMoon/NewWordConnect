@@ -167,7 +167,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &105951481
 GameObject:
@@ -197,7 +197,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &144762987
 GameObject:
@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 144762988}
   - component: {fileID: 144762989}
   m_Layer: 6
-  m_Name: TileMapWord
+  m_Name: GravitySetting
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -498,7 +498,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &704115848
 GameObject:
@@ -1486,7 +1486,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &869978265
 GameObject:
@@ -1596,7 +1596,7 @@ Transform:
   - {fileID: 381633888}
   - {fileID: 225332981}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1309855027
 GameObject:
@@ -1830,7 +1830,7 @@ Transform:
   m_Children:
   - {fileID: 2031036106}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1441519248
 GameObject:
@@ -3403,7 +3403,7 @@ Transform:
   m_Children:
   - {fileID: 1624829497}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1802983960
 GameObject:
@@ -3449,7 +3449,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1834439471
 GameObject:
@@ -3841,7 +3841,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2016849910}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.9375, z: -10}
+  m_LocalPosition: {x: -0.01, y: -0.92999995, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1834439472}
@@ -3901,7 +3901,45 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: "1.MainCamera(\uBA54\uC778\uCE74\uBA54\uB77C)\n-\uBA54\uC778\uCE74\uBA54\uB77C
+    \uC548\uC5D0 \uC5D0\uB7EC \uC624\uBE0C\uC81D\uD2B8\uB4E4\uC744 \uC124\uC815\uD560
+    \uC218 \uC788\uC74C\n-Global Light2D\uB294 \uC804\uCCB4\uC801\uC778 \uBC1D\uAE30\uB97C
+    \uC870\uC808\uD568 \uC785\uB9DB\uB300\uB85C \uC870\uC815\n\n2.Player(\uD50C\uB808\uC774\uC5B4)\n-Point
+    Light2D\uAC00 \uC788\uC74C. \uD50C\uB808\uC774\uC5B4 \uC8FC\uC704\uC758 \uBC1D\uAE30\uB97C
+    \uC124\uC815\uD568\n\n3.PlayerLockMov(Horizontal)\n-\uD50C\uB808\uC774\uC5B4\uC758
+    \uC88C\uC6B0\uB85C\uB9CC \uC774\uB3D9\uD568\n-y\uC88C\uD45C\uB294 \uBBF8\uB9AC
+    \uC124\uC815\uD574\uC57C\uD568\n\n\n4.PlayerLockMov(Vertical)\n-\uD50C\uB808\uC774\uC5B4\uC758
+    \uC0C1\uD558\uB85C\uB9CC \uC774\uB3D9\uD568\n-x\uC88C\uD45C\uB294 \uBBF8\uB9AC
+    \uC124\uC815\uD574\uC57C\uD568\n\n5.Grid\n-StageManager \uC2A4\uD14C\uC774\uC9C0
+    \uAD00\uB828\uB41C\uAC74 \uC774 \uC624\uBE0C\uC81D\uD2B8 \uC544\uB798\uB85C \uB123\uC5B4\uC8FC\uBA74
+    \uB428\n-Tilemap \uC2E4\uC9C8\uC801\uC778 \uC2A4\uD14C\uC774\uC9C0\uC784\n-GravitySetting
+    \uAC74\uB4E4\uC9C0\uB9C8\uC148 \uC2A4\uD14C\uC774\uC9C0 \uC810\uD504 \uAD00\uB828
+    \uC124\uC815 \uC2A4\uD14C\uC774\uC9C0\uB97C \uC598 \uBCF4\uB2E4 y\uC88C\uD45C\uAC00
+    \uB0AE\uAC8C \uB9CC\uB4E4\uC9C0 \uB9C8\uC148\n-Tilemap Wall \uC2A4\uD14C\uC774\uC9C0\uC758
+    \uBCBD\uC744 \uB9C9\uC544\uC8FC\uB294 \uCF5C\uB77C\uC774\uB354 Tilemap\uC744
+    \uBCF5\uC81C\uD558\uACE0 \uB9AC\uC9C0\uB4DC\uBC14\uB514\uC758 \uC124\uC815\uC744
+    Kinematic\uC73C\uB85C \uBC14\uAFB8\uACE0 StageWordObject\uCEF4\uD3EC\uB108\uD2D1\uB97C
+    \uC81C\uAC70\uD574\uC11C Tilemap\uC758 \uC790\uC2DD\uC624\uBE0C\uC81D\uD2B8\uB85C
+    \uB123\uC5B4\uC8FC\uBA74 \uC644\uC131\uB428\n\n6.TemPerManager(\uC628\uB3C4 \uB9E4\uB2C8\uC800)\n-\uC628\uB3C4
+    \uAD00\uB828\uB41C \uC624\uBE0C\uC81D\uD2B8\uB97C \uB2E4\uB8F8\n-TemperObject
+    \uCEF4\uD3EC\uB10C\uD2B8 \uBCF4\uBA74 \uC22B\uC790 \uB2E4\uB8E8\uB294 \uBD80\uBD84
+    \uC788\uC74C. 1\uC774\uBA74 \uC628\uB3C4 \uB192\uB2E4 0\uC774\uBA74 \uC628\uB3C4\uAC00
+    \uC801\uB2F9\uD558\uB2E4 -1\uC774\uBA74 \uC628\uB3C4\uAC00 \uB0AE\uB2E4\n\uC124\uC815\uD55C
+    \uC628\uB3C4\uAC00 \uB418\uBA74 \uC624\uBE0C\uC81D\uD2B8\uAC00 \uC0AC\uB77C\uC9D0.
+    \uC5EC\uAE30 \uC790\uC2DD\uC73C\uB85C \uC628\uB3C4\uAD00\uB828\uB41C \uC624\uBE0C\uC81D\uD2B8
+    \uB123\uC5B4\uC8FC\uBA74 \uB428\n\n7.WeatherManager(\uB0A0\uC528 \uB9E4\uB2C8\uC800)\n-\uC790\uC2DD\uC73C\uB85C
+    \uB0A0\uC528\uB97C \uB123\uC5B4\uC918\uC57C\uD568\n-\uCEF4\uD3EC\uB10C\uD2B8\uC5D0
+    \uB0A0\uC528 \uC624\uBE0C\uC81D\uD2B8 \uB123\uB294 \uB9AC\uC2A4\uD2B8\uAC00 \uC788\uB294\uB370
+    \uAC70\uAE30 \uC22B\uC790\uC5D0 \uB9DE\uAC8C \uC124\uC815\uD574\uC8FC\uBA74\uB428\n\n8.NotTouchObjects(\uAC74\uB4E4\uC9C0\uB9C8\uC148)\n\n9.CameraLockObjects(\uCE74\uBA54\uB77C
+    \uC124\uC815 \uC624\uBE0C\uC81D\uD2B8\uB4E4)\n-\uAD6C\uC5ED\uC744 \uB098\uB204\uB294
+    \uC624\uBE0C\uC81D\uD2B8\uB4E4\uC744 \uB2F4\uC74C\n-\uC0C8\uB85C \uAD6C\uC5ED\uC744
+    \uB098\uB20C \uB54C\uB294 \uAE30\uC874 \uC624\uBE0C\uC81D\uD2B8\uB97C \uBCF5\uC81C\uD558\uC148\n-HorizontalOn,VerticalOn,LockOn
+    \uC911 \uD558\uB098\uB9CC \uC120\uD0DD\uD558\uC148 \uC544\uBB34\uAC83\uB3C4 \uC120\uD0DD\uD558\uC9C0
+    \uC54A\uC73C\uBA74 \uD50C\uB808\uC774\uC5B4\uC5D0\uAC8C \uCE74\uBA54\uB77C\uAC00
+    \uB3CC\uC544\uAC10\n-HorizontalOn\uC740 \uC88C\uC6B0\uB85C\uB9CC\n-VerticalOn\uC740
+    \uC0C1\uD558\uB85C\uB9CC\n-LockOn\uC740 \uACE0\uC815\n-\uC790\uC2DD\uC624\uBE0C\uC81D\uD2B8\uB85C
+    LockTransform\uC774 \uC788\uB294\uB370 LockOn\uC77C \uB54C \uC774\uAC70\uC758
+    \uC704\uCE58\uB85C \uACE0\uC815\uB428\n\n"
 --- !u!222 &2027488066
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3922,7 +3960,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4060,5 +4098,5 @@ Transform:
   m_Children:
   - {fileID: 1309855028}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
