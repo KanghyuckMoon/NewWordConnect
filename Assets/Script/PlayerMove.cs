@@ -14,6 +14,12 @@ public class PlayerMove : WordGameObject
     private BoxCollider2D collider2d;
 
 
+    //애니메이션
+    private SpriteRenderer spriteRenderer = null;
+    private Animator animator = null;
+    private bool isWalk = false;
+
+
     private void Awake()
     {
         //Save_Path = Application.persistentDataPath + "/Save";
@@ -34,6 +40,8 @@ public class PlayerMove : WordGameObject
         rigid.gravityScale = gravityScale;
         w_collider = GetComponent<Collider2D>();
         savePoint = transform.position;
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
     }
 
@@ -64,10 +72,12 @@ public class PlayerMove : WordGameObject
     private void InputMove()
     {
         velocityX = Input.GetAxisRaw("Horizontal");
+        SetAnimation();
     }
 
     private void Move()
     {
+        isWalk = true;
         rigid.AddForce(Vector2.right * (velocityX * realspeed));
         if(downGravity)
         {
@@ -158,5 +168,22 @@ public class PlayerMove : WordGameObject
     public void SetSavePoint(Vector2 transform)
     {
         savePoint = transform;
+    }
+
+    private void SetAnimation()
+    {
+        if (velocityX == 1)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else if (velocityX == -1)
+        {
+            spriteRenderer.flipX = false;
+        }
+        else
+        {
+            isWalk = false;
+        }
+        animator.SetBool("IsWalk", isWalk);
     }
 }
