@@ -4,23 +4,27 @@ using UnityEngine;
 
 public class EnemyBased : WordGameObject
 {
-    private int nexMove = -1;
-    private float speedset = 1;
+    [SerializeField]
+    protected float enemymoveSpeed = 1;
+
+    protected int nexMove = -1;
+
+    protected float speedset = 1;
     [Header("무조건 안 떨어질지 떨어질지")]
     [SerializeField]
-    private bool downDetectionOn = false;
+    protected bool downDetectionOn = false;
     [Header("낭떠러지의 높이에 따라 떨어질지말지")]
     [SerializeField]
-    private bool downDistanceOn = false;
+    protected bool downDistanceOn = false;
     [Header("낭떠러지의 높이에 따라 떨어질지의 값")]
     [SerializeField]
-    private float downDistanceValue = 0;
+    protected float downDistanceValue = 0;
     [Header("앞에 있는 물건 감지")]
     [SerializeField]
-    private bool fowardDetectionOn = true;
+    protected bool fowardDetectionOn = true;
     [Header("앞에 있는 물건을 어느 거리로 감지할지")]
     [SerializeField]
-    private float fowardDetectionValue = 0.2f;
+    protected float fowardDetectionValue = 0.2f;
 
     protected override void Start()
     {
@@ -43,9 +47,9 @@ public class EnemyBased : WordGameObject
         EnemyMove();
     }
 
-    private void EnemyMove()
+    protected virtual void EnemyMove()
     {
-        rigid.velocity = new Vector2(nexMove * speedset, rigid.velocity.y);
+        rigid.velocity = new Vector2(nexMove * speedset * enemymoveSpeed, rigid.velocity.y);
 
         Vector2 frontvec = new Vector2(rigid.position.x + nexMove * 0.5f, rigid.position.y);
         Vector2 frontvec2 = new Vector2(rigid.position.x + nexMove * 0.5f, rigid.position.y);
@@ -120,7 +124,8 @@ public class EnemyBased : WordGameObject
     public override void TimeReset()
     {
         base.TimeReset();
-        speed = 1f;
+        speed = 1;
+        speed = enemymoveSpeed;
     }
     public override void SpeedStopnotinvoke()
     {
