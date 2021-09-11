@@ -9,7 +9,7 @@ public class PlayerMove : WordGameObject
 
     private float velocityX = 0;
     private bool downGravity = false; //�������� �ӵ��� ������ ����
-    private Transform savePoint;
+    private Vector2 savePoint;
 
     private BoxCollider2D collider2d;
 
@@ -33,6 +33,7 @@ public class PlayerMove : WordGameObject
         realspeed = speed;
         rigid.gravityScale = gravityScale;
         w_collider = GetComponent<Collider2D>();
+        savePoint = transform.position;
 
     }
 
@@ -107,6 +108,18 @@ public class PlayerMove : WordGameObject
         w_vector1 = transform.position.x;
         w_BlockOn = true;
         superDownOn = false;
+        if(collision.gameObject.CompareTag("Enemy"))
+        {
+            if(collision.transform.position.y < transform.position.y && rigid.velocity.y < 0)
+            {
+                Jump();
+                collision.gameObject.GetComponent<EnemyBased>().Die();
+            }
+            else
+            {
+                Died();
+            }
+        }
     }
     protected override void OnCollisionExit2D(Collision2D collision)
     {
@@ -131,9 +144,9 @@ public class PlayerMove : WordGameObject
 
     public void Died()
     {
-        transform.position = savePoint.position;
+        transform.position = savePoint;
     }
-    public void SetSavePoint(Transform transform)
+    public void SetSavePoint(Vector2 transform)
     {
         savePoint = transform;
     }

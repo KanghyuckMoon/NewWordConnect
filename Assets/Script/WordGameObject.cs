@@ -130,17 +130,17 @@ public class WordGameObject : MonoBehaviour
     //    jump = user.jump;
     //    rigid.gravityScale = gravityScale;
     //}
-    public void Settingvalue()
+    public virtual void Settingvalue()
     {
      speed = 24.5f;
      maxSpeed = 27.5f;
      friction = 7.5f;
      airfriction = 4.0f;
      downGravityOn = true;
-      jump = 22.5f;
+     jump = 22.5f;
      gravityScale = 4.300000190734863f;
-        rigid.gravityScale = gravityScale;
-}
+     rigid.gravityScale = gravityScale;
+    }
 
     //public virtual void LoadToJson()
     //{
@@ -346,6 +346,7 @@ public class WordGameObject : MonoBehaviour
         w_vector1 = transform.position.x;
         w_BlockOn = true;
         superDownOn = false;
+        jumpOn = false;
     }
     protected virtual void OnCollisionStay2D(Collision2D collision)
     {
@@ -372,6 +373,7 @@ public class WordGameObject : MonoBehaviour
         w_ColliderEffect = false;
         w_BlockOn = false;
         w_tile = 0;
+        jumpOn = true;
     }
 
     public void SetCollider()

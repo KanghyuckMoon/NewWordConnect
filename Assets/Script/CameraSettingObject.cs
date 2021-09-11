@@ -31,7 +31,7 @@ public class CameraSettingObject : MonoBehaviour
 
     public void SetCameraMoveSetting()
     {
-        playerTransform.GetComponent<PlayerMove>().SetSavePoint(savePoint);
+        playerTransform.GetComponent<PlayerMove>().SetSavePoint(savePoint.position);
         if(horizontalOn)
         {
             mainCamera.GetComponent<CinemachineVirtualCamera>().Follow = horizontalObj;
