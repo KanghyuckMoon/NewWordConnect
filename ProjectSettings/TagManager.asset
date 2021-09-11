@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - TileMap
   - Spike
+  - BreakBlock
   layers:
   - Default
   - TransparentFX

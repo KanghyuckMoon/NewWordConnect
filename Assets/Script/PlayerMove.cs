@@ -132,17 +132,22 @@ public class PlayerMove : WordGameObject
 
     protected void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Wind"))
+        if (collision.CompareTag("Wind"))
         {
             rigid.AddForce(Vector2.right * 2f);
         }
-        if (collision.gameObject.CompareTag("CameraLock"))
+        if (collision.CompareTag("CameraLock"))
         {
             collision.GetComponent<CameraSettingObject>().SetCameraMoveSetting();
         }
-        if (collision.gameObject.CompareTag("Spike"))
+        if (collision.CompareTag("Spike"))
         {
             Died();
+        }
+        if (collision.CompareTag("BreakBlock") && !(rigid.velocity.y <= 0))
+        {
+            collision.GetComponent<GimicBlock>().BreakBlock();
+            rigid.velocity = new Vector2(rigid.velocity.x,0);
         }
     }
 
