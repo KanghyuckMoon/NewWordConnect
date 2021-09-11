@@ -3914,7 +3914,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.47}
+  m_Offset: {x: 0, y: -0.45}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -4347,6 +4347,7 @@ MonoBehaviour:
   fowardDetectionOn: 1
   fowardDetectionValue: 0.2
   distance: 1
+  gravityOn: 0
 --- !u!61 &1796194919
 BoxCollider2D:
   m_ObjectHideFlags: 0

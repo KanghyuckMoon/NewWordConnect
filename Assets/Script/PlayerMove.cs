@@ -158,6 +158,7 @@ public class PlayerMove : WordGameObject
         {
             collision.GetComponent<GimicBlock>().BreakBlock();
             rigid.velocity = new Vector2(rigid.velocity.x,0);
+            rigid.AddForce(Vector2.down * 5f);
         }
     }
 

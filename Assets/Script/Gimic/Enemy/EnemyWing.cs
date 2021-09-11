@@ -8,6 +8,8 @@ public class EnemyWing : EnemyBased
     private float distance = 1f;
     private bool updown;
     private Vector2 originalPosition = Vector2.zero;
+    [SerializeField]
+    private bool gravityOn = false;
 
     protected override void Start()
     {
@@ -25,5 +27,15 @@ public class EnemyWing : EnemyBased
             updown = false;
         }
         rigid.AddForce(Vector2.up * enemymoveSpeed * (float)(updown ? -1 : 1), ForceMode2D.Impulse);
+    }
+
+    public override void Settingvalue()
+    {
+        base.Settingvalue();
+        if(!gravityOn)
+        {
+        rigid.gravityScale = 0;
+
+        }
     }
 }
