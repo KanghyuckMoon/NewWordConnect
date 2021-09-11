@@ -9,7 +9,7 @@ public class GimicBase : MonoBehaviour
     [SerializeField]
     private string animationName = null;
 
-    private void Start()
+    protected virtual void Start()
     {
         animator = GetComponent<Animator>();
     }
