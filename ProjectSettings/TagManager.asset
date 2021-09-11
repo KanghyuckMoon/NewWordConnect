@@ -10,6 +10,7 @@ TagManager:
   - TileMap
   - Spike
   - BreakBlock
+  - Spring
   layers:
   - Default
   - TransparentFX

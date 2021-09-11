@@ -5,7 +5,7 @@ using UnityEngine;
 public class GimicBase : MonoBehaviour
 {
     public float realSpeed = 1;
-    private Animator animator;
+    protected Animator animator;
     [SerializeField]
     private string animationName = null;
 

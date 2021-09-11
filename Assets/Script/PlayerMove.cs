@@ -158,7 +158,13 @@ public class PlayerMove : WordGameObject
         {
             collision.GetComponent<GimicBlock>().BreakBlock();
             rigid.velocity = new Vector2(rigid.velocity.x,0);
-            rigid.AddForce(Vector2.down * 5f);
+            rigid.AddForce(Vector2.down * 3f,ForceMode2D.Impulse);
+        }
+        if (collision.CompareTag("Spring") && (rigid.velocity.y <= 0))
+        {
+            collision.GetComponent<GimicSpring>().SpringTread();
+            rigid.velocity = new Vector2(rigid.velocity.x, 0);
+            rigid.AddForce(Vector2.up * 30f, ForceMode2D.Impulse);
         }
     }
 
