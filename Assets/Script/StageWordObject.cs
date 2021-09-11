@@ -7,6 +7,7 @@ public class StageWordObject : WordGameObject
     private StageManager stageManager;
     [SerializeField]
     private List<GimicBase> gimiclist = new List<GimicBase>();
+    private List<Rigidbody2D> gimicHasLigid = new List<Rigidbody2D>();
 
     protected override void Start()
     {
@@ -20,6 +21,10 @@ public class StageWordObject : WordGameObject
             if (transform.GetChild(i).GetComponent<GimicBase>() != null)
             {
                 gimiclist.Add(transform.GetChild(i).GetComponent<GimicBase>());
+                if(transform.GetChild(i).GetComponent<Rigidbody2D>() != null)
+                {
+                    gimicHasLigid.Add(transform.GetChild(i).GetComponent<Rigidbody2D>());
+                }
             }
         }
     }
@@ -28,6 +33,19 @@ public class StageWordObject : WordGameObject
     {
         base.Settingvalue();
         speed = 1;
+    }
+
+    public override void Jump()
+    {
+        rigid.AddForce(Vector2.up * jump, ForceMode2D.Impulse);
+        w_MoveOn = true;
+        w_MoveOnEffect = false;
+        w_tile = 0;
+        for(int i = 0; i < gimicHasLigid.Count;i++)
+        {
+            gimicHasLigid[i].velocity = new Vector2(gimicHasLigid[i].velocity.x, 0);
+            gimicHasLigid[i].AddForce(Vector2.up * jump, ForceMode2D.Impulse);
+        }
     }
 
     public override void SizeUp()

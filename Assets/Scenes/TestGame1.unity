@@ -598,6 +598,7 @@ MonoBehaviour:
   animationName: 
   distance: 1
   upDownSpeed: 1
+  mass: 1
   gravityOn: 0
 --- !u!50 &516724512
 Rigidbody2D:
