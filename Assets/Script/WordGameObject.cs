@@ -386,4 +386,9 @@ public class WordGameObject : MonoBehaviour
         w_BlockOn = false;
         w_tile = 0;
     }
+
+    public float ReturnRealSpeed()
+    {
+        return realspeed;
+    }
 }

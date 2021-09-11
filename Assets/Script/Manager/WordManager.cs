@@ -889,13 +889,14 @@ public class WordManager : MonoBehaviour
                 }
                 break;
             case 3: // 스테이지가 개발완료
-                for (int i = 0; i < s_stage.transform.childCount; i++)
-                {
-                    if(s_stage.transform.GetChild(i).GetComponent<WordGameObject>() != null)
-                    {
-                        wordSelect.Add(s_stage.transform.GetChild(i).GetComponent<WordGameObject>());
-                    }
-                }
+                //for (int i = 0; i < s_stage.transform.childCount; i++)
+                //{
+                //    if(s_stage.transform.GetChild(i).GetComponent<WordGameObject>() != null)
+                //    {
+                //        wordSelect.Add(s_stage.transform.GetChild(i).GetComponent<WordGameObject>());
+                //    }
+                //}
+                wordSelect.Add(s_stage.GetComponent<WordGameObject>());
                 break;
             case 4: // 카메라가 개발완료
                 wordSelect.Add(s_mainCamera.GetComponent<WordGameObject>());
@@ -1232,4 +1233,5 @@ public class WordManager : MonoBehaviour
     {
         wordSelect[i].ColliderOff();
     }
+
 }

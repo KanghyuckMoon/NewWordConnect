@@ -5,14 +5,29 @@ using UnityEngine;
 public class StageWordObject : WordGameObject
 {
     private StageManager stageManager;
-
+    [SerializeField]
+    private List<GimicBase> gimiclist = new List<GimicBase>();
 
     protected override void Start()
     {
         //base.Start();
         stageManager = FindObjectOfType<StageManager>();
         rigid = GetComponent<Rigidbody2D>();
+        w_collider = GetComponent<Collider2D>();
         Settingvalue();
+        for(int i = 0; i < transform.childCount; i++)
+        {
+            if (transform.GetChild(i).GetComponent<GimicBase>() != null)
+            {
+                gimiclist.Add(transform.GetChild(i).GetComponent<GimicBase>());
+            }
+        }
+    }
+
+    public override void Settingvalue()
+    {
+        base.Settingvalue();
+        speed = 1;
     }
 
     public override void SizeUp()
@@ -67,5 +82,49 @@ public class StageWordObject : WordGameObject
             sizeIndex = -2;
             stageManager.transform.localScale = new Vector2(0.6f, 0.6f);
         }
+    }
+
+    private void GimicListSendRealSpeed()
+    {
+        for (int i = 0; i < gimiclist.Count; i++)
+        {
+            gimiclist[i].SetGimicSpeed(realspeed);
+        }
+    }
+
+    public override void SpeedUp()
+    {
+        base.SpeedUp();
+        GimicListSendRealSpeed();
+    }
+
+    public override void SpeedDown()
+    {
+        base.SpeedDown();
+        GimicListSendRealSpeed();
+    }
+
+    public override void SpeedStop()
+    {
+        base.SpeedStop();
+        GimicListSendRealSpeed();
+    }
+
+    public override void SpeedReset()
+    {
+        base.SpeedReset();
+        GimicListSendRealSpeed();
+    }
+
+    public override void SpeedStopnotinvoke()
+    {
+        base.SpeedStopnotinvoke();
+        GimicListSendRealSpeed();
+    }
+
+    public override void TimeReset()
+    {
+        base.TimeReset();
+        GimicListSendRealSpeed();
     }
 }

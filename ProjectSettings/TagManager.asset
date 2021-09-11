@@ -8,6 +8,7 @@ TagManager:
   - CameraLock
   - Enemy
   - TileMap
+  - Spike
   layers:
   - Default
   - TransparentFX

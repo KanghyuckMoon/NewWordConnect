@@ -140,6 +140,10 @@ public class PlayerMove : WordGameObject
         {
             collision.GetComponent<CameraSettingObject>().SetCameraMoveSetting();
         }
+        if (collision.gameObject.CompareTag("Spike"))
+        {
+            Died();
+        }
     }
 
     public void Died()

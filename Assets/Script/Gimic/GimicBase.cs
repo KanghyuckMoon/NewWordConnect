@@ -1,0 +1,22 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class GimicBase : MonoBehaviour
+{
+    public float realSpeed = 1;
+    private Animator animator;
+    [SerializeField]
+    private string animationName = null;
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+
+    public virtual void SetGimicSpeed(float speed)
+    {
+        realSpeed = speed;
+        animator.SetFloat(animationName, realSpeed);
+    }
+}
