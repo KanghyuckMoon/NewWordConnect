@@ -132,7 +132,7 @@ public class WordManager : MonoBehaviour
     //실행어용 변수
 
     //이벤트 변수
-    private bool isEvent = false;
+    public bool isEvent = false;
 
 
     private void Awake()
@@ -177,6 +177,7 @@ public class WordManager : MonoBehaviour
 
     private void Update()
     {
+        if (isEvent) return;
         InputWordKey();
         Cooldown();
         Temperature();
@@ -1244,11 +1245,13 @@ public class WordManager : MonoBehaviour
 
     public void EventOn()
     {
+        isEvent = true;
         WordSystem.SetActive(false);
         TextSystem.SetActive(true);
     }
     public void EventOff()
     {
+        isEvent = false;
         WordSystem.SetActive(true);
         TextSystem.SetActive(false);
     }

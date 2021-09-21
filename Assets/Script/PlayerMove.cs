@@ -10,8 +10,10 @@ public class PlayerMove : WordGameObject
     private Vector2 savePoint;
 
     private BoxCollider2D collider2d;
-    public int nowArea = 0;
 
+    public int nowArea = 0;
+    private WordManager wordManager;
+    private TextManager textManager;
     //애니메이션
     private SpriteRenderer spriteRenderer = null;
     private Animator animator = null;
@@ -29,11 +31,13 @@ public class PlayerMove : WordGameObject
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         dust = GetComponentInChildren<ParticleSystem>();
-
+        wordManager = FindObjectOfType<WordManager>();
+        textManager = FindObjectOfType<TextManager>();
     }
 
     private void Update()
     {
+        if (wordManager.isEvent) return;
         //���������� �Լ�
         InputJump();
         JumpDrag();
@@ -44,6 +48,7 @@ public class PlayerMove : WordGameObject
 
     private void FixedUpdate()
     {
+        if (wordManager.isEvent) return;
         Move();
         DownDust();
     }
@@ -128,6 +133,19 @@ public class PlayerMove : WordGameObject
         jumpOn = true;
         w_BlockOn = false;
         w_tile = 0;
+    }
+
+    protected override void OnTriggerStay2D(Collider2D collision)
+    {
+        base.OnTriggerStay2D(collision);
+        if (collision.gameObject.CompareTag("TextObj"))
+        {
+            if (wordManager.isEvent) return;
+            if(Input.GetKeyDown(KeyCode.W))
+            {
+                textManager.ChatStart(collision.gameObject.GetComponent<TextObject>().ReturnTextIndex());
+            }
+        }
     }
 
     protected void OnTriggerEnter2D(Collider2D collision)

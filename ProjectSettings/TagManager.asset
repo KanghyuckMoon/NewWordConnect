@@ -11,6 +11,7 @@ TagManager:
   - Spike
   - BreakBlock
   - Spring
+  - TextObj
   layers:
   - Default
   - TransparentFX

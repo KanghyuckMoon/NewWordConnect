@@ -632,7 +632,7 @@ GameObject:
   - component: {fileID: 244281322}
   - component: {fileID: 244281321}
   m_Layer: 5
-  m_Name: Profile
+  m_Name: ProfileBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1502,13 +1502,14 @@ MonoBehaviour:
   wordManager: {fileID: 704011405}
   nameText: {fileID: 165081269}
   chatText: {fileID: 1914447248}
-  characterImage: {fileID: 0}
+  characterImage: {fileID: 1685596653}
   characterSprite: []
   textlist:
   - data:
     - "000 \uC548\uB155\uD558\uC138\uC694"
     - "001 \uC548\uB155"
     - "002 \u3147\u3141\u3139\u3134\u3147\u3139"
+    - "003 \uD14C\uC2BD"
 --- !u!114 &704011405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1549,6 +1550,7 @@ MonoBehaviour:
   TextSystem: {fileID: 703604348}
   s_timeManager: {fileID: 0}
   c_onesecondCoolTime: 0
+  isEvent: 0
 --- !u!114 &704011406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3488,7 +3490,7 @@ GameObject:
   - component: {fileID: 1685596654}
   - component: {fileID: 1685596653}
   m_Layer: 5
-  m_Name: Image
+  m_Name: ProfileImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3770,7 +3772,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1897916378
 RectTransform:
   m_ObjectHideFlags: 0
