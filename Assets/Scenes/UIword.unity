@@ -1428,7 +1428,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &703604349
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1507,8 +1507,8 @@ MonoBehaviour:
   textlist:
   - data:
     - "000 \uC548\uB155\uD558\uC138\uC694"
-    - "011 \uC548\uB155"
-    - "132 \u3147\u3141\u3139\u3134\u3147\u3139"
+    - "001 \uC548\uB155"
+    - "002 \u3147\u3141\u3139\u3134\u3147\u3139"
 --- !u!114 &704011405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1545,6 +1545,8 @@ MonoBehaviour:
   cooltime: 0
   cooltimeSpeed: 2
   temperImage: {fileID: 707846780}
+  WordSystem: {fileID: 1976667112}
+  TextSystem: {fileID: 703604348}
   s_timeManager: {fileID: 0}
   c_onesecondCoolTime: 0
 --- !u!114 &704011406

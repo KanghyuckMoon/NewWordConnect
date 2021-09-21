@@ -16,7 +16,15 @@ public class TextManager : MonoBehaviour
 {
     [SerializeField]
     private WordManager wordManager;
-
+    
+    enum Name
+    {
+        ¹®°­Çõ,
+        ¹ÚÇØ¿ï,
+        ¾î½Ã¿Â,
+        ¶òÈÆ,
+        ¤±¤¤¤·¤©
+    }
 
     [SerializeField]
     private Text nameText = null;
@@ -32,31 +40,36 @@ public class TextManager : MonoBehaviour
     //
     private int count = 0;
     private int textIndex = -1;
-    private int index = 0;
+    private int index = 3;
 
     public void Chatting()
     {
         if (textlist[textIndex].data.Length <= count)
         {
             count = 0;
+            wordManager.EventOff();
             return;
         }
         else
         {
             CharacterImageSet();
-            count++;
+            index = 3;
+            chatText.text = "";
+            ChatLoading();
         }
     }
     
     public void ChatStart(int textindex)
     {
         textIndex = textindex;
+        wordManager.EventOn();
         Chatting();
     }
 
     private void CharacterImageSet()
     {
-        int a = int.Parse(textlist[textIndex].data[count].Substring(0, 3));
+        Name a = (Name)int.Parse(textlist[textIndex].data[count].Substring(0, 3));
+        nameText.text = a.ToString();
         //characterImage.sprite = characterSprite[a];
     }
 
@@ -64,11 +77,13 @@ public class TextManager : MonoBehaviour
     {
         if(index >= textlist[textIndex].data[count].Length)
         {
+            count++;
             Invoke("Chatting", 1);
+            return;
         }
-        chatText.text = "";
+        Debug.Log(index + " , " + textlist[textIndex].data[count].Length);
         chatText.text += textlist[textIndex].data[count][index];
         index++;
-        Invoke("ChatLoading", 1);
+        Invoke("ChatLoading", 0.2f);
     }
 }

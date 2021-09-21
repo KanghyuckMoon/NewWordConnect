@@ -103,6 +103,10 @@ public class WordManager : MonoBehaviour
     private GameObject conditionScrollsPanel = null;
     private GameObject executionScrollsPanel = null;
     private int numberPressed = 0;
+    [SerializeField]
+    private GameObject WordSystem = null;
+    [SerializeField]
+    private GameObject TextSystem = null;
 
     //주어용 변수
     private PlayerMove s_player;
@@ -1238,5 +1242,14 @@ public class WordManager : MonoBehaviour
         wordSelect[i].ColliderOff();
     }
 
-
+    public void EventOn()
+    {
+        WordSystem.SetActive(false);
+        TextSystem.SetActive(true);
+    }
+    public void EventOff()
+    {
+        WordSystem.SetActive(true);
+        TextSystem.SetActive(false);
+    }
 }
