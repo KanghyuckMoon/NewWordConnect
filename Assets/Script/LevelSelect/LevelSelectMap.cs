@@ -42,5 +42,9 @@ public class LevelSelectMap : MonoBehaviour
 		{
 			Character.TrySetDirection(Direction.Right);
 		}
+		else if (Input.GetKeyDown(KeyCode.Space))
+        {
+			Character.StageStart();
+        }
 	}
 }

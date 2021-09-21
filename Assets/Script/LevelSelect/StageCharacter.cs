@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StageCharacter : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class StageCharacter : MonoBehaviour
 
     public StagePin CurrentPin { get; private set; }
     private StagePin targetPin;
+    private string inStageName;
     private LevelSelectMap mapManager;
 
     public void Initialise(LevelSelectMap mapManager, StagePin startPin)
@@ -66,7 +68,13 @@ public class StageCharacter : MonoBehaviour
     {
         CurrentPin = pin;
         targetPin = null;
+        inStageName = pin.StageName;
         transform.position = pin.transform.position;
         isMoving = false;
+    }
+
+    public void StageStart()
+    {
+        SceneManager.LoadScene(inStageName);
     }
 }

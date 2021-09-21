@@ -31,6 +31,8 @@ public class StagePin : MonoBehaviour
 	[SerializeField]
 	private StagePin RightPin = null;
 
+	public string StageName = null;
+
 	private Dictionary<Direction, StagePin> _pinDirections;
 
 	private void Start()
