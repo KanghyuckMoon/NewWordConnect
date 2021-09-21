@@ -1189,7 +1189,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   w_Movetime: 0
-  superDownOn: 0
   times: 0
   isRewinding: 0
   isStartRecord: 0
@@ -1208,7 +1207,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   w_Movetime: 0
-  superDownOn: 0
   x: 0
   y: 0
   ax: 0
@@ -1347,7 +1345,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 89c89d31cbb023d4a87840ff06fe110e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5e2969b837af660468c38ae21830a3f6, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1510,7 +1508,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 89c89d31cbb023d4a87840ff06fe110e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5e2969b837af660468c38ae21830a3f6, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1805,7 +1803,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 49183101
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f9e65f7b168d51344ba5def18e1792d3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2512,7 +2510,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 49183101
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f9e65f7b168d51344ba5def18e1792d3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -3551,8 +3549,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 89c89d31cbb023d4a87840ff06fe110e, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 5e2969b837af660468c38ae21830a3f6, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4

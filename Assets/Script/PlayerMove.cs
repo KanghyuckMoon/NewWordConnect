@@ -18,6 +18,7 @@ public class PlayerMove : WordGameObject
     private SpriteRenderer spriteRenderer = null;
     private Animator animator = null;
     private bool isWalk = false;
+    private ParticleSystem dust;
 
 
     private void Awake()
@@ -42,6 +43,7 @@ public class PlayerMove : WordGameObject
         savePoint = transform.position;
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        dust = GetComponentInChildren<ParticleSystem>();
 
     }
 
@@ -95,6 +97,7 @@ public class PlayerMove : WordGameObject
         w_MoveOn = true;
         w_MoveOnEffect = false;
         w_tile = 0;
+        CreateDust();
     }
 
 
@@ -118,7 +121,8 @@ public class PlayerMove : WordGameObject
         w_vector1 = transform.position.x;
         w_BlockOn = true;
         superDownOn = false;
-        if(collision.gameObject.CompareTag("Enemy"))
+        CreateDust();
+        if (collision.gameObject.CompareTag("Enemy"))
         {
             if(collision.transform.position.y < transform.position.y && rigid.velocity.y < 0)
             {
@@ -181,16 +185,23 @@ public class PlayerMove : WordGameObject
     {
         if (velocityX == 1)
         {
-            spriteRenderer.flipX = true;
+            //spriteRenderer.flipX = true;
+            transform.localScale = new Vector2(-1, transform.localScale.y);
         }
         else if (velocityX == -1)
         {
-            spriteRenderer.flipX = false;
+            //spriteRenderer.flipX = false;
+            transform.localScale = new Vector2(1, transform.localScale.y);
         }
         else
         {
             isWalk = false;
         }
         animator.SetBool("IsWalk", isWalk);
+    }
+
+    private void CreateDust()
+    {
+        dust.Play();
     }
 }

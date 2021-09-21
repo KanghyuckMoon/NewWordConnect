@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1263768035200962691}
   - component: {fileID: 1263768035200962692}
   - component: {fileID: 1263768035200962693}
+  - component: {fileID: 325306987}
   m_Layer: 9
   m_Name: SpikeMove
   m_TagString: Spike
@@ -27,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1263768035200962695}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.904, y: 1.986, z: -0.6599683}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -144,3 +145,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   realSpeed: 1
   animationName: AnimSpeed
+--- !u!114 &325306987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263768035200962695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 000000007b170a557d79ee02
+  m_ShapePath:
+  - {x: -0.5, y: 0, z: 0}
+  - {x: 0.5, y: 0, z: 0}
+  - {x: 0.04227543, y: 0.50066423, z: 0}
+  m_ShapePathHash: 1973252247
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -106764
