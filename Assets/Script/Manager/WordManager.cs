@@ -127,6 +127,10 @@ public class WordManager : MonoBehaviour
 
     //실행어용 변수
 
+    //이벤트 변수
+    private bool isEvent = false;
+
+
     private void Awake()
     {
         //주어 찾기
@@ -1233,5 +1237,6 @@ public class WordManager : MonoBehaviour
     {
         wordSelect[i].ColliderOff();
     }
+
 
 }
