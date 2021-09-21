@@ -8,6 +8,8 @@ public class WordGameObject : MonoBehaviour
     protected string Save_Path = "";
     protected string Save_FileName = "/MoveFile.txt";
 
+
+
     //물리 변수
     protected float speed = 24.5f;
     protected float maxSpeed = 27.5f;
@@ -79,21 +81,27 @@ public class WordGameObject : MonoBehaviour
     //떨어진다
     protected bool superDownOn = false;
 
-    protected WordGameObject player;
+    protected PlayerMove player;
     //private void Awake()
     //{
     //    //StartSetJsonSetting();
     //}
 
-    public void SetPlayer(WordGameObject player)
+    //구역 설정
+    [Header ("구역 설정")]
+    public int setArea = -1;
+
+    public void SetPlayer(PlayerMove player)
     {
         this.player = player;
+    }
+    public void SetPlayer()
+    {
+        player = FindObjectOfType<PlayerMove>();
     }
 
     private void StartSetJsonSetting()
     {
-        Save_Path = Application.persistentDataPath + "/Save";
-        //�ȵ���̵� ��忡����  Application.dataPath ��ſ� Application.persistentDataPath
         if (!Directory.Exists(Save_Path))
         {
             Directory.CreateDirectory(Save_Path);
@@ -108,28 +116,15 @@ public class WordGameObject : MonoBehaviour
             rigid = GetComponent<Rigidbody2D>();
         }
         w_collider = GetComponent<Collider2D>();
-        //LoadToJson();
-        //Setting();
     }
 
     protected virtual void Start()
     {
         realspeed = speed;
         StartCoroutine(OnMoveDetect());
+        SetPlayer();
     }
 
-    //public virtual void Setting()
-    //{
-    //    if (w_pause) return;
-    //    speed = user.speed;
-    //    maxSpeed = user.maxspeed;
-    //    friction = user.friction;
-    //    airfriction = user.aitfriction;
-    //    downGravityOn = user.downGravityOn;
-    //    gravityScale = user.gravityScale;
-    //    jump = user.jump;
-    //    rigid.gravityScale = gravityScale;
-    //}
     public virtual void Settingvalue()
     {
      speed = 24.5f;
@@ -142,14 +137,6 @@ public class WordGameObject : MonoBehaviour
      rigid.gravityScale = gravityScale;
     }
 
-    //public virtual void LoadToJson()
-    //{
-    //    if (File.Exists(Save_Path + Save_FileName))
-    //    {
-    //        string json = File.ReadAllText(Save_Path + Save_FileName);
-    //        user = JsonUtility.FromJson<PlayerSetting>(json);
-    //    }
-    //}
     protected virtual void JumpDrag()
     {
         if (jumpOn)
@@ -192,10 +179,13 @@ public class WordGameObject : MonoBehaviour
 
     public virtual void Jump()
     {
-        rigid.AddForce(Vector2.up * jump, ForceMode2D.Impulse);
-        w_MoveOn = true;
-        w_MoveOnEffect = false;
-        w_tile = 0;
+        if(setArea == -1 || setArea == player.nowArea)
+        {
+            rigid.AddForce(Vector2.up * jump, ForceMode2D.Impulse);
+            w_MoveOn = true;
+            w_MoveOnEffect = false;
+            w_tile = 0;
+        }
     }
     public virtual void Down()
     {

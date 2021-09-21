@@ -105,7 +105,7 @@ public class WordManager : MonoBehaviour
     private int numberPressed = 0;
 
     //주어용 변수
-    private WordGameObject s_player;
+    private PlayerMove s_player;
     private EnemyManager s_enemys;
     private StageManager s_stage;
     private Camera s_mainCamera;

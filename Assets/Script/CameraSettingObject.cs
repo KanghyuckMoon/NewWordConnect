@@ -20,6 +20,8 @@ public class CameraSettingObject : MonoBehaviour
     [SerializeField]
     private Transform savePoint = null;
     private Transform playerTransform = null;
+    [SerializeField]
+    private int setAreanum = 0;
 
     private Camera mainCamera = null;
 
@@ -29,27 +31,28 @@ public class CameraSettingObject : MonoBehaviour
         playerTransform = FindObjectOfType<PlayerMove>().transform;
     }
 
-    public void SetCameraMoveSetting()
+    public int SetCameraMoveSetting()
     {
         playerTransform.GetComponent<PlayerMove>().SetSavePoint(savePoint.position);
         if(horizontalOn)
         {
             mainCamera.GetComponent<CinemachineVirtualCamera>().Follow = horizontalObj;
-            return;
+            return setAreanum;
         }
         if(verticalOn)
         {
             mainCamera.GetComponent<CinemachineVirtualCamera>().Follow = verticalObj;
-            return;
+            return setAreanum;
         }
         if(cameraLock)
         {
             mainCamera.GetComponent<CinemachineVirtualCamera>().Follow = lockTransform;
-            return;
+            return setAreanum;
         }
         else
         {
             mainCamera.GetComponent<CinemachineVirtualCamera>().Follow = playerTransform;
+            return setAreanum;
         }
     }
 }

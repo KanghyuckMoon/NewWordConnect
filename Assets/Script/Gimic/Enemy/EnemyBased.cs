@@ -43,8 +43,11 @@ public class EnemyBased : WordGameObject
 
     private void FixedUpdate()
     {
+        if (setArea == -1 || setArea == player.nowArea)
+        { 
         JumpDrag();
         EnemyMove();
+        }
     }
 
     protected virtual void EnemyMove()

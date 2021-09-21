@@ -5,14 +5,12 @@ using UnityEngine;
 
 public class PlayerMove : WordGameObject
 {
-    //���� ���� ����
-
     private float velocityX = 0;
-    private bool downGravity = false; //�������� �ӵ��� ������ ����
+    private bool downGravity = false; 
     private Vector2 savePoint;
 
     private BoxCollider2D collider2d;
-
+    public int nowArea = 0;
 
     //애니메이션
     private SpriteRenderer spriteRenderer = null;
@@ -20,22 +18,9 @@ public class PlayerMove : WordGameObject
     private bool isWalk = false;
     private ParticleSystem dust;
 
-
-    private void Awake()
-    {
-        //Save_Path = Application.persistentDataPath + "/Save";
-        ////�ȵ���̵� ��忡����  Application.dataPath ��ſ� Application.persistentDataPath
-        //if (!Directory.Exists(Save_Path))
-        //{
-        //    Directory.CreateDirectory(Save_Path);
-        //}
-        //w_collider = GetComponent<Collider2D>();
-    }
-
     protected override void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
-        //LoadToJson();
         StartCoroutine(OnMoveDetect());
         realspeed = speed;
         rigid.gravityScale = gravityScale;
@@ -60,6 +45,7 @@ public class PlayerMove : WordGameObject
     private void FixedUpdate()
     {
         Move();
+        DownDust();
     }
     
 
@@ -152,7 +138,7 @@ public class PlayerMove : WordGameObject
         }
         if (collision.CompareTag("CameraLock"))
         {
-            collision.GetComponent<CameraSettingObject>().SetCameraMoveSetting();
+            nowArea = collision.GetComponent<CameraSettingObject>().SetCameraMoveSetting();
         }
         if (collision.CompareTag("Spike"))
         {
@@ -185,12 +171,10 @@ public class PlayerMove : WordGameObject
     {
         if (velocityX == 1)
         {
-            //spriteRenderer.flipX = true;
             transform.localScale = new Vector2(-1, transform.localScale.y);
         }
         else if (velocityX == -1)
         {
-            //spriteRenderer.flipX = false;
             transform.localScale = new Vector2(1, transform.localScale.y);
         }
         else
@@ -203,5 +187,13 @@ public class PlayerMove : WordGameObject
     private void CreateDust()
     {
         dust.Play();
+    }
+
+    private void DownDust()
+    {
+        if(rigid.velocity.y < -1.2f)
+        {
+            dust.Play();
+        }
     }
 }
