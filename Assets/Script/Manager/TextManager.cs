@@ -84,6 +84,6 @@ public class TextManager : MonoBehaviour
         Debug.Log(index + " , " + textlist[textIndex].data[count].Length);
         chatText.text += textlist[textIndex].data[count][index];
         index++;
-        Invoke("ChatLoading", 0.2f);
+        Invoke("ChatLoading", 0.1f);
     }
 }
