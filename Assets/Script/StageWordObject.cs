@@ -8,6 +8,8 @@ public class StageWordObject : WordGameObject
     [SerializeField]
     private List<GimicBase> gimiclist = new List<GimicBase>();
     private List<Rigidbody2D> gimicHasLigid = new List<Rigidbody2D>();
+    [SerializeField]
+    private GameObject gravityobj;
 
     protected override void Start()
     {
@@ -54,21 +56,25 @@ public class StageWordObject : WordGameObject
         {
             sizeIndex = 1;
             stageManager.transform.localScale = new Vector2(1.2f, 1.2f);
+            gravityobj.transform.localScale = new Vector2(1.2f, 1.2f);
         }
         else if (sizeIndex == 1)
         {
             sizeIndex = 2;
             stageManager.transform.localScale = new Vector2(1.4f, 1.4f);
+            gravityobj.transform.localScale = new Vector2(1.4f, 1.4f);
         }
         else if (sizeIndex == -1)
         {
             sizeIndex = 0;
             stageManager.transform.localScale = new Vector2(1, 1);
+            gravityobj.transform.localScale = new Vector2(1f, 1f);
         }
         else if (sizeIndex == -2)
         {
             sizeIndex = -1;
             stageManager.transform.localScale = new Vector2(0.8f, 0.8f);
+            gravityobj.transform.localScale = new Vector2(0.8f, 0.8f);
         }
 
     }
@@ -79,26 +85,31 @@ public class StageWordObject : WordGameObject
         {
             sizeIndex = 1;
             stageManager.transform.localScale = new Vector2(1.2f, 1.2f);
+            gravityobj.transform.localScale = new Vector2(1.2f, 1.2f);
         }
         else if (sizeIndex == 1)
         {
             sizeIndex = 0;
             stageManager.transform.localScale = new Vector2(1, 1);
+            gravityobj.transform.localScale = new Vector2(1f, 1f);
         }
         else if (sizeIndex == 0)
         {
             sizeIndex = -1;
             stageManager.transform.localScale = new Vector2(0.8f, 0.8f);
+            gravityobj.transform.localScale = new Vector2(0.8f, 0.8f);
         }
         else if (sizeIndex == 1)
         {
             sizeIndex = 0;
             stageManager.transform.localScale = new Vector2(1, 1);
+            gravityobj.transform.localScale = new Vector2(1f, 1f);
         }
         else if (sizeIndex == -1)
         {
             sizeIndex = -2;
             stageManager.transform.localScale = new Vector2(0.6f, 0.6f);
+            gravityobj.transform.localScale = new Vector2(0.6f, 0.6f);
         }
     }
 
