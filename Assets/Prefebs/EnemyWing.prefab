@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3350655660929798529}
   - component: {fileID: 3350655660929798531}
   - component: {fileID: 3350655660929798528}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyWing
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -145,6 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   w_Movetime: 0
+  setArea: 0
   enemymoveSpeed: 1
   downDetectionOn: 0
   downDistanceOn: 0

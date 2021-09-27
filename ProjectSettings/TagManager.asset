@@ -23,8 +23,8 @@ TagManager:
   - StgaePhysicsOnlyDefault
   - Wind
   - StgaePhysicsOnlyDefault2
-  - 
-  - 
+  - Enemy
+  - StageWorld
   - 
   - 
   - 

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6844554132479176193}
   - component: {fileID: 6844554132479176192}
   - component: {fileID: 6844554132479176207}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyPin
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -145,6 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   w_Movetime: 0
+  setArea: 0
   enemymoveSpeed: 1
   downDetectionOn: 0
   downDistanceOn: 0

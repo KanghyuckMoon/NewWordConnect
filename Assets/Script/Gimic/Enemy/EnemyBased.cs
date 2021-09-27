@@ -26,13 +26,16 @@ public class EnemyBased : WordGameObject
     [SerializeField]
     protected float fowardDetectionValue = 0.2f;
 
+    protected Vector2 resetPosition;
+    protected bool setAreaReset = false;
+
     protected override void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
         w_collider = GetComponent<Collider2D>();
         base.Start();
         Settingvalue();
-
+        resetPosition = transform.position;
     }
 
     public override void Settingvalue()
@@ -45,9 +48,24 @@ public class EnemyBased : WordGameObject
     {
         if (setArea == -1 || setArea == player.nowArea)
         { 
+            if(!setAreaReset)
+            {
+                ResetEnemyPosition();
+                setAreaReset = true;
+            }
         JumpDrag();
         EnemyMove();
         }
+        else
+        {
+            setAreaReset = false;
+        }
+    }
+
+    protected void ResetEnemyPosition()
+    {
+        rigid.velocity = Vector2.zero;
+        transform.position = resetPosition;
     }
 
     protected virtual void EnemyMove()
