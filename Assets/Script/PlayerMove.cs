@@ -19,6 +19,8 @@ public class PlayerMove : WordGameObject
     private Animator animator = null;
     private bool isWalk = false;
     private ParticleSystem dust;
+    [SerializeField]
+    private DieEffect dieEffect;
 
     protected override void Start()
     {
@@ -178,8 +180,17 @@ public class PlayerMove : WordGameObject
 
     public void Died()
     {
-        transform.position = savePoint;
+        dieEffect.transform.position = transform.position;
+        dieEffect.gameObject.SetActive(true);
+        Invoke("DiedtoReset", 1f);
+        gameObject.SetActive(false);
     }
+    private void DiedtoReset()
+    {
+        transform.position = savePoint;
+        gameObject.SetActive(true);
+    }
+
     public void SetSavePoint(Vector2 transform)
     {
         savePoint = transform;
