@@ -616,6 +616,12 @@ public class WordManager : MonoBehaviour
         subjectText.text = null;
         conditionText.text = null;
         executionText.text = null;
+        subjectText.color = new Color(0, 0, 0, 1);
+        conditionText.color = new Color(0, 0, 0, 1);
+        executionText.color = new Color(0, 0, 0, 1);
+        barSubject.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+        barCondition.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+        barExecution.GetComponent<Image>().color = new Color(1, 1, 1, 1);
         wordSelect.Clear();
         OnOffScroll();
     }
@@ -1250,6 +1256,7 @@ public class WordManager : MonoBehaviour
 
     public void EventOn()
     {
+        CleanSelect();
         isEvent = true;
         WordSystem.SetActive(false);
         TextSystem.SetActive(true);
