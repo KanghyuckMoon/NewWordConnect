@@ -51,6 +51,7 @@ public class PlayerMove : WordGameObject
     private void FixedUpdate()
     {
         if (wordManager.isEvent) return;
+        if (wordManager.isInputESC) return;
         Move();
         DownDust();
     }
@@ -67,7 +68,6 @@ public class PlayerMove : WordGameObject
     private void InputMove()
     {
         velocityX = Input.GetAxisRaw("Horizontal");
-        SetAnimation();
     }
 
     private void Move()
@@ -82,6 +82,7 @@ public class PlayerMove : WordGameObject
         {
             rigid.velocity = new Vector2(Mathf.Clamp(rigid.velocity.x, -maxSpeed, maxSpeed), rigid.velocity.y);
         }
+        SetAnimation();
     }
     public override void Jump()
     {

@@ -44,8 +44,6 @@ public class WordManager : MonoBehaviour
 
     [SerializeField]
     private List<WordGameObject> wordSelect = new List<WordGameObject>(); // 선택되는 오브젝트
-    [SerializeField]
-    private int selectCount = 0;
 
     //UI
     [SerializeField]
@@ -103,10 +101,14 @@ public class WordManager : MonoBehaviour
     private GameObject conditionScrollsPanel = null;
     private GameObject executionScrollsPanel = null;
     private int numberPressed = 0;
+
+    //시스템들
     [SerializeField]
     private GameObject WordSystem = null;
     [SerializeField]
     private GameObject TextSystem = null;
+    [SerializeField]
+    private GameObject escSystem;
 
     //주어용 변수
     private PlayerMove s_player;
@@ -133,7 +135,8 @@ public class WordManager : MonoBehaviour
 
     //이벤트 변수
     public bool isEvent = false;
-
+    public bool isGameStart = false;
+    public bool isInputESC = false;
 
     private void Awake()
     {
@@ -158,15 +161,15 @@ public class WordManager : MonoBehaviour
 
     private void FindSubjects()
     {
-        s_player = FindObjectOfType<PlayerMove>(); //안됨
-        s_enemys = FindObjectOfType<EnemyManager>(); // 안됨
-        s_stage = FindObjectOfType<StageManager>(); // 안됨
-        s_mainCamera = FindObjectOfType<Camera>(); // 안됨
-        s_temperentManager = FindObjectOfType<TemperentManager>(); // 안ㄴ됨
-        s_weatherManager = FindObjectOfType<WeatherManager>(); // 안됨ㄴ
+        s_player = FindObjectOfType<PlayerMove>();
+        s_enemys = FindObjectOfType<EnemyManager>(); 
+        s_stage = FindObjectOfType<StageManager>(); 
+        s_mainCamera = FindObjectOfType<Camera>(); 
+        s_temperentManager = FindObjectOfType<TemperentManager>(); 
+        s_weatherManager = FindObjectOfType<WeatherManager>(); 
 
-        s_timeManager = GetComponent<TimeManager>(); // 됨
-        s_displayManager = GetComponent<DisplayManager>(); // 됨
+        s_timeManager = GetComponent<TimeManager>(); 
+        s_displayManager = GetComponent<DisplayManager>(); 
         canvas.worldCamera = s_mainCamera;
 
         s_temperentManager.SetPlayer(s_player);
@@ -178,10 +181,19 @@ public class WordManager : MonoBehaviour
     private void Update()
     {
         if (isEvent) return;
+        if (!isGameStart) return;
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            isInputESC = !isInputESC;
+            escSystem.SetActive(isInputESC);
+            Time.timeScale = isInputESC ? 0 : 1;
+        }
+        if (isInputESC) return;
         InputWordKey();
         Cooldown();
         Temperature();
         TimeRewind();
+
         if (wordSetOn)
         {
             ConditionWordObject();
@@ -898,13 +910,6 @@ public class WordManager : MonoBehaviour
                 }
                 break;
             case 3: // 스테이지가 개발완료
-                //for (int i = 0; i < s_stage.transform.childCount; i++)
-                //{
-                //    if(s_stage.transform.GetChild(i).GetComponent<WordGameObject>() != null)
-                //    {
-                //        wordSelect.Add(s_stage.transform.GetChild(i).GetComponent<WordGameObject>());
-                //    }
-                //}
                 wordSelect.Add(s_stage.GetComponent<WordGameObject>());
                 break;
             case 4: // 카메라가 개발완료

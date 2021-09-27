@@ -1310,3 +1310,54 @@ AssetImportParameters requested are different than current active one (requested
   custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 14063.143672 seconds.
+  path: Assets/ShadeCaster/Scenes
+  artifactKey: Guid(d53b12c32a1a7d94ba12ade8dd2cbc6f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ShadeCaster/Scenes using Guid(d53b12c32a1a7d94ba12ade8dd2cbc6f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9e9f7707bc2f62f526a383da85e0c0e7') in 0.091175 seconds 
+  Import took 0.214038 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.718062 seconds.
+  path: Assets/ShadeCaster/Scenes/SampleScene.unity
+  artifactKey: Guid(2cda990e2423bbf4892e6590ba056729) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ShadeCaster/Scenes/SampleScene.unity using Guid(2cda990e2423bbf4892e6590ba056729) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c6092deb71e300cfb091bf06e6e4fb52') in 0.057180 seconds 
+  Import took 0.063344 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 27.314531 seconds.
+  path: Assets/ShadeCaster/New Folder/Rule Tile.asset
+  artifactKey: Guid(44d1cc5d34dd46a4eb30400d9266d8f8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ShadeCaster/New Folder/Rule Tile.asset using Guid(44d1cc5d34dd46a4eb30400d9266d8f8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '54ebd8b8e034582911cb89bb2b16397b') in 0.133587 seconds 
+  Import took 0.140456 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000304 seconds.
+  path: Assets/ShadeCaster/New Folder/tileset-1.png
+  artifactKey: Guid(85a6fb15574eb1946be04d46af84e30c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ShadeCaster/New Folder/tileset-1.png using Guid(85a6fb15574eb1946be04d46af84e30c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6d65c0293dafc078aa702ab32ca4977b') in 0.130042 seconds 
+  Import took 0.135479 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000249 seconds.
+  path: Assets/ShadeCaster/New Folder/Tile Palette-1.prefab
+  artifactKey: Guid(fc9ac86cd51ebc7478422e862d3a2736) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ShadeCaster/New Folder/Tile Palette-1.prefab using Guid(fc9ac86cd51ebc7478422e862d3a2736) Importer(815301076,1909f56bfc062723c751e8b465ee728b) StackOverflowException: The requested operation caused a stack overflow.
+  at (wrapper managed-to-native) UnityEditor.EditorUtility.Internal_InstantiateRemoveAllNonAnimationComponentsSingle_Injected(UnityEngine.Object,UnityEngine.Vector3&,UnityEngine.Quaternion&)
+  at UnityEditor.EditorUtility.Internal_InstantiateRemoveAllNonAnimationComponentsSingle (UnityEngine.Object data, UnityEngine.Vector3 pos, UnityEngine.Quaternion rot) [0x00000] in <ef3b6bf002d8435a97b4e938f6c49b02>:0 
+  at UnityEditor.EditorUtility.InstantiateRemoveAllNonAnimationComponents (UnityEngine.Object original, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation) [0x00017] in <ef3b6bf002d8435a97b4e938f6c49b02>:0 
+  at UnityEditor.EditorUtility.InstantiateForAnimatorPreview (UnityEngine.Object original) [0x00022] in <ef3b6bf002d8435a97b4e938f6c49b02>:0 
+  at UnityEditor.GameObjectInspector+PreviewData.UpdateGameObject (UnityEngine.Object targetObject) [0x0000d] in <ef3b6bf002d8435a97b4e938f6c49b02>:0 
+  at UnityEditor.GameObjectInspector+PreviewData..ctor (UnityEngine.Object targetObject) [0x00029] in <ef3b6bf002d8435a97b4e938f6c49b02>:0 
+  at UnityEditor.GameObjectInspector.GetPreviewData () [0x00022] in <ef3b6bf002d8435a97b4e938f6c49b02>:0 
+  at UnityEditor.GameObjectInspector.RenderStaticPreview (System.String assetPath, UnityEngine.Object[] subAssets, System.Int32 width, System.Int32 height) [0x0001d] in <ef3b6bf002d8435a97b4e938f6c49b02>:0 
+  at UnityEditor.AssetPreviewUpdater.CreatePreviewForAsset (UnityEngine.Object obj, UnityEngine.Object[] subAssets, System.String assetPath) [0x0008a] in <ef3b6bf002d8435a97b4e938f6c49b02>:0 
+
+ -> (artifact id: 'ac510dd4f73b950ee424ffda73ec2dc3') in 0.054291 seconds 
+  Import took 0.060768 seconds .
+
