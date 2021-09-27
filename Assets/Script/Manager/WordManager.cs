@@ -1260,6 +1260,7 @@ public class WordManager : MonoBehaviour
         isEvent = true;
         WordSystem.SetActive(false);
         TextSystem.SetActive(true);
+        TextSystem.GetComponent<Animator>().Play("TextOn");
     }
     public void EventOff()
     {

@@ -32,6 +32,8 @@ public class TextManager : MonoBehaviour
     private Text chatText = null;
     [SerializeField]
     private Image characterImage = null;
+    [SerializeField]
+    private GameObject endcousur;
 
     [SerializeField]
     private Sprite[] characterSprite;
@@ -41,9 +43,13 @@ public class TextManager : MonoBehaviour
     private int count = 0;
     private int textIndex = -1;
     private int index = 3;
+    private float delay = 0.05f;
+    private bool chatend;
 
     public void Chatting()
     {
+        endcousur.SetActive(false);
+        chatend = false;
         if (textlist[textIndex].data.Length <= count)
         {
             count = 0;
@@ -63,7 +69,9 @@ public class TextManager : MonoBehaviour
     {
         textIndex = textindex;
         wordManager.EventOn();
-        Chatting();
+        Invoke("Chatting", 1);
+        chatText.text = null;
+        //Chatting();
     }
 
     private void CharacterImageSet()
@@ -78,12 +86,23 @@ public class TextManager : MonoBehaviour
         if(index >= textlist[textIndex].data[count].Length)
         {
             count++;
-            Invoke("Chatting", 1);
+            endcousur.SetActive(true);
+            chatend = true;
             return;
         }
-        Debug.Log(index + " , " + textlist[textIndex].data[count].Length);
         chatText.text += textlist[textIndex].data[count][index];
         index++;
-        Invoke("ChatLoading", 0.1f);
+        Invoke("ChatLoading", delay);
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            if(chatend)
+            {
+            Chatting();
+            }
+        }
     }
 }
