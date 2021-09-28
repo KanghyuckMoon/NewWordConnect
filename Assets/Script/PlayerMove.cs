@@ -93,6 +93,7 @@ public class PlayerMove : WordGameObject
         w_MoveOnEffect = false;
         w_tile = 0;
         CreateDust();
+        PlaySound();
     }
 
 
@@ -123,6 +124,7 @@ public class PlayerMove : WordGameObject
             {
                 Jump();
                 collision.gameObject.GetComponent<EnemyBased>().Die();
+                PlaySound();
             }
             else
             {
@@ -177,6 +179,7 @@ public class PlayerMove : WordGameObject
             collision.GetComponent<GimicSpring>().SpringTread();
             rigid.velocity = new Vector2(rigid.velocity.x, 0);
             rigid.AddForce(Vector2.up * 30f, ForceMode2D.Impulse);
+            PlaySound();
         }
     }
 
@@ -262,7 +265,6 @@ public class PlayerMove : WordGameObject
 
     public override void SizeDown()
     {
-        Debug.Log("A");
         if (sizeIndex == 2)
         {
             sizeIndex = 1;

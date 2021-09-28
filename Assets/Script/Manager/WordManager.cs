@@ -1049,6 +1049,7 @@ public class WordManager : MonoBehaviour
                 Condition_InCamera();
                 break;
             case 8: // 소리를 낼 때 
+                Condition_OutSound();
                 break;
             case 9: // 여기서부터 특수
                 break;
@@ -1141,6 +1142,22 @@ public class WordManager : MonoBehaviour
             }
         }
     }
+
+    private void Condition_OutSound() // 8번 소리를 낼 때
+    {
+        for (int i = 0; i < wordSelect.Count; i++)
+        {
+            if (wordSelect[i].isSound)
+            {
+                if(wordSelect[i].isSoundEffect)
+                {
+                    wordSelect[i].isSoundEffect = false;
+                    ExecutionWordObject(i);
+                }
+            }
+        }
+    }
+
     //실행 함수
     private void ExecutionWordObject()
     {

@@ -48,6 +48,7 @@ public class StageWordObject : WordGameObject
             gimicHasLigid[i].velocity = new Vector2(gimicHasLigid[i].velocity.x, 0);
             gimicHasLigid[i].AddForce(Vector2.up * jump, ForceMode2D.Impulse);
         }
+        PlaySound();
     }
 
     public override void SizeUp()

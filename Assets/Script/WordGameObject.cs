@@ -91,6 +91,9 @@ public class WordGameObject : MonoBehaviour
     [Header ("구역 설정")]
     public int setArea = -1;
 
+    public bool isSound = false;
+    public bool isSoundEffect = true;
+
     public void SetPlayer(PlayerMove player)
     {
         this.player = player;
@@ -185,6 +188,7 @@ public class WordGameObject : MonoBehaviour
             w_MoveOn = true;
             w_MoveOnEffect = false;
             w_tile = 0;
+            PlaySound();
         }
     }
     public virtual void Down()
@@ -192,6 +196,7 @@ public class WordGameObject : MonoBehaviour
         rigid.AddForce(Vector2.down * (jump * 0.8f), ForceMode2D.Impulse);
         w_MoveOn = true;
         w_MoveOnEffect = false;
+        PlaySound();
     }
     public virtual void SuperDown()
     {
@@ -199,6 +204,7 @@ public class WordGameObject : MonoBehaviour
         w_MoveOn = true;
         w_MoveOnEffect = false;
         superDownOn = true;
+        PlaySound();
         Invoke("SuperDownFalse",0.5f);
     }
     public virtual void SuperDownFalse()
@@ -263,11 +269,13 @@ public class WordGameObject : MonoBehaviour
     public virtual void SpeedUp()
     {
         realspeed = speed * 2f;
+        PlaySound();
         Invoke("SpeedReset", 1f);
     }
     public virtual void SpeedDown()
     {
         realspeed = speed * 0.5f;
+        PlaySound();
         Invoke("SpeedReset", 1f);
     }
     public virtual void SpeedStop()
@@ -280,6 +288,7 @@ public class WordGameObject : MonoBehaviour
         pausevector = rigid.velocity;
         rigid.velocity = Vector2.zero;
         realspeed = 0;
+        PlaySound();
         Invoke("TimeReset", 1f);
     }
     public virtual void SpeedStopnotinvoke()
@@ -385,5 +394,17 @@ public class WordGameObject : MonoBehaviour
     public float ReturnRealSpeed()
     {
         return realspeed;
+    }
+
+    protected void PlaySound()
+    {
+        isSound = true;
+        Invoke("ResetSound", 1f);
+    }
+
+    protected void ResetSound()
+    {
+        isSound = false;
+        isSoundEffect = true;
     }
 }

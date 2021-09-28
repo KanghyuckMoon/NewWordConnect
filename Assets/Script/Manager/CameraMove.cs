@@ -85,12 +85,14 @@ public class CameraMove : WordGameObject
         w_MoveOn = true;
         w_MoveOnEffect = false;
         w_tile = 0;
+        PlaySound();
     }
     public override void Down()
     {
         w_MoveOn = true;
         w_MoveOnEffect = false;
         downmoveOn = true;
+        PlaySound();
     }
     private void LateUpdate()
     {
@@ -214,17 +216,20 @@ public class CameraMove : WordGameObject
     {
         virtualCameraTrans.m_XDamping = 0;
         virtualCameraTrans.m_YDamping = 0;
+        PlaySound();
         Invoke("SpeedReset", 1);
     }
     public override void SpeedDown()
     {
         virtualCameraTrans.m_XDamping = 2;
         virtualCameraTrans.m_YDamping = 2;
+        PlaySound();
         Invoke("SpeedReset", 1);
     }
     public override void SpeedStop()
     {
         virtualCamera.Follow = null;
+        PlaySound();
         Invoke("SpeedReset", 1);
     }
     public override void SpeedReset()
