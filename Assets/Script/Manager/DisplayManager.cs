@@ -13,6 +13,7 @@ public class DisplayManager : WordGameObject
     public int ay;
     private int[] sizevector = new int[2];
     public Vector2 scaleVector = new Vector2(1, 1);
+    private Vector2 notMoveVector = Vector2.zero;
 
     public void Set1()
     {
@@ -44,6 +45,31 @@ public class DisplayManager : WordGameObject
     protected override void Start()
     {
 
+    }
+
+    protected override IEnumerator OnMoveDetect()
+    {
+        while (true)
+        {
+            if (w_Movetime < 0.02f)
+            {
+                w_Movetime += Time.deltaTime;
+
+            }
+            else
+            {
+                w_MoveOn = false;
+                w_MoveOnEffect = true;
+            }
+            if (new Vector2(x + ax, y + ay) != notMoveVector)
+            {
+                notMoveVector = new Vector2(x + ax, y + ay);
+                w_MoveOn = true;
+                w_Movetime = 0f;
+            }
+
+            yield return waitForSeconds;
+        }
     }
 
     private void Update()
