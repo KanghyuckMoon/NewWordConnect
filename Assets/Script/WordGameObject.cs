@@ -59,8 +59,8 @@ public class WordGameObject : MonoBehaviour
     public bool W_BlockOn { get { return w_BlockOn; } }
 
     [SerializeField]
-    private float w_Movetime = 0f;
-    private WaitForSeconds waitForSeconds = new WaitForSeconds(0.1f);
+    protected float w_Movetime = 0f;
+    protected WaitForSeconds waitForSeconds = new WaitForSeconds(0.1f);
 
     //공용
     protected Rigidbody2D rigid = null;
@@ -150,7 +150,7 @@ public class WordGameObject : MonoBehaviour
     }
 
 
-    protected IEnumerator OnMoveDetect()
+    protected virtual IEnumerator OnMoveDetect()
     {
         while(true)
         {
@@ -328,7 +328,7 @@ public class WordGameObject : MonoBehaviour
         w_visibleEffect = false;
     }
 
-    public float ReturnVelocityY()
+    public virtual float ReturnVelocityY()
     {
         return rigid.velocity.y;
     }

@@ -9,9 +9,11 @@ public class CameraMove : WordGameObject
     private CinemachineFramingTransposer virtualCameraTrans;
     private Vector2 position1;
     private WaitForSeconds WaitForSeconds = new WaitForSeconds(0.05f); 
-    public bool jumpmoveOn = false;
+    public bool downmoveOn = false;
     private LookCamera lookCamera = null;
     private Vector3 lockPosition = new Vector3(1,10,0);
+    private Vector3 NotMovePosition;
+    private bool downon;
 
     protected override void Start()
     {
@@ -19,16 +21,8 @@ public class CameraMove : WordGameObject
         virtualCamera = GetComponent<CinemachineVirtualCamera>();
         virtualCameraTrans = virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
         lookCamera = GetComponent<LookCamera>();
-        //LoadToJson();
-        //Setting();
-
-        //state = virtualCamera.GetComponent<CinemachineFramingTransposer>().VirtualCamera.State;
-        //state = virtualCamera.GetComponent<CinemachineFramingTransposer>().VcamState;
-        //state = GetComponent<CinemachineExtension>().VirtualCamera.State;
-        //state = GetComponent<CinemachineBrain>().CurrentCameraState;
-        //state = virtualCamera.State;
-        //GetComponent<CinemachineVirtualCamera>().cor
         StartCoroutine(JumpCam());
+        StartCoroutine(OnMoveDetect());
     }
 
 
@@ -46,6 +40,41 @@ public class CameraMove : WordGameObject
     //    rigid.gravityScale = 0;
     //}
 
+    protected override IEnumerator OnMoveDetect()
+    {
+        while (true)
+        {
+            if (w_Movetime < 0.02f)
+            {
+                w_Movetime += Time.deltaTime;
+
+            }
+            else
+            {
+                w_MoveOn = false;
+                w_MoveOnEffect = true;
+                downon = false;
+            }
+            if (transform.position != NotMovePosition)
+            {
+                if(NotMovePosition.y - 1 > transform.position.y)
+                {
+                    downon = true;
+                }
+                else
+                {
+                    downon = false;
+                }
+                NotMovePosition = transform.position;
+                w_MoveOn = true;
+                w_Movetime = 0f;
+            }
+
+            yield return waitForSeconds;
+        }
+
+    }
+
 
     public override void Jump()
     {
@@ -55,8 +84,12 @@ public class CameraMove : WordGameObject
         w_MoveOn = true;
         w_MoveOnEffect = false;
         w_tile = 0;
-        jumpmoveOn = true;
-        //Invoke("ResetCam", 1f);
+    }
+    public override void Down()
+    {
+        w_MoveOn = true;
+        w_MoveOnEffect = false;
+        downmoveOn = true;
     }
     private void LateUpdate()
     {
@@ -71,7 +104,6 @@ public class CameraMove : WordGameObject
                 for(float i = 0; i < 11; i++)
                 {
                     virtualCameraTrans.m_TrackedObjectOffset.y = Mathf.Lerp(0, jump / (friction * 0.5f), i / 10);
-                    //state.RawPosition = new Vector3(lockPosition.x, lockPosition.y + virtualCameraTrans.m_TrackedObjectOffset.y, lockPosition.z);
                     yield return WaitForSeconds;
                 }
                 jumpOn = false;
@@ -79,21 +111,30 @@ public class CameraMove : WordGameObject
                 virtualCameraTrans.m_SoftZoneHeight = 2f;
                 virtualCameraTrans.m_BiasY = -0.36f;
             }
-            else if(!jumpOn && virtualCameraTrans.m_TrackedObjectOffset.y != 0)
+            if(downmoveOn)
+            {
+                for (float i = 0; i < 11; i++)
+                {
+                    virtualCameraTrans.m_TrackedObjectOffset.y = Mathf.Lerp(0, -(jump / (friction * 0.5f)), -(i / 10));
+                    yield return WaitForSeconds;
+                }
+                downmoveOn = false;
+                virtualCameraTrans.m_TrackedObjectOffset.y = -(jump / (friction * 0.5f));
+                virtualCameraTrans.m_SoftZoneHeight = 2f;
+                virtualCameraTrans.m_BiasY = 0.36f;
+            }
+            else if((!jumpOn && !downmoveOn) && virtualCameraTrans.m_TrackedObjectOffset.y != 0)
             {
                 for (float i = 0; i < 20; i++)
                 {
                     virtualCameraTrans.m_TrackedObjectOffset.y = Mathf.Lerp(virtualCameraTrans.m_TrackedObjectOffset.y, 0, i / 20);
-                    /*lookCamera.rea_lm_Position = lookCamera.m_ZPosition + virtualCameraTrans.m_TrackedObjectOffset.y*/;
-                    //state.RawPosition = lockPosition;
-                    virtualCameraTrans.m_BiasY = Mathf.Lerp(-0.36f, 0, i / 20);
-                    virtualCameraTrans.m_SoftZoneHeight = Mathf.Lerp(2, 0.5f, i / 20);
+                    virtualCameraTrans.m_BiasY = Mathf.Lerp(virtualCameraTrans.m_BiasY, 0, i / 20);
+                    virtualCameraTrans.m_SoftZoneHeight = Mathf.Lerp(virtualCameraTrans.m_SoftZoneHeight, 0.5f, i / 20);
                     yield return WaitForSeconds;
                 }
                 virtualCameraTrans.m_TrackedObjectOffset.y = 0;
                 virtualCameraTrans.m_SoftZoneHeight = 0.5f;
                 virtualCameraTrans.m_BiasY = 0;
-                jumpmoveOn = false;
             }
             yield return null;
         }
@@ -168,5 +209,25 @@ public class CameraMove : WordGameObject
         virtualCameraTrans.m_BiasY = 0;
     }
 
-
+    public override void SpeedUp()
+    {
+        virtualCameraTrans.m_XDamping = 0;
+        virtualCameraTrans.m_YDamping = 0;
+        Invoke("SpeedReset", 1);
+    }
+    public override void SpeedDown()
+    {
+        virtualCameraTrans.m_XDamping = 2;
+        virtualCameraTrans.m_YDamping = 2;
+        Invoke("SpeedReset", 1);
+    }
+    public override void SpeedReset()
+    {
+        virtualCameraTrans.m_XDamping = 0.5f;
+        virtualCameraTrans.m_YDamping = 0.5f;
+    }
+    public override float ReturnVelocityY()
+    {
+        return downon ? -4 : 0;
+    }
 }
