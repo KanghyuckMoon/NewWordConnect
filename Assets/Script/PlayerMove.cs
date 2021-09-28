@@ -19,6 +19,7 @@ public class PlayerMove : WordGameObject
     private Animator animator = null;
     private bool isWalk = false;
     private ParticleSystem dust;
+    private Vector2 scaleVetor = new Vector2(1, 1);
     [SerializeField]
     private DieEffect dieEffect;
 
@@ -201,17 +202,24 @@ public class PlayerMove : WordGameObject
     {
         if (velocityX == 1)
         {
-            transform.localScale = new Vector2(-1, transform.localScale.y);
+            transform.localScale = new Vector2(-1 * scaleVetor.x, scaleVetor.y);
         }
         else if (velocityX == -1)
         {
-            transform.localScale = new Vector2(1, transform.localScale.y);
+            transform.localScale = new Vector2(scaleVetor.x, scaleVetor.y);
         }
         else
         {
+            transform.localScale = new Vector2(ReturnPlusOrMinuse(transform.localScale.x) * scaleVetor.x, scaleVetor.y);
             isWalk = false;
         }
         animator.SetBool("IsWalk", isWalk);
+    }
+
+    private int ReturnPlusOrMinuse(float a)
+    {
+        if (a >= 0) return 1;
+        else return -1;
     }
 
     private void CreateDust()
@@ -225,5 +233,61 @@ public class PlayerMove : WordGameObject
         {
             dust.Play();
         }
+    }
+
+    public override void SizeUp()
+    {
+        if (sizeIndex == 0)
+        {
+            sizeIndex = 1;
+            scaleVetor = new Vector2(1.2f, 1.2f);
+        }
+        else if (sizeIndex == 1)
+        {
+            sizeIndex = 2;
+            scaleVetor = new Vector2(1.4f, 1.4f);
+        }
+        else if (sizeIndex == -1)
+        {
+            sizeIndex = 0;
+            scaleVetor = new Vector2(1, 1);
+        }
+        else if (sizeIndex == -2)
+        {
+            sizeIndex = -1;
+            scaleVetor = new Vector2(0.8f, 0.8f);
+        }
+        SetAnimation();
+    }
+
+    public override void SizeDown()
+    {
+        Debug.Log("A");
+        if (sizeIndex == 2)
+        {
+            sizeIndex = 1;
+            scaleVetor = new Vector2(1.2f, 1.2f);
+        }
+        else if (sizeIndex == 1)
+        {
+            sizeIndex = 0;
+            scaleVetor = new Vector2(1, 1);
+        }
+        else if (sizeIndex == 0)
+        {
+            sizeIndex = -1;
+            scaleVetor = new Vector2(0.8f, 0.8f);
+        }
+        else if (sizeIndex == 1)
+        {
+            sizeIndex = 0;
+            scaleVetor = new Vector2(1, 1);
+        }
+        else if (sizeIndex == -1)
+        {
+            sizeIndex = -2;
+            scaleVetor = new Vector2(0.6f, 0.6f);
+        }
+        SetAnimation();
     }
 }

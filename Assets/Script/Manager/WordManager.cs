@@ -1239,7 +1239,7 @@ public class WordManager : MonoBehaviour
     }
     private void Execution_SizeDown(int i)
     {
-        wordSelect[i].SizeUp();
+        wordSelect[i].SizeDown();
     }
 
     private void Execution_ColliderOff()

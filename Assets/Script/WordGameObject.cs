@@ -195,10 +195,15 @@ public class WordGameObject : MonoBehaviour
     }
     public virtual void SuperDown()
     {
-        //rigid.AddForce(Vector2.down * (jump * 0.8f), ForceMode2D.Impulse);
+        rigid.AddForce(Vector2.down * (jump * 0.01f), ForceMode2D.Impulse);
         w_MoveOn = true;
         w_MoveOnEffect = false;
         superDownOn = true;
+        Invoke("SuperDownFalse",0.5f);
+    }
+    public virtual void SuperDownFalse()
+    {
+        superDownOn = false;
     }
 
     public virtual void SizeUp()
