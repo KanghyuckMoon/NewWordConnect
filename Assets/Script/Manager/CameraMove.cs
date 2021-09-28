@@ -23,6 +23,7 @@ public class CameraMove : WordGameObject
         lookCamera = GetComponent<LookCamera>();
         StartCoroutine(JumpCam());
         StartCoroutine(OnMoveDetect());
+        SetPlayer();
     }
 
 
@@ -221,8 +222,14 @@ public class CameraMove : WordGameObject
         virtualCameraTrans.m_YDamping = 2;
         Invoke("SpeedReset", 1);
     }
+    public override void SpeedStop()
+    {
+        virtualCamera.Follow = null;
+        Invoke("SpeedReset", 1);
+    }
     public override void SpeedReset()
     {
+        virtualCamera.Follow = player.transform;
         virtualCameraTrans.m_XDamping = 0.5f;
         virtualCameraTrans.m_YDamping = 0.5f;
     }
