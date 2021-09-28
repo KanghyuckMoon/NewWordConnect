@@ -53,8 +53,8 @@ public class StageCharacter : MonoBehaviour
     public void TrySetDirection(Direction direction)
     {
         var pin = CurrentPin.GetPinInDirection(direction);
-
         if (pin == null) return;
+        if (pin.ReturnStat() == 0) return;
         MoveToPin(pin);
     }
 

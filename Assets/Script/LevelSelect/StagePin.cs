@@ -33,6 +33,13 @@ public class StagePin : MonoBehaviour
 
 	public string StageName = null;
 
+	[SerializeField]
+	private Sprite[] sprites;
+	[SerializeField]
+	private int stageindex = 0;
+	[SerializeField]
+	private int stagestat;
+
 	private Dictionary<Direction, StagePin> _pinDirections;
 
 	private void Start()
@@ -50,7 +57,13 @@ public class StagePin : MonoBehaviour
 		{
 			GetComponent<SpriteRenderer>().enabled = false;
 		}
+		GetComponent<SpriteRenderer>().sprite = sprites[stagestat];
 	}
+
+	public int ReturnStat()
+    {
+		return stagestat;
+    }
 
 	public StagePin GetPinInDirection(Direction direction)
 	{
