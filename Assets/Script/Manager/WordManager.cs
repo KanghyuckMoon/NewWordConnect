@@ -645,12 +645,16 @@ public class WordManager : MonoBehaviour
         barExecution.GetComponent<Image>().color = new Color(1, 1, 1, 1);
         barSubject.transform.GetChild(1).GetChild(0).GetComponent<ParticleSystem>().Play();
         barCondition.transform.GetChild(1).GetChild(0).GetComponent<ParticleSystem>().Play();
+        barSubject.transform.GetChild(1).GetComponent<Animator>().SetBool("ChainOn", false);
+        barCondition.transform.GetChild(1).GetComponent<Animator>().SetBool("ChainOn", false);
         wordSelect.Clear();
         Invoke("CleanBreakEnd", 0.5f);
         OnOffScroll();
     }
     private void CleanBreakEnd()
     {
+        barSubject.transform.GetChild(1).GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+        barCondition.transform.GetChild(1).GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
         BackAnimationSubject();
         BackAnimationCondition();
         BackAnimationExecution();
