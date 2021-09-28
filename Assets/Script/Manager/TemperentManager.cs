@@ -10,23 +10,36 @@ public class TemperentManager : WordGameObject
 
     public int tempdan = 0;
 
-    //public override void Setting()
-    //{
-    //    speed = user.speed;
-    //    maxSpeed = user.maxspeed;
-    //    friction = user.friction;
-    //    airfriction = user.aitfriction;
-    //    downGravityOn = user.downGravityOn;
-    //    gravityScale = 0;
-    //    jump = user.jump;
-
-    //    rigid.drag = friction;
-    //    rigid.gravityScale = 0;
-    //}
+    private float notMoveTemperature = 0;
 
     protected override void Start()
     {
+        StartCoroutine(OnMoveDetect());
+    }
 
+    protected override IEnumerator OnMoveDetect()
+    {
+        while (true)
+        {
+            if (w_Movetime < 0.02f)
+            {
+                w_Movetime += Time.deltaTime;
+
+            }
+            else
+            {
+                w_MoveOn = false;
+                w_MoveOnEffect = true;
+            }
+            if (notMoveTemperature != s_Temperature)
+            {
+                notMoveTemperature = s_Temperature;
+                w_MoveOn = true;
+                w_Movetime = 0f;
+            }
+
+            yield return waitForSeconds;
+        }
     }
 
     public override void Jump()

@@ -10,6 +10,7 @@ public class WeatherManager : WordGameObject
     [SerializeField]
     private List<int> s_Weather;
     private float s_WeatherPersent = 0;
+    private float notmoveWeatherPersent = 0;
     private int s_WeatherCode = 0;
 
     [Header("[날씨 오브젝트들]")]
@@ -20,7 +21,7 @@ public class WeatherManager : WordGameObject
     private float realautoWeatherPlus = 0;
 
 
-    private void Update()
+    private void FixedUpdate()
     {
         WeatherCheak();
     }
@@ -51,6 +52,7 @@ public class WeatherManager : WordGameObject
     {
         //base.Start();
         realautoWeatherPlus = autoWeatherPlus;
+        StartCoroutine(OnMoveDetect());
     }
 
     //public override void Setting()
@@ -59,6 +61,30 @@ public class WeatherManager : WordGameObject
     //    rigid.gravityScale = 0;
     //}
 
+    protected override IEnumerator OnMoveDetect()
+    {
+        while (true)
+        {
+            if (w_Movetime < 0.02f)
+            {
+                w_Movetime += Time.deltaTime;
+
+            }
+            else
+            {
+                w_MoveOn = false;
+                w_MoveOnEffect = true;
+            }
+            if (notmoveWeatherPersent != s_WeatherPersent)
+            {
+                notmoveWeatherPersent = s_WeatherPersent;
+                w_MoveOn = true;
+                w_Movetime = 0f;
+            }
+
+            yield return waitForSeconds;
+        }
+    }
 
 
     public override void SizeUp()
