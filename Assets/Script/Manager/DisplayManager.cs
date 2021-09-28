@@ -1,4 +1,4 @@
-using UnityEngine;
+ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using System.Collections;
@@ -11,6 +11,8 @@ public class DisplayManager : WordGameObject
     public int y;
     public int ax;
     public int ay;
+    private int[] sizevector = new int[2];
+    public Vector2 scaleVector = new Vector2(1, 1);
 
     public void Set1()
     {
@@ -34,6 +36,8 @@ public class DisplayManager : WordGameObject
     { 
         x = 1250 / 2;
         y = 520 / 2;
+        sizevector[0] = 640;
+        sizevector[1] = 480;
         SetPosition(x, y);
     }
 
@@ -44,7 +48,8 @@ public class DisplayManager : WordGameObject
 
     private void Update()
     {
-        SetPosition(x,y + ay); // 크기 조절
+        SetPosition(x + ax,y + ay); // 위치 조절
+        Screen.SetResolution(sizevector[0],sizevector[1],false);
     }
 
     public override void Jump()
@@ -57,6 +62,80 @@ public class DisplayManager : WordGameObject
     }
     public override void SizeUp()
     {
+        if (sizeIndex == 0)
+        {
+            sizeIndex = 1;
+            sizevector[0] = 720;
+            ax = -40;
+            ay += -30;
+            sizevector[1] = 540;
+            scaleVector = new Vector2(0.5f, 0.5f);
+        }
+        else if (sizeIndex == 1)
+        {
+            sizeIndex = 2;
+            sizevector[0] = 1280;
+            ax = -320;
+            ay += -210;
+            sizevector[1] = 960;
+            scaleVector = new Vector2(0.375f, 0.375f);
+        }
+        else if (sizeIndex == -1)
+        {
+            sizeIndex = 0;
+            sizevector[0] = 640;
+            ax = 0;
+            sizevector[1] = 480;
+            scaleVector = new Vector2(1, 1);
+        }
+        else if (sizeIndex == -2)
+        {
+            sizeIndex = -1;
+            sizevector[0] = 320;
+            ax = 160;
+            ay += -120;
+            sizevector[1] = 240;
+            scaleVector = new Vector2(1.125f, 1.125f);
+        }
+    }
 
+    public override void SizeDown()
+    {
+        if (sizeIndex == 2)
+        {
+            sizeIndex = 1;
+            sizevector[0] = 720;
+            ax = -40;
+            ay += 210;
+            sizevector[1] = 540;
+            scaleVector = new Vector2(0.5f, 0.5f);
+        }
+        else if (sizeIndex == 1)
+        {
+            sizeIndex = 0;
+            sizevector[0] = 640;
+            ax = 0;
+            ay += 30;
+            sizevector[1] = 480;
+            scaleVector = new Vector2(1, 1);
+        }
+        else if (sizeIndex == 0)
+        {
+            sizeIndex = -1;
+            sizevector[0] = 320;
+            ax = 160;
+            ay += 120;
+            sizevector[1] = 240;
+            scaleVector = new Vector2(1.125f, 1.125f);
+        }
+        else if (sizeIndex == -1)
+        {
+            sizeIndex = -2;
+            sizevector[0] = 240;
+            ax = 200;
+            ay += 30;
+            sizevector[1] = 180;
+            scaleVector = new Vector2(2, 2);
+        }
     }
 }
