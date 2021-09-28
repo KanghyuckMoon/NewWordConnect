@@ -137,6 +137,7 @@ public class WordManager : MonoBehaviour
     public bool isEvent = false;
     public bool isGameStart = false;
     public bool isInputESC = false;
+    private bool isBreak = false;
 
     private void Awake()
     {
@@ -182,6 +183,7 @@ public class WordManager : MonoBehaviour
     {
         if (isEvent) return;
         if (!isGameStart) return;
+        if (isBreak) return;
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             isInputESC = !isInputESC;
@@ -625,6 +627,80 @@ public class WordManager : MonoBehaviour
         wordSelect.Clear();
         OnOffScroll();
     }
+    private void CleanSelectChainBreak() // 틀린 조합
+    {
+        isBreak = true;
+        subjectWord = 0;
+        conditionWord = 0;
+        executionWord = 0;
+        nowWord = 0;
+        subjectText.text = null;
+        conditionText.text = null;
+        executionText.text = null;
+        subjectText.color = new Color(0, 0, 0, 1);
+        conditionText.color = new Color(0, 0, 0, 1);
+        executionText.color = new Color(0, 0, 0, 1);
+        barSubject.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+        barCondition.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+        barExecution.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+        barSubject.transform.GetChild(1).GetChild(0).GetComponent<ParticleSystem>().Play();
+        barCondition.transform.GetChild(1).GetChild(0).GetComponent<ParticleSystem>().Play();
+        wordSelect.Clear();
+        Invoke("CleanBreakEnd", 0.5f);
+        OnOffScroll();
+    }
+    private void CleanBreakEnd()
+    {
+        BackAnimationSubject();
+        BackAnimationCondition();
+        BackAnimationExecution();
+        panelBar.SetBool("PanelOn", true);
+        isBreak = false;
+    }
+
+    private void CheakWordCombination() // 틀린 조합 찾기
+    {
+        if (subjectWord == 1 && conditionWord == 7) CleanSelectChainBreak(); //용사가 카메라 안에 들 때
+
+        else if (subjectWord == 3 && conditionWord == 4) CleanSelectChainBreak(); //스테이지가 블록을 밟을 때
+
+        else if (subjectWord == 4 && conditionWord == 3) CleanSelectChainBreak(); //카메라가 충돌할 때
+        else if (subjectWord == 4 && conditionWord == 4) CleanSelectChainBreak(); //카메라가 블록을 밟을 때
+        else if (subjectWord == 4 && conditionWord == 7) CleanSelectChainBreak(); //카메라가 카메라 안에 들을 때
+        else if (subjectWord == 4 && conditionWord == 8) CleanSelectChainBreak(); //카메라가 소리를 낼 때
+        else if (subjectWord == 4 && executionWord == 8) CleanSelectChainBreak(); //카메라가 충돌하지 않는다
+
+        else if (subjectWord == 5 && conditionWord == 3) CleanSelectChainBreak(); //날씨가 충돌할 때
+        else if (subjectWord == 5 && conditionWord == 4) CleanSelectChainBreak(); //날씨가 블록을 밟을 때
+        else if (subjectWord == 5 && conditionWord == 7) CleanSelectChainBreak(); //날씨가 카메라 안에 들 때
+        else if (subjectWord == 5 && conditionWord == 8) CleanSelectChainBreak(); //날씨가 소리를 낼 때
+        else if (subjectWord == 5 && executionWord == 8) CleanSelectChainBreak(); //날씨가 충돌하지 않는다
+
+        else if (subjectWord == 6 && conditionWord == 3) CleanSelectChainBreak(); //온도가 충돌할 때
+        else if (subjectWord == 6 && conditionWord == 4) CleanSelectChainBreak(); //온도가 블록을 밟을 때
+        else if (subjectWord == 6 && conditionWord == 7) CleanSelectChainBreak(); //온도가 카메라 안에 들 때
+        else if (subjectWord == 6 && conditionWord == 8) CleanSelectChainBreak(); //온도가 소리를 낼 때
+        else if (subjectWord == 6 && executionWord == 8) CleanSelectChainBreak(); //온도가 충돌하지 않는다
+
+        else if (subjectWord == 7 && conditionWord == 2) CleanSelectChainBreak(); //시간이 가만히 있을 때
+        else if (subjectWord == 7 && conditionWord == 3) CleanSelectChainBreak(); //시간이 충돌할 때
+        else if (subjectWord == 7 && conditionWord == 4) CleanSelectChainBreak(); //시간이 블록을 밟을 때
+        else if (subjectWord == 7 && conditionWord == 6) CleanSelectChainBreak(); //시간이 떨어질 때
+        else if (subjectWord == 7 && conditionWord == 7) CleanSelectChainBreak(); //시간이 카메라 안에 들 때
+        else if (subjectWord == 7 && conditionWord == 8) CleanSelectChainBreak(); //시간이 소리를 낼 때
+        else if (subjectWord == 7 && executionWord == 8) CleanSelectChainBreak(); //시간이 충돌하지 않는다
+
+        else if (subjectWord == 8 && conditionWord == 3) CleanSelectChainBreak(); //게임창이 충돌할 때
+        else if (subjectWord == 8 && conditionWord == 4) CleanSelectChainBreak(); //게임창이 블록을 밟을 때
+        else if (subjectWord == 8 && conditionWord == 6) CleanSelectChainBreak(); //게임창이 떨어질 때
+        else if (subjectWord == 8 && conditionWord == 7) CleanSelectChainBreak(); //게임창이 카메라 안에 들 때
+        else if (subjectWord == 8 && conditionWord == 8) CleanSelectChainBreak(); //게임창이 소리를 낼 때
+        else if (subjectWord == 8 && executionWord == 2) CleanSelectChainBreak(); //게임창이 1초동안 빨라진다
+        else if (subjectWord == 8 && executionWord == 3) CleanSelectChainBreak(); //게임창이 1초동안 정지한다
+        else if (subjectWord == 8 && executionWord == 4) CleanSelectChainBreak(); //게임창이 1초동안 느려진다
+        else if (subjectWord == 8 && executionWord == 8) CleanSelectChainBreak(); //게임창이 충돌하지 않는다
+    }
+
 
     private void InputWordKey() // 키입력
     {
@@ -665,6 +741,7 @@ public class WordManager : MonoBehaviour
                         InputExecution(numberPressed);
                         AllReset();
                         SelectWordObject();
+                        CheakWordCombination();
                         break;
                     default:
                         InputDefault();
@@ -767,6 +844,7 @@ public class WordManager : MonoBehaviour
         AllReset();
         cooltime = 0f;
         coolOn = true;
+        CheakWordCombination();
     }
 
     private void InputDefault()
