@@ -22,6 +22,7 @@ public class PlayerMove : WordGameObject
     private Vector2 scaleVetor = new Vector2(1, 1);
     [SerializeField]
     private DieEffect dieEffect;
+    private CameraMove maincam;
 
     protected override void Start()
     {
@@ -36,6 +37,7 @@ public class PlayerMove : WordGameObject
         dust = GetComponentInChildren<ParticleSystem>();
         wordManager = FindObjectOfType<WordManager>();
         textManager = FindObjectOfType<TextManager>();
+        maincam = Camera.main.GetComponent<CameraMove>();
     }
 
     private void Update()
@@ -125,6 +127,7 @@ public class PlayerMove : WordGameObject
                 Jump();
                 collision.gameObject.GetComponent<EnemyBased>().Die();
                 PlaySound();
+                maincam.Shakecam(2f,0.2f);
             }
             else
             {
@@ -185,9 +188,11 @@ public class PlayerMove : WordGameObject
 
     public void Died()
     {
+        maincam.Shakecam(3f, 0.3f);
         dieEffect.transform.position = transform.position;
         dieEffect.gameObject.SetActive(true);
         Invoke("DiedtoReset", 1f);
+        wordManager.PlayToDieResetAnimation();
         gameObject.SetActive(false);
     }
     private void DiedtoReset()

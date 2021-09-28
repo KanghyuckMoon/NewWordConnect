@@ -139,6 +139,10 @@ public class WordManager : MonoBehaviour
     public bool isInputESC = false;
     private bool isBreak = false;
 
+    //애니메이션 변수
+    [SerializeField]
+    private Animator dieAnimation;
+
     private void Awake()
     {
         //주어 찾기
@@ -1366,5 +1370,10 @@ public class WordManager : MonoBehaviour
         isEvent = false;
         WordSystem.SetActive(true);
         TextSystem.SetActive(false);
+    }
+
+    public void PlayToDieResetAnimation()
+    {
+        dieAnimation.Play("DieResetAnimation");
     }
 }

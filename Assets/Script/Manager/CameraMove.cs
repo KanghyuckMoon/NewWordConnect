@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using DG.Tweening;
 
 public class CameraMove : WordGameObject
 {
@@ -14,6 +15,7 @@ public class CameraMove : WordGameObject
     private Vector3 lockPosition = new Vector3(1,10,0);
     private Vector3 NotMovePosition;
     private bool downon;
+    private float shaketimer = 0;
 
     protected override void Start()
     {
@@ -94,10 +96,25 @@ public class CameraMove : WordGameObject
         downmoveOn = true;
         PlaySound();
     }
-    private void LateUpdate()
+    private void FixedUpdate()
     {
+        if (shaketimer > 0)
+        {
+            shaketimer -= Time.deltaTime;
+            if (shaketimer <= 0f)
+            {
+                CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin =
+                    virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
 
+                cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 0f;
+            }
+            if (transform.eulerAngles.x != 0 || transform.eulerAngles.y != 0 || transform.eulerAngles.z != 0)
+            {
+                transform.DORotate(new Vector3(0, 0, 0), 0.5f);
+            }
+        }
     }
+
     protected IEnumerator JumpCam()
     {
         while(true)
@@ -241,5 +258,14 @@ public class CameraMove : WordGameObject
     public override float ReturnVelocityY()
     {
         return downon ? -4 : 0;
+    }
+
+    public void Shakecam(float power, float time)
+    {
+        CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin =
+            virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = power;
+        Debug.Log(cinemachineBasicMultiChannelPerlin.m_AmplitudeGain);
+        shaketimer = time;
     }
 }
