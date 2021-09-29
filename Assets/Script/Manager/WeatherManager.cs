@@ -45,8 +45,8 @@ public class WeatherManager : WordGameObject
             }
         }
         s_WeatherPersent += realautoWeatherPlus;
-        if (s_WeatherPersent <= 0) s_WeatherPersent = 100;
-        if (s_WeatherPersent >= 100) s_WeatherPersent = 0;
+        if (s_WeatherPersent <= 0) s_WeatherPersent = 150;
+        if (s_WeatherPersent >= 150) s_WeatherPersent = 0;
         
     }
 
