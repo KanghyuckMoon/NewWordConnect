@@ -19,6 +19,7 @@ public class WeatherManager : WordGameObject
     [SerializeField]
     private float autoWeatherPlus = 0;
     private float realautoWeatherPlus = 0;
+    private WeatherBar weatherBar;
 
 
     private void FixedUpdate()
@@ -46,6 +47,7 @@ public class WeatherManager : WordGameObject
         s_WeatherPersent += realautoWeatherPlus;
         if (s_WeatherPersent <= 0) s_WeatherPersent = 100;
         if (s_WeatherPersent >= 100) s_WeatherPersent = 0;
+        
     }
 
     protected override void Start()
@@ -53,13 +55,12 @@ public class WeatherManager : WordGameObject
         //base.Start();
         realautoWeatherPlus = autoWeatherPlus;
         StartCoroutine(OnMoveDetect());
+        weatherBar = FindObjectOfType<WeatherBar>();
+        for(int i = 0; i < s_Weather.Count;i++)
+        {
+            weatherBar.UIWeatherUpdate(i,s_Weather[i]);
+        }
     }
-
-    //public override void Setting()
-    //{
-    //    gravityScale = 0;
-    //    rigid.gravityScale = 0;
-    //}
 
     protected override IEnumerator OnMoveDetect()
     {
@@ -90,6 +91,7 @@ public class WeatherManager : WordGameObject
     public override void SizeUp()
     {
         s_WeatherPersent += 10;
+        weatherBar.WeatherUp();
     }
 
     public override void SizeDown()
@@ -121,6 +123,7 @@ public class WeatherManager : WordGameObject
     public override void Jump()
     {
         s_WeatherPersent += 10;
+        weatherBar.WeatherUp();
     }
 
     public override void Down()
