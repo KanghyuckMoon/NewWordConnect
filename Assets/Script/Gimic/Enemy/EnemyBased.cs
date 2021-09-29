@@ -50,6 +50,7 @@ public class EnemyBased : WordGameObject
         { 
             if(!setAreaReset)
             {
+                ResetArea();
                 ResetEnemyPosition();
                 setAreaReset = true;
             }
@@ -156,6 +157,14 @@ public class EnemyBased : WordGameObject
 
     public void Die()
     {
-        Destroy(gameObject);
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        gameObject.GetComponent<Collider2D>().enabled = false;
+    }
+
+    public void ResetArea()
+    {
+        gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        gameObject.GetComponent<Collider2D>().enabled = true;
+
     }
 }
