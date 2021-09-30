@@ -11,6 +11,7 @@ public class TemperentManager : WordGameObject
     public int tempdan = 0;
 
     private float notMoveTemperature = 0;
+    private bool locktemp = false;
 
     protected override void Start()
     {
@@ -42,8 +43,11 @@ public class TemperentManager : WordGameObject
         }
     }
 
+
+
     public override void Jump()
     {
+        if (locktemp) return;
         s_Temperature -= 10;
         if (s_Temperature <= 0) s_Temperature = 0;
         if (s_Temperature >= 100) s_Temperature = 100;
@@ -51,6 +55,7 @@ public class TemperentManager : WordGameObject
 
     public override void Down()
     {
+        if (locktemp) return;
         s_Temperature += 10;
         if (s_Temperature <= 0) s_Temperature = 0;
         if (s_Temperature >= 100) s_Temperature = 100;
@@ -58,6 +63,7 @@ public class TemperentManager : WordGameObject
 
     public override void SizeUp()
     {
+        if (locktemp) return;
         s_Temperature -= 10;
         if (s_Temperature <= 0) s_Temperature = 0;
         if (s_Temperature >= 100) s_Temperature = 100;
@@ -65,8 +71,28 @@ public class TemperentManager : WordGameObject
 
     public override void SizeDown()
     {
+        if (locktemp) return;
         s_Temperature += 10;
         if (s_Temperature <= 0) s_Temperature = 0;
         if (s_Temperature >= 100) s_Temperature = 100;
+    }
+
+    public void GetWeather(int index)
+    {
+        switch(index)
+        {
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                s_Temperature -= 20;
+                break;
+
+            default:
+                break;
+        }
     }
 }

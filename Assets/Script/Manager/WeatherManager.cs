@@ -21,11 +21,21 @@ public class WeatherManager : WordGameObject
     private float realautoWeatherPlus = 0;
     private int weatherselect = 1;
     private WeatherBar weatherBar;
+    private TemperentManager temperentManager;
 
 
     private void FixedUpdate()
     {
         WeatherCheak();
+    }
+
+    public int ReturnToWeatherSize()
+    {
+        return s_Weather[s_Weather.Count - 1];
+    }
+    public int ReturnToWeatherCount()
+    {
+        return s_Weather.Count;
     }
 
     private void WeatherCheak()
@@ -40,20 +50,21 @@ public class WeatherManager : WordGameObject
             {
                 weatherObjects[i].SetActive(false);
             }
-            if ((100 / s_Weather.Count) * (i + 1) >= s_WeatherPersent && (100 / s_Weather.Count) * (i) <= s_WeatherPersent)
+            if (((50 * s_Weather.Count - 1) / s_Weather.Count) * (i + 1) >= s_WeatherPersent && ((50 * s_Weather.Count - 1) / s_Weather.Count) * (i) <= s_WeatherPersent)
             {
                 if (s_WeatherCode != s_Weather[i])
                 {
                     weatherselect++;
                     if (weatherselect > 2) weatherselect = 0;
                     weatherBar.SetShader(weatherselect);
+                    temperentManager.GetWeather(s_WeatherCode);
                 }
                 s_WeatherCode = s_Weather[i];
             }
         }
         s_WeatherPersent += realautoWeatherPlus;
-        if (s_WeatherPersent <= 0) s_WeatherPersent = 150;
-        if (s_WeatherPersent >= 150) s_WeatherPersent = 0;
+        if (s_WeatherPersent <= 0) s_WeatherPersent = 50 * s_Weather.Count;
+        if (s_WeatherPersent >= 50 * s_Weather.Count) s_WeatherPersent = 0;
         
     }
 
@@ -63,7 +74,8 @@ public class WeatherManager : WordGameObject
         realautoWeatherPlus = autoWeatherPlus;
         StartCoroutine(OnMoveDetect());
         weatherBar = FindObjectOfType<WeatherBar>();
-        for(int i = 0; i < s_Weather.Count;i++)
+        temperentManager = FindObjectOfType<TemperentManager>();
+        for(int i = 0; i < 3;i++)
         {
             weatherBar.UIWeatherUpdate(i,s_Weather[i]);
         }
