@@ -19,4 +19,9 @@ public class GimicBase : MonoBehaviour
         realSpeed = speed;
         animator.SetFloat(animationName, realSpeed);
     }
+
+    public virtual void AreaReset()
+    {
+        gameObject.SetActive(true);
+    }
 }
