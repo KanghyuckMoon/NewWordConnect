@@ -205,11 +205,14 @@ public class WordGameObject : MonoBehaviour
         w_MoveOnEffect = false;
         superDownOn = true;
         PlaySound();
-        Invoke("SuperDownFalse",0.5f);
+        Invoke("SuperDownFalse",0.2f);
     }
     public virtual void SuperDownFalse()
     {
+        if(rigid.velocity.y >= 0)
+        {
         superDownOn = false;
+        }
     }
 
     public virtual void SizeUp()
@@ -351,7 +354,26 @@ public class WordGameObject : MonoBehaviour
         w_BlockOn = true;
         superDownOn = false;
         jumpOn = false;
+        if(collision.gameObject.CompareTag("BreakBlock") && superDownOn)
+        {
+            collision.gameObject.GetComponent<GimicBlock>().BreakBlock();
+        }
     }
+
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("BreakBlock") && !(rigid.velocity.y <= 0) && collision.transform.position.y >= transform.position.y)
+        {
+            collision.GetComponent<GimicBlock>().BreakBlock();
+            rigid.velocity = new Vector2(rigid.velocity.x, 0);
+            rigid.AddForce(Vector2.down * 3f, ForceMode2D.Impulse);
+        }
+        else if (collision.CompareTag("BreakBlock") && superDownOn)
+        {
+            collision.GetComponent<GimicBlock>().BreakBlock();
+        }
+    }
+
     protected virtual void OnCollisionStay2D(Collision2D collision)
     {
         w_Collider = true;

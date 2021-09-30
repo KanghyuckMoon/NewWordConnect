@@ -118,7 +118,6 @@ public class PlayerMove : WordGameObject
         w_tile = 0;
         w_vector1 = transform.position.x;
         w_BlockOn = true;
-        superDownOn = false;
         CreateDust();
         if (collision.gameObject.CompareTag("Enemy"))
         {
@@ -134,6 +133,7 @@ public class PlayerMove : WordGameObject
                 Died();
             }
         }
+        superDownOn = false;
     }
     protected override void OnCollisionExit2D(Collision2D collision)
     {
@@ -157,7 +157,7 @@ public class PlayerMove : WordGameObject
         }
     }
 
-    protected void OnTriggerEnter2D(Collider2D collision)
+    protected override void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Wind"))
         {
@@ -171,11 +171,15 @@ public class PlayerMove : WordGameObject
         {
             Died();
         }
-        if (collision.CompareTag("BreakBlock") && !(rigid.velocity.y <= 0))
+        if (collision.CompareTag("BreakBlock") && !(rigid.velocity.y <= 0) && collision.transform.position.y >= transform.position.y)
         {
             collision.GetComponent<GimicBlock>().BreakBlock();
             rigid.velocity = new Vector2(rigid.velocity.x,0);
             rigid.AddForce(Vector2.down * 3f,ForceMode2D.Impulse);
+        }
+        else if (collision.CompareTag("BreakBlock") && superDownOn)
+        {
+            collision.GetComponent<GimicBlock>().BreakBlock();
         }
         if (collision.CompareTag("Spring") && (rigid.velocity.y <= 0))
         {
