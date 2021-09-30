@@ -18,7 +18,7 @@ public class PlayerMove : WordGameObject
     private SpriteRenderer spriteRenderer = null;
     private Animator animator = null;
     private bool isWalk = false;
-    private ParticleSystem dust;
+    private ParticleSystem[] dust;
     private Vector2 scaleVetor = new Vector2(1, 1);
     [SerializeField]
     private DieEffect dieEffect;
@@ -34,7 +34,8 @@ public class PlayerMove : WordGameObject
         savePoint = transform.position;
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        dust = GetComponentInChildren<ParticleSystem>();
+        dust = GetComponentsInChildren<ParticleSystem>();
+        
         wordManager = FindObjectOfType<WordManager>();
         textManager = FindObjectOfType<TextManager>();
         maincam = Camera.main.GetComponent<CameraMove>();
@@ -96,6 +97,11 @@ public class PlayerMove : WordGameObject
         w_tile = 0;
         CreateDust();
         PlaySound();
+    }
+
+    public override void SuperDown()
+    {
+        base.SuperDown();
     }
 
 
@@ -236,14 +242,21 @@ public class PlayerMove : WordGameObject
 
     private void CreateDust()
     {
-        dust.Play();
+        dust[0].Play();
     }
 
     private void DownDust()
     {
-        if(rigid.velocity.y < -1.2f)
+        if (superDownOn)
         {
-            dust.Play();
+            dust[1].Play();
+        }
+        else
+        {
+            if (rigid.velocity.y < -1.2f)
+            {
+                dust[0].Play();
+            }
         }
     }
 
