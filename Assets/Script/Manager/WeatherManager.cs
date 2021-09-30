@@ -19,6 +19,7 @@ public class WeatherManager : WordGameObject
     [SerializeField]
     private float autoWeatherPlus = 0;
     private float realautoWeatherPlus = 0;
+    private int weatherselect = 1;
     private WeatherBar weatherBar;
 
 
@@ -41,6 +42,12 @@ public class WeatherManager : WordGameObject
             }
             if ((100 / s_Weather.Count) * (i + 1) >= s_WeatherPersent && (100 / s_Weather.Count) * (i) <= s_WeatherPersent)
             {
+                if (s_WeatherCode != s_Weather[i])
+                {
+                    weatherselect++;
+                    if (weatherselect > 2) weatherselect = 0;
+                    weatherBar.SetShader(weatherselect);
+                }
                 s_WeatherCode = s_Weather[i];
             }
         }

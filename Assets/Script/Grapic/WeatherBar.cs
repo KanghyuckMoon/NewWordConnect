@@ -17,6 +17,22 @@ public class WeatherBar : MonoBehaviour
         imageSize[0] = 0;
         imageSize[1] = 50;
         imageSize[2] = 100;
+        SetShader(1);
+    }
+
+    public void SetShader(int index)
+    {
+        for(int i = 0; i < 3; i++)
+        {
+            if(i == index)
+            {
+                weatherImage[i].material.EnableKeyword("OUTBASE_ON");
+            }
+            else
+            {
+                weatherImage[i].material.DisableKeyword("OUTBASE_ON");
+            }
+        }
     }
 
     public void UIWeatherUpdate(int index, int type)
