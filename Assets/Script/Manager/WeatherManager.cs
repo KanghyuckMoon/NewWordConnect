@@ -75,10 +75,9 @@ public class WeatherManager : WordGameObject
         StartCoroutine(OnMoveDetect());
         weatherBar = FindObjectOfType<WeatherBar>();
         temperentManager = FindObjectOfType<TemperentManager>();
-        for(int i = 0; i < 3;i++)
-        {
-            weatherBar.UIWeatherUpdate(i,s_Weather[i]);
-        }
+        weatherBar.UIWeatherUpdate(0, s_Weather[s_Weather.Count - 1]);
+        weatherBar.UIWeatherUpdate(1, s_Weather[0]);
+        weatherBar.UIWeatherUpdate(2, s_Weather[1]);
     }
 
     protected override IEnumerator OnMoveDetect()

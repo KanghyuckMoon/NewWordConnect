@@ -14,7 +14,7 @@ public class WeatherBar : MonoBehaviour
     private int[] imageindex = new int[3];
     private WeatherManager weatherManager;
 
-    private void Start()
+    private void Awake()
     {
         weatherManager = FindObjectOfType<WeatherManager>();
         imageSize[0] = 0;
@@ -29,18 +29,21 @@ public class WeatherBar : MonoBehaviour
         {
             if(i == index)
             {
-                weatherImage[i].material.EnableKeyword("OUTBASE_ON");
+                weatherImage[i].material.EnableKeyword("SHINE_ON");
             }
             else
             {
-                weatherImage[i].material.DisableKeyword("OUTBASE_ON");
+                weatherImage[i].material.DisableKeyword("SHINE_ON");
             }
         }
     }
 
     public void UIWeatherUpdate(int index, int type)
     {
-        if (type < 0) type = weatherManager.ReturnToWeatherSize();
+        if(type > weatherManager.ReturnToWeatherSize())
+        {
+            type -= weatherManager.ReturnToWeatherSize() + 1;
+        }
         imageindex[index] = type;
         weatherImage[index].sprite = sprites[type];
     }
@@ -53,11 +56,11 @@ public class WeatherBar : MonoBehaviour
             imageSize[i] -= 10;
             if (imageSize[i] < 0)
             {
-                UIWeatherUpdate(i, imageindex[i] - 1);
+                UIWeatherUpdate(i, imageindex[i] + 3);
                 imageSize[i] = 140;
             }
             weatherImage[i].transform.localScale = new Vector3(1 - Mathf.Abs(imageSize[i] - 50) / 100, 1 - Mathf.Abs(imageSize[i] - 50) / 100,1);
-            weatherImage[i].rectTransform.anchoredPosition = new Vector2(imageSize[i] - 50, 30);
+            weatherImage[i].rectTransform.anchoredPosition = new Vector2(imageSize[i] - 50, 10);
         }
     }
 }
