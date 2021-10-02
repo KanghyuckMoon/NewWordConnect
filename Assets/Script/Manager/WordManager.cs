@@ -690,23 +690,24 @@ public class WordManager : MonoBehaviour
         else if (subjectWord == 6 && conditionWord == 8) CleanSelectChainBreak(); //온도가 소리를 낼 때
         else if (subjectWord == 6 && executionWord == 8) CleanSelectChainBreak(); //온도가 충돌하지 않는다
 
-        else if (subjectWord == 7 && conditionWord == 2) CleanSelectChainBreak(); //시간이 가만히 있을 때
-        else if (subjectWord == 7 && conditionWord == 3) CleanSelectChainBreak(); //시간이 충돌할 때
-        else if (subjectWord == 7 && conditionWord == 4) CleanSelectChainBreak(); //시간이 블록을 밟을 때
-        else if (subjectWord == 7 && conditionWord == 6) CleanSelectChainBreak(); //시간이 떨어질 때
-        else if (subjectWord == 7 && conditionWord == 7) CleanSelectChainBreak(); //시간이 카메라 안에 들 때
-        else if (subjectWord == 7 && conditionWord == 8) CleanSelectChainBreak(); //시간이 소리를 낼 때
-        else if (subjectWord == 7 && executionWord == 8) CleanSelectChainBreak(); //시간이 충돌하지 않는다
 
-        else if (subjectWord == 8 && conditionWord == 3) CleanSelectChainBreak(); //게임창이 충돌할 때
-        else if (subjectWord == 8 && conditionWord == 4) CleanSelectChainBreak(); //게임창이 블록을 밟을 때
-        else if (subjectWord == 8 && conditionWord == 6) CleanSelectChainBreak(); //게임창이 떨어질 때
-        else if (subjectWord == 8 && conditionWord == 7) CleanSelectChainBreak(); //게임창이 카메라 안에 들 때
-        else if (subjectWord == 8 && conditionWord == 8) CleanSelectChainBreak(); //게임창이 소리를 낼 때
-        else if (subjectWord == 8 && executionWord == 2) CleanSelectChainBreak(); //게임창이 1초동안 빨라진다
-        else if (subjectWord == 8 && executionWord == 3) CleanSelectChainBreak(); //게임창이 1초동안 정지한다
-        else if (subjectWord == 8 && executionWord == 4) CleanSelectChainBreak(); //게임창이 1초동안 느려진다
-        else if (subjectWord == 8 && executionWord == 8) CleanSelectChainBreak(); //게임창이 충돌하지 않는다
+        else if (subjectWord == 7 && conditionWord == 3) CleanSelectChainBreak(); //게임창이 충돌할 때
+        else if (subjectWord == 7 && conditionWord == 4) CleanSelectChainBreak(); //게임창이 블록을 밟을 때
+        else if (subjectWord == 7 && conditionWord == 6) CleanSelectChainBreak(); //게임창이 떨어질 때
+        else if (subjectWord == 7 && conditionWord == 7) CleanSelectChainBreak(); //게임창이 카메라 안에 들 때
+        else if (subjectWord == 7 && conditionWord == 8) CleanSelectChainBreak(); //게임창이 소리를 낼 때
+        else if (subjectWord == 7 && executionWord == 2) CleanSelectChainBreak(); //게임창이 1초동안 빨라진다
+        else if (subjectWord == 7 && executionWord == 3) CleanSelectChainBreak(); //게임창이 1초동안 정지한다
+        else if (subjectWord == 7 && executionWord == 4) CleanSelectChainBreak(); //게임창이 1초동안 느려진다
+        else if (subjectWord == 7 && executionWord == 8) CleanSelectChainBreak(); //게임창이 충돌하지 않는다
+
+        else if (subjectWord == 8 && conditionWord == 2) CleanSelectChainBreak(); //시간이 가만히 있을 때
+        else if (subjectWord == 8 && conditionWord == 3) CleanSelectChainBreak(); //시간이 충돌할 때
+        else if (subjectWord == 8 && conditionWord == 4) CleanSelectChainBreak(); //시간이 블록을 밟을 때
+        else if (subjectWord == 8 && conditionWord == 6) CleanSelectChainBreak(); //시간이 떨어질 때
+        else if (subjectWord == 8 && conditionWord == 7) CleanSelectChainBreak(); //시간이 카메라 안에 들 때
+        else if (subjectWord == 8 && conditionWord == 8) CleanSelectChainBreak(); //시간이 소리를 낼 때
+        else if (subjectWord == 8 && executionWord == 8) CleanSelectChainBreak(); //시간이 충돌하지 않는다
     }
 
 

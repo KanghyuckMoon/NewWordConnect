@@ -43,38 +43,37 @@ public class TemperentManager : WordGameObject
         }
     }
 
-
+    public void OverTempSet()
+    {
+        if (s_Temperature <= 0) s_Temperature = 0;
+        if (s_Temperature >= 100) s_Temperature = 100;
+    }
 
     public override void Jump()
     {
-        if (locktemp) return;
-        s_Temperature -= 10;
-        if (s_Temperature <= 0) s_Temperature = 0;
-        if (s_Temperature >= 100) s_Temperature = 100;
+        if (locktemp) return; 
+        OverTempSet();
     }
 
     public override void Down()
     {
         if (locktemp) return;
         s_Temperature += 10;
-        if (s_Temperature <= 0) s_Temperature = 0;
-        if (s_Temperature >= 100) s_Temperature = 100;
+        OverTempSet();
     }
 
     public override void SizeUp()
     {
         if (locktemp) return;
         s_Temperature -= 10;
-        if (s_Temperature <= 0) s_Temperature = 0;
-        if (s_Temperature >= 100) s_Temperature = 100;
+        OverTempSet();
     }
 
     public override void SizeDown()
     {
         if (locktemp) return;
         s_Temperature += 10;
-        if (s_Temperature <= 0) s_Temperature = 0;
-        if (s_Temperature >= 100) s_Temperature = 100;
+        OverTempSet();
     }
 
     public void GetWeather(int index)
@@ -82,16 +81,30 @@ public class TemperentManager : WordGameObject
         switch(index)
         {
             case 0:
+                locktemp = false;
                 break;
             case 1:
+                locktemp = false;
                 break;
             case 2:
+                locktemp = false;
                 break;
-            case 3:
+            case 3: //ºñ
+                locktemp = false;
                 s_Temperature -= 20;
+                OverTempSet();
+                break;
+            case 5: //´«
+                locktemp = true;
+                s_Temperature = 100;
+                break;
+            case 6: //´õÀ§
+                s_Temperature += 30;
+                OverTempSet();
                 break;
 
             default:
+                locktemp = false;
                 break;
         }
     }
