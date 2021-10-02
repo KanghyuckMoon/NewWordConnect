@@ -16,13 +16,17 @@ public class PlayerMove : WordGameObject
     private TextManager textManager;
     //애니메이션
     private SpriteRenderer spriteRenderer = null;
+    private Collider2D colliders = null;
     private Animator animator = null;
     private bool isWalk = false;
     private ParticleSystem[] dust;
     private Vector2 scaleVetor = new Vector2(1, 1);
     [SerializeField]
     private DieEffect dieEffect;
+    [SerializeField]
+    private Transform cloth;
     private CameraMove maincam;
+    private bool die = false;
 
     protected override void Start()
     {
@@ -35,6 +39,7 @@ public class PlayerMove : WordGameObject
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         dust = GetComponentsInChildren<ParticleSystem>();
+        colliders = GetComponent<Collider2D>();
         
         wordManager = FindObjectOfType<WordManager>();
         textManager = FindObjectOfType<TextManager>();
@@ -43,6 +48,7 @@ public class PlayerMove : WordGameObject
 
     private void Update()
     {
+        if (die) return;
         if (wordManager.isEvent) return;
         //���������� �Լ�
         InputJump();
@@ -54,6 +60,7 @@ public class PlayerMove : WordGameObject
 
     private void FixedUpdate()
     {
+        if (die) return;
         if (wordManager.isEvent) return;
         if (wordManager.isInputESC) return;
         Move();
@@ -198,17 +205,26 @@ public class PlayerMove : WordGameObject
 
     public void Died()
     {
+        cloth.gameObject.SetActive(false);
         maincam.Shakecam(3f, 0.3f);
         dieEffect.transform.position = transform.position;
         dieEffect.gameObject.SetActive(true);
         Invoke("DiedtoReset", 1f);
         wordManager.PlayToDieResetAnimation();
-        gameObject.SetActive(false);
+        die = true;
+        spriteRenderer.enabled = false;
+        colliders.enabled = false;
+        rigid.gravityScale = 0f;
     }
     private void DiedtoReset()
     {
         transform.position = savePoint;
-        gameObject.SetActive(true);
+        cloth.position = transform.position;
+        cloth.gameObject.SetActive(true);
+        die = false;
+        spriteRenderer.enabled = true;
+        colliders.enabled = true;
+        rigid.gravityScale = 4.3f;
     }
 
     public void SetSavePoint(Vector2 transform)
