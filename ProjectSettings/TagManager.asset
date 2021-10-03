@@ -12,6 +12,7 @@ TagManager:
   - BreakBlock
   - Spring
   - TextObj
+  - Bloon
   layers:
   - Default
   - TransparentFX

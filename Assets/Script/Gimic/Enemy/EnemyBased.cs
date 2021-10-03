@@ -159,12 +159,18 @@ public class EnemyBased : WordGameObject
     {
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
         gameObject.GetComponent<Collider2D>().enabled = false;
+        rigid.mass = 0;
+        if(isBloon)
+        {
+            bloon.BloonisNotJoint();
+        }
     }
 
     public void ResetArea()
     {
         gameObject.GetComponent<SpriteRenderer>().enabled = true;
         gameObject.GetComponent<Collider2D>().enabled = true;
+        rigid.mass = 1;
 
     }
 }

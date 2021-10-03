@@ -94,6 +94,11 @@ public class WordGameObject : MonoBehaviour
     public bool isSound = false;
     public bool isSoundEffect = true;
 
+    //풍선설정
+    public bool isBloon = false;
+    [SerializeField]
+    protected GimicBloon bloon;
+
     public void SetPlayer(PlayerMove player)
     {
         this.player = player;
