@@ -37,11 +37,13 @@ public class CameraSettingObject : MonoBehaviour
         if(horizontalOn)
         {
             mainCamera.GetComponent<CinemachineVirtualCamera>().Follow = horizontalObj;
+            horizontalObj.position = new Vector2(horizontalObj.transform.position.x,lockTransform.position.y);
             return setAreanum;
         }
         if(verticalOn)
         {
             mainCamera.GetComponent<CinemachineVirtualCamera>().Follow = verticalObj;
+            horizontalObj.position = new Vector2(lockTransform.position.x, verticalObj.transform.position.y);
             return setAreanum;
         }
         if(cameraLock)
