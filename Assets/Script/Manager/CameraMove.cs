@@ -265,7 +265,6 @@ public class CameraMove : WordGameObject
         CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin =
             virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = power;
-        Debug.Log(cinemachineBasicMultiChannelPerlin.m_AmplitudeGain);
         shaketimer = time;
     }
 }

@@ -132,19 +132,32 @@ public class PlayerMove : WordGameObject
         w_vector1 = transform.position.x;
         w_BlockOn = true;
         CreateDust();
-        if (collision.gameObject.CompareTag("Enemy"))
+        switch(collision.gameObject.tag)
         {
-            if(collision.transform.position.y < transform.position.y && rigid.velocity.y < 0)
-            {
-                Jump();
-                collision.gameObject.GetComponent<EnemyBased>().Die();
-                PlaySound();
-                maincam.Shakecam(2f,0.2f);
-            }
-            else
-            {
-                Died();
-            }
+            case "Enemy":
+                if (collision.transform.position.y < transform.position.y && rigid.velocity.y < 0)
+                {
+                    Jump();
+                    collision.gameObject.GetComponent<EnemyBased>().Die();
+                    PlaySound();
+                    maincam.Shakecam(2f, 0.2f);
+                }
+                else
+                {
+                    Died();
+                }
+                break;
+            case "Bloon":
+                if (collision.transform.position.y < transform.position.y && rigid.velocity.y < 0)
+                {
+                    Jump();
+                    collision.gameObject.GetComponent<GimicBloon>().BloonBoom();
+                    PlaySound();
+                    maincam.Shakecam(1f, 0.1f);
+                }
+                break;
+
+
         }
         superDownOn = false;
     }

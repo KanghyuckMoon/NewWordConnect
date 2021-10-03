@@ -13,13 +13,11 @@ public class GimicButton : MonoBehaviour
     {
         onoff = true;
         gimicDoor.OnoffDoor(onoff);
-        Debug.Log("ON");
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
         onoff = false;
         gimicDoor.OnoffDoor(onoff);
-        Debug.Log("Off");
     }
 }
