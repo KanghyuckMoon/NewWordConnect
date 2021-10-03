@@ -29,4 +29,9 @@ public class PlayerFollow : MonoBehaviour
             transform.position = new Vector2(player.position.x, LockVector2.y);
         }
     }
+
+    public void SetPosition(Vector2 vetor2)
+    {
+        LockVector2 = new Vector2(vetor2.x, vetor2.y);
+    }
 }
