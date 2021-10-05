@@ -22,8 +22,11 @@ public class CameraSettingObject : MonoBehaviour
     private Transform playerTransform = null;
     [SerializeField]
     private int setAreanum = 0;
+    [SerializeField]
+    private float camSizeSet = 1;
 
     private Camera mainCamera = null;
+    private CameraMove maincam_move = null;
 
     private void Start()
     {

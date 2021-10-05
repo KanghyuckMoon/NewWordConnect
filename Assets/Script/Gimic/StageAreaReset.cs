@@ -19,7 +19,14 @@ public class StageAreaReset : MonoBehaviour
     {
         for(int i = 0; i < transform.childCount;i++)
         {
-            transform.GetChild(i).GetComponent<GimicBase>().AreaReset();
+            if(transform.GetChild(i).GetComponent<GimicBase>() != null)
+            {
+                transform.GetChild(i).GetComponent<GimicBase>().AreaReset();
+            }
+            else
+            {
+
+            }
         }
     }
 

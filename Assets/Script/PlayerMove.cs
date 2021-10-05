@@ -12,6 +12,7 @@ public class PlayerMove : WordGameObject
     private BoxCollider2D collider2d;
 
     public int nowArea = 0;
+    private int dieArea = 0;
     private WordManager wordManager;
     private TextManager textManager;
     //애니메이션
@@ -222,12 +223,14 @@ public class PlayerMove : WordGameObject
         maincam.Shakecam(3f, 0.3f);
         dieEffect.transform.position = transform.position;
         dieEffect.gameObject.SetActive(true);
-        Invoke("DiedtoReset", 1f);
         wordManager.PlayToDieResetAnimation();
         die = true;
         spriteRenderer.enabled = false;
         colliders.enabled = false;
         rigid.gravityScale = 0f;
+        dieArea = nowArea;
+        nowArea = -1;
+        Invoke("DiedtoReset", 1);
     }
     private void DiedtoReset()
     {
@@ -238,6 +241,7 @@ public class PlayerMove : WordGameObject
         spriteRenderer.enabled = true;
         colliders.enabled = true;
         rigid.gravityScale = 4.3f;
+        nowArea = dieArea;
     }
 
     public void SetSavePoint(Vector2 transform)
