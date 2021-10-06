@@ -12,7 +12,8 @@ public class StageAreaReset : MonoBehaviour
 
     private void Start()
     {
-        player = FindObjectOfType<PlayerMove>();   
+        player = FindObjectOfType<PlayerMove>();
+        StartCoroutine(AreaCheak());
     }
 
     private void AreaObjectReset()
@@ -30,19 +31,23 @@ public class StageAreaReset : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    private IEnumerator AreaCheak()
     {
-        if (area_index == player.nowArea)
+        while(true)
         {
-            if (!setAreaReset)
+            if (area_index == player.nowArea)
             {
-                AreaObjectReset();
-                setAreaReset = true;
+                if (!setAreaReset)
+                {
+                    AreaObjectReset();
+                    setAreaReset = true;
+                }
             }
-        }
-        else
-        {
-            setAreaReset = false;
+            else
+            {
+                setAreaReset = false;
+            }
+            yield return null;
         }
     }
 }
