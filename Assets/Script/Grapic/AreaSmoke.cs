@@ -1,48 +1,54 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class AreaSmoke : MonoBehaviour
 {
     [SerializeField]
     private int area_index = 0;
     private PlayerMove player;
-    private bool setAreaReset = false;
+    private bool setAreaReset = true;
     private SpriteRenderer spriteRenderer = null;
 
     private void Start()
     {
         player = FindObjectOfType<PlayerMove>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        StartCoroutine(AreaSet());
     }
 
     private void SetSmoke()
     {
-        spriteRenderer.enabled = true;
+        spriteRenderer.DOColor(new Color(0.3f, 0.3f, 0.3f, 1), 1);
     }
     private void NotSetSmoke()
     {
-        spriteRenderer.enabled = false;
+        spriteRenderer.DOColor(new Color(1f, 1f, 1f, 0), 1);
     }
 
-    private void FixedUpdate()
+    private IEnumerator AreaSet()
     {
-        if (area_index != player.nowArea)
+        while(true)
         {
-            if (!setAreaReset)
+            if (area_index != player.nowArea)
             {
-                SetSmoke();
-                setAreaReset = true;
+                if (!setAreaReset)
+                {
+                    SetSmoke();
+                    setAreaReset = true;
+                }
             }
-        }
-        else
-        {
-            if(setAreaReset)
+            else
             {
-                NotSetSmoke();
-                setAreaReset = false;
+                if (setAreaReset)
+                {
+                    NotSetSmoke();
+                    setAreaReset = false;
 
+                }
             }
+            yield return null;
         }
     }
 }

@@ -281,6 +281,7 @@ public class PlayerMove : WordGameObject
         if (velocityX == 1)
         {
             transform.localScale = new Vector2(-1 * scaleVetor.x, scaleVetor.y);
+            //cloth.localScale = new Vector2(-1 * cloth.localScale.x, scaleVetor.y);
         }
         else if (velocityX == -1)
         {
