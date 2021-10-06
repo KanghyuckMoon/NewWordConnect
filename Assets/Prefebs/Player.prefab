@@ -9692,8 +9692,8 @@ GameObject:
   - component: {fileID: 2936947540001608042}
   - component: {fileID: 2936947540001608052}
   - component: {fileID: 2936947540001608054}
-  - component: {fileID: 2936947540001608053}
   - component: {fileID: 2936947540001608055}
+  - component: {fileID: 1884236047}
   m_Layer: 13
   m_Name: Player
   m_TagString: Player
@@ -9781,10 +9781,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3998835c26fa5b240b8c0e0d6f4361b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 24.5
   w_Movetime: 0
-  setArea: -1
+  setArea: 0
   isSound: 0
   isSoundEffect: 1
+  isBloon: 0
+  bloon: {fileID: 0}
   nowArea: 0
   dieEffect: {fileID: 0}
   cloth: {fileID: 0}
@@ -9804,37 +9807,11 @@ Rigidbody2D:
   m_LinearDrag: 7
   m_AngularDrag: 0
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 354b3f84768b83941a1589aecb08f1d6, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &2936947540001608053
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2936947540001608041}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.04}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 0.32, y: 0.32}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.3, y: 0.6}
-  m_EdgeRadius: 0
 --- !u!95 &2936947540001608055
 Animator:
   serializedVersion: 3
@@ -9854,3 +9831,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!70 &1884236047
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2936947540001608041}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.4, y: 0.67}
+  m_Direction: 0

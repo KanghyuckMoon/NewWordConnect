@@ -106,11 +106,14 @@ public class EnemyBased : WordGameObject
         {
             if(fowardDetectionOn)
             {
-                if (rayHit2.collider.tag != "Player")
                 {
                     if (rayHit2.distance <= fowardDetectionValue)
                     {
+                        if (rayHit2.collider.tag != "Player")
+                        {
                         nexMove *= -1;
+
+                        }
                     }
                 }
             }
