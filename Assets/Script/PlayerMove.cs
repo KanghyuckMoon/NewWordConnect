@@ -28,9 +28,12 @@ public class PlayerMove : WordGameObject
     private Transform cloth;
     private CameraMove maincam;
     private bool die = false;
+    private bool isAir = false;
+    private int layerMask = 0;
 
     protected override void Start()
     {
+        layerMask = 1 << LayerMask.NameToLayer("StgaePhysicsOnlyDefault");
         rigid = GetComponent<Rigidbody2D>();
         StartCoroutine(OnMoveDetect());
         realspeed = speed;
@@ -110,7 +113,20 @@ public class PlayerMove : WordGameObject
 
     public void GravitySet()
     {
-        if(jumpOn)
+
+
+        Vector2 frontvec = new Vector2(rigid.position.x, rigid.position.y);
+        RaycastHit2D rayHit = Physics2D.Raycast(frontvec, Vector3.down,1, layerMask);
+        Debug.DrawRay(frontvec, Vector3.down, new Color(0, 1, 0));
+        if (rayHit.collider != null)
+        {
+            isAir = false;
+        }
+        else
+        {
+            isAir = true;
+        }
+        if (isAir)
         {
             rigid.gravityScale = 4.3f;
         }
@@ -149,7 +165,7 @@ public class PlayerMove : WordGameObject
         switch(collision.gameObject.tag)
         {
             case "Enemy":
-                if (collision.transform.position.y < transform.position.y && rigid.velocity.y < 0)
+                if (collision.transform.position.y + 0.1f < transform.position.y && rigid.velocity.y < 0)
                 {
                     Jump();
                     collision.gameObject.GetComponent<EnemyBased>().Die();
@@ -170,8 +186,6 @@ public class PlayerMove : WordGameObject
                     maincam.Shakecam(1f, 0.1f);
                 }
                 break;
-
-
         }
         superDownOn = false;
     }
