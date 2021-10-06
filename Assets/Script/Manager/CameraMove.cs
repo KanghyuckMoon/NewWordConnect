@@ -16,6 +16,8 @@ public class CameraMove : WordGameObject
     private Vector3 NotMovePosition;
     private bool downon;
     private float shaketimer = 0;
+    private float camerasize = 3.75f;
+    private float scaleUpDownSize = 1f;
 
     protected override void Start()
     {
@@ -178,22 +180,26 @@ public class CameraMove : WordGameObject
         if (sizeIndex == 0)
         {
             sizeIndex = 1;
-            virtualCamera.m_Lens.OrthographicSize = 4.5f;
+            scaleUpDownSize = 1.2f;
+            ChangeCameraSize();
         }
         else if (sizeIndex == 1)
         {
             sizeIndex = 2;
-            virtualCamera.m_Lens.OrthographicSize = 5.25f;
+            scaleUpDownSize = 1.4f;
+            ChangeCameraSize();
         }
         else if (sizeIndex == -1)
         {
             sizeIndex = 0;
-            virtualCamera.m_Lens.OrthographicSize = 3.75f;
+            scaleUpDownSize = 1f;
+            ChangeCameraSize();
         }
         else if (sizeIndex == -2)
         {
             sizeIndex = -1;
-            virtualCamera.m_Lens.OrthographicSize = 3;
+            scaleUpDownSize = 0.8f;
+            ChangeCameraSize();
         }
 
     }
@@ -203,23 +209,32 @@ public class CameraMove : WordGameObject
         if (sizeIndex == 2)
         {
             sizeIndex = 1;
-            virtualCamera.m_Lens.OrthographicSize = 4.5f;
+            scaleUpDownSize = 1.2f;
+            ChangeCameraSize();
         }
         else if (sizeIndex == 1)
         {
             sizeIndex = 0;
-            virtualCamera.m_Lens.OrthographicSize = 3.75f;
+            scaleUpDownSize = 1f;
+            ChangeCameraSize();
         }
         else if (sizeIndex == 0)
         {
             sizeIndex = -1;
-            virtualCamera.m_Lens.OrthographicSize = 3;
+            scaleUpDownSize = 0.8f;
+            ChangeCameraSize();
         }
         else if (sizeIndex == -1)
         {
             sizeIndex = -2;
-            virtualCamera.m_Lens.OrthographicSize = 2.25f;
+            scaleUpDownSize = 0.6f; 
+            ChangeCameraSize();
         }
+    }
+
+    private void ChangeCameraSize()
+    {
+        virtualCamera.m_Lens.OrthographicSize = camerasize * scaleUpDownSize;
     }
 
     private void ResetCam()
@@ -266,5 +281,11 @@ public class CameraMove : WordGameObject
             virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = power;
         shaketimer = time;
+    }
+
+    public void SetCameraSize(float size)
+    {
+        camerasize = size;
+        ChangeCameraSize();
     }
 }

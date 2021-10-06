@@ -23,7 +23,7 @@ public class CameraSettingObject : MonoBehaviour
     [SerializeField]
     private int setAreanum = 0;
     [SerializeField]
-    private float camSizeSet = 1;
+    private float camSizeSet = 3.75f;
 
     private Camera mainCamera = null;
     private CameraMove maincam_move = null;
@@ -31,12 +31,14 @@ public class CameraSettingObject : MonoBehaviour
     private void Start()
     {
         mainCamera = FindObjectOfType<Camera>();
+        maincam_move = mainCamera.GetComponent<CameraMove>();
         playerTransform = FindObjectOfType<PlayerMove>().transform;
     }
 
     public int SetCameraMoveSetting()
     {
         playerTransform.GetComponent<PlayerMove>().SetSavePoint(savePoint.position);
+        maincam_move.SetCameraSize(camSizeSet);
         if(horizontalOn)
         {
             mainCamera.GetComponent<CinemachineVirtualCamera>().Follow = horizontalObj;
