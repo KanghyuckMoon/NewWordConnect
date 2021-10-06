@@ -11,6 +11,7 @@ public class WordGameObject : MonoBehaviour
 
 
     //물리 변수
+    [SerializeField]
     protected float speed = 24.5f;
     protected float maxSpeed = 27.5f;
     protected float friction = 7.5f;

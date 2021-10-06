@@ -64,6 +64,7 @@ public class PlayerMove : WordGameObject
         if (die) return;
         if (wordManager.isEvent) return;
         if (wordManager.isInputESC) return;
+        GravitySet();
         Move();
         DownDust();
     }
@@ -86,7 +87,7 @@ public class PlayerMove : WordGameObject
     {
         isWalk = true;
         rigid.AddForce(Vector2.right * (velocityX * realspeed));
-        if(downGravity)
+        if (downGravity)
         {
             rigid.velocity = new Vector2(Mathf.Clamp(rigid.velocity.x, -maxSpeed, maxSpeed), Mathf.Clamp(rigid.velocity.y, -maxSpeed, maxSpeed));
         }
@@ -105,6 +106,18 @@ public class PlayerMove : WordGameObject
         w_tile = 0;
         CreateDust();
         PlaySound();
+    }
+
+    public void GravitySet()
+    {
+        if(jumpOn)
+        {
+            rigid.gravityScale = 4.3f;
+        }
+        else
+        {
+            rigid.gravityScale = 1f;
+        }
     }
 
     public override void SuperDown()
