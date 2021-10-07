@@ -9,6 +9,12 @@ EditorBuildSettings:
     path: 
     guid: 00000000000000000000000000000000
   - enabled: 1
+    path: Assets/Scenes/Intro.unity
+    guid: 1595bf55bf62de246974823f859fd1c3
+  - enabled: 1
+    path: Assets/Scenes/MainTitle.unity
+    guid: d7270a9db27797049abb7a95767b1e21
+  - enabled: 1
     path: Assets/Scenes/TestGame1.unity
     guid: 29051ff65e35675419cff4fe69dcbcdd
   - enabled: 1
@@ -17,9 +23,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/UIword.unity
     guid: 5c0d4a8a6145be64ea995c361d163490
-  - enabled: 0
-    path: Assets/Scenes/Intro.unity
-    guid: 1595bf55bf62de246974823f859fd1c3
   - enabled: 1
     path: Assets/Scenes/GrapicTest.unity
     guid: bd82bb78991db9a4097f58f8b6f47166

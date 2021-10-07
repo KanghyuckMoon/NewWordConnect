@@ -51,6 +51,11 @@ public class TitleAnimation : MonoBehaviour
         images.material.DisableKeyword("PIXELATE_ON");
         yield return new WaitForSeconds(0.1f);
         images.material.DisableKeyword("GLITCH_ON");
+        for(int i = 0; i < 3; i++)
+        {
+            words[i].DOAnchorPosY(-120, 0.3f);
+        }
+        yield return new WaitForSeconds(0.2f);
         loadingOn = true;
     }
 

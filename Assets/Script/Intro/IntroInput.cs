@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class IntroInput : MonoBehaviour
 {
@@ -173,7 +174,7 @@ public class IntroInput : MonoBehaviour
         guidetext.gameObject.SetActive(false);
 
         introOn = false;
-
+        SceneManager.LoadScene("MainTitle");
         yield return null;
     }
 
