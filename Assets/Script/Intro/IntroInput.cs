@@ -53,7 +53,10 @@ public class IntroInput : MonoBehaviour
 
     [SerializeField]
     private ImageLoding imageLoding = null;
-
+    [SerializeField]
+    private Image[] numbers;
+    [SerializeField]
+    private Text guidetext;
     private WaitForSeconds waitForSeconds = null;
 
     private void Start()
@@ -103,6 +106,10 @@ public class IntroInput : MonoBehaviour
         firstWord.SetActive(true);
         secondWord.SetActive(true);
         thirdWord.SetActive(true);
+        numbers[0].gameObject.SetActive(true);
+        numbers[1].gameObject.SetActive(true);
+        numbers[2].gameObject.SetActive(true);
+        guidetext.gameObject.SetActive(true);
 
         for (float i = 0; i <= 1; i += 0.1f)
         {
@@ -110,9 +117,14 @@ public class IntroInput : MonoBehaviour
             boxSubject.GetComponent<Image>().color = new Color(1, 1, 1, i);
             boxCondition.GetComponent<Image>().color = new Color(1, 1, 1, i);
             boxExecution.GetComponent<Image>().color = new Color(1, 1, 1, i);
+            numbers[0].GetComponent<Image>().color = new Color(1, 1, 1, i);
+            numbers[1].GetComponent<Image>().color = new Color(1, 1, 1, i);
+            numbers[2].GetComponent<Image>().color = new Color(1, 1, 1, i);
+            guidetext.GetComponent<Text>().color = new Color(1, 1, 1, i);
             firstWord.GetComponent<Text>().color = new Color(1, 1, 1, i);
             secondWord.GetComponent<Text>().color = new Color(1, 1, 1, i);
             thirdWord.GetComponent<Text>().color = new Color(1, 1, 1, i);
+
             yield return waitForSeconds;
         }
         wariningText.color = new Color(1, 1, 1, 1);
@@ -129,7 +141,6 @@ public class IntroInput : MonoBehaviour
 
     private IEnumerator FadeOut()
     {
-        
         for (float i = 1; i >= 0; i -= 0.1f)
         {
             wariningText.color = new Color(1, 1, 1, i);
@@ -139,6 +150,7 @@ public class IntroInput : MonoBehaviour
             firstWord.GetComponent<Text>().color = new Color(1, 1, 1, i);
             secondWord.GetComponent<Text>().color = new Color(1, 1, 1, i);
             thirdWord.GetComponent<Text>().color = new Color(1, 1, 1, i);
+            guidetext.GetComponent<Text>().color = new Color(1, 1, 1, i);
             yield return waitForSeconds;
         }
         wariningText.color = new Color(1, 1, 1, 0);
@@ -155,6 +167,10 @@ public class IntroInput : MonoBehaviour
         firstWord.SetActive(false);
         secondWord.SetActive(false);
         thirdWord.SetActive(false);
+        numbers[0].gameObject.SetActive(false);
+        numbers[1].gameObject.SetActive(false);
+        numbers[2].gameObject.SetActive(false);
+        guidetext.gameObject.SetActive(false);
 
         introOn = false;
 
@@ -225,12 +241,15 @@ public class IntroInput : MonoBehaviour
                 {
                     case 1:
                         firstWord.transform.DOMove(firstposition, movetime);
+                        numbers[0].DOColor(new Color(1, 1, 1, 1), 1);
                         break;
                     case 2:
                         secondWord.transform.DOMove(secondposition, movetime);
+                        numbers[1].DOColor(new Color(1, 1, 1, 1), 1);
                         break;
                     case 3:
                         thirdWord.transform.DOMove(thirdposition, movetime);
+                        numbers[2].DOColor(new Color(1, 1, 1, 1), 1);
                         break;
                 }
                 break;
@@ -239,12 +258,15 @@ public class IntroInput : MonoBehaviour
                 {
                     case 1:
                         firstWord.transform.DOMove(firstposition, movetime);
+                        numbers[0].DOColor(new Color(1, 1, 1, 1), 1);
                         break;
                     case 2:
                         secondWord.transform.DOMove(secondposition, movetime);
+                        numbers[1].DOColor(new Color(1, 1, 1, 1), 1);
                         break;
                     case 3:
                         thirdWord.transform.DOMove(thirdposition, movetime);
+                        numbers[2].DOColor(new Color(1, 1, 1, 1), 1);
                         break;
                 }
                 break;
@@ -253,12 +275,15 @@ public class IntroInput : MonoBehaviour
                 {
                     case 1:
                         firstWord.transform.DOMove(firstposition, movetime);
+                        numbers[0].DOColor(new Color(1, 1, 1, 1), 1);
                         break;
                     case 2:
                         secondWord.transform.DOMove(secondposition, movetime);
+                        numbers[1].DOColor(new Color(1, 1, 1, 1), 1);
                         break;
                     case 3:
                         thirdWord.transform.DOMove(thirdposition, movetime);
+                        numbers[2].DOColor(new Color(1, 1, 1, 1), 1);
                         break;
                 }
                 break;
@@ -274,12 +299,15 @@ public class IntroInput : MonoBehaviour
                 {
                     case 1:
                         firstWord.transform.DOMove(boxSubject.position, movetime);
+                        numbers[0].DOColor(new Color(1, 1, 1, 0), 1);
                         break;
                     case 2:
                         secondWord.transform.DOMove(boxSubject.position, movetime);
+                        numbers[1].DOColor(new Color(1, 1, 1, 0), 1);
                         break;
                     case 3:
                         thirdWord.transform.DOMove(boxSubject.position, movetime);
+                        numbers[2].DOColor(new Color(1, 1, 1, 0), 1);
                         break;
                 }
                 break;
@@ -288,12 +316,15 @@ public class IntroInput : MonoBehaviour
                 {
                     case 1:
                         firstWord.transform.DOMove(boxCondition.position, movetime);
+                        numbers[0].DOColor(new Color(1, 1, 1, 0), 1);
                         break;
                     case 2:
                         secondWord.transform.DOMove(boxCondition.position, movetime);
+                        numbers[1].DOColor(new Color(1, 1, 1, 0), 1);
                         break;
                     case 3:
                         thirdWord.transform.DOMove(boxCondition.position, movetime);
+                        numbers[2].DOColor(new Color(1, 1, 1, 0), 1);
                         break;
                 }
                 break;
@@ -302,12 +333,15 @@ public class IntroInput : MonoBehaviour
                 {
                     case 1:
                         firstWord.transform.DOMove(boxExecution.position, movetime);
+                        numbers[0].DOColor(new Color(1, 1, 1, 0), 1);
                         break;
                     case 2:
                         secondWord.transform.DOMove(boxExecution.position, movetime);
+                        numbers[1].DOColor(new Color(1, 1, 1, 0), 1);
                         break;
                     case 3:
                         thirdWord.transform.DOMove(boxExecution.position, movetime);
+                        numbers[2].DOColor(new Color(1, 1, 1, 0), 1);
                         break;
                 }
                 break;

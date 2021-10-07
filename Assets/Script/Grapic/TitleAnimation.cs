@@ -25,6 +25,8 @@ public class TitleAnimation : MonoBehaviour
     private Image images;
     private int select = 0;
     private bool loadingOn = false;
+    [SerializeField]
+    private Text spacetext = null;
 
 
     private void Awake()
@@ -77,6 +79,21 @@ public class TitleAnimation : MonoBehaviour
             if(i + 1 == index)
             {
                 words[i].DOAnchorPosY(-70,0.5f);
+                spacetext.color = new Color(1, 1, 1, 0);
+                spacetext.DOKill();
+                spacetext.DOColor(new Color(1, 1, 1, 1), 1f);
+                switch(i)
+                {
+                    case 0:
+                        spacetext.text = "-스페이스를 눌러 게임을 설정합니다-";
+                        break;
+                    case 1:
+                        spacetext.text = "-스페이스를 눌러 게임을 시작합니다-";
+                        break;
+                    case 2:
+                        spacetext.text = "-스페이스를 눌러 게임을 종료합니다-";
+                        break;
+                }
             }
             else
             {

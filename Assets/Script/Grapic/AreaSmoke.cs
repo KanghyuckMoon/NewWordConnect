@@ -30,13 +30,19 @@ public class AreaSmoke : MonoBehaviour
     {
         spriteRenderer.DOColor(new Color(0.3f, 0.3f, 0.3f, 1), 1);
         if(isParticle)
-        particle.Play();
+        {
+            particle.startLifetime = 2f;
+            particle.Play();
+        }
     }
     private void NotSetSmoke()
     {
         spriteRenderer.DOColor(new Color(1f, 1f, 1f, 0), 1);
         if (isParticle)
+        {
+            particle.startLifetime = 0.5f;
             particle.Stop();
+        }
     }
 
     private IEnumerator AreaSet()
