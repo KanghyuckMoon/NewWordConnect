@@ -60,6 +60,8 @@ public class IntroInput : MonoBehaviour
     private Text guidetext;
     private WaitForSeconds waitForSeconds = null;
 
+    private bool numpadOn = true;
+
 
     [SerializeField]
     private Image[] keysettingImage;
@@ -103,6 +105,7 @@ public class IntroInput : MonoBehaviour
     public void SetKeyPad(bool input)
     {
         SaveManager.Instance.CurrenKeySetting.Numpad = input;
+        numpadOn = input;
     }
 
     private IEnumerator KeySettingStart()
@@ -237,7 +240,7 @@ public class IntroInput : MonoBehaviour
     {
         for (int i = 0; i < keyCodes.Length; i++)
         {
-            if (Input.GetKeyDown(  keyCodes[i] - (SaveManager.Instance.CurrenKeySetting.Numpad ? 0 : 208)))
+            if (Input.GetKeyDown(  keyCodes[i] - (numpadOn ? 0 : 208)))
             {
                 num = i;
 
