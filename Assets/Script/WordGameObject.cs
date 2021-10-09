@@ -194,7 +194,7 @@ public class WordGameObject : MonoBehaviour
             w_MoveOn = true;
             w_MoveOnEffect = false;
             w_tile = 0;
-            PlaySound();
+            PlaySound(1);
         }
     }
     public virtual void Down()
@@ -202,7 +202,7 @@ public class WordGameObject : MonoBehaviour
         rigid.AddForce(Vector2.down * (jump * 0.8f), ForceMode2D.Impulse);
         w_MoveOn = true;
         w_MoveOnEffect = false;
-        PlaySound();
+        PlaySound(1);
     }
     public virtual void SuperDown()
     {
@@ -210,7 +210,7 @@ public class WordGameObject : MonoBehaviour
         w_MoveOn = true;
         w_MoveOnEffect = false;
         superDownOn = true;
-        PlaySound();
+        PlaySound(1);
         Invoke("SuperDownFalse",0.2f);
     }
     public virtual void SuperDownFalse()
@@ -278,13 +278,13 @@ public class WordGameObject : MonoBehaviour
     public virtual void SpeedUp()
     {
         realspeed = speed * 2f;
-        PlaySound();
+        PlaySound(0.5f);
         Invoke("SpeedReset", 1f);
     }
     public virtual void SpeedDown()
     {
         realspeed = speed * 0.5f;
-        PlaySound();
+        PlaySound(0.5f);
         Invoke("SpeedReset", 1f);
     }
     public virtual void SpeedStop()
@@ -297,7 +297,7 @@ public class WordGameObject : MonoBehaviour
         pausevector = rigid.velocity;
         rigid.velocity = Vector2.zero;
         realspeed = 0;
-        PlaySound();
+        PlaySound(0.5f);
         Invoke("TimeReset", 1f);
     }
     public virtual void SpeedStopnotinvoke()
@@ -424,10 +424,10 @@ public class WordGameObject : MonoBehaviour
         return realspeed;
     }
 
-    protected void PlaySound()
+    protected void PlaySound(float time)
     {
         isSound = true;
-        Invoke("ResetSound", 1f);
+        Invoke("ResetSound", time);
     }
 
     protected void ResetSound()

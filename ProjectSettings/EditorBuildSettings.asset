@@ -9,24 +9,24 @@ EditorBuildSettings:
     path: 
     guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/Intro.unity
+    path: Assets/Scenes/Title&Intro/Intro.unity
     guid: 1595bf55bf62de246974823f859fd1c3
   - enabled: 1
     path: Assets/Scenes/StageSelect.unity
     guid: 11d3eb4d23ca82f4d899d43f6865da82
   - enabled: 1
-    path: Assets/Scenes/MainTitle.unity
+    path: Assets/Scenes/Title&Intro/MainTitle.unity
     guid: d7270a9db27797049abb7a95767b1e21
   - enabled: 1
-    path: Assets/Scenes/TestGame1.unity
+    path: Assets/Scenes/Test/TestGame1.unity
     guid: 29051ff65e35675419cff4fe69dcbcdd
   - enabled: 1
-    path: Assets/Scenes/TestGame2.unity
+    path: Assets/Scenes/Test/TestGame2.unity
     guid: b30c7f9e4b858164380847647f212f17
   - enabled: 1
     path: Assets/Scenes/UIword.unity
     guid: 5c0d4a8a6145be64ea995c361d163490
   - enabled: 1
-    path: Assets/Scenes/GrapicTest.unity
+    path: Assets/Scenes/Test/GrapicTest.unity
     guid: bd82bb78991db9a4097f58f8b6f47166
   m_configObjects: {}

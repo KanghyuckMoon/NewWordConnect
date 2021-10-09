@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public enum Type
 {
     Image,
     Sprite,
-    Text
+    Text,
+    ImageText
 };
 
 [System.Serializable]
@@ -26,8 +28,14 @@ public class ImageLoding : MonoBehaviour
     [SerializeField]
     private List<FadeObject> fadeObjects = new List<FadeObject>();
     private WaitForSeconds waitForSecondsDelay;
+    private WaitForSeconds waitTextDelay;
     private int orderindex = 0;
     private bool endfade = false;
+    private string tempText = "";
+    [SerializeField]
+    private bool NextSceneOn;
+    [SerializeField]
+    private string NextSceneName;
 
     public bool GetEnd()
     {
@@ -36,6 +44,7 @@ public class ImageLoding : MonoBehaviour
 
     private void Start()
     {
+        waitTextDelay = new WaitForSeconds(0.1f);
         OrderDraw();
     }
 
@@ -44,6 +53,11 @@ public class ImageLoding : MonoBehaviour
         if (orderindex >= fadeObjects.Count)
         {
             endfade = true;
+            if (NextSceneOn)
+            {
+                SceneManager.LoadScene(NextSceneName);
+            }
+
             return;
         }
         waitForSecondsDelay = new WaitForSeconds(fadeObjects[orderindex].delayTime);
@@ -57,6 +71,9 @@ public class ImageLoding : MonoBehaviour
                 break;
             case Type.Text:
                 StartCoroutine(FadeInOutText(orderindex));
+                break;
+            case Type.ImageText:
+                StartCoroutine(FadeInOutImageText(orderindex));
                 break;
         }
         orderindex++;
@@ -129,6 +146,43 @@ public class ImageLoding : MonoBehaviour
             yield return waitForSecondsDelay;
         }
         obj.color = new Color(1, 1, 1, 0);
+        fadeObjects[index].fadeObj.SetActive(false);
+        OrderDraw();
+        yield return null;
+    }
+
+    private IEnumerator FadeInOutImageText(int index)
+    {
+        Text obj = fadeObjects[index].fadeObj.GetComponentInChildren<Text>();
+        tempText = obj.text;
+        obj.text = "";
+        fadeObjects[index].fadeObj.SetActive(true);
+        float a = fadeObjects[index].lodingAmount * 0.016f;
+        float b = fadeObjects[index].endAmount * 0.016f;
+        Image obj2 = fadeObjects[index].fadeObj.GetComponentInChildren<Image>();
+        obj.color = new Color(1, 1, 1, 1);
+        for (float i = 0; i <= 1; i += a)
+        {
+            obj2.color = new Color(1, 1, 1, i);
+            yield return waitForSecondsDelay;
+        }
+
+        for(int i = 0; i <= tempText.Length - 1; i++)
+        {
+            obj.text += tempText[i];
+            yield return waitTextDelay;
+        }
+
+        obj2.color = new Color(1, 1, 1, 1);
+        yield return new WaitForSeconds(fadeObjects[index].holdingTime);
+        for (float i = 1; i >= 0; i -= b)
+        {
+            obj.color = new Color(1, 1, 1, i);
+            obj2.color = new Color(1, 1, 1, i);
+            yield return waitForSecondsDelay;
+        }
+        obj.color = new Color(1, 1, 1, 0);
+        obj2.color = new Color(1, 1, 1, 0);
         fadeObjects[index].fadeObj.SetActive(false);
         OrderDraw();
         yield return null;
