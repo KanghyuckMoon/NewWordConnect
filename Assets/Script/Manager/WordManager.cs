@@ -143,6 +143,10 @@ public class WordManager : MonoBehaviour
     [SerializeField]
     private Animator dieAnimation;
 
+    //키세팅 변수
+    private bool wasd;
+    private bool keypad;
+
     private void Awake()
     {
         //주어 찾기
@@ -181,6 +185,12 @@ public class WordManager : MonoBehaviour
         s_timeManager.SetPlayer(s_player);
         s_weatherManager.SetPlayer(s_player);
         s_displayManager.SetPlayer(s_player);
+    }
+
+    public void SetKeySetting()
+    {
+        wasd = SaveManager.Instance.CurrenKeySetting.Wasd;
+        keypad = SaveManager.Instance.CurrenKeySetting.Numpad;
     }
 
     private void Update()

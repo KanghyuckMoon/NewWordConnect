@@ -108,7 +108,7 @@ public class PlayerMove : WordGameObject
         w_MoveOnEffect = false;
         w_tile = 0;
         CreateDust();
-        PlaySound();
+        PlaySound(1);
     }
 
     public void GravitySet()
@@ -169,7 +169,7 @@ public class PlayerMove : WordGameObject
                 {
                     Jump();
                     collision.gameObject.GetComponent<EnemyBased>().Die();
-                    PlaySound();
+                    PlaySound(1);
                     maincam.Shakecam(2f, 0.2f);
                 }
                 else
@@ -182,7 +182,7 @@ public class PlayerMove : WordGameObject
                 {
                     Jump();
                     collision.gameObject.GetComponent<GimicBloon>().BloonBoom();
-                    PlaySound();
+                    PlaySound(1);
                     maincam.Shakecam(1f, 0.1f);
                 }
                 break;
@@ -240,7 +240,7 @@ public class PlayerMove : WordGameObject
             collision.GetComponent<GimicSpring>().SpringTread();
             rigid.velocity = new Vector2(rigid.velocity.x, 0);
             rigid.AddForce(Vector2.up * 30f, ForceMode2D.Impulse);
-            PlaySound();
+            PlaySound(1);
         }
     }
 

@@ -13252,9 +13252,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   saveUser1:
-    writingData: 0
-    playerName: None
-    lateDate: None
+    writingData: 1
+    playerName: MoonKanghyuck
+    lateDate: 2021/10/09
   saveUser2:
     writingData: 0
     playerName: None

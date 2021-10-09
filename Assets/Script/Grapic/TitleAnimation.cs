@@ -205,7 +205,14 @@ public class TitleAnimation : MonoBehaviour
 
     private void GoToStageSelect()
     {
-        SceneManager.LoadScene("StageSelect");
+        if(SaveManager.Instance.CurrentSaveUser.writingData)
+        {
+            SceneManager.LoadScene("StageSelect");
+        }
+        else
+        {
+            SceneManager.LoadScene("StoryIntro");
+        }
     }
 
 }

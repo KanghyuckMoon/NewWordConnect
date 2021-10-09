@@ -60,6 +60,10 @@ public class IntroInput : MonoBehaviour
     private Text guidetext;
     private WaitForSeconds waitForSeconds = null;
 
+
+    [SerializeField]
+    private Image[] keysettingImage;
+
     private void Start()
     {
         waitForSeconds = new WaitForSeconds(0.1f);
@@ -81,10 +85,61 @@ public class IntroInput : MonoBehaviour
             if (imageLoding.GetEnd() == true)
             {
                 if (playing) return;
-                IntroStart();
                 playing = true;
+                StartCoroutine(KeySettingStart());
             }
         }
+    }
+
+    public void KeySettingEnd()
+    {
+        StartCoroutine(KeySettingEndFade());
+    }
+
+    public void SetWasd(bool input)
+    {
+        SaveManager.Instance.CurrenKeySetting.Wasd = input;
+    }
+    public void SetKeyPad(bool input)
+    {
+        SaveManager.Instance.CurrenKeySetting.Numpad = input;
+    }
+
+    private IEnumerator KeySettingStart()
+    {
+        for (int j = 0; j < keysettingImage.Length; j++)
+        {
+            keysettingImage[j].gameObject.SetActive(true);
+            keysettingImage[j].color = new Color(1, 1, 1, 0);
+        }
+        for (float i = 0; i <= 1; i+= 0.1f)
+        {
+            for(int j = 0; j < keysettingImage.Length; j++)
+            {
+                keysettingImage[j].color = new Color(1, 1, 1, i);
+            }
+            yield return waitForSeconds;
+        }
+        yield return waitForSeconds;
+    }
+
+    private IEnumerator KeySettingEndFade()
+    {
+        
+        for (float i = 1; i >= 0; i -= 0.1f)
+        {
+            for (int j = 0; j < keysettingImage.Length; j++)
+            {
+                keysettingImage[j].color = new Color(1, 1, 1, i);
+            }
+            yield return waitForSeconds;
+        }
+        for (int j = 0; j < keysettingImage.Length; j++)
+        {
+            keysettingImage[j].gameObject.SetActive(false);
+        }
+        yield return waitForSeconds;
+        IntroStart();
     }
 
     public void IntroStart()
@@ -182,7 +237,7 @@ public class IntroInput : MonoBehaviour
     {
         for (int i = 0; i < keyCodes.Length; i++)
         {
-            if (Input.GetKeyDown(keyCodes[i]) || Input.GetKeyDown(keyCodes[i] - 208))
+            if (Input.GetKeyDown(  keyCodes[i] - (SaveManager.Instance.CurrenKeySetting.Numpad ? 0 : 208)))
             {
                 num = i;
 

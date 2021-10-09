@@ -10,6 +10,7 @@ public class SaveManager : MonoSingleton<SaveManager>
     private string Save_FileName1 = "/SaveFile1.txt";
     private string Save_FileName2 = "/SaveFile2.txt";
     private string Save_FileName3 = "/SaveFile3.txt";
+    private string Save_KeySettingFileName = "/KeySettingFile.txt";
     private string Now_Save_FileName = "";
 
     [SerializeField]
@@ -62,6 +63,16 @@ public class SaveManager : MonoSingleton<SaveManager>
         }
     }
 
+    [SerializeField]
+    private KeySetting keysetting;
+    public KeySetting CurrenKeySetting
+    {
+        get
+        {
+            return keysetting;
+        }
+    }
+
 
     private void Awake()
     {
@@ -70,6 +81,7 @@ public class SaveManager : MonoSingleton<SaveManager>
         {
             Directory.CreateDirectory(Save_Path);
         }
+        LoadKeySetting();
     }
 
     public void SetSaveUserData(int index)
@@ -109,5 +121,20 @@ public class SaveManager : MonoSingleton<SaveManager>
             string json = File.ReadAllText(Save_Path + Now_Save_FileName);
             data = JsonUtility.FromJson<SaveUser>(json);
         }
+    }
+
+    private void LoadKeySetting()
+    {
+        if (File.Exists(Save_Path + Now_Save_FileName))
+        {
+            string json = File.ReadAllText(Save_Path + Save_KeySettingFileName);
+            keysetting = JsonUtility.FromJson<KeySetting>(json);
+        }
+    }
+
+    private void SaveKeySetting()
+    {
+        string json = JsonUtility.ToJson(CurrenKeySetting, true);
+        File.WriteAllText(Save_Path + Save_KeySettingFileName, json, System.Text.Encoding.UTF8);
     }
 }

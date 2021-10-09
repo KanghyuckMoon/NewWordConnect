@@ -49,7 +49,7 @@ public class ProfileBar : MonoBehaviour
             NameText.text = data.playerName;
             DateText.text = data.lateDate;
             ProfileImage.sprite = profileSprites[1];
-            ProfileImage.SetNativeSize();
+            ProfileImage.GetComponent<RectTransform>().sizeDelta = new Vector2(80, 80);
         }
         else
         {
