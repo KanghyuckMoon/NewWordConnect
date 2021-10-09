@@ -101,6 +101,11 @@ public class TitleAnimation : MonoBehaviour
                     if(nowbarselect == 0)
                     {
                         MoveScreen(select);
+                        select = 0;
+                    }
+                    else if(nowbarselect == 2 && select != 0)
+                    {
+                        StartGame(select);
                     }
                 }
             }
@@ -186,10 +191,21 @@ public class TitleAnimation : MonoBehaviour
         }
     }
 
+    private void StartGame(int index)
+    {
+        loadingOn = false;
+        SaveManager.Instance.SetSaveUserData(index);
+        Startbar.DOAnchorPosX(-1500, 2).OnComplete(() => GoToStageSelect());
+    }
+
     private void SetLoadingEnd()
     {
         loadingOn = true;
     }
 
+    private void GoToStageSelect()
+    {
+        SceneManager.LoadScene("StageSelect");
+    }
 
 }

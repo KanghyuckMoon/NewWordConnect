@@ -14,7 +14,7 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
             if (shuttingDown)
             {
                 Debug.LogWarning("[Instance] Instance " + typeof(T) + " is already destroyed. Returning null.");
-                return null;
+                //return null;
             }
 
             lock (locker)

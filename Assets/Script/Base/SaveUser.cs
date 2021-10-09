@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class SaveUser : MonoBehaviour
+[System.Serializable]
+public class SaveUser
 {
-
+    public bool writingData;
+    public string playerName;
+    public string lateDate;
 }
