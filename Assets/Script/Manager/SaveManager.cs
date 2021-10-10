@@ -81,6 +81,7 @@ public class SaveManager : MonoSingleton<SaveManager>
         {
             Directory.CreateDirectory(Save_Path);
         }
+        DontDestroyOnLoad(Instance);
         LoadKeySetting();
     }
 

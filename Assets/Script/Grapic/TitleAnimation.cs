@@ -29,6 +29,7 @@ public class TitleAnimation : MonoBehaviour
     private Image images;
     private int select = 0;
     private int nowbarselect = 0;
+    private int optionselect = 0;
     private int lastselect = 0;
     private bool loadingOn = false;
     [SerializeField]
@@ -40,6 +41,13 @@ public class TitleAnimation : MonoBehaviour
     private RectTransform Startbar = null;
     [SerializeField]
     private RectTransform Optionbar = null;
+
+    [SerializeField]
+    private RectTransform optionarrow = null;
+    [SerializeField]
+    private RectTransform[] optionRectTexts = null;
+    [SerializeField]
+    private Text[] optionTexts = null;
 
 
     private void Awake()
@@ -102,11 +110,26 @@ public class TitleAnimation : MonoBehaviour
                     {
                         MoveScreen(select);
                         select = 0;
+                        optionselect = 0;
                     }
                     else if(nowbarselect == 2 && select != 0)
                     {
                         StartGame(select);
                     }
+                }
+            }
+
+            if(nowbarselect == 1)
+            {
+                if(Input.GetKeyDown(KeyCode.W))
+                {
+                    OptionSelect(-1);
+                    MoveOption();
+                }
+                else if(Input.GetKeyDown(KeyCode.S))
+                {
+                    OptionSelect(1);
+                    MoveOption();
                 }
             }
         }
@@ -176,19 +199,31 @@ public class TitleAnimation : MonoBehaviour
             case 0:
                 Mainbar.DOAnchorPosX(0, 1).OnComplete(() => SetLoadingEnd()); ;
                 Startbar.DOAnchorPosX(700, 1);
-                //Optionbar.DOAnchorPosX(-700, 0.5f);
+                Optionbar.DOAnchorPosX(-700, 1);
                 break;
             case 1: // 옵션
                 Mainbar.DOAnchorPosX(700, 1).OnComplete(() => SetLoadingEnd());
                 Startbar.DOAnchorPosX(1400, 1);
-                //Optionbar.DOAnchorPosX(-700, 0.5f);
+                Optionbar.DOAnchorPosX(0, 1);
                 break;
             case 2: // 스타트
                 Mainbar.DOAnchorPosX(-700, 1).OnComplete(() => SetLoadingEnd());
                 Startbar.DOAnchorPosX(0, 1);
-                //Optionbar.DOAnchorPosX(-700, 0.5f);
+                Optionbar.DOAnchorPosX(-1400, 1);
                 break;
         }
+    }
+
+    private void MoveOption()
+    {
+        optionarrow.DOAnchorPosY(optionRectTexts[optionselect].anchoredPosition.y,0.2f);
+    }
+
+    private void OptionSelect(int i)
+    {
+        if (optionselect + i < 0) return;
+        if (optionselect + i > optionRectTexts.Length - 1) return;
+        optionselect += i;
     }
 
     private void StartGame(int index)
