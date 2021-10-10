@@ -43,14 +43,16 @@ public class NameSetting : MonoBehaviour
 
 
     [SerializeField]
-    private Transform hangleobj;
+    private Transform hangleobj = null;
     [SerializeField]
     private RectTransform box;
+    [SerializeField]
+    private RectTransform selectbox;
     private RectTransform[,] recthangle = new RectTransform[3,10];
     private KeySetting keysetting;
 
     [SerializeField]
-    private Text NameText;
+    private Text[] NameText = new Text[5];
 
     private void Awake()
     {
@@ -68,6 +70,13 @@ public class NameSetting : MonoBehaviour
     private void Start()
     {
         keysetting = SaveManager.Instance.CurrenKeySetting;
+        MoveBox();
+        MoveSelectBox();
+        playername[0] = ' ';
+        playername[1] = ' ';
+        playername[2] = ' ';
+        playername[3] = ' ';
+        playername[4] = ' ';
     }
 
     private void Update()
@@ -119,17 +128,21 @@ public class NameSetting : MonoBehaviour
         {
             SetName();
         }
-
-        for (int i = 0; i < keyCodes.Length; i++)
+        else
         {
-            if (Input.GetKeyDown(keyCodes[i] - (keysetting.Numpad ? 0 : 208)))
+            for (int i = 0; i < keyCodes.Length; i++)
             {
-                if (i < 5)
+                if (Input.GetKeyDown(keyCodes[i + 1 >= 9 ? 9 : i + 1] - (keysetting.Numpad ? 0 : 208)))
                 {
-                    indexplayername = i;
+                    if (i < 5)
+                    {
+                        indexplayername = i;
+                        MoveSelectBox();
+                    }
                 }
             }
         }
+        
     }
 
     private void MoveBox()
@@ -137,9 +150,15 @@ public class NameSetting : MonoBehaviour
         box.DOAnchorPos(recthangle[y,x].anchoredPosition,0.2f);
     }
 
+    private void MoveSelectBox()
+    {
+        selectbox.DOAnchorPos(NameText[indexplayername].GetComponent<RectTransform>().anchoredPosition, 0.2f);
+    }
+
     private void SetName()
     {
-        switch(indexplayernamestat[indexplayername])
+        InputZero();
+        switch (indexplayernamestat[indexplayername])
         {
             case 6:
                 SetName6();
@@ -169,7 +188,11 @@ public class NameSetting : MonoBehaviour
                 SetName0();
                 break;
         }
-        NameText.text = string.Format("{0}{1}{2}{3}{4}", playername[0], playername[1], playername[2], playername[3], playername[4]);
+        NameText[0].text = string.Format("{0}", playername[0]);
+        NameText[1].text = string.Format("{0}", playername[1]);
+        NameText[2].text = string.Format("{0}", playername[2]);
+        NameText[3].text = string.Format("{0}", playername[3]);
+        NameText[4].text = string.Format("{0}", playername[4]);
     }
 
     private int FindListInChar(char value, char[] list)
@@ -529,6 +552,18 @@ public class NameSetting : MonoBehaviour
             indexunicode[indexplayername, 2] = 0;
             indexplayernamestat[indexplayername] = 0;
             SetName0();
+        }
+    }
+
+    private void InputZero() // 공백을 입력함
+    {
+        if(hangle[y,x] == ' ')
+        {
+            indexunicode[indexplayername, 0] = -1;
+            indexunicode[indexplayername, 1] = -1;
+            indexunicode[indexplayername, 2] = 0;
+            indexplayernamestat[indexplayername] = 0;
+            playername[indexplayername] = ' ';
         }
     }
 }
