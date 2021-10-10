@@ -109,6 +109,7 @@ public class PlayerMove : WordGameObject
         w_tile = 0;
         CreateDust();
         PlaySound(1);
+        SoundManager.Instance.SFXPlay("JumpSound",clips[0]);
     }
 
     public void GravitySet()
@@ -170,6 +171,7 @@ public class PlayerMove : WordGameObject
                     Jump();
                     collision.gameObject.GetComponent<EnemyBased>().Die();
                     PlaySound(1);
+                    SoundManager.Instance.SFXPlay("JumpSound", clips[0]);
                     maincam.Shakecam(2f, 0.2f);
                 }
                 else
@@ -183,6 +185,7 @@ public class PlayerMove : WordGameObject
                     Jump();
                     collision.gameObject.GetComponent<GimicBloon>().BloonBoom();
                     PlaySound(1);
+                    SoundManager.Instance.SFXPlay("JumpSound", clips[0]);
                     maincam.Shakecam(1f, 0.1f);
                 }
                 break;
@@ -241,6 +244,7 @@ public class PlayerMove : WordGameObject
             rigid.velocity = new Vector2(rigid.velocity.x, 0);
             rigid.AddForce(Vector2.up * 30f, ForceMode2D.Impulse);
             PlaySound(1);
+            SoundManager.Instance.SFXPlay("JumpSound", clips[0]);
         }
     }
 

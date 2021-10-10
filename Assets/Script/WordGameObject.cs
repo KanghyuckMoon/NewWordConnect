@@ -100,6 +100,9 @@ public class WordGameObject : MonoBehaviour
     [SerializeField]
     protected GimicBloon bloon;
 
+    [SerializeField]
+    protected List<AudioClip> clips;
+
     public void SetPlayer(PlayerMove player)
     {
         this.player = player;
