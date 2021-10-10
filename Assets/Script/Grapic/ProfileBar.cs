@@ -16,6 +16,7 @@ public class ProfileBar : MonoBehaviour
     private Sprite[] profileSprites;
 
     private SaveUser data;
+    private SaveManager saveManager;
 
     [SerializeField]
     private int dateindex;
@@ -27,17 +28,17 @@ public class ProfileBar : MonoBehaviour
 
     public void SetProfile()
     {
-        Debug.Log(SaveManager.Instance);
+        saveManager = SaveManager.Instance;
         switch(dateindex)
         {
             case 1:
-                data = SaveManager.Instance.saveUserData1;
+                data = saveManager.saveUserData1;
                 break;
             case 2:
-                data = SaveManager.Instance.saveUserData2;
+                data = saveManager.saveUserData2;
                 break;
             case 3:
-                data = SaveManager.Instance.saveUserData3;
+                data = saveManager.saveUserData3;
                 break;
             default:
                 Debug.LogWarning("[Instance] Instance " + typeof(ProfileBar) + "몇 번째 세이브인지 체크해주세요");

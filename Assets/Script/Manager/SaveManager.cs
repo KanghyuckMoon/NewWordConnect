@@ -124,7 +124,7 @@ public class SaveManager : MonoSingleton<SaveManager>
         }
     }
 
-    private void LoadKeySetting()
+    public void LoadKeySetting()
     {
         if (File.Exists(Save_Path + Now_Save_FileName))
         {
@@ -133,7 +133,7 @@ public class SaveManager : MonoSingleton<SaveManager>
         }
     }
 
-    private void SaveKeySetting()
+    public void SaveKeySetting()
     {
         string json = JsonUtility.ToJson(CurrenKeySetting, true);
         File.WriteAllText(Save_Path + Save_KeySettingFileName, json, System.Text.Encoding.UTF8);

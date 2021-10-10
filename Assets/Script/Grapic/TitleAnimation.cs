@@ -51,6 +51,8 @@ public class TitleAnimation : MonoBehaviour
 
     private KeySetting keysetting;
 
+    [SerializeField]
+    private AudioClip testClip;
 
     private void Awake()
     {
@@ -61,6 +63,9 @@ public class TitleAnimation : MonoBehaviour
     {
         StartCoroutine(AnimationTitle());
         keysetting = SaveManager.Instance.CurrenKeySetting;
+        SetTexts();
+        SetBackGroundVolume(keysetting.backgroundvolume);
+        SetEffectVolume(keysetting.effectvolume);
     }
 
     private IEnumerator AnimationTitle()
@@ -89,7 +94,7 @@ public class TitleAnimation : MonoBehaviour
         {
             for (int i = 0; i < keyCodes.Length; i++)
             {
-                if (Input.GetKeyDown(keyCodes[0]) || Input.GetKeyDown(KeyCode.Backspace))
+                if (Input.GetKeyDown(KeyCode.Backspace))
                 {
                     select = 0;
                     spacetext.color = new Color(1, 1, 1, 0);
@@ -101,7 +106,16 @@ public class TitleAnimation : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(keyCodes[i] - (keysetting.Numpad ? 0 : 208)))
                 {
-                    if(i < 4)
+                    if(nowbarselect == 1)
+                    {
+                        if (optionselect == 2) SetBackGroundVolume(i);
+                        if (optionselect == 3)
+                        {
+                            SetEffectVolume(i);
+                            SoundManager.Instance.SFXPlay("testSound", testClip);
+                        }
+                    }
+                    else if(i < 4)
                     {
                         select = i;
                         MoveWord(select);
@@ -253,4 +267,44 @@ public class TitleAnimation : MonoBehaviour
         }
     }
 
+    private void SetTexts()
+    {
+        SetTextWASD();
+        SetTextNumpad();
+    }
+
+    private void SetTextWASD()
+    {
+        optionTexts[0].text = "WASD/방향키 - " + (keysetting.Wasd ? "WASD" : "방향키");
+    }
+
+    private void SetTextNumpad()
+    {
+        optionTexts[1].text = "넘패드/키패드 - " + (keysetting.Numpad ? "넘패드" : "키패드");
+    }
+
+    private void SetBackGroundVolume(int num)
+    {
+        SoundManager.Instance.SetBgSoundVolume(num);
+        if(num == 9)
+        {
+            optionTexts[2].text = "배경음악 - " + 100;
+        }
+        else
+        {
+        optionTexts[2].text = "배경음악 - " + (num * 10);
+        }
+    }
+    private void SetEffectVolume(int num)
+    {
+        SoundManager.Instance.SetEffectSoundVolume(num);
+        if (num == 9)
+        {
+            optionTexts[3].text = "효과음 - " + 100;
+        }
+        else
+        {
+            optionTexts[3].text = "효과음 - " + (num * 10);
+        }
+    }
 }

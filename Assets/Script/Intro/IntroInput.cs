@@ -103,6 +103,7 @@ public class IntroInput : MonoBehaviour
     public void KeySettingEnd()
     {
         SaveManager.Instance.CurrenKeySetting.writingData = true;
+        SaveManager.Instance.SaveKeySetting();
         StartCoroutine(KeySettingEndFade());
     }
 
