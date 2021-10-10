@@ -49,6 +49,8 @@ public class TitleAnimation : MonoBehaviour
     [SerializeField]
     private Text[] optionTexts = null;
 
+    private KeySetting keysetting;
+
 
     private void Awake()
     {
@@ -58,6 +60,7 @@ public class TitleAnimation : MonoBehaviour
     private void Start()
     {
         StartCoroutine(AnimationTitle());
+        keysetting = SaveManager.Instance.CurrenKeySetting;
     }
 
     private IEnumerator AnimationTitle()
@@ -86,17 +89,17 @@ public class TitleAnimation : MonoBehaviour
         {
             for (int i = 0; i < keyCodes.Length; i++)
             {
-                if(Input.GetKeyDown(keyCodes[0]) || Input.GetKeyDown(KeyCode.Backspace))
+                if (Input.GetKeyDown(keyCodes[0]) || Input.GetKeyDown(KeyCode.Backspace))
                 {
                     select = 0;
                     spacetext.color = new Color(1, 1, 1, 0);
                     spacetext.DOKill();
                     MoveWord(0);
-                    if(nowbarselect != 0)
+                    if (nowbarselect != 0)
                         MoveScreen(select);
 
                 }
-                else if (Input.GetKeyDown(keyCodes[i]) || Input.GetKeyDown(keyCodes[i] - 208))
+                else if (Input.GetKeyDown(keyCodes[i] - (keysetting.Numpad ? 0 : 208)))
                 {
                     if(i < 4)
                     {

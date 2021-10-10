@@ -1748,6 +1748,7 @@ MonoBehaviour:
   keysetting:
     Wasd: 1
     Numpad: 1
+    writingData: 1
 --- !u!4 &1126261153
 Transform:
   m_ObjectHideFlags: 0

@@ -88,13 +88,21 @@ public class IntroInput : MonoBehaviour
             {
                 if (playing) return;
                 playing = true;
-                StartCoroutine(KeySettingStart());
+                if(SaveManager.Instance.CurrenKeySetting.writingData)
+                {
+                    IntroStart();
+                }
+                else
+                {
+                    StartCoroutine(KeySettingStart());
+                }
             }
         }
     }
 
     public void KeySettingEnd()
     {
+        SaveManager.Instance.CurrenKeySetting.writingData = true;
         StartCoroutine(KeySettingEndFade());
     }
 
@@ -147,6 +155,7 @@ public class IntroInput : MonoBehaviour
 
     public void IntroStart()
     {
+        numpadOn = SaveManager.Instance.CurrenKeySetting.Numpad;
         StartCoroutine(FadeIn());
     }
 
@@ -240,7 +249,7 @@ public class IntroInput : MonoBehaviour
     {
         for (int i = 0; i < keyCodes.Length; i++)
         {
-            if (Input.GetKeyDown(  keyCodes[i] - (numpadOn ? 0 : 208)))
+            if (Input.GetKeyDown(keyCodes[i] - (numpadOn ? 0 : 208)))
             {
                 num = i;
 
