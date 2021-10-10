@@ -1465,7 +1465,7 @@ MonoBehaviour:
   - {fileID: 505691775}
   - {fileID: 1161803010}
   - {fileID: 1009829120}
-  testClip: {fileID: 8300000, guid: d5af0526ead235e458dea93ebcb43b19, type: 3}
+  testClip: {fileID: 8300000, guid: 820b4ae7e2ef15149ba3363114e654ad, type: 3}
 --- !u!1 &471426218
 GameObject:
   m_ObjectHideFlags: 0

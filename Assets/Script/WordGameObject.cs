@@ -282,6 +282,7 @@ public class WordGameObject : MonoBehaviour
     {
         realspeed = speed * 2f;
         PlaySound(0.5f);
+        SoundManager.Instance.SFXPlay("JumpSound", clips[1]);
         Invoke("SpeedReset", 1f);
     }
     public virtual void SpeedDown()
