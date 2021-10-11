@@ -37,6 +37,9 @@ public class ImageLoding : MonoBehaviour
     [SerializeField]
     private string NextSceneName;
     private bool isSkip = false;
+    [SerializeField]
+    private AudioClip effectsound;
+    AudioSource audioSource;
 
     public bool GetEnd()
     {
@@ -45,6 +48,8 @@ public class ImageLoding : MonoBehaviour
 
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = effectsound;
         waitTextDelay = new WaitForSeconds(0.1f);
         OrderDraw();
     }
@@ -184,6 +189,7 @@ public class ImageLoding : MonoBehaviour
                 obj.text = tempText;
                 break;
             }
+            audioSource.Play();
             obj.text += tempText[i];
             yield return waitTextDelay;
         }

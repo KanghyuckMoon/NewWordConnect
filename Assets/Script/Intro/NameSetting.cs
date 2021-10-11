@@ -70,6 +70,7 @@ public class NameSetting : MonoBehaviour
     [SerializeField]
     private Image backgroundImage;
     private WaitForSeconds wait;
+    private AudioSource audioSource;
 
     private void Awake()
     {
@@ -83,6 +84,7 @@ public class NameSetting : MonoBehaviour
                 k++;
             }
         }
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -247,6 +249,7 @@ public class NameSetting : MonoBehaviour
 
     private void SetName()
     {
+        audioSource.Play();
         if(yesnoon)
         {
             if(yesnoselect == 0)
