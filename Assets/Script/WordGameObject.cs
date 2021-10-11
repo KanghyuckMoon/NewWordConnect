@@ -68,7 +68,7 @@ public class WordGameObject : MonoBehaviour
     protected int sizeIndex = 0;
 
     //1초동안 정지한다
-    private bool w_pause;
+    protected bool w_pause;
     private Vector2 pausevector;
 
     //블럭을 밟을 때 마다
@@ -106,6 +106,10 @@ public class WordGameObject : MonoBehaviour
     public bool isStop = false;
     //protected bool isStop = false;
     protected Vector2 stopVector = Vector2.zero;
+
+    [SerializeField]
+    protected Material[] materials;
+    protected SpriteRenderer spriteRenderer;
 
     public void SetPlayer(PlayerMove player)
     {
@@ -175,6 +179,7 @@ public class WordGameObject : MonoBehaviour
     protected virtual void Start()
     {
         realspeed = speed;
+        spriteRenderer = GetComponent<SpriteRenderer>();
         StartCoroutine(OnMoveDetect());
         SetPlayer();
     }
@@ -323,6 +328,7 @@ public class WordGameObject : MonoBehaviour
     public virtual void SpeedUp()
     {
         realspeed = speed * 2f;
+        spriteRenderer.material = materials[1];
         PlaySound(0.5f);
         SoundManager.Instance.SFXPlay("JumpSound", clips[1]);
         Invoke("SpeedReset", 1f);
@@ -330,12 +336,14 @@ public class WordGameObject : MonoBehaviour
     public virtual void SpeedDown()
     {
         realspeed = speed * 0.5f;
+        spriteRenderer.material = materials[3];
         PlaySound(0.5f);
         Invoke("SpeedReset", 1f);
     }
     public virtual void SpeedStop()
     {
         w_pause = true;
+        spriteRenderer.material = materials[2];
         realspeed = 0;
         gravityScale = 0;
         jump = 0;
@@ -359,11 +367,13 @@ public class WordGameObject : MonoBehaviour
     }
     public virtual void SpeedReset()
     {
+        spriteRenderer.material = materials[0];
         realspeed = speed;
     }
     public virtual void TimeReset()
     {
         w_pause = false;
+        spriteRenderer.material = materials[0];
         realspeed = speed;
         rigid.velocity = pausevector;
         gravityScale = 4.300000190734863f;
@@ -373,12 +383,13 @@ public class WordGameObject : MonoBehaviour
 
     public virtual void ColliderOff()
     {
+        spriteRenderer.material = materials[4];
         w_collider.enabled = false;
         Invoke("ColliderOn",1f);
     }
     public virtual void ColliderOn()
     {
-
+        spriteRenderer.material = materials[0];
         w_collider.enabled = true;
     }
 

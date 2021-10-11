@@ -17,7 +17,6 @@ public class PlayerMove : WordGameObject
     private WordManager wordManager;
     private TextManager textManager;
     //애니메이션
-    private SpriteRenderer spriteRenderer = null;
     private Collider2D colliders = null;
     private Animator animator = null;
     private bool isWalk = false;
@@ -57,6 +56,7 @@ public class PlayerMove : WordGameObject
     {
         if (die) return;
         if (wordManager.isEvent) return;
+        if (w_pause) return;
         //���������� �Լ�
         InputJump();
         JumpDrag();
@@ -72,6 +72,7 @@ public class PlayerMove : WordGameObject
         if (die) return;
         if (wordManager.isEvent) return;
         if (wordManager.isInputESC) return;
+        if (w_pause) return;
         GravitySet();
         Move();
         DownDust();
