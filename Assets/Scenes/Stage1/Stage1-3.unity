@@ -335,13 +335,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 24.5
   w_Movetime: 0
-  setArea: -1
+  setArea: 0
   isSound: 0
   isSoundEffect: 0
   isBloon: 0
   bloon: {fileID: 0}
+  clips: []
   isStop: 0
-  materials: []
   gimiclist: []
   gravityobj: {fileID: 1753925254}
 --- !u!66 &263275148
@@ -496,7 +496,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 40
-      m_TileSpriteIndex: 48
+      m_TileSpriteIndex: 40
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -606,7 +606,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 7
-      m_TileSpriteIndex: 47
+      m_TileSpriteIndex: 22
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -866,7 +866,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 1
-      m_TileSpriteIndex: 45
+      m_TileSpriteIndex: 34
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -976,7 +976,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 38
-      m_TileSpriteIndex: 44
+      m_TileSpriteIndex: 38
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -1137,6 +1137,8 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: -8081318777611070668, guid: 284bbd1bcd879c041848bdcb38af0031, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
   - m_RefCount: 0
@@ -1159,38 +1161,36 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: -1944774772770411972, guid: 284bbd1bcd879c041848bdcb38af0031, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
   - m_RefCount: 2
     m_Data: {fileID: -2952594467184964206, guid: 284bbd1bcd879c041848bdcb38af0031, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 276684615530449783, guid: 284bbd1bcd879c041848bdcb38af0031, type: 3}
   - m_RefCount: 3
     m_Data: {fileID: -3830343096677665897, guid: 284bbd1bcd879c041848bdcb38af0031, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 6589938823187235683, guid: 284bbd1bcd879c041848bdcb38af0031, type: 3}
   - m_RefCount: 10
     m_Data: {fileID: 6737935124300610594, guid: 284bbd1bcd879c041848bdcb38af0031, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: -1433116259882955719, guid: 284bbd1bcd879c041848bdcb38af0031, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 1
-    m_Data: {fileID: 276684615530449783, guid: 284bbd1bcd879c041848bdcb38af0031, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: -1944774772770411972, guid: 284bbd1bcd879c041848bdcb38af0031, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 20
     m_Data: {fileID: 8354052564189010205, guid: 284bbd1bcd879c041848bdcb38af0031, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: -8081318777611070668, guid: 284bbd1bcd879c041848bdcb38af0031, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: 6589938823187235683, guid: 284bbd1bcd879c041848bdcb38af0031, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileMatrixArray:
   - m_RefCount: 50
     m_Data:
@@ -1358,8 +1358,8 @@ MonoBehaviour:
   isSoundEffect: 0
   isBloon: 0
   bloon: {fileID: 0}
+  clips: []
   isStop: 0
-  materials: []
   s_Temperature: 50
   tempdan: 0
 --- !u!1 &334722424
@@ -7639,7 +7639,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 384878ea4668d584fbfb14d6babcaaef, type: 2}
-  audioSource: []
+  bgSource: {fileID: 874071040}
   bgclip:
   - {fileID: 8300000, guid: cc7631ee7b836f84c95663cd47d094f2, type: 3}
 --- !u!82 &874071040
@@ -9778,8 +9778,8 @@ MonoBehaviour:
   isSoundEffect: 0
   isBloon: 0
   bloon: {fileID: 0}
+  clips: []
   isStop: 0
-  materials: []
   downmoveOn: 0
 --- !u!50 &2016849913
 Rigidbody2D:
@@ -10157,8 +10157,8 @@ MonoBehaviour:
   isSoundEffect: 0
   isBloon: 0
   bloon: {fileID: 0}
+  clips: []
   isStop: 0
-  materials: []
   s_Weather: 00000000010000000200000003000000040000000500000006000000
   weatherObjects:
   - {fileID: 1135043462}
