@@ -1,5 +1,5 @@
 ﻿{
-    "writingData": false,
+    "writingData": true,
     "playerName": "마리오  ",
     "lateDate": "2021-10-11"
 }

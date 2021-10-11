@@ -83,6 +83,7 @@ public class SaveManager : MonoSingleton<SaveManager>
         }
         DontDestroyOnLoad(Instance);
         LoadKeySetting();
+        LoadAllSaveFile();
     }
 
     public void SetSaveUserData(int index)
@@ -112,6 +113,26 @@ public class SaveManager : MonoSingleton<SaveManager>
     {
         string json = JsonUtility.ToJson(CurrentSaveUser, true);
         File.WriteAllText(Save_Path + Now_Save_FileName, json, System.Text.Encoding.UTF8);
+    }
+
+
+    private void LoadAllSaveFile()
+    {
+        if (File.Exists(Save_Path + Save_FileName1))
+        {
+            string json = File.ReadAllText(Save_Path + Save_FileName1);
+            saveUser1 = JsonUtility.FromJson<SaveUser>(json);
+        }
+        if (File.Exists(Save_Path + Save_FileName2))
+        {
+            string json = File.ReadAllText(Save_Path + Save_FileName2);
+            saveUser2 = JsonUtility.FromJson<SaveUser>(json);
+        }
+        if (File.Exists(Save_Path + Save_FileName3))
+        {
+            string json = File.ReadAllText(Save_Path + Save_FileName3);
+            saveUser3 = JsonUtility.FromJson<SaveUser>(json);
+        }
     }
 
     private void LoadToJson()
