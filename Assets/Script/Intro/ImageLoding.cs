@@ -36,6 +36,7 @@ public class ImageLoding : MonoBehaviour
     private bool NextSceneOn;
     [SerializeField]
     private string NextSceneName;
+    private bool isSkip = false;
 
     public bool GetEnd()
     {
@@ -46,6 +47,14 @@ public class ImageLoding : MonoBehaviour
     {
         waitTextDelay = new WaitForSeconds(0.1f);
         OrderDraw();
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            isSkip = true;
+        }
     }
 
     private void OrderDraw()
@@ -169,6 +178,12 @@ public class ImageLoding : MonoBehaviour
 
         for(int i = 0; i <= tempText.Length - 1; i++)
         {
+            if(isSkip)
+            {
+                isSkip = false;
+                obj.text = tempText;
+                break;
+            }
             obj.text += tempText[i];
             yield return waitTextDelay;
         }
