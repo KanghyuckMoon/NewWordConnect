@@ -6,7 +6,7 @@ using UnityEngine.Audio;
 public class SoundManager : MonoSingleton<SoundManager>
 {
     public AudioMixer audioMixer;
-    public AudioSource bgSource;
+    public AudioSource[] audioSource;
     public AudioClip[] bgclip;
 
 
@@ -14,23 +14,20 @@ public class SoundManager : MonoSingleton<SoundManager>
     private void Awake()
     {
         DontDestroyOnLoad(Instance);
+        audioSource = GetComponents<AudioSource>();
     }
 
-    public void SFXPlay(string sfxName, AudioClip clip)
+    public void SFXPlay(int index)
     {
-        GameObject soundobj = new GameObject(sfxName + "Sound");
-        AudioSource audioSource = soundobj.AddComponent<AudioSource>();
-        audioSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("SFX")[0];
-        audioSource.clip = clip;
-        audioSource.Play();
+        audioSource[index].Play();
     }
 
     public void BgSoundPlay(AudioClip clip)
     {
-        bgSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("BackGround")[0];
-        bgSource.clip = clip;
-        bgSource.loop = true;
-        bgSource.Play();
+        audioSource[0].outputAudioMixerGroup = audioMixer.FindMatchingGroups("BackGround")[0];
+        audioSource[0].clip = clip;
+        audioSource[0].loop = true;
+        audioSource[0].Play();
     }
 
     public void SetBgSoundVolume(int val)

@@ -112,7 +112,7 @@ public class TitleAnimation : MonoBehaviour
                         if (optionselect == 3)
                         {
                             SetEffectVolume(i);
-                            SoundManager.Instance.SFXPlay("testSound", testClip);
+                            SoundManager.Instance.SFXPlay(2);
                         }
                     }
                     else if(i < 4)
