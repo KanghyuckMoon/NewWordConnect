@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMove : WordGameObject
 {
@@ -30,6 +31,7 @@ public class PlayerMove : WordGameObject
     private bool die = false;
     private bool isAir = false;
     private int layerMask = 0;
+    private bool isInvincibility = false;
 
     protected override void Start()
     {
@@ -219,40 +221,60 @@ public class PlayerMove : WordGameObject
 
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Wind"))
+        switch(collision.gameObject.tag)
         {
-            rigid.AddForce(Vector2.right * 2f);
+            case "Wind":
+                rigid.AddForce(Vector2.right * 2f);
+                break;
+            case "CameraLock":
+                nowArea = collision.GetComponent<CameraSettingObject>().SetCameraMoveSetting();
+                break;
+            case "Spike":
+                Died();
+                break;
+            case "BreakBlock":
+                if(!(rigid.velocity.y <= 0) && collision.transform.position.y >= transform.position.y)
+                {
+                    collision.GetComponent<GimicBlock>().BreakBlock();
+                    rigid.velocity = new Vector2(rigid.velocity.x, 0);
+                    rigid.AddForce(Vector2.down * 3f, ForceMode2D.Impulse);
+                }
+                else if(superDownOn)
+                {
+                    collision.GetComponent<GimicBlock>().BreakBlock();
+                }
+                break;
+            case "Spring":
+                if((rigid.velocity.y <= 0))
+                {
+                    collision.GetComponent<GimicSpring>().SpringTread();
+                    rigid.velocity = new Vector2(rigid.velocity.x, 0);
+                    rigid.AddForce(Vector2.up * 30f, ForceMode2D.Impulse);
+                    PlaySound(1);
+                    SoundManager.Instance.SFXPlay("JumpSound", clips[0]);
+                }
+                break;
+            case "WinPoint":
+                WinNextScene();
+                break;
         }
-        if (collision.CompareTag("CameraLock"))
-        {
-            nowArea = collision.GetComponent<CameraSettingObject>().SetCameraMoveSetting();
-        }
-        if (collision.CompareTag("Spike"))
-        {
-            Died();
-        }
-        if (collision.CompareTag("BreakBlock") && !(rigid.velocity.y <= 0) && collision.transform.position.y >= transform.position.y)
-        {
-            collision.GetComponent<GimicBlock>().BreakBlock();
-            rigid.velocity = new Vector2(rigid.velocity.x,0);
-            rigid.AddForce(Vector2.down * 3f,ForceMode2D.Impulse);
-        }
-        else if (collision.CompareTag("BreakBlock") && superDownOn)
-        {
-            collision.GetComponent<GimicBlock>().BreakBlock();
-        }
-        if (collision.CompareTag("Spring") && (rigid.velocity.y <= 0))
-        {
-            collision.GetComponent<GimicSpring>().SpringTread();
-            rigid.velocity = new Vector2(rigid.velocity.x, 0);
-            rigid.AddForce(Vector2.up * 30f, ForceMode2D.Impulse);
-            PlaySound(1);
-            SoundManager.Instance.SFXPlay("JumpSound", clips[0]);
-        }
+    }
+
+    public void WinNextScene()
+    {
+        if (isInvincibility) return;
+        isInvincibility = true;
+        Invoke("MoveStageSelect",1f);
+    }
+
+    public void MoveStageSelect()
+    {
+        SceneManager.LoadScene("StageSelect");
     }
 
     public void Died()
     {
+        if (isInvincibility) return;
         cloth.gameObject.SetActive(false);
         maincam.Shakecam(3f, 0.3f);
         dieEffect.transform.position = transform.position;

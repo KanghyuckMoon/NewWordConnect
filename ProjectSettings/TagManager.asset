@@ -13,6 +13,7 @@ TagManager:
   - Spring
   - TextObj
   - Bloon
+  - WinPoint
   layers:
   - Default
   - TransparentFX
