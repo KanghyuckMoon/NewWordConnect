@@ -54,6 +54,15 @@ public class TitleAnimation : MonoBehaviour
     [SerializeField]
     private AudioClip testClip;
 
+    [SerializeField]
+    private GameObject wasdset;
+    [SerializeField]
+    private GameObject numpadset;
+
+    private KeyCode[] wasdkeycodes = new KeyCode[5];
+
+    private bool optionOn;
+
     private void Awake()
     {
         images = GetComponent<Image>();
@@ -66,6 +75,20 @@ public class TitleAnimation : MonoBehaviour
         SetTexts();
         SetBackGroundVolume(keysetting.backgroundvolume);
         SetEffectVolume(keysetting.effectvolume);
+        if (keysetting.Wasd)
+        {
+            wasdkeycodes[0] = KeyCode.W;
+            wasdkeycodes[1] = KeyCode.S;
+            wasdkeycodes[2] = KeyCode.D;
+            wasdkeycodes[3] = KeyCode.A;
+        }
+        else
+        {
+            wasdkeycodes[0] = KeyCode.UpArrow;
+            wasdkeycodes[1] = KeyCode.DownArrow;
+            wasdkeycodes[2] = KeyCode.RightArrow;
+            wasdkeycodes[3] = KeyCode.LeftArrow;
+        }
     }
 
     private IEnumerator AnimationTitle()
@@ -109,7 +132,7 @@ public class TitleAnimation : MonoBehaviour
                     if(nowbarselect == 1)
                     {
                         if (optionselect == 2) SetBackGroundVolume(i);
-                        if (optionselect == 3)
+                        else if (optionselect == 3)
                         {
                             SetEffectVolume(i);
                             SoundManager.Instance.SFXPlay(2);
@@ -123,7 +146,12 @@ public class TitleAnimation : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    if(nowbarselect == 0)
+                    if (nowbarselect == 1)
+                    {
+                        if (optionselect == 0) ShowWasdSet();
+                        else if (optionselect == 1) ShowNumpadSet();
+                    }
+                    else if (nowbarselect == 0)
                     {
                         if (select == 3)
                         {
@@ -135,6 +163,8 @@ public class TitleAnimation : MonoBehaviour
                         }
                         else
                         {
+                            loadingOn = false;
+                            optionOn = false;
                             MoveScreen(select);
                             select = 0;
                             optionselect = 0;
@@ -144,21 +174,17 @@ public class TitleAnimation : MonoBehaviour
                     {
                         StartGame(select);
                     }
-                    else if(nowbarselect == 0 && select == 3)
-                    {
-                        
-                    }
                 }
             }
 
             if(nowbarselect == 1)
             {
-                if(Input.GetKeyDown(KeyCode.W))
+                if(Input.GetKeyDown(wasdkeycodes[0]))
                 {
                     OptionSelect(-1);
                     MoveOption();
                 }
-                else if(Input.GetKeyDown(KeyCode.S))
+                else if(Input.GetKeyDown(wasdkeycodes[1]))
                 {
                     OptionSelect(1);
                     MoveOption();
@@ -267,6 +293,10 @@ public class TitleAnimation : MonoBehaviour
 
     private void SetLoadingEnd()
     {
+        if(nowbarselect == 1)
+        {
+        optionOn = true;
+        }
         loadingOn = true;
     }
 
@@ -320,6 +350,61 @@ public class TitleAnimation : MonoBehaviour
         else
         {
             optionTexts[3].text = "È¿°úÀ½ - " + (num * 10);
+        }
+    }
+
+    public void ShowWasdSet()
+    {
+        if(optionOn)
+        {
+            wasdset.gameObject.SetActive(true);
+            loadingOn = false;
+        }
+    }
+
+    public void ShowNumpadSet()
+    {
+        if(optionOn)
+        {
+            numpadset.gameObject.SetActive(true);
+            loadingOn = false;
+        }
+    }
+
+    public void SetWasd(bool input)
+    {
+        if(optionOn)
+        {
+            keysetting.Wasd = input;
+            SaveManager.Instance.SaveKeySetting();
+            wasdset.gameObject.SetActive(false);
+            loadingOn = true;
+            SetTexts();
+            if(input)
+            {
+                wasdkeycodes[0] = KeyCode.W;
+                wasdkeycodes[1] = KeyCode.S;
+                wasdkeycodes[2] = KeyCode.D;
+                wasdkeycodes[3] = KeyCode.A;
+            }
+            else
+            {
+                wasdkeycodes[0] = KeyCode.UpArrow;
+                wasdkeycodes[1] = KeyCode.DownArrow;
+                wasdkeycodes[2] = KeyCode.RightArrow;
+                wasdkeycodes[3] = KeyCode.LeftArrow;
+            }
+        }
+    }
+    public void SetKeyPad(bool input)
+    {
+        if(optionOn)
+        {
+            keysetting.Numpad = input;
+            SaveManager.Instance.SaveKeySetting();
+            numpadset.gameObject.SetActive(false);
+            loadingOn = true;
+            SetTexts();
         }
     }
 }
