@@ -130,7 +130,9 @@ MonoBehaviour:
   isSoundEffect: 1
   isBloon: 0
   bloon: {fileID: 0}
-  clips: []
+  clips:
+  - {fileID: 8300000, guid: d52e4c38a6ec7ac469d8ae062a2261d7, type: 3}
+  - {fileID: 8300000, guid: 820b4ae7e2ef15149ba3363114e654ad, type: 3}
   isStop: 0
   materials:
   - {fileID: 2100000, guid: f571860b36c7d394cb7d27a179f6ae28, type: 2}

@@ -151,7 +151,7 @@ public class EnemyBased : WordGameObject
     public override void TimeReset()
     {
         base.TimeReset();
-        speed = 1;
+        speedset = 1;
         speed = enemymoveSpeed;
     }
     public override void SpeedStopnotinvoke()
