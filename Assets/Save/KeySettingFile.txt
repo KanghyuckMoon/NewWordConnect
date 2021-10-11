@@ -1,7 +1,7 @@
 ﻿{
     "Wasd": true,
     "Numpad": true,
-    "writingData": false,
+    "writingData": true,
     "backgroundvolume": 7,
     "effectvolume": 7
 }

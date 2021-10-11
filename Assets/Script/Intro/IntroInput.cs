@@ -66,6 +66,11 @@ public class IntroInput : MonoBehaviour
     [SerializeField]
     private Image[] keysettingImage;
 
+    [SerializeField]
+    private RectTransform box;
+    [SerializeField]
+    private RectTransform padbox;
+
     private void Start()
     {
         waitForSeconds = new WaitForSeconds(0.1f);
@@ -73,6 +78,8 @@ public class IntroInput : MonoBehaviour
         secondposition = secondWord.transform.position;
         thirdposition = thirdWord.transform.position;
         imageLoding.gameObject.SetActive(true);
+        SetWasd(true);
+        SetKeyPad(true);
     }
 
     private void Update()
@@ -110,11 +117,27 @@ public class IntroInput : MonoBehaviour
     public void SetWasd(bool input)
     {
         SaveManager.Instance.CurrenKeySetting.Wasd = input;
+        if(input == true)
+        {
+            box.DOAnchorPos(keysettingImage[0].GetComponent<RectTransform>().anchoredPosition, 0.2f);
+        }
+        else
+        {
+            box.DOAnchorPos(keysettingImage[1].GetComponent<RectTransform>().anchoredPosition, 0.2f);
+        }
     }
     public void SetKeyPad(bool input)
     {
         SaveManager.Instance.CurrenKeySetting.Numpad = input;
         numpadOn = input;
+        if (input == true)
+        {
+            padbox.DOAnchorPos(keysettingImage[2].GetComponent<RectTransform>().anchoredPosition, 0.2f);
+        }
+        else
+        {
+            padbox.DOAnchorPos(keysettingImage[3].GetComponent<RectTransform>().anchoredPosition, 0.2f);
+        }
     }
 
     private IEnumerator KeySettingStart()
