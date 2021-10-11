@@ -108,7 +108,7 @@ public class SaveManager : MonoSingleton<SaveManager>
         nowSelectData = 0;
     }
 
-    private void SaveToJson()
+    public void SaveToJson()
     {
         string json = JsonUtility.ToJson(CurrentSaveUser, true);
         File.WriteAllText(Save_Path + Now_Save_FileName, json, System.Text.Encoding.UTF8);

@@ -126,6 +126,10 @@ public class NameSetting : MonoBehaviour
         backgroundImage.color = new Color(1, 1, 1, 1);
         yield return wait;
         yield return wait;
+        SaveManager.Instance.CurrentSaveUser.playerName 
+            = string.Format("{0}{1}{2}{3}{4}", playername[0], playername[1], playername[2], playername[3], playername[4]);
+        SaveManager.Instance.CurrentSaveUser.lateDate = System.DateTime.Now.ToString("yyyy/MM/dd");
+        SaveManager.Instance.SaveToJson();
         SceneManager.LoadScene("StageSelect");
     }
 
@@ -206,16 +210,19 @@ public class NameSetting : MonoBehaviour
         {
             if(yesnoselect == 0)
             {
-            box.DOAnchorPos(yes.anchoredPosition, 0.2f);
+                box.DOAnchorPos(yes.anchoredPosition, 0.2f);
+                box.DOScaleX(1, 0.2f);
             }
             else
             {
                 box.DOAnchorPos(no.anchoredPosition, 0.2f);
+                box.DOScaleX(3, 0.2f);
             }
         }
         else
         {
         box.DOAnchorPos(recthangle[y,x].anchoredPosition,0.2f);
+            box.DOScaleX(1, 0.2f);
         }
 
     }
@@ -225,10 +232,12 @@ public class NameSetting : MonoBehaviour
         if(yesnoon)
         {
             selectbox.DOAnchorPos(yesnobox.anchoredPosition, 0.2f);
+            selectbox.DOScaleX(15, 0.2f);
         }
         else
         {
         selectbox.DOAnchorPos(NameText[indexplayername].GetComponent<RectTransform>().anchoredPosition, 0.2f);
+            selectbox.DOScaleX(1, 0.2f);
         }
     }
 
