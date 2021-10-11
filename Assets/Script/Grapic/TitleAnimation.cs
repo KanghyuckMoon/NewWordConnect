@@ -125,13 +125,28 @@ public class TitleAnimation : MonoBehaviour
                 {
                     if(nowbarselect == 0)
                     {
-                        MoveScreen(select);
-                        select = 0;
-                        optionselect = 0;
+                        if (select == 3)
+                        {
+                            #if UNITY_EDITOR
+                                UnityEditor.EditorApplication.isPlaying = false;
+                            #else
+                            Application.Quit(); // 어플리케이션 종료
+                            #endif
+                        }
+                        else
+                        {
+                            MoveScreen(select);
+                            select = 0;
+                            optionselect = 0;
+                        }
                     }
                     else if(nowbarselect == 2 && select != 0)
                     {
                         StartGame(select);
+                    }
+                    else if(nowbarselect == 0 && select == 3)
+                    {
+                        
                     }
                 }
             }
