@@ -15151,6 +15151,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 9102987125293460626, guid: dad12be879401c847ac0d51e8c72ecf2, type: 3}
+      propertyPath: sharedProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: 4152735eefbc7f94bbf5e688f6f6589e, type: 2}
     - target: {fileID: 9102987125509654210, guid: dad12be879401c847ac0d51e8c72ecf2, type: 3}
       propertyPath: m_RootOrder
       value: 0
