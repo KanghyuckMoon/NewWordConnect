@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using DG.Tweening;
 
 public class NameSetting : MonoBehaviour
@@ -63,8 +64,16 @@ public class NameSetting : MonoBehaviour
     private bool yesnoon;
     private int yesnoselect;
 
+    [SerializeField]
+    private GameObject NameObjects;
+
+    [SerializeField]
+    private Image backgroundImage;
+    private WaitForSeconds wait;
+
     private void Awake()
     {
+        wait = new WaitForSeconds(0.1f);
         int k = 0;
         for(int i = 0; i < 3; i++)
         {
@@ -91,20 +100,39 @@ public class NameSetting : MonoBehaviour
     private void Update()
     {
 
-        //if (nameOn)
-        //{
-        //    //이름 짓기
-        //}
-        //else
-        //{
-        //    if (imageLoding.GetEnd() == true)
-        //    {
-        //        if (playing) return;
-        //        playing = true;
-        //        //코루틴 이름 입력하는거 나옴
-        //    }
-        //}
-        NameInput();
+        if (nameOn)
+        {
+            NameInput();
+        }
+        else
+        {
+            if (imageLoding.GetEnd() == true)
+            {
+                if (playing) return;
+                playing = true;
+                SetNameObj();
+            }
+        }
+    }
+
+    private IEnumerator FadeOut()
+    {
+        backgroundImage.color = new Color(0, 0, 0, 1);
+        for(float i = 0; i <= 1; i+=0.1f)
+        {
+            backgroundImage.color = new Color(i, i, i, 1);
+            yield return wait;
+        }
+        backgroundImage.color = new Color(1, 1, 1, 1);
+        yield return wait;
+        yield return wait;
+        SceneManager.LoadScene("StageSelect");
+    }
+
+    private void SetNameObj()
+    {
+        nameOn = true;
+        NameObjects.SetActive(true);
     }
 
     private void NameInput()
@@ -210,7 +238,12 @@ public class NameSetting : MonoBehaviour
         {
             if(yesnoselect == 0)
             {
-                Debug.Log("에스");
+                yesnoon = false;
+                yesnobox.gameObject.SetActive(false);
+                yes.gameObject.SetActive(false);
+                no.gameObject.SetActive(false);
+                NameObjects.SetActive(false);
+                StartCoroutine(FadeOut());
             }
             else
             {
@@ -640,8 +673,20 @@ public class NameSetting : MonoBehaviour
             yesnobox.gameObject.SetActive(true);
             yes.gameObject.SetActive(true);
             no.gameObject.SetActive(true);
+
+
             MoveBox();
             MoveSelectBox();
+            for(int i = 0; i < 5; i++)
+            {
+                if(playername[i] != ' ')
+                {
+                    return;
+                }
+            }
+            playername[0] = '마';
+            playername[1] = '리';
+            playername[2] = '오';
         }
     }
 }
