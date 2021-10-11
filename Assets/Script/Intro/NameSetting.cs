@@ -99,21 +99,21 @@ public class NameSetting : MonoBehaviour
 
     private void Update()
     {
-        NameInput();
+        //NameInput();
 
-        //if (nameOn)
-        //{
-        //    NameInput();
-        //}
-        //else
-        //{
-        //    if (imageLoding.GetEnd() == true)
-        //    {
-        //        if (playing) return;
-        //        playing = true;
-        //        SetNameObj();
-        //    }
-        //}
+        if (nameOn)
+        {
+            NameInput();
+        }
+        else
+        {
+            if (imageLoding.GetEnd() == true)
+            {
+                if (playing) return;
+                playing = true;
+                SetNameObj();
+            }
+        }
     }
 
     private IEnumerator FadeOut()
