@@ -48,6 +48,7 @@ public class PlayerMove : WordGameObject
         wordManager = FindObjectOfType<WordManager>();
         textManager = FindObjectOfType<TextManager>();
         maincam = Camera.main.GetComponent<CameraMove>();
+        player = GetComponent<PlayerMove>();
     }
 
     private void Update()
@@ -64,6 +65,8 @@ public class PlayerMove : WordGameObject
 
     private void FixedUpdate()
     {
+        SetEscStop();
+        if (isStop) return;
         if (die) return;
         if (wordManager.isEvent) return;
         if (wordManager.isInputESC) return;

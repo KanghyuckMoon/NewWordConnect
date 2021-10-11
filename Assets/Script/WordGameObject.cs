@@ -103,6 +103,10 @@ public class WordGameObject : MonoBehaviour
     [SerializeField]
     protected List<AudioClip> clips;
 
+    public bool isStop = false;
+    //protected bool isStop = false;
+    protected Vector2 stopVector = Vector2.zero;
+
     public void SetPlayer(PlayerMove player)
     {
         this.player = player;
@@ -110,6 +114,44 @@ public class WordGameObject : MonoBehaviour
     public void SetPlayer()
     {
         player = FindObjectOfType<PlayerMove>();
+    }
+
+    protected virtual void SetEscStop()
+    {
+        if (player.isStop)
+        {
+            if (isStop) return;
+            isStop = true;
+            EscStop();
+        }
+        else
+        {
+            if (isStop)
+            {
+                isStop = false;
+                EscReset();
+            }
+        }
+    }
+
+    public void EscStop()
+    {
+        realspeed = 0;
+        gravityScale = 0;
+        jump = 0;
+        rigid.gravityScale = 0;
+        stopVector = rigid.velocity;
+        rigid.velocity = Vector2.zero;
+        realspeed = 0;
+    }
+
+    public void EscReset()
+    {
+        realspeed = speed;
+        rigid.velocity = stopVector;
+        gravityScale = 4.300000190734863f;
+        jump = 22.5f;
+        rigid.gravityScale = 4.300000190734863f;
     }
 
     private void StartSetJsonSetting()

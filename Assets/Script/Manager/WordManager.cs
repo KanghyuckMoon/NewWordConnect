@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
+using DG.Tweening;
 
 public class WordManager : MonoBehaviour
 {
@@ -147,10 +148,26 @@ public class WordManager : MonoBehaviour
     private bool wasd;
     private bool keypad;
 
+    //esc
+    [SerializeField]
+    private GameObject escObj;
+    private int optionselect = 0;
+    [SerializeField]
+    private RectTransform optionarrow = null;
+    [SerializeField]
+    private RectTransform[] optionRectTexts = null;
+    [SerializeField]
+    private Text[] optionTexts = null;
+    private KeySetting keysetting;
+    [SerializeField]
+    private AudioClip testClip;
+
+
     private void Awake()
     {
         //주어 찾기
         FindSubjects();
+        keysetting = SaveManager.Instance.CurrenKeySetting;
     }
 
     private void Start()
@@ -201,8 +218,12 @@ public class WordManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             isInputESC = !isInputESC;
+            s_player.isStop = isInputESC;
             escSystem.SetActive(isInputESC);
-            Time.timeScale = isInputESC ? 0 : 1;
+        }
+        if(isInputESC)
+        {
+            OptionInput();
         }
         if (isInputESC) return;
         InputWordKey();
@@ -1386,5 +1407,86 @@ public class WordManager : MonoBehaviour
     public void PlayToDieResetAnimation()
     {
         dieAnimation.Play("DieResetAnimation");
+    }
+
+    //ESC
+
+
+    private void SetTexts()
+    {
+        SetTextWASD();
+        SetTextNumpad();
+    }
+
+    private void SetTextWASD()
+    {
+        optionTexts[0].text = "WASD/방향키 - " + (keysetting.Wasd ? "WASD" : "방향키");
+    }
+
+    private void SetTextNumpad()
+    {
+        optionTexts[1].text = "넘패드/키패드 - " + (keysetting.Numpad ? "넘패드" : "키패드");
+    }
+
+    private void SetBackGroundVolume(int num)
+    {
+        SoundManager.Instance.SetBgSoundVolume(num);
+        if (num == 9)
+        {
+            optionTexts[2].text = "배경음악 - " + 100;
+        }
+        else
+        {
+            optionTexts[2].text = "배경음악 - " + (num * 10);
+        }
+    }
+    private void SetEffectVolume(int num)
+    {
+        SoundManager.Instance.SetEffectSoundVolume(num);
+        if (num == 9)
+        {
+            optionTexts[3].text = "효과음 - " + 100;
+        }
+        else
+        {
+            optionTexts[3].text = "효과음 - " + (num * 10);
+        }
+    }
+    private void MoveOption()
+    {
+        optionarrow.DOAnchorPosY(optionRectTexts[optionselect].anchoredPosition.y, 0.2f);
+    }
+
+    private void OptionSelect(int i)
+    {
+        if (optionselect + i < 0) return;
+        if (optionselect + i > optionRectTexts.Length - 1) return;
+        optionselect += i;
+    }
+
+    private void OptionInput()
+    {
+        for (int i = 0; i < keyCodes.Length; i++)
+        {
+            if (Input.GetKeyDown(keyCodes[i] - (keysetting.Numpad ? 0 : 208)))
+            {
+                    if (optionselect == 2) SetBackGroundVolume(i);
+                    if (optionselect == 3)
+                    {
+                        SetEffectVolume(i);
+                        SoundManager.Instance.SFXPlay("testSound", testClip);
+                    }
+            }
+        }
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                OptionSelect(-1);
+                MoveOption();
+            }
+            else if (Input.GetKeyDown(KeyCode.S))
+            {
+                OptionSelect(1);
+                MoveOption();
+            }
     }
 }

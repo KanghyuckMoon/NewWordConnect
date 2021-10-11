@@ -13,7 +13,6 @@ public class GimicBase : MonoBehaviour
     {
         animator = GetComponent<Animator>();
     }
-
     public virtual void SetGimicSpeed(float speed)
     {
         realSpeed = speed;

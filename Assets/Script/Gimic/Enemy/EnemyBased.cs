@@ -46,6 +46,8 @@ public class EnemyBased : WordGameObject
 
     private void FixedUpdate()
     {
+        SetEscStop();
+        if (isStop) return;
         if (setArea == -1 || setArea == player.nowArea)
         { 
             if(!setAreaReset)
