@@ -99,20 +99,21 @@ public class NameSetting : MonoBehaviour
 
     private void Update()
     {
+        NameInput();
 
-        if (nameOn)
-        {
-            NameInput();
-        }
-        else
-        {
-            if (imageLoding.GetEnd() == true)
-            {
-                if (playing) return;
-                playing = true;
-                SetNameObj();
-            }
-        }
+        //if (nameOn)
+        //{
+        //    NameInput();
+        //}
+        //else
+        //{
+        //    if (imageLoding.GetEnd() == true)
+        //    {
+        //        if (playing) return;
+        //        playing = true;
+        //        SetNameObj();
+        //    }
+        //}
     }
 
     private IEnumerator FadeOut()
@@ -141,14 +142,14 @@ public class NameSetting : MonoBehaviour
 
     private void NameInput()
     {
-        if(Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.W))
         {
             if (yesnoon) return;
             if (y == 0) return;
             y--;
             MoveBox();
         }
-        else if(Input.GetKeyDown(KeyCode.S))
+        else if (Input.GetKeyDown(KeyCode.S))
         {
             if (yesnoon) return;
             if (y == 2) return;
@@ -187,6 +188,10 @@ public class NameSetting : MonoBehaviour
         {
             SetName();
         }
+        else if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            InputBackSpace();
+        }
         else
         {
             for (int i = 0; i < keyCodes.Length; i++)
@@ -200,8 +205,7 @@ public class NameSetting : MonoBehaviour
                     }
                 }
             }
-        }
-        
+        }        
     }
 
     private void MoveBox()
@@ -697,5 +701,15 @@ public class NameSetting : MonoBehaviour
             playername[1] = '리';
             playername[2] = '오';
         }
+    }
+
+    private void InputBackSpace()// 백스페이스 입력함
+    {
+        indexunicode[indexplayername, 0] = -1;
+        indexunicode[indexplayername, 1] = -1;
+        indexunicode[indexplayername, 2] = 0;
+        indexplayernamestat[indexplayername] = 0;
+        playername[indexplayername] = ' ';
+        NameText[indexplayername].text = string.Format(" ");
     }
 }
