@@ -27,7 +27,7 @@ public class NameSetting : MonoBehaviour
     {
         {'ぁ','い','ぇ','ぉ','け','た','ち','っ','づ','で'},
         {'げ','さ','し','じ','ず','に','ぬ','ば','だ','ぢ'},
-        {'せ','ぜ','そ','ぞ',' ',' ','つ','て','ぱ','び'}
+        {'せ','ぜ','そ','ぞ',' ','魁','つ','て','ぱ','び'}
     };
     private char[] cho = { 'ぁ', 'あ', 'い', 'ぇ', 'え', 'ぉ', 'け', 'げ', 'こ', 'さ', 'ざ', 'し', 'じ', 'す', 'ず', 'せ', 'ぜ', 'そ', 'ぞ' };
     private char[] jung = { 'た', 'だ', 'ち', 'ぢ', 'っ', 'つ', 'づ', 'て', 'で', 'と', 'ど', 'な', 'に', 'ぬ', 'ね',
@@ -53,6 +53,15 @@ public class NameSetting : MonoBehaviour
 
     [SerializeField]
     private Text[] NameText = new Text[5];
+
+    [SerializeField]
+    private RectTransform yesnobox;
+    [SerializeField]
+    private RectTransform yes;
+    [SerializeField]
+    private RectTransform no;
+    private bool yesnoon;
+    private int yesnoselect;
 
     private void Awake()
     {
@@ -102,24 +111,42 @@ public class NameSetting : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.W))
         {
+            if (yesnoon) return;
             if (y == 0) return;
             y--;
             MoveBox();
         }
         else if(Input.GetKeyDown(KeyCode.S))
         {
+            if (yesnoon) return;
             if (y == 2) return;
             y++;
             MoveBox();
         }
         else if (Input.GetKeyDown(KeyCode.A))
         {
+            if (yesnoon)
+            {
+                yesnoselect -= 1;
+                if (yesnoselect < 0) yesnoselect = 1;
+                else if (yesnoselect > 1) yesnoselect = 0;
+                MoveBox();
+                return;
+            }
             if (x == 0) return;
             x--;
             MoveBox();
         }
         else if (Input.GetKeyDown(KeyCode.D))
         {
+            if (yesnoon)
+            {
+                yesnoselect -= 1;
+                if (yesnoselect < 0) yesnoselect = 1;
+                else if (yesnoselect > 1) yesnoselect = 0;
+                MoveBox();
+                return;
+            }
             if (x == 9) return;
             x++;
             MoveBox();
@@ -147,52 +174,94 @@ public class NameSetting : MonoBehaviour
 
     private void MoveBox()
     {
+        if(yesnoon)
+        {
+            if(yesnoselect == 0)
+            {
+            box.DOAnchorPos(yes.anchoredPosition, 0.2f);
+            }
+            else
+            {
+                box.DOAnchorPos(no.anchoredPosition, 0.2f);
+            }
+        }
+        else
+        {
         box.DOAnchorPos(recthangle[y,x].anchoredPosition,0.2f);
+        }
+
     }
 
     private void MoveSelectBox()
     {
+        if(yesnoon)
+        {
+            selectbox.DOAnchorPos(yesnobox.anchoredPosition, 0.2f);
+        }
+        else
+        {
         selectbox.DOAnchorPos(NameText[indexplayername].GetComponent<RectTransform>().anchoredPosition, 0.2f);
+        }
     }
 
     private void SetName()
     {
-        InputZero();
-        switch (indexplayernamestat[indexplayername])
+        if(yesnoon)
         {
-            case 6:
-                SetName6();
-                break;
-
-            case 5:
-                SetName5();
-                break;
-
-            case 4:
-                SetName4();
-                break;
-
-            case 3:
-                SetName3();
-                break;
-
-            case 2:
-                SetName2();
-                break;
-
-            case 1:
-                SetName1();
-                break;
-
-            case 0:
-                SetName0();
-                break;
+            if(yesnoselect == 0)
+            {
+                Debug.Log("拭什");
+            }
+            else
+            {
+                yesnoon = false;
+                yesnobox.gameObject.SetActive(false);
+                yes.gameObject.SetActive(false);
+                no.gameObject.SetActive(false);
+                MoveBox();
+                MoveSelectBox();
+            }
         }
-        NameText[0].text = string.Format("{0}", playername[0]);
-        NameText[1].text = string.Format("{0}", playername[1]);
-        NameText[2].text = string.Format("{0}", playername[2]);
-        NameText[3].text = string.Format("{0}", playername[3]);
-        NameText[4].text = string.Format("{0}", playername[4]);
+        else
+        {
+            InputZero();
+            switch (indexplayernamestat[indexplayername])
+            {
+                case 6:
+                    SetName6();
+                    break;
+
+                case 5:
+                    SetName5();
+                    break;
+
+                case 4:
+                    SetName4();
+                    break;
+
+                case 3:
+                    SetName3();
+                    break;
+
+                case 2:
+                    SetName2();
+                    break;
+
+                case 1:
+                    SetName1();
+                    break;
+
+                case 0:
+                    SetName0();
+                    break;
+            }
+            NameText[0].text = string.Format("{0}", playername[0]);
+            NameText[1].text = string.Format("{0}", playername[1]);
+            NameText[2].text = string.Format("{0}", playername[2]);
+            NameText[3].text = string.Format("{0}", playername[3]);
+            NameText[4].text = string.Format("{0}", playername[4]);
+        }
+        
     }
 
     private int FindListInChar(char value, char[] list)
@@ -564,6 +633,15 @@ public class NameSetting : MonoBehaviour
             indexunicode[indexplayername, 2] = 0;
             indexplayernamestat[indexplayername] = 0;
             playername[indexplayername] = ' ';
+        }
+        else if(hangle[y,x] == '魁')
+        {
+            yesnoon = true;
+            yesnobox.gameObject.SetActive(true);
+            yes.gameObject.SetActive(true);
+            no.gameObject.SetActive(true);
+            MoveBox();
+            MoveSelectBox();
         }
     }
 }
