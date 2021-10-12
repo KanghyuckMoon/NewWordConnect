@@ -351,10 +351,14 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5688312911914938580, guid: 4172b317ccc39844c9444c5bddf74fcf, type: 3}
       propertyPath: distance
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5688312911914938580, guid: 4172b317ccc39844c9444c5bddf74fcf, type: 3}
       propertyPath: rightleft
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5688312911914938580, guid: 4172b317ccc39844c9444c5bddf74fcf, type: 3}
+      propertyPath: upDownTime
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5688312911914938581, guid: 4172b317ccc39844c9444c5bddf74fcf, type: 3}
@@ -363,7 +367,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5688312911914938581, guid: 4172b317ccc39844c9444c5bddf74fcf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 48.5
+      value: 46
       objectReference: {fileID: 0}
     - target: {fileID: 5688312911914938581, guid: 4172b317ccc39844c9444c5bddf74fcf, type: 3}
       propertyPath: m_LocalPosition.y
@@ -23834,6 +23838,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 584810002}
     m_Modifications:
     - target: {fileID: 3350655660929798528, guid: 4340a4897c0495948b54a34ac4c4ac28, type: 3}
+      propertyPath: setArea
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350655660929798528, guid: 4340a4897c0495948b54a34ac4c4ac28, type: 3}
       propertyPath: distance
       value: 4
       objectReference: {fileID: 0}
@@ -29566,6 +29574,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 584810002}
     m_Modifications:
     - target: {fileID: 3350655660929798528, guid: 4340a4897c0495948b54a34ac4c4ac28, type: 3}
+      propertyPath: setArea
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350655660929798528, guid: 4340a4897c0495948b54a34ac4c4ac28, type: 3}
       propertyPath: distance
       value: 5
       objectReference: {fileID: 0}
@@ -31031,6 +31043,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 584810002}
     m_Modifications:
     - target: {fileID: 3350655660929798528, guid: 4340a4897c0495948b54a34ac4c4ac28, type: 3}
+      propertyPath: setArea
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350655660929798528, guid: 4340a4897c0495948b54a34ac4c4ac28, type: 3}
       propertyPath: distance
       value: 2
       objectReference: {fileID: 0}
@@ -32452,6 +32468,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 584810002}
     m_Modifications:
+    - target: {fileID: 3350655660929798528, guid: 4340a4897c0495948b54a34ac4c4ac28, type: 3}
+      propertyPath: setArea
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3350655660929798528, guid: 4340a4897c0495948b54a34ac4c4ac28, type: 3}
       propertyPath: distance
       value: 6

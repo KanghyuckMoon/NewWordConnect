@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class GimicMovingTile : GimicBase
 {
@@ -14,7 +15,6 @@ public class GimicMovingTile : GimicBase
     private Vector2 originalPosition = Vector2.zero;
     [SerializeField]
     private bool gravityOn = false;
-    private Rigidbody2D rigid;
     [SerializeField]
     private bool rightleft = false;
 
@@ -22,8 +22,6 @@ public class GimicMovingTile : GimicBase
     {
         originalPosition = transform.position;
         realSpeed = 1;
-        rigid = GetComponent<Rigidbody2D>();
-        Settingvalue();
     }
 
     void FixedUpdate()
@@ -48,7 +46,7 @@ public class GimicMovingTile : GimicBase
         {
             updown = false;
         }
-        rigid.AddForce(Vector2.up * realSpeed * upDownSpeed * (float)(updown ? -1 : 1), ForceMode2D.Impulse);
+        transform.Translate(Vector2.up * realSpeed * upDownSpeed * (float)(updown ? -1 : 1));
     }
     protected void MovingRightLeftPlatform()
     {
@@ -60,7 +58,7 @@ public class GimicMovingTile : GimicBase
         {
             updown = false;
         }
-        rigid.AddForce(Vector2.right * realSpeed * upDownSpeed * (float)(updown ? -1 : 1), ForceMode2D.Impulse);
+        transform.Translate(Vector2.right * realSpeed * upDownSpeed * (float)(updown ? -1 : 1));
     }
 
 
@@ -69,17 +67,4 @@ public class GimicMovingTile : GimicBase
         realSpeed = speed;
     }
 
-    public void Settingvalue()
-    {
-        rigid.drag = 7.5f;
-        rigid.mass = mass;
-        if(gravityOn)
-        {
-        rigid.gravityScale = 4.300000190734863f;
-        }
-        else
-        {
-            rigid.gravityScale = 0;
-        }
-    }
 }
