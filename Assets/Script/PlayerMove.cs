@@ -197,6 +197,24 @@ public class PlayerMove : WordGameObject
         jumpOn = true;
         w_BlockOn = false;
         w_tile = 0;
+
+        transform.SetParent(null);
+    }
+
+    protected override void OnCollisionStay2D(Collision2D collision)
+    {
+        base.OnCollisionStay2D(collision);
+        if (collision.gameObject.CompareTag("MovingTile"))
+        {
+            if(rigid.velocity.y <= 0 && transform.position.y > collision.transform.position.y)
+            {
+                transform.SetParent(collision.transform);
+            }
+            else
+            {
+                transform.SetParent(null);
+            }
+        }
     }
 
     protected override void OnTriggerStay2D(Collider2D collision)

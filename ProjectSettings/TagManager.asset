@@ -16,6 +16,7 @@ TagManager:
   - WinPoint
   - GetWord
   - ColorBlock
+  - MovingTile
   layers:
   - Default
   - TransparentFX

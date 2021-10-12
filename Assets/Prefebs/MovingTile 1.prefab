@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5688312911914938580}
   m_Layer: 9
   m_Name: MovingTile 1
-  m_TagString: TileMap
+  m_TagString: MovingTile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -124,8 +124,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   realSpeed: 0.5
   animationName: 
-  distance: 1
-  upDownTime: 1
+  distance: 5
+  upDownSpeed: 0
   mass: 5
   gravityOn: 0
-  rightleft: 0
+  rightleft: 1
