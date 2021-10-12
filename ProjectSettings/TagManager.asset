@@ -15,6 +15,7 @@ TagManager:
   - Bloon
   - WinPoint
   - GetWord
+  - ColorBlock
   layers:
   - Default
   - TransparentFX
