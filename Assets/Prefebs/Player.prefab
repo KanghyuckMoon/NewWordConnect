@@ -4830,11 +4830,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1952519307}
   m_LocalRotation: {x: 0.62084866, y: 0.33844754, z: 0.33844763, w: 0.62084895}
-  m_LocalPosition: {x: 0.214, y: -0.141, z: 0}
-  m_LocalScale: {x: -0.01, y: 0, z: 0.04}
+  m_LocalPosition: {x: 0.21399999, y: -0.14100003, z: 0}
+  m_LocalScale: {x: -0.010000001, y: 0, z: 0.040000003}
   m_Children: []
-  m_Father: {fileID: 2936947540001608043}
-  m_RootOrder: 3
+  m_Father: {fileID: 8870409126794827000}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 32.807, y: 90, z: 90}
 --- !u!137 &1952519311
 SkinnedMeshRenderer:
@@ -10072,7 +10072,7 @@ Transform:
   - {fileID: 2936947539865747703}
   - {fileID: 1209357148}
   - {fileID: 1976626331}
-  - {fileID: 1952519308}
+  - {fileID: 8870409126794827000}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10146,11 +10146,11 @@ MonoBehaviour:
   isSoundEffect: 0
   isBloon: 0
   bloon: {fileID: 0}
-  clips:
-  - {fileID: 8300000, guid: d52e4c38a6ec7ac469d8ae062a2261d7, type: 3}
+  isStop: 0
+  materials: []
   nowArea: 0
   dieEffect: {fileID: 0}
-  cloth: {fileID: 1952519308}
+  cloth: {fileID: 8870409126794827000}
 --- !u!50 &2936947540001608054
 Rigidbody2D:
   serializedVersion: 4
@@ -10207,3 +10207,34 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.4, y: 0.67}
   m_Direction: 0
+--- !u!1 &3981828686336784589
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8870409126794827000}
+  m_Layer: 13
+  m_Name: ClothParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8870409126794827000
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3981828686336784589}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1952519308}
+  m_Father: {fileID: 2936947540001608043}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

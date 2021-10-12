@@ -209,6 +209,7 @@ public class PlayerMove : WordGameObject
             if(rigid.velocity.y <= 0 && transform.position.y > collision.transform.position.y)
             {
                 transform.SetParent(collision.transform);
+                Debug.Log("A");
             }
             else
             {

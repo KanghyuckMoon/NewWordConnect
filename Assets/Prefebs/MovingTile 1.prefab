@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5688312911914938600}
   - component: {fileID: 5688312911914938601}
   - component: {fileID: 5688312911914938580}
+  - component: {fileID: 366324004}
   m_Layer: 9
   m_Name: MovingTile 1
   m_TagString: MovingTile
@@ -125,7 +126,28 @@ MonoBehaviour:
   realSpeed: 0.5
   animationName: 
   distance: 5
-  upDownSpeed: 0
+  upDownSpeed: 0.05
   mass: 5
   gravityOn: 0
   rightleft: 1
+--- !u!50 &366324004
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5688312911914938582}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
