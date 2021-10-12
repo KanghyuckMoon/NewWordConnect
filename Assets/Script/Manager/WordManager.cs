@@ -176,7 +176,6 @@ public class WordManager : MonoBehaviour
         SetSizeListUI(); //UI 크기 맞추는 함수
         AllChangeTexts(); //텍스트 바꾸는 함수
         OnOffScroll(); //스크롤 껐다 키는 함수
-        ResetOnClick(); // 버튼 기능들 리셋시키고 다시 부여
 
         //캐싱
         subjectScrollsPanel = subjectScroll.GetChild(0).gameObject;
@@ -270,6 +269,7 @@ public class WordManager : MonoBehaviour
             case 0:
                 for (int i = 0; i < panellistSubject.Count; i++)
                 {
+                    if (subjectUnlock[i + 1] == -1) continue;
                     subjectScroll.GetChild(i).transform.GetChild(1).GetComponent<Text>().text =
                         subjectlist[subjectUnlock[i + 1]];
                 }
@@ -277,6 +277,7 @@ public class WordManager : MonoBehaviour
             case 1:
                 for (int i = 0; i < panellistCondition.Count; i++)
                 {
+                    if (conditionUnlock[i + 1] == -1) continue;
                     conditionScroll.GetChild(i).transform.GetChild(1).GetComponent<Text>().text =
                         conditionlist[conditionUnlock[i + 1]];
                 }
@@ -284,12 +285,12 @@ public class WordManager : MonoBehaviour
             case 2:
                 for (int i = 0; i < panellistExecution.Count; i++)
                 {
+                    if (executionUnlock[i + 1] == -1) continue;
                     executionScroll.GetChild(i).transform.GetChild(1).GetComponent<Text>().text =
                         executionlist[executionUnlock[i + 1]];
                 }
                 break;
         }
-
     }
 
     public void CreatePanel()
@@ -319,11 +320,58 @@ public class WordManager : MonoBehaviour
                 newPanel.transform.GetChild(1).GetComponent<Text>().text = executionlist[executionUnlock[panellistExecution.Count]];
                 break;
         }
-        ResetOnClick();
         SetListUI();
         SetSizeListUI();
         AllChangeTexts();
     } // 완료
+
+    public void AddSubjectWord(int index)
+    {
+        newPanel = CreatePanel_Pull(0);
+        newPanel.SetActive(true);
+        panellistSubject.Add(newPanel);
+        for(int i = 0; i < subjectUnlock.Count; i++)
+        {
+            if(subjectUnlock[i] == -1)
+            {
+                subjectUnlock[i] = index;
+                return;
+            }
+        }
+        newPanel.transform.GetChild(1).GetComponent<Text>().text = subjectlist[subjectUnlock[index]];
+    }
+
+    public void AddConditionWord(int index)
+    {
+        newPanel = CreatePanel_Pull(0);
+        newPanel.SetActive(true);
+        panellistSubject.Add(newPanel);
+        for (int i = 0; i < conditionUnlock.Count; i++)
+        {
+            if (conditionUnlock[i] == -1)
+            {
+                conditionUnlock[i] = index;
+                return;
+            }
+        }
+        newPanel.transform.GetChild(1).GetComponent<Text>().text = conditionlist[conditionUnlock[index]];
+    }
+
+    public void AddExecutionWord(int index)
+    {
+        newPanel = CreatePanel_Pull(0);
+        newPanel.SetActive(true);
+        panellistSubject.Add(newPanel);
+        for (int i = 0; i < executionUnlock.Count; i++)
+        {
+            if (executionUnlock[i] == -1)
+            {
+                executionUnlock[i] = index;
+                return;
+            }
+        }
+        newPanel.transform.GetChild(1).GetComponent<Text>().text = executionlist[executionUnlock[index]];
+    }
 
     private GameObject CreatePanel_Pull(int type)
     {
@@ -363,35 +411,9 @@ public class WordManager : MonoBehaviour
                 return Instantiate(executionScrollsPanel, executionScrollsPanel.transform.parent);
         }
         return null;
-    } //하위 함수
+    }
 
-
-    public void ResetOnClick()
-    {
-        resetOnClick = null;
-        for (int i = 0; i < subjectScroll.childCount; i++)
-        {
-            int temp = i;
-            resetOnClick = subjectScroll.GetChild(temp).GetComponent<Button>();
-            resetOnClick.onClick.RemoveAllListeners();
-            resetOnClick.onClick.AddListener(() => { ClickOnWordSelect(temp + 1); });
-        }
-        for (int i = 0; i < conditionScroll.childCount; i++)
-        {
-            int temp = i;
-            resetOnClick = conditionScroll.GetChild(temp).GetComponent<Button>();
-            resetOnClick.onClick.RemoveAllListeners();
-            resetOnClick.onClick.AddListener(() => { ClickOnWordSelect(temp + 1); });
-        }
-        for (int i = 0; i < executionScroll.childCount; i++)
-        {
-            int temp = i;
-            resetOnClick = executionScroll.GetChild(temp).GetComponent<Button>();
-            resetOnClick.onClick.RemoveAllListeners();
-            resetOnClick.onClick.AddListener(() => { ClickOnWordSelect(temp + 1); });
-        }
-    } // 완료
-    public void BackPanel() // 
+    public void BackPanel()
     {
         backPanel = null;
         switch (nowWord)
@@ -454,9 +476,9 @@ public class WordManager : MonoBehaviour
                 }
                 break;
         }
-
         SetSizeListUI();
-    } // 
+    }
+
     private void SetListUI()
     {
         panellistSubject.Clear();
@@ -486,6 +508,7 @@ public class WordManager : MonoBehaviour
             }
         };
     }
+
     private void SetSizeListUI()
     {
         SetSizeListImage();

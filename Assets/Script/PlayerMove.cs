@@ -148,14 +148,6 @@ public class PlayerMove : WordGameObject
         base.SuperDown();
     }
 
-
-    //�������
-    //private void SaveToJson()
-    //{
-    //    string json = JsonUtility.ToJson(user, true);
-    //    File.WriteAllText(Save_Path + Save_FileName, json, System.Text.Encoding.UTF8);
-    //}
-
     private void OnApplicationQuit()
     {
         //SaveToJson();
@@ -257,6 +249,9 @@ public class PlayerMove : WordGameObject
                 break;
             case "WinPoint":
                 WinNextScene();
+                break;
+            case "GetWord":
+                collision.GetComponent<NewItemGet>().GetItem();
                 break;
         }
     }

@@ -14,6 +14,7 @@ TagManager:
   - TextObj
   - Bloon
   - WinPoint
+  - GetWord
   layers:
   - Default
   - TransparentFX
