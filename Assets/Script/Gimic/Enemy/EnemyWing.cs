@@ -14,6 +14,7 @@ public class EnemyWing : EnemyBased
     protected override void Start()
     {
         base.Start();
+        originalPosition = transform.position;
     }
 
     protected override void EnemyMove()

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class GimicPassWordDoor : MonoBehaviour
 {
@@ -12,11 +13,12 @@ public class GimicPassWordDoor : MonoBehaviour
     private bool onoff;
     [SerializeField]
     private List<GimicPassWord> gimicPassWords;
+    private Vector2 originalVector = Vector2.zero;
 
     private void Start()
     {
+        originalVector = transform.position;
         colliders = GetComponent<Collider2D>();
-        animator = GetComponent<Animator>();
         StartCoroutine(CheakColor());
     }
 
@@ -29,7 +31,6 @@ public class GimicPassWordDoor : MonoBehaviour
             for (int i = 0; i < gimicPassWords.Count; i++)
             {
                 nowpassword += gimicPassWords[i].ReturnPassWord();
-                Debug.Log(nowpassword);
             }
             if (nowpassword != null)
             {
@@ -53,12 +54,12 @@ public class GimicPassWordDoor : MonoBehaviour
     {
         if(onoff)
         {
-            animator.SetBool("Onoff",true);
+            transform.DOLocalMoveY(originalVector.y - 3, 1f);
             colliders.enabled = false;
         }
         else
         {
-            animator.SetBool("Onoff", false);
+            transform.DOLocalMoveY(originalVector.y, 1f);
             colliders.enabled = true;
         }
     }

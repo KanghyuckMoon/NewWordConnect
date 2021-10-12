@@ -164,7 +164,7 @@ public class PlayerMove : WordGameObject
         switch(collision.gameObject.tag)
         {
             case "Enemy":
-                if (collision.transform.position.y + 0.1f < transform.position.y && rigid.velocity.y < 0)
+                if (collision.transform.position.y + 0.1f < transform.position.y)
                 {
                     Jump();
                     collision.gameObject.GetComponent<EnemyBased>().Die();

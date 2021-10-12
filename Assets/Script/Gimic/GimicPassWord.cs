@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class GimicPassWord : GimicBase
 {
@@ -50,12 +51,6 @@ public class GimicPassWord : GimicBase
                 spriteRenderer.color = new Color(0.5f, 0, 1, 1);
                 break;
         }
-        CheakColor();
-    }
-
-    public void CheakColor()
-    {
-
     }
 
     private void SetActiveFalse()
