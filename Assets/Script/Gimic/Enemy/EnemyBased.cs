@@ -77,7 +77,7 @@ public class EnemyBased : WordGameObject
     protected virtual void EnemyMove()
     {
         rigid.velocity = new Vector2(nexMove * speedset * enemymoveSpeed, rigid.velocity.y);
-
+        if (jumpOn) return;
         Vector2 frontvec = new Vector2(rigid.position.x + nexMove * 0.5f, rigid.position.y);
         Vector2 frontvec2 = new Vector2(rigid.position.x + nexMove * 0.5f, rigid.position.y);
         RaycastHit2D rayHit = Physics2D.Raycast(frontvec, Vector3.down, LayerMask.GetMask("StgaePhysicsOnlyDefault"));
