@@ -164,7 +164,7 @@ public class PlayerMove : WordGameObject
         switch(collision.gameObject.tag)
         {
             case "Enemy":
-                if (collision.transform.position.y + 0.1f < transform.position.y && rigid.velocity.y < 0)
+                if (collision.transform.position.y + 0.1f < transform.position.y)
                 {
                     Jump();
                     collision.gameObject.GetComponent<EnemyBased>().Die();
@@ -252,6 +252,14 @@ public class PlayerMove : WordGameObject
                 break;
             case "GetWord":
                 collision.GetComponent<NewItemGet>().GetItem();
+                break;
+            case "ColorBlock":
+                if (!(rigid.velocity.y <= 0) && collision.transform.position.y >= transform.position.y)
+                {
+                    collision.GetComponent<GimicPassWord>().ChangeColor();
+                    rigid.velocity = new Vector2(rigid.velocity.x, 0);
+                    rigid.AddForce(Vector2.down * 3f, ForceMode2D.Impulse);
+                }
                 break;
         }
     }

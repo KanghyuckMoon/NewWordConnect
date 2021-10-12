@@ -1,15 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class GimicPassWord : GimicBase
 {
-    [SerializeField]
-    private List<int> passwordcolor;
     private int nowpassword = 0;
     private SpriteRenderer spriteRenderer;
     private ParticleSystem particle;
     private Collider2D[] colliders;
+
+    public int ReturnPassWord()
+    {
+        return nowpassword;
+    }
 
     protected override void Start()
     {
@@ -17,16 +21,6 @@ public class GimicPassWord : GimicBase
         spriteRenderer = GetComponent<SpriteRenderer>();
         colliders = GetComponents<Collider2D>();
         particle = GetComponent<ParticleSystem>();
-    }
-
-    public void BreakBlock()
-    {
-        spriteRenderer.enabled = false;
-        colliders[0].enabled = false;
-        colliders[1].enabled = false;
-        particle.Play();
-        Invoke("SetActiveFalse", 1f);
-        ChangeColor();
     }
 
     public void ChangeColor()
@@ -57,12 +51,6 @@ public class GimicPassWord : GimicBase
                 spriteRenderer.color = new Color(0.5f, 0, 1, 1);
                 break;
         }
-        CheakColor();
-    }
-
-    public void CheakColor()
-    {
-
     }
 
     private void SetActiveFalse()
