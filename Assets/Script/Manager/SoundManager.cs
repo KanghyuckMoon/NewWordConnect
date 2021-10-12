@@ -19,7 +19,7 @@ public class SoundManager : MonoSingleton<SoundManager>
 
     public void SFXPlay(int index)
     {
-        audioSource[index].Play();
+        //audioSource[index].Play();
     }
 
     public void BgSoundPlay(AudioClip clip)

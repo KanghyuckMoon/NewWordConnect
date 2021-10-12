@@ -18,6 +18,7 @@ public class GimicMovingTile : GimicBase
 
     protected override void Start()
     {
+        originalPosition = transform.position;
         realSpeed = 1;
         rigid = GetComponent<Rigidbody2D>();
         Settingvalue();
