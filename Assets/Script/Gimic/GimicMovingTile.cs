@@ -15,6 +15,8 @@ public class GimicMovingTile : GimicBase
     [SerializeField]
     private bool gravityOn = false;
     private Rigidbody2D rigid;
+    [SerializeField]
+    private bool rightleft = false;
 
     protected override void Start()
     {
@@ -26,7 +28,14 @@ public class GimicMovingTile : GimicBase
 
     void FixedUpdate()
     {
+        if(rightleft)
+        {
+            MovingRightLeftPlatform();
+        }
+        else
+        {
         MovingPlatform();
+        }
     }
 
     protected void MovingPlatform()
@@ -41,6 +50,19 @@ public class GimicMovingTile : GimicBase
         }
         rigid.AddForce(Vector2.up * realSpeed * upDownSpeed * (float)(updown ? -1 : 1), ForceMode2D.Impulse);
     }
+    protected void MovingRightLeftPlatform()
+    {
+        if (originalPosition.x + distance < base.transform.position.x)
+        {
+            updown = true;
+        }
+        else if (originalPosition.x > base.transform.position.x)
+        {
+            updown = false;
+        }
+        rigid.AddForce(Vector2.right * realSpeed * upDownSpeed * (float)(updown ? -1 : 1), ForceMode2D.Impulse);
+    }
+
 
     public override void SetGimicSpeed(float speed)
     {
