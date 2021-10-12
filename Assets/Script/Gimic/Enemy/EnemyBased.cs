@@ -172,7 +172,7 @@ public class EnemyBased : WordGameObject
         base.SpeedStopnotinvoke();
     }
 
-    public void Die()
+    public virtual void Die()
     {
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
         gameObject.GetComponent<Collider2D>().enabled = false;
@@ -183,7 +183,7 @@ public class EnemyBased : WordGameObject
         }
     }
 
-    public void ResetArea()
+    public virtual void ResetArea()
     {
         gameObject.GetComponent<SpriteRenderer>().enabled = true;
         gameObject.GetComponent<Collider2D>().enabled = true;

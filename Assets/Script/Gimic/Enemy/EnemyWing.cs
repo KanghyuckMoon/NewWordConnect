@@ -10,11 +10,13 @@ public class EnemyWing : EnemyBased
     private Vector2 originalPosition = Vector2.zero;
     [SerializeField]
     private bool gravityOn = false;
+    private SpriteRenderer wing;
 
     protected override void Start()
     {
         base.Start();
         originalPosition = transform.position;
+        wing = transform.GetChild(0).GetComponent<SpriteRenderer>();
     }
 
     protected override void EnemyMove()
@@ -38,5 +40,17 @@ public class EnemyWing : EnemyBased
         rigid.gravityScale = 0;
 
         }
+    }
+
+    public override void Die()
+    {
+        base.Die();
+        wing.enabled = false;
+    }
+
+    public override void ResetArea()
+    {
+        base.ResetArea();
+        wing.enabled = true;
     }
 }
