@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7524246946382212436}
   - component: {fileID: 7524246946382212435}
   - component: {fileID: 7524246946382212434}
+  - component: {fileID: 541831550}
   m_Layer: 10
   m_Name: EnemyWalk 1
   m_TagString: Enemy
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 8596640243658272642, guid: 5d4daff38e3d9174b873918abcf2c1d4, type: 3}
+  m_Sprite: {fileID: -836408707274385450, guid: f17ccb5f67ac00d4ba0f6e82f546098f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -102,14 +103,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.46875, y: 0.71875}
     newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5}
+  m_Size: {x: 0.5, y: 0.7}
   m_EdgeRadius: 0
 --- !u!114 &7524246946382212435
 MonoBehaviour:
@@ -125,14 +126,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 24.5
   w_Movetime: 0
-  setArea: 0
+  setArea: 1
   isSound: 0
   isSoundEffect: 1
   isBloon: 0
   bloon: {fileID: 0}
-  clips:
-  - {fileID: 8300000, guid: d52e4c38a6ec7ac469d8ae062a2261d7, type: 3}
-  - {fileID: 8300000, guid: 820b4ae7e2ef15149ba3363114e654ad, type: 3}
   isStop: 0
   materials:
   - {fileID: 2100000, guid: f571860b36c7d394cb7d27a179f6ae28, type: 2}
@@ -167,3 +165,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!95 &541831550
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7524246946382212439}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1bc77d069ca18b04eaf4f9c4b3259523, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

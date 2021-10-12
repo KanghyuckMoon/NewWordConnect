@@ -28,14 +28,17 @@ public class EnemyBased : WordGameObject
 
     protected Vector2 resetPosition;
     protected bool setAreaReset = false;
+    protected Animator animator;
 
     protected override void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
         w_collider = GetComponent<Collider2D>();
+        animator = GetComponent<Animator>();
         base.Start();
         Settingvalue();
         resetPosition = transform.position;
+        animator.SetFloat("Speed", speedset);
     }
 
     public override void Settingvalue()
@@ -86,6 +89,7 @@ public class EnemyBased : WordGameObject
             if (rayHit.collider == null) // 바닥에 아무것도 없을 때
             {
                 nexMove *= -1;
+                transform.localScale = new Vector2(-nexMove, 1);
 
             }
             else
@@ -95,6 +99,7 @@ public class EnemyBased : WordGameObject
                     if (rayHit.distance >= downDistanceValue)
                     {
                         nexMove *= -1;
+                        transform.localScale = new Vector2(-nexMove, 1);
                     }
                     else
                     {
@@ -114,6 +119,7 @@ public class EnemyBased : WordGameObject
                         if (rayHit2.collider.tag != "Player")
                         {
                         nexMove *= -1;
+                        transform.localScale = new Vector2(-nexMove, 1);
 
                         }
                     }
@@ -130,21 +136,25 @@ public class EnemyBased : WordGameObject
     public override void SpeedUp()
     {
         speedset = 1.5f;
+        animator.SetFloat("Speed", speedset);
         base.SpeedUp();
     }
     public override void SpeedDown()
     {
         speedset = 0.5f;
+        animator.SetFloat("Speed", speedset);
         base.SpeedDown();
     }
     public override void SpeedStop()
     {
         speedset = 0;
+        animator.SetFloat("Speed", speedset);
         base.SpeedStop();
         speed = 1f;
     }
     public override void SpeedReset()
     {
+        animator.SetFloat("Speed", speedset);
         speedset = 1;
         base.SpeedReset();
     }
@@ -152,11 +162,13 @@ public class EnemyBased : WordGameObject
     {
         base.TimeReset();
         speedset = 1;
+        animator.SetFloat("Speed", speedset);
         speed = enemymoveSpeed;
     }
     public override void SpeedStopnotinvoke()
     {
         speedset = 0;
+        animator.SetFloat("Speed", speedset);
         base.SpeedStopnotinvoke();
     }
 
