@@ -7,7 +7,7 @@ public class SaveUser
     public bool writingData;
     public string playerName;
     public string lateDate;
-    public List<bool> subjectGet;
-    public List<bool> conditionGet;
-    public List<bool> executionGet;
+    public List<int> subjectGet;
+    public List<int> conditionGet;
+    public List<int> executionGet;
 }

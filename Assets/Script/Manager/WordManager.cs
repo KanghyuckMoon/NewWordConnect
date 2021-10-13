@@ -342,10 +342,12 @@ public class WordManager : MonoBehaviour
             if(subjectUnlock[i] == -1)
             {
                 subjectUnlock[i] = index;
+                SortList(subjectUnlock);
                 return;
             }
         }
         newPanel.transform.GetChild(1).GetComponent<Text>().text = subjectlist[subjectUnlock[index]];
+        SortList(subjectUnlock);
     }
 
     public void AddConditionWord(int index)
@@ -358,10 +360,12 @@ public class WordManager : MonoBehaviour
             if (conditionUnlock[i] == -1)
             {
                 conditionUnlock[i] = index;
+                SortList(conditionUnlock);
                 return;
             }
         }
         newPanel.transform.GetChild(1).GetComponent<Text>().text = conditionlist[conditionUnlock[index]];
+        SortList(conditionUnlock);
     }
 
     public void AddExecutionWord(int index)
@@ -374,10 +378,36 @@ public class WordManager : MonoBehaviour
             if (executionUnlock[i] == -1)
             {
                 executionUnlock[i] = index;
+                SortList(executionUnlock);
                 return;
             }
         }
         newPanel.transform.GetChild(1).GetComponent<Text>().text = executionlist[executionUnlock[index]];
+        SortList(executionUnlock);
+    }
+
+    public void SortList(List<int> list)
+    {
+        int temp = 0;
+        for(int i = 1; i < list.Count; i++)
+        {
+            if (list[i] == -1) continue;
+            for(int j = 0; j < i; j++)
+            {
+                if(list[j] == -1)
+                {
+                    temp = list[i];
+                    list[i] = list[j];
+                    list[j] = temp;
+                }
+                if(list[i] < list[j])
+                {
+                    temp = list[i];
+                    list[i] = list[j];
+                    list[j] = temp;
+                }
+            }
+        }
     }
 
     private GameObject CreatePanel_Pull(int type)
