@@ -1196,7 +1196,7 @@ public class WordManager : MonoBehaviour
             {
                 if(wordSelect[i].W_BlockOn)
                 {
-                    wordSelect[i].SetMoveZero();
+                    wordSelect[i].PlayFunction("SetMoveZero");
                     ExecutionWordObject(i);
                 }
             }
@@ -1230,7 +1230,7 @@ public class WordManager : MonoBehaviour
             {
                 if(!wordSelect[i].W_VisibleEffect)
                 {
-                    wordSelect[i].W_VisibleEffectOntrue();
+                    wordSelect[i].PlayFunction("W_VisibleEffectOntrue");
                     ExecutionWordObject(i);
                 }
             }
@@ -1336,47 +1336,47 @@ public class WordManager : MonoBehaviour
     {
         for(int i = 0; i<wordSelect.Count;i++)
         {
-            wordSelect[i].Jump();
+            wordSelect[i].PlayFunction("Jump");
         }
     }
     private void Execution_Jump(int i)
     {
-            wordSelect[i].Jump();
+        wordSelect[i].PlayFunction("Jump");
     }
     private void Execution_SpeedUp() // 2번 스피드
     {
         for (int i = 0; i < wordSelect.Count; i++)
         {
-            wordSelect[i].SpeedUp();
+            wordSelect[i].PlayFunction("SpeedUp");
         }
     }
     private void Execution_SpeedUp(int i) // 2번 스피드
     {
-        
-            wordSelect[i].SpeedUp();
-        
+
+        wordSelect[i].PlayFunction("SpeedUp");
+
     }
     private void Execution_TimeStop() // 3번 시간 정지
     {
         for (int i = 0; i < wordSelect.Count; i++)
         {
-            wordSelect[i].SpeedStop();
+            wordSelect[i].PlayFunction("SpeedStop");
         }
     }
     private void Execution_TimeStop(int i) // 
     {
-       wordSelect[i].SpeedStop();
+        wordSelect[i].PlayFunction("SpeedStop");
     }
     private void Execution_SpeedDown() // 4번 스피드 떨어짐
     {
         for (int i = 0; i < wordSelect.Count; i++)
         {
-            wordSelect[i].SpeedDown();
+            wordSelect[i].PlayFunction("SpeedDown");
         }
     }
     private void Execution_SpeedDown(int i) // 4번 스피드 떨어짐
     {
-            wordSelect[i].SpeedDown();
+        wordSelect[i].PlayFunction("SpeedDown");
     }
     private void Execution_Down() // 5번 내려간다
     {
@@ -1384,11 +1384,11 @@ public class WordManager : MonoBehaviour
         {
             if(conditionWord == 6)
             {
-                wordSelect[i].SuperDown();
+                wordSelect[i].PlayFunction("SuperDown");
             }
             else
             {
-                wordSelect[i].Down();
+                wordSelect[i].PlayFunction("Down");
             }
             if(subjectWord == 8)
             {
@@ -1400,11 +1400,11 @@ public class WordManager : MonoBehaviour
     {
         if (conditionWord == 6)
         {
-            wordSelect[i].SuperDown();
+            wordSelect[i].PlayFunction("SuperDown");
         }
         else
         {
-            wordSelect[i].Down();
+            wordSelect[i].PlayFunction("Down");
         }
         if (subjectWord == 8)
         {
@@ -1416,23 +1416,23 @@ public class WordManager : MonoBehaviour
     {
         for (int i = 0; i < wordSelect.Count; i++)
         {
-            wordSelect[i].SizeUp();
+            wordSelect[i].PlayFunction("SizeUp");
         }
     }
     private void Execution_SizeUp(int i)
     {
-        wordSelect[i].SizeUp();
+        wordSelect[i].PlayFunction("SizeUp");
     }
     private void Execution_SizeDown()
     {
         for (int i = 0; i < wordSelect.Count; i++)
         {
-            wordSelect[i].SizeDown();
+            wordSelect[i].PlayFunction("SizeDown");
         }
     }
     private void Execution_SizeDown(int i)
     {
-        wordSelect[i].SizeDown();
+        wordSelect[i].PlayFunction("SizeDown");
     }
 
     private void Execution_ColliderOff()
