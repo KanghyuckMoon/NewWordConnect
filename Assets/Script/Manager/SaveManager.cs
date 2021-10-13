@@ -57,8 +57,9 @@ public class SaveManager : MonoSingleton<SaveManager>
                 case 3:
                     return saveUser3;
                 default:
-                    Debug.LogWarning("[Instance] Instance " + typeof(SaveManager) + "1~3번째 세이브 파일이 아닙니다");
-                    return null;
+                    //Debug.LogWarning("[Instance] Instance " + typeof(SaveManager) + "1~3번째 세이브 파일이 아닙니다");
+                   // return null;
+                   return saveUser1; 
             }
         }
     }

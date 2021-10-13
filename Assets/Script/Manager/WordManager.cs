@@ -95,7 +95,6 @@ public class WordManager : MonoBehaviour
     //캐싱용 멤버변수
     private Text tempSetSizeText = null;
     private Image tempSetSizeImage = null;
-    private Button resetOnClick = null;
     private GameObject backPanel = null;
     private GameObject newPanel = null;
     private GameObject subjectScrollsPanel = null;
@@ -121,8 +120,6 @@ public class WordManager : MonoBehaviour
     //스테이지에서 가져오는 변수
     private TemperentManager s_temperentManager;
     private WeatherManager s_weatherManager;
-    //소리
-    private float s_Sound;
     //게임창
     private DisplayManager s_displayManager;
     //특수
@@ -130,7 +127,6 @@ public class WordManager : MonoBehaviour
     //조건어용 변수
     [SerializeField]
     private float c_onesecondCoolTime = 0f;
-    private float c_StandTime = 0f;
 
     //실행어용 변수
 
@@ -148,9 +144,6 @@ public class WordManager : MonoBehaviour
     private bool wasd;
     private bool keypad;
 
-    //esc
-    [SerializeField]
-    private GameObject escObj;
     private int optionselect = 0;
     [SerializeField]
     private RectTransform optionarrow = null;
@@ -159,8 +152,7 @@ public class WordManager : MonoBehaviour
     [SerializeField]
     private Text[] optionTexts = null;
     private KeySetting keysetting;
-    [SerializeField]
-    private AudioClip testClip;
+    private SaveUser saveUser;
 
     //윈 게임
     [SerializeField]
@@ -179,6 +171,7 @@ public class WordManager : MonoBehaviour
         //주어 찾기
         FindSubjects();
         keysetting = SaveManager.Instance.CurrenKeySetting;
+        saveUser = SaveManager.Instance.CurrentSaveUser;
     }
 
     private void Start()
@@ -412,6 +405,7 @@ public class WordManager : MonoBehaviour
                 }
             }
         }
+        AllChangeTexts();
     }
 
     private GameObject CreatePanel_Pull(int type)
