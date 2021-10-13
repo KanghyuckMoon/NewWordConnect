@@ -13,7 +13,7 @@ public class StageWordObject : WordGameObject
 
     protected override void Start()
     {
-        //base.Start();
+        base.Start();
         stageManager = FindObjectOfType<StageManager>();
         rigid = GetComponent<Rigidbody2D>();
         w_collider = GetComponent<Collider2D>();
@@ -49,64 +49,47 @@ public class StageWordObject : WordGameObject
 
     public override void SizeUp()
     {
-        if (sizeIndex == 0)
+        if (sizeIndex < 2)
         {
-            sizeIndex = 1;
-            stageManager.transform.localScale = new Vector2(1.2f, 1.2f);
-            gravityobj.transform.localScale = new Vector2(1.2f, 1.2f);
-        }
-        else if (sizeIndex == 1)
-        {
-            sizeIndex = 2;
-            stageManager.transform.localScale = new Vector2(1.4f, 1.4f);
-            gravityobj.transform.localScale = new Vector2(1.4f, 1.4f);
-        }
-        else if (sizeIndex == -1)
-        {
-            sizeIndex = 0;
-            stageManager.transform.localScale = new Vector2(1, 1);
-            gravityobj.transform.localScale = new Vector2(1f, 1f);
-        }
-        else if (sizeIndex == -2)
-        {
-            sizeIndex = -1;
-            stageManager.transform.localScale = new Vector2(0.8f, 0.8f);
-            gravityobj.transform.localScale = new Vector2(0.8f, 0.8f);
+            sizeIndex++;
+            SetSizeIndexToScaleVector();
         }
 
     }
 
+    protected override void SetSizeIndexToScaleVector()
+    {
+        switch(sizeIndex)
+        {
+            case 0:
+                stageManager.transform.localScale = new Vector2(1, 1);
+                gravityobj.transform.localScale = new Vector2(1f, 1f);
+                break;
+            case 1:
+                stageManager.transform.localScale = new Vector2(1.2f, 1.2f);
+                gravityobj.transform.localScale = new Vector2(1.2f, 1.2f);
+                break;
+            case 2:
+                stageManager.transform.localScale = new Vector2(1.4f, 1.4f);
+                gravityobj.transform.localScale = new Vector2(1.4f, 1.4f);
+                break;
+            case -1:
+                stageManager.transform.localScale = new Vector2(0.8f, 0.8f);
+                gravityobj.transform.localScale = new Vector2(0.8f, 0.8f);
+                break;
+            case -2:
+                stageManager.transform.localScale = new Vector2(0.6f, 0.6f);
+                gravityobj.transform.localScale = new Vector2(0.6f, 0.6f);
+                break;
+        }
+    }
+
     public override void SizeDown()
     {
-        if (sizeIndex == 2)
+        if (sizeIndex > -2)
         {
-            sizeIndex = 1;
-            stageManager.transform.localScale = new Vector2(1.2f, 1.2f);
-            gravityobj.transform.localScale = new Vector2(1.2f, 1.2f);
-        }
-        else if (sizeIndex == 1)
-        {
-            sizeIndex = 0;
-            stageManager.transform.localScale = new Vector2(1, 1);
-            gravityobj.transform.localScale = new Vector2(1f, 1f);
-        }
-        else if (sizeIndex == 0)
-        {
-            sizeIndex = -1;
-            stageManager.transform.localScale = new Vector2(0.8f, 0.8f);
-            gravityobj.transform.localScale = new Vector2(0.8f, 0.8f);
-        }
-        else if (sizeIndex == 1)
-        {
-            sizeIndex = 0;
-            stageManager.transform.localScale = new Vector2(1, 1);
-            gravityobj.transform.localScale = new Vector2(1f, 1f);
-        }
-        else if (sizeIndex == -1)
-        {
-            sizeIndex = -2;
-            stageManager.transform.localScale = new Vector2(0.6f, 0.6f);
-            gravityobj.transform.localScale = new Vector2(0.6f, 0.6f);
+            sizeIndex--;
+            SetSizeIndexToScaleVector();
         }
     }
 
@@ -118,28 +101,41 @@ public class StageWordObject : WordGameObject
         }
     }
 
+    private void GimicListSendMaterial(int index)
+    {
+        for (int i = 0; i < gimiclist.Count; i++)
+        {
+            gimiclist[i].SetMaterial(wordManager.ReturnMaterials(index));
+        }
+    }
+
     public override void SpeedUp()
     {
         base.SpeedUp();
         GimicListSendRealSpeed();
+        GimicListSendMaterial(1);
     }
 
     public override void SpeedDown()
     {
         base.SpeedDown();
         GimicListSendRealSpeed();
+        GimicListSendMaterial(3);
     }
 
     public override void SpeedStop()
     {
         base.SpeedStop();
+        realspeed = 0;
         GimicListSendRealSpeed();
+        GimicListSendMaterial(2);
     }
 
     public override void SpeedReset()
     {
         base.SpeedReset();
         GimicListSendRealSpeed();
+        GimicListSendMaterial(0);
     }
 
     public override void SpeedStopnotinvoke()
@@ -151,6 +147,8 @@ public class StageWordObject : WordGameObject
     public override void TimeReset()
     {
         base.TimeReset();
+        realspeed = 1;
         GimicListSendRealSpeed();
+        GimicListSendMaterial(0);
     }
 }

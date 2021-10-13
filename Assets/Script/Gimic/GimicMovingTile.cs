@@ -20,6 +20,7 @@ public class GimicMovingTile : GimicBase
 
     protected override void Start()
     {
+        base.Start();
         originalPosition = transform.position;
         realSpeed = 1;
     }
@@ -66,5 +67,4 @@ public class GimicMovingTile : GimicBase
     {
         realSpeed = speed;
     }
-
 }

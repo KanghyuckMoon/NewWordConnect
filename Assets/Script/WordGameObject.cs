@@ -456,7 +456,7 @@ public class WordGameObject : MonoBehaviour
 
 
     //연산 함수
-    protected void SetSizeIndexToScaleVector()
+    protected virtual void SetSizeIndexToScaleVector()
     {
         switch (sizeIndex)
         {
