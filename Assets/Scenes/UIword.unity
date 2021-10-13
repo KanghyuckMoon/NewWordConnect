@@ -2134,7 +2134,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4411052962741426988, guid: 245a52a6ccf6a124d969d5784ff3058f, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4411052962741426988, guid: 245a52a6ccf6a124d969d5784ff3058f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2439,7 +2439,6 @@ MonoBehaviour:
   isGameStart: 1
   isInputESC: 0
   dieAnimation: {fileID: 1957914430}
-  escObj: {fileID: 2142776493}
   optionarrow: {fileID: 58009838}
   optionRectTexts:
   - {fileID: 802403211}
@@ -2451,7 +2450,6 @@ MonoBehaviour:
   - {fileID: 2006246729}
   - {fileID: 2007043690}
   - {fileID: 1612794286}
-  testClip: {fileID: 8300000, guid: 820b4ae7e2ef15149ba3363114e654ad, type: 3}
   wingame: {fileID: 1639838706}
   winbackground: {fileID: 1077185609}
   wintext: {fileID: 180239696}
@@ -2481,6 +2479,7 @@ MonoBehaviour:
   isBloon: 0
   bloon: {fileID: 0}
   isStop: 0
+  isObject: 0
   times: 0
   isRewinding: 0
   isStartRecord: 0
@@ -2506,6 +2505,7 @@ MonoBehaviour:
   isBloon: 0
   bloon: {fileID: 0}
   isStop: 0
+  isObject: 0
   x: 0
   y: 0
   ax: 0
@@ -15611,76 +15611,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1562033653}
   m_CullTransparentMesh: 1
---- !u!1 &1567390232
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1567390234}
-  - component: {fileID: 1567390233}
-  m_Layer: 0
-  m_Name: SaveManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1567390233
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1567390232}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 701f0ea2ba2d1ef42942073e1537c1f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  saveUser1:
-    writingData: 1
-    playerName: MoonKanghyuck
-    lateDate: 2021/10/09
-    subjectGet: 0000000000000000
-    conditionGet: 0000000000000000
-    executionGet: 0000000000000000
-  saveUser2:
-    writingData: 1
-    playerName: None
-    lateDate: None
-    subjectGet: 0000000000000000
-    conditionGet: 0000000000000000
-    executionGet: 0000000000000000
-  saveUser3:
-    writingData: 0
-    playerName: None
-    lateDate: None
-    subjectGet: 0000000000000000
-    conditionGet: 0000000000000000
-    executionGet: 0000000000000000
-  keysetting:
-    Wasd: 1
-    Numpad: 1
-    writingData: 0
-    backgroundvolume: 7
-    effectvolume: 7
---- !u!4 &1567390234
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1567390232}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.14354, y: 4.162163, z: -9.089275}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1597653540
 GameObject:
   m_ObjectHideFlags: 0

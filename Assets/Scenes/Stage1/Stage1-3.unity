@@ -1564,7 +1564,7 @@ MonoBehaviour:
   isBloon: 0
   bloon: {fileID: 0}
   isStop: 0
-  materials: []
+  isObject: 0
   gimiclist: []
   gravityobj: {fileID: 1753925254}
 --- !u!66 &263275148
@@ -16945,7 +16945,7 @@ MonoBehaviour:
   isBloon: 0
   bloon: {fileID: 0}
   isStop: 0
-  materials: []
+  isObject: 0
   s_Temperature: 50
   tempdan: 0
 --- !u!1 &301739557
@@ -55573,7 +55573,7 @@ MonoBehaviour:
   isBloon: 0
   bloon: {fileID: 0}
   isStop: 0
-  materials: []
+  isObject: 0
   downmoveOn: 0
   lightRays2D: {fileID: 1193139979}
 --- !u!50 &2016849913
@@ -56170,7 +56170,7 @@ MonoBehaviour:
   isBloon: 0
   bloon: {fileID: 0}
   isStop: 0
-  materials: []
+  isObject: 0
   s_Weather: 00000000010000000200000003000000040000000500000006000000
   weatherObjects:
   - {fileID: 1135043462}
@@ -56305,6 +56305,10 @@ PrefabInstance:
     - target: {fileID: 1337555957478727601, guid: 83a61b9bed363ba4d86fdbe7e3d36c41, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1337555957478727606, guid: 83a61b9bed363ba4d86fdbe7e3d36c41, type: 3}
+      propertyPath: wordsIndex
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83a61b9bed363ba4d86fdbe7e3d36c41, type: 3}

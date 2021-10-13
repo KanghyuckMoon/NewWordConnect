@@ -173,6 +173,7 @@ public class IntroInput : MonoBehaviour
         {
             keysettingImage[j].gameObject.SetActive(false);
         }
+        SaveManager.Instance.SaveKeySetting();
         yield return waitForSeconds;
         IntroStart();
     }

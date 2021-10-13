@@ -186,6 +186,17 @@ public class WordManager : MonoBehaviour
         conditionScrollsPanel = conditionScroll.GetChild(0).gameObject;
         executionScrollsPanel = executionScroll.GetChild(0).gameObject;
         cooltimeAnimator = cooltimeImage.GetComponent<Animator>();
+
+
+        subjectUnlock = saveUser.subjectGet;
+        conditionUnlock = saveUser.conditionGet;
+        executionUnlock = saveUser.executionGet;
+        SortList(subjectUnlock);
+        SortList(conditionUnlock);
+        SortList(executionUnlock);
+        ReCreateWordPanel(subjectUnlock, 0);
+        ReCreateWordPanel(conditionUnlock, 1);
+        ReCreateWordPanel(executionUnlock, 2);
     }
 
     private void FindSubjects()
@@ -346,6 +357,35 @@ public class WordManager : MonoBehaviour
         newPanel.transform.GetChild(1).GetComponent<Text>().text = subjectlist[subjectUnlock[index]];
         SortList(subjectUnlock);
     }
+    public void ReCreateWordPanel(List<int> list, int type)
+    {
+        for(int i = 2; i < list.Count; i++)
+        {
+            if(list[i] == -1)
+            {
+                continue;   
+            }
+            else
+            {
+                newPanel = CreatePanel_Pull(type);
+                newPanel.SetActive(true);
+                switch (type)
+                {
+                    case 0:
+                        panellistSubject.Add(newPanel);
+                        break;
+                    case 1:
+                        panellistCondition.Add(newPanel);
+                        break;
+                    case 2:
+                        panellistExecution.Add(newPanel);
+                        break;
+                }
+            }
+        }
+        AllChangeTexts();
+    }
+
 
     public void AddConditionWord(int index)
     {
@@ -406,6 +446,7 @@ public class WordManager : MonoBehaviour
             }
         }
         AllChangeTexts();
+        SaveManager.Instance.SaveToJson();
     }
 
     private GameObject CreatePanel_Pull(int type)
