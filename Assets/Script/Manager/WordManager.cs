@@ -162,6 +162,13 @@ public class WordManager : MonoBehaviour
     [SerializeField]
     private AudioClip testClip;
 
+    //윈 게임
+    [SerializeField]
+    private GameObject wingame;
+    [SerializeField]
+    private RectTransform winbackground;
+    [SerializeField]
+    private RectTransform wintext;
 
     private void Awake()
     {
@@ -1511,5 +1518,16 @@ public class WordManager : MonoBehaviour
                 OptionSelect(1);
                 MoveOption();
             }
+    }
+
+    public void WinGame()
+    {
+        wingame.SetActive(true);
+        WordSystem.SetActive(false);
+        wintext.GetComponent<Text>().text = "stage 1-1클리어";
+        wintext.anchoredPosition = new Vector2(-100, wintext.anchoredPosition.y);
+        winbackground.anchoredPosition = new Vector2(-100, winbackground.anchoredPosition.y);
+        wintext.DOAnchorPosX(0, 1);
+        winbackground.DOAnchorPosX(0, 0.5f);
     }
 }

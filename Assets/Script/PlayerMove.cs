@@ -31,6 +31,7 @@ public class PlayerMove : WordGameObject
     private bool isAir = false;
     private int layerMask = 0;
     private bool isInvincibility = false;
+    private bool win;
 
     protected override void Start()
     {
@@ -54,6 +55,7 @@ public class PlayerMove : WordGameObject
 
     private void Update()
     {
+        if (win) return;
         if (die) return;
         if (wordManager.isEvent) return;
         if (w_pause) return;
@@ -67,6 +69,7 @@ public class PlayerMove : WordGameObject
 
     private void FixedUpdate()
     {
+        if (win) return;
         SetEscStop();
         if (isStop) return;
         if (die) return;
@@ -209,7 +212,6 @@ public class PlayerMove : WordGameObject
             if(rigid.velocity.y <= 0 && transform.position.y > collision.transform.position.y)
             {
                 transform.SetParent(collision.transform);
-                Debug.Log("A");
             }
             else
             {
@@ -286,8 +288,10 @@ public class PlayerMove : WordGameObject
     public void WinNextScene()
     {
         if (isInvincibility) return;
+        win = true;
         isInvincibility = true;
-        Invoke("MoveStageSelect",1f);
+        wordManager.WinGame();
+        Invoke("MoveStageSelect",2f);
     }
 
     public void MoveStageSelect()
