@@ -18,6 +18,8 @@ public class CameraMove : WordGameObject
     private float shaketimer = 0;
     private float camerasize = 3.75f;
     private float scaleUpDownSize = 1f;
+    [SerializeField]
+    private LightRays2D lightRays2D;
 
     protected override void Start()
     {
@@ -235,6 +237,7 @@ public class CameraMove : WordGameObject
     private void ChangeCameraSize()
     {
         virtualCamera.m_Lens.OrthographicSize = camerasize * scaleUpDownSize;
+        lightRays2D.transform.localScale = new Vector2(3 * virtualCamera.m_Lens.OrthographicSize, 3 * virtualCamera.m_Lens.OrthographicSize);
     }
 
     private void ResetCam()

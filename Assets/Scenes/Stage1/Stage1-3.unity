@@ -51005,7 +51005,7 @@ Transform:
   m_GameObject: {fileID: 1193139977}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 10}
-  m_LocalScale: {x: 14, y: 14, z: 1}
+  m_LocalScale: {x: 12, y: 12, z: 1}
   m_Children: []
   m_Father: {fileID: 2016849920}
   m_RootOrder: 0
@@ -54333,7 +54333,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 24.5
   w_Movetime: 0
-  setArea: 0
+  setArea: -1
   isSound: 0
   isSoundEffect: 0
   isBloon: 0
@@ -54341,6 +54341,7 @@ MonoBehaviour:
   isStop: 0
   materials: []
   downmoveOn: 0
+  lightRays2D: {fileID: 1193139979}
 --- !u!50 &2016849913
 Rigidbody2D:
   serializedVersion: 4
@@ -54535,7 +54536,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2016849910}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.61, y: -1.4499999, z: -17.728243}
+  m_LocalPosition: {x: -2.625, y: -1.4375, z: -17.728243}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1193139978}
