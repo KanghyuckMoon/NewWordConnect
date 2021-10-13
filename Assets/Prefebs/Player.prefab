@@ -10141,13 +10141,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 24.5
   w_Movetime: 0
-  setArea: 0
+  setArea: -1
   isSound: 0
   isSoundEffect: 0
   isBloon: 0
   bloon: {fileID: 0}
   isStop: 0
-  materials: []
+  isObject: 1
   nowArea: 0
   dieEffect: {fileID: 0}
   cloth: {fileID: 8870409126794827000}

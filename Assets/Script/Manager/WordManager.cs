@@ -171,6 +171,7 @@ public class WordManager : MonoBehaviour
     private RectTransform wintext;
 
     //쉐이더
+    [SerializeField]
     private List<Material> materials;
 
     private void Awake()

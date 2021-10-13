@@ -2455,6 +2455,12 @@ MonoBehaviour:
   wingame: {fileID: 1639838706}
   winbackground: {fileID: 1077185609}
   wintext: {fileID: 180239696}
+  materials:
+  - {fileID: 2100000, guid: f571860b36c7d394cb7d27a179f6ae28, type: 2}
+  - {fileID: 2100000, guid: 629ed5605efd7174baf26cbc97f663e4, type: 2}
+  - {fileID: 2100000, guid: 027b0cf02b95b5c439ec76c77720763e, type: 2}
+  - {fileID: 2100000, guid: 889e3a91807cb6441bf0576e77a16ee4, type: 2}
+  - {fileID: 2100000, guid: 4d3d893f815b952409c644dba3bc5d22, type: 2}
 --- !u!114 &704011406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2475,7 +2481,6 @@ MonoBehaviour:
   isBloon: 0
   bloon: {fileID: 0}
   isStop: 0
-  materials: []
   times: 0
   isRewinding: 0
   isStartRecord: 0
@@ -2501,7 +2506,6 @@ MonoBehaviour:
   isBloon: 0
   bloon: {fileID: 0}
   isStop: 0
-  materials: []
   x: 0
   y: 0
   ax: 0
@@ -15640,23 +15644,23 @@ MonoBehaviour:
     writingData: 1
     playerName: MoonKanghyuck
     lateDate: 2021/10/09
-    subjectGet: 000000000000000000
-    conditionGet: 000000000000000000
-    executionGet: 000000000000000000
+    subjectGet: 0000000000000000
+    conditionGet: 0000000000000000
+    executionGet: 0000000000000000
   saveUser2:
     writingData: 1
     playerName: None
     lateDate: None
-    subjectGet: 000000000000000000
-    conditionGet: 000000000000000000
-    executionGet: 000000000000000000
+    subjectGet: 0000000000000000
+    conditionGet: 0000000000000000
+    executionGet: 0000000000000000
   saveUser3:
     writingData: 0
     playerName: None
     lateDate: None
-    subjectGet: 000000000000000000
-    conditionGet: 000000000000000000
-    executionGet: 000000000000000000
+    subjectGet: 0000000000000000
+    conditionGet: 0000000000000000
+    executionGet: 0000000000000000
   keysetting:
     Wasd: 1
     Numpad: 1
