@@ -5,11 +5,6 @@ using UnityEngine;
 
 public class WordGameObject : MonoBehaviour
 {
-    protected string Save_Path = "";
-    protected string Save_FileName = "/MoveFile.txt";
-
-
-
     //물리 변수
     [SerializeField]
     protected float speed = 24.5f;
@@ -62,6 +57,7 @@ public class WordGameObject : MonoBehaviour
     [SerializeField]
     protected float w_Movetime = 0f;
     protected WaitForSeconds waitForSeconds = new WaitForSeconds(0.1f);
+    protected Vector2 scaleVetor = new Vector2(1, 1);
 
     //공용
     protected Rigidbody2D rigid = null;
@@ -83,10 +79,7 @@ public class WordGameObject : MonoBehaviour
     protected bool superDownOn = false;
 
     protected PlayerMove player;
-    //private void Awake()
-    //{
-    //    //StartSetJsonSetting();
-    //}
+    protected WordManager wordManager;
 
     //구역 설정
     [Header ("구역 설정")]
@@ -104,9 +97,9 @@ public class WordGameObject : MonoBehaviour
     //protected bool isStop = false;
     protected Vector2 stopVector = Vector2.zero;
 
-    [SerializeField]
-    protected Material[] materials;
     protected SpriteRenderer spriteRenderer;
+
+    private bool isObject;
 
     public void SetPlayer(PlayerMove player)
     {
@@ -115,6 +108,7 @@ public class WordGameObject : MonoBehaviour
     public void SetPlayer()
     {
         player = FindObjectOfType<PlayerMove>();
+        wordManager = FindObjectOfType<WordManager>();
     }
 
     protected virtual void SetEscStop()
@@ -155,28 +149,11 @@ public class WordGameObject : MonoBehaviour
         rigid.gravityScale = 4.300000190734863f;
     }
 
-    private void StartSetJsonSetting()
-    {
-        if (!Directory.Exists(Save_Path))
-        {
-            Directory.CreateDirectory(Save_Path);
-        }
-        if (gameObject.GetComponent<Rigidbody2D>() == null)
-        {
-            gameObject.AddComponent<Rigidbody2D>();
-            rigid = GetComponent<Rigidbody2D>();
-        }
-        else
-        {
-            rigid = GetComponent<Rigidbody2D>();
-        }
-        w_collider = GetComponent<Collider2D>();
-    }
-
     protected virtual void Start()
     {
-        realspeed = speed;
+        rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        realspeed = speed;
         StartCoroutine(OnMoveDetect());
         SetPlayer();
     }
@@ -191,9 +168,10 @@ public class WordGameObject : MonoBehaviour
      jump = 22.5f;
      gravityScale = 4.300000190734863f;
      rigid.gravityScale = gravityScale;
+     realspeed = speed;
     }
 
-    protected virtual void JumpDrag()
+    protected virtual void SetJumpDrag()
     {
         if (jumpOn)
         {
@@ -235,37 +213,28 @@ public class WordGameObject : MonoBehaviour
 
     public virtual void Jump()
     {
-        if(setArea == -1 || setArea == player.nowArea)
-        {
-            rigid.AddForce(Vector2.up * jump, ForceMode2D.Impulse);
-            w_MoveOn = true;
-            w_MoveOnEffect = false;
-            w_tile = 0;
-            PlaySound(1);
-            SoundManager.Instance.SFXPlay(1);
-        }
+        rigid.AddForce(Vector2.up * jump, ForceMode2D.Impulse);
+        w_MoveOn = true;
+        w_MoveOnEffect = false;
+        w_tile = 0;
+        PlaySound(1);
+        SoundManager.Instance.SFXPlay(1);
     }
     public virtual void Down()
     {
-        if (setArea == -1 || setArea == player.nowArea)
-        {
-            rigid.AddForce(Vector2.down * (jump * 0.8f), ForceMode2D.Impulse);
-            w_MoveOn = true;
-            w_MoveOnEffect = false;
-            PlaySound(1);
-        }
+        rigid.AddForce(Vector2.down * (jump * 0.8f), ForceMode2D.Impulse);
+        w_MoveOn = true;
+        w_MoveOnEffect = false;
+        PlaySound(1);
     }
     public virtual void SuperDown()
     {
-        if (setArea == -1 || setArea == player.nowArea)
-        {
-            rigid.AddForce(Vector2.down * (jump * 0.01f), ForceMode2D.Impulse);
-            w_MoveOn = true;
-            w_MoveOnEffect = false;
-            superDownOn = true;
-            PlaySound(1);
-            Invoke("SuperDownFalse", 0.2f);
-        }
+        rigid.AddForce(Vector2.down * (jump * 0.01f), ForceMode2D.Impulse);
+        w_MoveOn = true;
+        w_MoveOnEffect = false;
+        superDownOn = true;
+        PlaySound(1);
+        Invoke("SuperDownFalse", 0.2f);
             
     }
     public virtual void SuperDownFalse()
@@ -276,94 +245,28 @@ public class WordGameObject : MonoBehaviour
         }
     }
 
-    public virtual void SizeUp()
-    {
-        if (setArea == -1 || setArea == player.nowArea)
-        {
-            if (sizeIndex == 0)
-            {
-                sizeIndex = 1;
-                transform.localScale = new Vector2(1.2f, 1.2f);
-            }
-            else if (sizeIndex == 1)
-            {
-                sizeIndex = 2;
-                transform.localScale = new Vector2(1.4f, 1.4f);
-            }
-            else if (sizeIndex == -1)
-            {
-                sizeIndex = 0;
-                transform.localScale = new Vector2(1, 1);
-            }
-            else if (sizeIndex == -2)
-            {
-                sizeIndex = -1;
-                transform.localScale = new Vector2(0.8f, 0.8f);
-            }
-        }
-    }
-
-    public virtual void SizeDown()
-    {
-        if (setArea == -1 || setArea == player.nowArea)
-        {
-            if (sizeIndex == 2)
-            {
-                sizeIndex = 1;
-                transform.localScale = new Vector2(1.2f, 1.2f);
-            }
-            else if (sizeIndex == 1)
-            {
-                sizeIndex = 0;
-                transform.localScale = new Vector2(1, 1);
-            }
-            else if (sizeIndex == 0)
-            {
-                sizeIndex = -1;
-                transform.localScale = new Vector2(0.8f, 0.8f);
-            }
-            else if (sizeIndex == 1)
-            {
-                sizeIndex = 0;
-                transform.localScale = new Vector2(1, 1);
-            }
-            else if (sizeIndex == -1)
-            {
-                sizeIndex = -2;
-                transform.localScale = new Vector2(0.6f, 0.6f);
-            }
-        }
-            
-    }
+    
 
     public virtual void SpeedUp()
     {
-        if (setArea == -1 || setArea == player.nowArea)
-        {
-            realspeed = speed * 2f;
-            spriteRenderer.material = materials[1];
-            PlaySound(0.5f);
-            SoundManager.Instance.SFXPlay(2);
-            Invoke("SpeedReset", 1f);
-        }
+        realspeed = speed * 2f;
+        ChangeMaterial(1);
+        PlaySound(0.5f);
+        SoundManager.Instance.SFXPlay(2);
+        Invoke("SpeedReset", 1f);
     }
     public virtual void SpeedDown()
     {
-        if (setArea == -1 || setArea == player.nowArea)
-        {
             realspeed = speed * 0.5f;
-            spriteRenderer.material = materials[3];
+            ChangeMaterial(3);
             PlaySound(0.5f);
             SoundManager.Instance.SFXPlay(4);
             Invoke("SpeedReset", 1f);
-        }
     }
     public virtual void SpeedStop()
     {
-        if (setArea == -1 || setArea == player.nowArea)
-        {
             w_pause = true;
-            spriteRenderer.material = materials[2];
+            ChangeMaterial(2);
             realspeed = 0;
             gravityScale = 0;
             jump = 0;
@@ -374,13 +277,10 @@ public class WordGameObject : MonoBehaviour
             PlaySound(0.5f);
             SoundManager.Instance.SFXPlay(3);
             Invoke("TimeReset", 1f);
-        }
             
     }
     public virtual void SpeedStopnotinvoke()
     {
-        if (setArea == -1 || setArea == player.nowArea)
-        {
             w_pause = true;
             realspeed = 0;
             gravityScale = 0;
@@ -389,65 +289,29 @@ public class WordGameObject : MonoBehaviour
             pausevector = rigid.velocity;
             rigid.velocity = Vector2.zero;
             realspeed = 0;
-        }
             
     }
     public virtual void SpeedReset()
     {
-        if (setArea == -1 || setArea == player.nowArea)
-        {
-            spriteRenderer.material = materials[0];
-            realspeed = speed;
-        }
+        ChangeMaterial(0);
+        realspeed = speed;
     }
     public virtual void TimeReset()
     {
-        if (setArea == -1 || setArea == player.nowArea)
+        w_pause = false;
+        if (isObject)
         {
-            w_pause = false;
-            spriteRenderer.material = materials[0];
-            realspeed = speed;
-            rigid.velocity = pausevector;
-            gravityScale = 4.300000190734863f;
-            jump = 22.5f;
-            rigid.gravityScale = 4.300000190734863f;
+            spriteRenderer.material = wordManager.ReturnMaterials(0);
         }
-            
+        realspeed = speed;
+        rigid.velocity = pausevector;
+        gravityScale = 4.300000190734863f;
+        jump = 22.5f;
+        rigid.gravityScale = 4.300000190734863f;
     }
 
-    public virtual void ColliderOff()
-    {
-        if (setArea == -1 || setArea == player.nowArea)
-        {
-            spriteRenderer.material = materials[4];
-            w_collider.enabled = false;
-            Invoke("ColliderOn", 1f);
-        }
-    }
-    public virtual void ColliderOn()
-    {
-        if (setArea == -1 || setArea == player.nowArea)
-        {
-            spriteRenderer.material = materials[0];
-            w_collider.enabled = true;
-        }
-    }
+    
 
-    public void OnBecameVisible()
-    {
-        if (setArea == -1 || setArea == player.nowArea)
-        {
-            w_visible = true;
-        }
-    }
-    public void OnBecameInvisible()
-    {
-        if (setArea == -1 || setArea == player.nowArea)
-        {
-            w_visible = false;
-            w_visibleEffect = false;
-        }
-    }
 
     public virtual float ReturnVelocityY()
     {
@@ -456,19 +320,16 @@ public class WordGameObject : MonoBehaviour
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        if (setArea == -1 || setArea == player.nowArea)
+        w_Collider = true;
+        w_ColliderEffect = false;
+        w_tile = 0;
+        w_vector1 = transform.position.x;
+        w_BlockOn = true;
+        superDownOn = false;
+        jumpOn = false;
+        if (collision.gameObject.CompareTag("BreakBlock") && superDownOn)
         {
-            w_Collider = true;
-            w_ColliderEffect = false;
-            w_tile = 0;
-            w_vector1 = transform.position.x;
-            w_BlockOn = true;
-            superDownOn = false;
-            jumpOn = false;
-            if (collision.gameObject.CompareTag("BreakBlock") && superDownOn)
-            {
-                collision.gameObject.GetComponent<GimicBlock>().BreakBlock();
-            }
+            collision.gameObject.GetComponent<GimicBlock>().BreakBlock();
         }
             
     }
@@ -527,8 +388,7 @@ public class WordGameObject : MonoBehaviour
             w_BlockOn = false;
             w_tile = 0;
             jumpOn = true;
-        }
-            
+        } 
     }
 
     public void SetCollider()
@@ -548,23 +408,115 @@ public class WordGameObject : MonoBehaviour
         }
     }
 
-    public float ReturnRealSpeed()
-    {
-        return realspeed;
-    }
 
     protected void PlaySound(float time)
     {
-        if (setArea == -1 || setArea == player.nowArea)
-        {
-            isSound = true;
-            Invoke("ResetSound", time);
-        }
+        isSound = true;
+        Invoke("ResetSound", time);
     }
 
     protected void ResetSound()
     {
         isSound = false;
         isSoundEffect = true;
+    }
+
+    //기능 함수
+    public void PlayFunction(string meshode)
+    {
+        if (setArea == -1 || setArea == player.nowArea)
+        {
+            Invoke(meshode, 0);
+        }
+    }
+
+    public virtual void SizeUp()
+    {
+        if (sizeIndex < 2)
+        {
+            sizeIndex++;
+            SetSizeIndexToScaleVector();
+        }
+    }
+
+    public virtual void SizeDown()
+    {
+        if (sizeIndex > -2)
+        {
+            sizeIndex--;
+            SetSizeIndexToScaleVector();
+        }
+    }
+    public void OnBecameVisible()
+    {
+        if (setArea == -1 || setArea == player.nowArea)
+        {
+            w_visible = true;
+        }
+    }
+    public void OnBecameInvisible()
+    {
+        if (setArea == -1 || setArea == player.nowArea)
+        {
+            w_visible = false;
+            w_visibleEffect = false;
+        }
+    }
+    public virtual void ColliderOff()
+    {
+        if (setArea == -1 || setArea == player.nowArea)
+        {
+            if (isObject)
+            {
+                spriteRenderer.material = wordManager.ReturnMaterials(4);
+            }
+            w_collider.enabled = false;
+            Invoke("ColliderOn", 1f);
+        }
+    }
+    public virtual void ColliderOn()
+    {
+        if (setArea == -1 || setArea == player.nowArea)
+        {
+            if (isObject)
+            {
+                spriteRenderer.material = wordManager.ReturnMaterials(0);
+            }
+            w_collider.enabled = true;
+        }
+    }
+
+
+    //연산 함수
+    protected void SetSizeIndexToScaleVector()
+    {
+        switch (sizeIndex)
+        {
+            case 0:
+                scaleVetor = new Vector2(1, 1);
+                break;
+            case 1:
+                scaleVetor = new Vector2(1.2f, 1.2f);
+                break;
+            case 2:
+                scaleVetor = new Vector2(1.4f, 1.4f);
+                break;
+            case -1:
+                scaleVetor = new Vector2(0.8f, 0.8f);
+                break;
+            case -2:
+                scaleVetor = new Vector2(0.6f, 0.6f);
+                break;
+        }
+    }
+
+
+    //그래픽 함수
+    protected void ChangeMaterial(int index)
+    {
+        if (isObject)
+        {
+            spriteRenderer.material = wordManager.ReturnMaterials(index);
+        }
     }
 }

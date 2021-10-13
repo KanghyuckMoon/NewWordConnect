@@ -170,6 +170,9 @@ public class WordManager : MonoBehaviour
     [SerializeField]
     private RectTransform wintext;
 
+    //쉐이더
+    private List<Material> materials;
+
     private void Awake()
     {
         //주어 찾기
@@ -1559,5 +1562,12 @@ public class WordManager : MonoBehaviour
         winbackground.anchoredPosition = new Vector2(-100, winbackground.anchoredPosition.y);
         wintext.DOAnchorPosX(0, 1);
         winbackground.DOAnchorPosX(0, 0.5f);
+    }
+
+    //그래픽 관련 함수
+
+    public Material ReturnMaterials(int index)
+    {
+        return materials[index];
     }
 }

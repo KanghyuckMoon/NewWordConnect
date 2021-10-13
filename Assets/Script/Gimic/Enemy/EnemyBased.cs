@@ -59,7 +59,7 @@ public class EnemyBased : WordGameObject
                 ResetEnemyPosition();
                 setAreaReset = true;
             }
-        JumpDrag();
+        SetJumpDrag();
         EnemyMove();
         }
         else
