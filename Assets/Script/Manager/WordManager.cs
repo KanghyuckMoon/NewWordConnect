@@ -1439,12 +1439,12 @@ public class WordManager : MonoBehaviour
     {
         for (int i = 0; i < wordSelect.Count; i++)
         {
-            wordSelect[i].ColliderOff();
+            wordSelect[i].PlayFunction("ColliderOff");
         }
     } // 8번 1초동안 충돌하지 않는다
     private void Execution_ColliderOff(int i)
     {
-        wordSelect[i].ColliderOff();
+        wordSelect[i].PlayFunction("ColliderOff");
     }
 
     public void EventOn()
