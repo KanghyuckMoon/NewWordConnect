@@ -2181,3 +2181,12 @@ AssetImportParameters requested are different than current active one (requested
   custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 3041.535891 seconds.
+  path: Assets/Grapic/Sprite/레인보우링.png
+  artifactKey: Guid(ddf1ef9061dddc346ad9176ba1848ee3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Grapic/Sprite/레인보우링.png using Guid(ddf1ef9061dddc346ad9176ba1848ee3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '46b24e3fa1dacd6e16c2e13d40c87c22') in 0.293658 seconds 
+  Import took 0.302402 seconds .
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
