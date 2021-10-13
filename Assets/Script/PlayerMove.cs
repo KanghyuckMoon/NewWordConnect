@@ -9,19 +9,14 @@ public class PlayerMove : WordGameObject
     private float velocityX = 0;
     private bool downGravity = false; 
     private Vector2 savePoint;
-
-    private BoxCollider2D collider2d;
-
     public int nowArea = 0;
     private int dieArea = 0;
-    private WordManager wordManager;
     private TextManager textManager;
     //애니메이션
     private Collider2D colliders = null;
     private Animator animator = null;
     private bool isWalk = false;
     private ParticleSystem[] dust;
-    private Vector2 scaleVetor = new Vector2(1, 1);
     [SerializeField]
     private DieEffect dieEffect;
     [SerializeField]
@@ -32,6 +27,8 @@ public class PlayerMove : WordGameObject
     private int layerMask = 0;
     private bool isInvincibility = false;
     private bool win;
+    private Vector2 frontvec;
+    private RaycastHit2D rayHit;
 
     protected override void Start()
     {
@@ -46,11 +43,29 @@ public class PlayerMove : WordGameObject
         spriteRenderer = GetComponent<SpriteRenderer>();
         dust = GetComponentsInChildren<ParticleSystem>();
         colliders = GetComponent<Collider2D>();
-        
         wordManager = FindObjectOfType<WordManager>();
         textManager = FindObjectOfType<TextManager>();
         maincam = Camera.main.GetComponent<CameraMove>();
-        player = GetComponent<PlayerMove>();
+
+        Settingvalue();
+    }
+
+    protected override void SetEscStop()
+    {
+        if (isStop)
+        {
+            if (isStop) return;
+            isStop = true;
+            Stop();
+        }
+        else
+        {
+            if (isStop)
+            {
+                isStop = false;
+                ReStart();
+            }
+        }
     }
 
     private void Update()
@@ -59,11 +74,7 @@ public class PlayerMove : WordGameObject
         if (die) return;
         if (wordManager.isEvent) return;
         if (w_pause) return;
-        //���������� �Լ�
         InputJump();
-        JumpDrag();
-
-        //�Է� �޴� ��
         InputMove();
     }
 
@@ -76,6 +87,7 @@ public class PlayerMove : WordGameObject
         if (wordManager.isEvent) return;
         if (wordManager.isInputESC) return;
         if (w_pause) return;
+        SetJumpDrag();
         GravitySet();
         Move();
         DownDust();
@@ -111,23 +123,15 @@ public class PlayerMove : WordGameObject
     }
     public override void Jump()
     {
-        rigid.AddForce(Vector2.up * jump,ForceMode2D.Impulse);
+        base.Jump();
         jumpOn = true;
-        w_MoveOn = true;
-        w_MoveOnEffect = false;
-        w_tile = 0;
-        CreateDust();
-        PlaySound(1);
-        SoundManager.Instance.SFXPlay(1);
+        CreateDust(0);
     }
 
     public void GravitySet()
     {
-
-
-        Vector2 frontvec = new Vector2(rigid.position.x, rigid.position.y);
-        RaycastHit2D rayHit = Physics2D.Raycast(frontvec, Vector3.down,1, layerMask);
-        Debug.DrawRay(frontvec, Vector3.down, new Color(0, 1, 0));
+        frontvec = new Vector2(rigid.position.x, rigid.position.y);
+        rayHit = Physics2D.Raycast(frontvec, Vector3.down,1, layerMask);
         if (rayHit.collider != null)
         {
             isAir = false;
@@ -146,15 +150,6 @@ public class PlayerMove : WordGameObject
         }
     }
 
-    public override void SuperDown()
-    {
-        base.SuperDown();
-    }
-
-    private void OnApplicationQuit()
-    {
-        //SaveToJson();
-    }
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
         w_Collider = true;
@@ -163,32 +158,14 @@ public class PlayerMove : WordGameObject
         w_tile = 0;
         w_vector1 = transform.position.x;
         w_BlockOn = true;
-        CreateDust();
-        switch(collision.gameObject.tag)
+        CreateDust(0);
+        switch (collision.gameObject.tag)
         {
             case "Enemy":
-                if (collision.transform.position.y + 0.1f < transform.position.y)
-                {
-                    Jump();
-                    collision.gameObject.GetComponent<EnemyBased>().Die();
-                    PlaySound(1);
-                    SoundManager.Instance.SFXPlay(1);
-                    maincam.Shakecam(2f, 0.2f);
-                }
-                else
-                {
-                    Died();
-                }
+                CollisionEnterEnemy(collision.gameObject);
                 break;
             case "Bloon":
-                if (collision.transform.position.y < transform.position.y && rigid.velocity.y < 0)
-                {
-                    Jump();
-                    collision.gameObject.GetComponent<GimicBloon>().BloonBoom();
-                    PlaySound(1);
-                    SoundManager.Instance.SFXPlay(1);
-                    maincam.Shakecam(1f, 0.1f);
-                }
+                CollisionEnterBloon(collision.gameObject);
                 break;
         }
         superDownOn = false;
@@ -200,7 +177,6 @@ public class PlayerMove : WordGameObject
         jumpOn = true;
         w_BlockOn = false;
         w_tile = 0;
-
         transform.SetParent(null);
     }
 
@@ -209,14 +185,7 @@ public class PlayerMove : WordGameObject
         base.OnCollisionStay2D(collision);
         if (collision.gameObject.CompareTag("MovingTile"))
         {
-            if(rigid.velocity.y <= 0 && transform.position.y > collision.transform.position.y)
-            {
-                transform.SetParent(collision.transform);
-            }
-            else
-            {
-                transform.SetParent(null);
-            }
+            CollisionStayMovingTile(collision.gameObject);
         }
     }
 
@@ -225,11 +194,7 @@ public class PlayerMove : WordGameObject
         base.OnTriggerStay2D(collision);
         if (collision.gameObject.CompareTag("TextObj"))
         {
-            if (wordManager.isEvent) return;
-            if(Input.GetKeyDown(KeyCode.W))
-            {
-                textManager.ChatStart(collision.gameObject.GetComponent<TextObject>().ReturnTextIndex());
-            }
+            TriggerStayTextobj(collision.gameObject);
         }
     }
 
@@ -238,35 +203,19 @@ public class PlayerMove : WordGameObject
         switch(collision.gameObject.tag)
         {
             case "Wind":
-                rigid.AddForce(Vector2.right * 2f);
+                TriggerEnterWind();
                 break;
             case "CameraLock":
-                nowArea = collision.GetComponent<CameraSettingObject>().SetCameraMoveSetting();
+                TriggerEnterCameraLock(collision.gameObject);
                 break;
             case "Spike":
                 Died();
                 break;
             case "BreakBlock":
-                if(!(rigid.velocity.y <= 0) && collision.transform.position.y >= transform.position.y)
-                {
-                    collision.GetComponent<GimicBlock>().BreakBlock();
-                    rigid.velocity = new Vector2(rigid.velocity.x, 0);
-                    rigid.AddForce(Vector2.down * 3f, ForceMode2D.Impulse);
-                }
-                else if(superDownOn)
-                {
-                    collision.GetComponent<GimicBlock>().BreakBlock();
-                }
+                TriggerEnterBreakBlock(collision.gameObject);
                 break;
             case "Spring":
-                if((rigid.velocity.y <= 0))
-                {
-                    collision.GetComponent<GimicSpring>().SpringTread();
-                    rigid.velocity = new Vector2(rigid.velocity.x, 0);
-                    rigid.AddForce(Vector2.up * 30f, ForceMode2D.Impulse);
-                    PlaySound(1);
-                    SoundManager.Instance.SFXPlay(1);
-                }
+                TriggerEnterSpring(collision.gameObject);
                 break;
             case "WinPoint":
                 WinNextScene();
@@ -275,12 +224,7 @@ public class PlayerMove : WordGameObject
                 collision.GetComponent<NewItemGet>().GetItem();
                 break;
             case "ColorBlock":
-                if (!(rigid.velocity.y <= 0) && collision.transform.position.y >= transform.position.y)
-                {
-                    collision.GetComponent<GimicPassWord>().ChangeColor();
-                    rigid.velocity = new Vector2(rigid.velocity.x, 0);
-                    rigid.AddForce(Vector2.down * 3f, ForceMode2D.Impulse);
-                }
+                TriggerEnterColorBlock(collision.gameObject);
                 break;
         }
     }
@@ -313,9 +257,9 @@ public class PlayerMove : WordGameObject
         rigid.gravityScale = 0f;
         dieArea = nowArea;
         nowArea = -1;
-        Invoke("DiedtoReset", 1);
+        Invoke("DietoReset", 1);
     }
-    private void DiedtoReset()
+    private void DietoReset()
     {
         transform.position = savePoint;
         cloth.position = transform.position;
@@ -337,7 +281,6 @@ public class PlayerMove : WordGameObject
         if (velocityX == 1)
         {
             transform.localScale = new Vector2(-1 * scaleVetor.x, scaleVetor.y);
-            //cloth.localScale = new Vector2(-1 * cloth.localScale.x, scaleVetor.y);
         }
         else if (velocityX == -1)
         {
@@ -357,78 +300,123 @@ public class PlayerMove : WordGameObject
         else return -1;
     }
 
-    private void CreateDust()
+    private void CreateDust(int index)
     {
-        dust[0].Play();
+        //0이면 일반먼지 1이면 슈퍼먼지
+        dust[index].Play();
     }
 
     private void DownDust()
     {
         if (superDownOn)
         {
-            dust[1].Play();
+            CreateDust(1);
         }
         else
         {
             if (rigid.velocity.y < -1.2f)
             {
-                dust[0].Play();
+                CreateDust(0);
             }
         }
     }
 
     public override void SizeUp()
     {
-        if (sizeIndex == 0)
+        if (sizeIndex < 2)
         {
-            sizeIndex = 1;
-            scaleVetor = new Vector2(1.2f, 1.2f);
-        }
-        else if (sizeIndex == 1)
-        {
-            sizeIndex = 2;
-            scaleVetor = new Vector2(1.4f, 1.4f);
-        }
-        else if (sizeIndex == -1)
-        {
-            sizeIndex = 0;
-            scaleVetor = new Vector2(1, 1);
-        }
-        else if (sizeIndex == -2)
-        {
-            sizeIndex = -1;
-            scaleVetor = new Vector2(0.8f, 0.8f);
+            sizeIndex--;
+            SetSizeIndexToScaleVector();
         }
         SetAnimation();
     }
 
     public override void SizeDown()
     {
-        if (sizeIndex == 2)
+        if(sizeIndex > -2)
         {
-            sizeIndex = 1;
-            scaleVetor = new Vector2(1.2f, 1.2f);
-        }
-        else if (sizeIndex == 1)
-        {
-            sizeIndex = 0;
-            scaleVetor = new Vector2(1, 1);
-        }
-        else if (sizeIndex == 0)
-        {
-            sizeIndex = -1;
-            scaleVetor = new Vector2(0.8f, 0.8f);
-        }
-        else if (sizeIndex == 1)
-        {
-            sizeIndex = 0;
-            scaleVetor = new Vector2(1, 1);
-        }
-        else if (sizeIndex == -1)
-        {
-            sizeIndex = -2;
-            scaleVetor = new Vector2(0.6f, 0.6f);
+            sizeIndex--;
+            SetSizeIndexToScaleVector();
         }
         SetAnimation();
+    }
+
+    //충돌 관련 함수
+    protected virtual void CollisionEnterEnemy(GameObject collision)
+    {
+        if (collision.transform.position.y + 0.1f < transform.position.y)
+        {
+            Jump();
+            collision.gameObject.GetComponent<EnemyBased>().Die();
+            maincam.Shakecam(2f, 0.2f);
+        }
+        else
+        {
+            Died();
+        }
+    }
+    protected virtual void CollisionEnterBloon(GameObject collision)
+    {
+        if (collision.transform.position.y < transform.position.y && rigid.velocity.y < 0)
+        {
+            Jump();
+            collision.gameObject.GetComponent<GimicBloon>().BloonBoom();
+            maincam.Shakecam(1f, 0.1f);
+        }
+    }
+    protected virtual void CollisionStayMovingTile(GameObject collision)
+    {
+        if (rigid.velocity.y <= 0 && transform.position.y > collision.transform.position.y)
+        {
+            transform.SetParent(collision.transform);
+        }
+        else
+        {
+            transform.SetParent(null);
+        }
+    }
+    protected virtual void TriggerStayTextobj(GameObject collision)
+    {
+        if (wordManager.isEvent) return;
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            textManager.ChatStart(collision.GetComponent<TextObject>().ReturnTextIndex());
+        }
+    }
+    protected virtual void TriggerEnterCameraLock(GameObject collision)
+    {
+        nowArea = collision.GetComponent<CameraSettingObject>().SetCameraMoveSetting();
+    }
+    protected virtual void TriggerEnterSpike()
+    {
+
+    }
+    
+    protected virtual void TriggerEnterSpring(GameObject collision)
+    {
+        if ((rigid.velocity.y <= 0))
+        {
+            collision.GetComponent<GimicSpring>().SpringTread();
+            rigid.velocity = new Vector2(rigid.velocity.x, 0);
+            rigid.AddForce(Vector2.up * 30f, ForceMode2D.Impulse);
+            PlaySound(1, 0);
+        }
+    }
+    protected virtual void TriggerEnterWinPoint()
+    {
+
+    }
+    protected virtual void TriggerEnterGetWord()
+    {
+
+    }
+    protected virtual void TriggerEnterColorBlock(GameObject collision)
+    {
+        if (!(rigid.velocity.y <= 0) && collision.transform.position.y >= transform.position.y)
+        {
+            collision.GetComponent<GimicPassWord>().ChangeColor();
+            rigid.velocity = new Vector2(rigid.velocity.x, 0);
+            rigid.AddForce(Vector2.down * 3f, ForceMode2D.Impulse);
+        }
     }
 }

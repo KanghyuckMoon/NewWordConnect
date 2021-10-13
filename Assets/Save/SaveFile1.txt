@@ -1,0 +1,42 @@
+﻿{
+    "writingData": true,
+    "playerName": "문강혁  ",
+    "lateDate": "2021-10-13",
+    "testing": false,
+    "subjectGet": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+    ],
+    "conditionGet": [
+        0,
+        1,
+        2,
+        3,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+    ],
+    "executionGet": [
+        0,
+        1,
+        2,
+        3,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+    ]
+}

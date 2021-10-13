@@ -519,7 +519,7 @@ MonoBehaviour:
   DownPin: {fileID: 0}
   LeftPin: {fileID: 1815305341}
   RightPin: {fileID: 0}
-  StageName: GrapicTest
+  StageName: Stage1-4
   sprites:
   - {fileID: 8596640243658272642, guid: 5d4daff38e3d9174b873918abcf2c1d4, type: 3}
   - {fileID: 2962027833772318483, guid: 10f3cacccb0c4c547be76836eba20664, type: 3}
@@ -577,7 +577,7 @@ MonoBehaviour:
   DownPin: {fileID: 0}
   LeftPin: {fileID: 0}
   RightPin: {fileID: 1815305341}
-  StageName: GrapicTest
+  StageName: Stage1-1
   sprites:
   - {fileID: 8596640243658272642, guid: 5d4daff38e3d9174b873918abcf2c1d4, type: 3}
   - {fileID: 2962027833772318483, guid: 10f3cacccb0c4c547be76836eba20664, type: 3}
@@ -809,7 +809,7 @@ MonoBehaviour:
   DownPin: {fileID: 0}
   LeftPin: {fileID: 1815305341}
   RightPin: {fileID: 0}
-  StageName: GrapicTest
+  StageName: Stage1-3
   sprites:
   - {fileID: 8596640243658272642, guid: 5d4daff38e3d9174b873918abcf2c1d4, type: 3}
   - {fileID: 2962027833772318483, guid: 10f3cacccb0c4c547be76836eba20664, type: 3}
@@ -918,7 +918,7 @@ MonoBehaviour:
   DownPin: {fileID: 933402604}
   LeftPin: {fileID: 1443328027}
   RightPin: {fileID: 0}
-  StageName: GrapicTest
+  StageName: Stage1-2
   sprites:
   - {fileID: 8596640243658272642, guid: 5d4daff38e3d9174b873918abcf2c1d4, type: 3}
   - {fileID: 2962027833772318483, guid: 10f3cacccb0c4c547be76836eba20664, type: 3}

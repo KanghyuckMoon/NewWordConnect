@@ -95,7 +95,6 @@ public class WordManager : MonoBehaviour
     //캐싱용 멤버변수
     private Text tempSetSizeText = null;
     private Image tempSetSizeImage = null;
-    private Button resetOnClick = null;
     private GameObject backPanel = null;
     private GameObject newPanel = null;
     private GameObject subjectScrollsPanel = null;
@@ -121,8 +120,6 @@ public class WordManager : MonoBehaviour
     //스테이지에서 가져오는 변수
     private TemperentManager s_temperentManager;
     private WeatherManager s_weatherManager;
-    //소리
-    private float s_Sound;
     //게임창
     private DisplayManager s_displayManager;
     //특수
@@ -130,7 +127,6 @@ public class WordManager : MonoBehaviour
     //조건어용 변수
     [SerializeField]
     private float c_onesecondCoolTime = 0f;
-    private float c_StandTime = 0f;
 
     //실행어용 변수
 
@@ -148,9 +144,6 @@ public class WordManager : MonoBehaviour
     private bool wasd;
     private bool keypad;
 
-    //esc
-    [SerializeField]
-    private GameObject escObj;
     private int optionselect = 0;
     [SerializeField]
     private RectTransform optionarrow = null;
@@ -159,8 +152,7 @@ public class WordManager : MonoBehaviour
     [SerializeField]
     private Text[] optionTexts = null;
     private KeySetting keysetting;
-    [SerializeField]
-    private AudioClip testClip;
+    private SaveUser saveUser;
 
     //윈 게임
     [SerializeField]
@@ -170,11 +162,16 @@ public class WordManager : MonoBehaviour
     [SerializeField]
     private RectTransform wintext;
 
+    //쉐이더
+    [SerializeField]
+    private List<Material> materials;
+
     private void Awake()
     {
         //주어 찾기
         FindSubjects();
         keysetting = SaveManager.Instance.CurrenKeySetting;
+        saveUser = SaveManager.Instance.CurrentSaveUser;
     }
 
     private void Start()
@@ -189,6 +186,17 @@ public class WordManager : MonoBehaviour
         conditionScrollsPanel = conditionScroll.GetChild(0).gameObject;
         executionScrollsPanel = executionScroll.GetChild(0).gameObject;
         cooltimeAnimator = cooltimeImage.GetComponent<Animator>();
+
+
+        subjectUnlock = saveUser.subjectGet;
+        conditionUnlock = saveUser.conditionGet;
+        executionUnlock = saveUser.executionGet;
+        SortList(subjectUnlock);
+        SortList(conditionUnlock);
+        SortList(executionUnlock);
+        ReCreateWordPanel(subjectUnlock, 0);
+        ReCreateWordPanel(conditionUnlock, 1);
+        ReCreateWordPanel(executionUnlock, 2);
     }
 
     private void FindSubjects()
@@ -349,6 +357,35 @@ public class WordManager : MonoBehaviour
         newPanel.transform.GetChild(1).GetComponent<Text>().text = subjectlist[subjectUnlock[index]];
         SortList(subjectUnlock);
     }
+    public void ReCreateWordPanel(List<int> list, int type)
+    {
+        for(int i = 2; i < list.Count; i++)
+        {
+            if(list[i] == -1)
+            {
+                continue;   
+            }
+            else
+            {
+                newPanel = CreatePanel_Pull(type);
+                newPanel.SetActive(true);
+                switch (type)
+                {
+                    case 0:
+                        panellistSubject.Add(newPanel);
+                        break;
+                    case 1:
+                        panellistCondition.Add(newPanel);
+                        break;
+                    case 2:
+                        panellistExecution.Add(newPanel);
+                        break;
+                }
+            }
+        }
+        AllChangeTexts();
+    }
+
 
     public void AddConditionWord(int index)
     {
@@ -408,6 +445,8 @@ public class WordManager : MonoBehaviour
                 }
             }
         }
+        AllChangeTexts();
+        SaveManager.Instance.SaveToJson();
     }
 
     private GameObject CreatePanel_Pull(int type)
@@ -1198,7 +1237,7 @@ public class WordManager : MonoBehaviour
             {
                 if(wordSelect[i].W_BlockOn)
                 {
-                    wordSelect[i].SetMoveZero();
+                    wordSelect[i].PlayFunction("SetMoveZero");
                     ExecutionWordObject(i);
                 }
             }
@@ -1232,7 +1271,7 @@ public class WordManager : MonoBehaviour
             {
                 if(!wordSelect[i].W_VisibleEffect)
                 {
-                    wordSelect[i].W_VisibleEffectOntrue();
+                    wordSelect[i].PlayFunction("W_VisibleEffectOntrue");
                     ExecutionWordObject(i);
                 }
             }
@@ -1338,47 +1377,47 @@ public class WordManager : MonoBehaviour
     {
         for(int i = 0; i<wordSelect.Count;i++)
         {
-            wordSelect[i].Jump();
+            wordSelect[i].PlayFunction("Jump");
         }
     }
     private void Execution_Jump(int i)
     {
-            wordSelect[i].Jump();
+        wordSelect[i].PlayFunction("Jump");
     }
     private void Execution_SpeedUp() // 2번 스피드
     {
         for (int i = 0; i < wordSelect.Count; i++)
         {
-            wordSelect[i].SpeedUp();
+            wordSelect[i].PlayFunction("SpeedUp");
         }
     }
     private void Execution_SpeedUp(int i) // 2번 스피드
     {
-        
-            wordSelect[i].SpeedUp();
-        
+
+        wordSelect[i].PlayFunction("SpeedUp");
+
     }
     private void Execution_TimeStop() // 3번 시간 정지
     {
         for (int i = 0; i < wordSelect.Count; i++)
         {
-            wordSelect[i].SpeedStop();
+            wordSelect[i].PlayFunction("SpeedStop");
         }
     }
     private void Execution_TimeStop(int i) // 
     {
-       wordSelect[i].SpeedStop();
+        wordSelect[i].PlayFunction("SpeedStop");
     }
     private void Execution_SpeedDown() // 4번 스피드 떨어짐
     {
         for (int i = 0; i < wordSelect.Count; i++)
         {
-            wordSelect[i].SpeedDown();
+            wordSelect[i].PlayFunction("SpeedDown");
         }
     }
     private void Execution_SpeedDown(int i) // 4번 스피드 떨어짐
     {
-            wordSelect[i].SpeedDown();
+        wordSelect[i].PlayFunction("SpeedDown");
     }
     private void Execution_Down() // 5번 내려간다
     {
@@ -1386,11 +1425,11 @@ public class WordManager : MonoBehaviour
         {
             if(conditionWord == 6)
             {
-                wordSelect[i].SuperDown();
+                wordSelect[i].PlayFunction("SuperDown");
             }
             else
             {
-                wordSelect[i].Down();
+                wordSelect[i].PlayFunction("Down");
             }
             if(subjectWord == 8)
             {
@@ -1402,11 +1441,11 @@ public class WordManager : MonoBehaviour
     {
         if (conditionWord == 6)
         {
-            wordSelect[i].SuperDown();
+            wordSelect[i].PlayFunction("SuperDown");
         }
         else
         {
-            wordSelect[i].Down();
+            wordSelect[i].PlayFunction("Down");
         }
         if (subjectWord == 8)
         {
@@ -1418,35 +1457,35 @@ public class WordManager : MonoBehaviour
     {
         for (int i = 0; i < wordSelect.Count; i++)
         {
-            wordSelect[i].SizeUp();
+            wordSelect[i].PlayFunction("SizeUp");
         }
     }
     private void Execution_SizeUp(int i)
     {
-        wordSelect[i].SizeUp();
+        wordSelect[i].PlayFunction("SizeUp");
     }
     private void Execution_SizeDown()
     {
         for (int i = 0; i < wordSelect.Count; i++)
         {
-            wordSelect[i].SizeDown();
+            wordSelect[i].PlayFunction("SizeDown");
         }
     }
     private void Execution_SizeDown(int i)
     {
-        wordSelect[i].SizeDown();
+        wordSelect[i].PlayFunction("SizeDown");
     }
 
     private void Execution_ColliderOff()
     {
         for (int i = 0; i < wordSelect.Count; i++)
         {
-            wordSelect[i].ColliderOff();
+            wordSelect[i].PlayFunction("ColliderOff");
         }
     } // 8번 1초동안 충돌하지 않는다
     private void Execution_ColliderOff(int i)
     {
-        wordSelect[i].ColliderOff();
+        wordSelect[i].PlayFunction("ColliderOff");
     }
 
     public void EventOn()
@@ -1559,5 +1598,12 @@ public class WordManager : MonoBehaviour
         winbackground.anchoredPosition = new Vector2(-100, winbackground.anchoredPosition.y);
         wintext.DOAnchorPosX(0, 1);
         winbackground.DOAnchorPosX(0, 0.5f);
+    }
+
+    //그래픽 관련 함수
+
+    public Material ReturnMaterials(int index)
+    {
+        return materials[index];
     }
 }

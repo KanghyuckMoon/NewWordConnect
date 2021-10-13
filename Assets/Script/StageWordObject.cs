@@ -39,16 +39,12 @@ public class StageWordObject : WordGameObject
 
     public override void Jump()
     {
-        rigid.AddForce(Vector2.up * jump, ForceMode2D.Impulse);
-        w_MoveOn = true;
-        w_MoveOnEffect = false;
-        w_tile = 0;
+        base.Jump();
         for(int i = 0; i < gimicHasLigid.Count;i++)
         {
             gimicHasLigid[i].velocity = new Vector2(gimicHasLigid[i].velocity.x, 0);
             gimicHasLigid[i].AddForce(Vector2.up * jump, ForceMode2D.Impulse);
         }
-        PlaySound(1);
     }
 
     public override void SizeUp()

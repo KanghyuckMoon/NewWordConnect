@@ -132,6 +132,22 @@ public class NameSetting : MonoBehaviour
         SaveManager.Instance.CurrentSaveUser.playerName 
             = string.Format("{0}{1}{2}{3}{4}", playername[0], playername[1], playername[2], playername[3], playername[4]);
         SaveManager.Instance.CurrentSaveUser.lateDate = System.DateTime.Now.ToString("yyyy/MM/dd");
+        SaveManager.Instance.CurrentSaveUser.writingData = true;
+        for(int i = 0; i < 10; i++)
+        {
+            if(i < 4)
+            {
+                SaveManager.Instance.CurrentSaveUser.subjectGet.Add(i);
+                SaveManager.Instance.CurrentSaveUser.conditionGet.Add(i);
+                SaveManager.Instance.CurrentSaveUser.executionGet.Add(i);
+            }
+            else
+            {
+                SaveManager.Instance.CurrentSaveUser.subjectGet.Add(-1);
+                SaveManager.Instance.CurrentSaveUser.conditionGet.Add(-1);
+                SaveManager.Instance.CurrentSaveUser.executionGet.Add(-1);
+            }
+        }
         SaveManager.Instance.SaveToJson();
         SceneManager.LoadScene("StageSelect");
     }

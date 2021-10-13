@@ -1564,7 +1564,7 @@ MonoBehaviour:
   isBloon: 0
   bloon: {fileID: 0}
   isStop: 0
-  materials: []
+  isObject: 0
   gimiclist: []
   gravityobj: {fileID: 1753925254}
 --- !u!66 &263275148
@@ -16945,7 +16945,7 @@ MonoBehaviour:
   isBloon: 0
   bloon: {fileID: 0}
   isStop: 0
-  materials: []
+  isObject: 0
   s_Temperature: 50
   tempdan: 0
 --- !u!1 &301739557
@@ -33010,6 +33010,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2936947540001608052, guid: 068abe95b6e7ffc4a9537ad67f6d3b95, type: 3}
+      propertyPath: setArea
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2936947540001608052, guid: 068abe95b6e7ffc4a9537ad67f6d3b95, type: 3}
       propertyPath: dieEffect
       value: 
       objectReference: {fileID: 788294690}
@@ -33278,7 +33282,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: AllIn1SpriteShader/AllIn1SpriteShader
   m_Shader: {fileID: 4800000, guid: a36b7719ff0465b42ab1407d67672c5f, type: 3}
-  m_ShaderKeywords: WAVEUV_ON
+  m_ShaderKeywords: PIXELATE_ON WAVEUV_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -55234,7 +55238,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: AllIn1SpriteShader/AllIn1SpriteShader
   m_Shader: {fileID: 4800000, guid: a36b7719ff0465b42ab1407d67672c5f, type: 3}
-  m_ShaderKeywords: WAVEUV_ON
+  m_ShaderKeywords: PIXELATE_ON WAVEUV_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -55398,7 +55402,7 @@ Material:
     - _OverlayBlend: 1
     - _OverlayGlow: 1
     - _PinchUvAmount: 0.35
-    - _PixelateSize: 32
+    - _PixelateSize: 30
     - _PosterizeGamma: 0.75
     - _PosterizeNumColors: 8
     - _PosterizeOutline: 0
@@ -55569,7 +55573,7 @@ MonoBehaviour:
   isBloon: 0
   bloon: {fileID: 0}
   isStop: 0
-  materials: []
+  isObject: 0
   downmoveOn: 0
   lightRays2D: {fileID: 1193139979}
 --- !u!50 &2016849913
@@ -55859,6 +55863,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 231501047784861209, guid: 4a7b80c628959994e9f1ddea2926bd06, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 231501047784861209, guid: 4a7b80c628959994e9f1ddea2926bd06, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 231501047784861211, guid: 4a7b80c628959994e9f1ddea2926bd06, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -56158,7 +56170,7 @@ MonoBehaviour:
   isBloon: 0
   bloon: {fileID: 0}
   isStop: 0
-  materials: []
+  isObject: 0
   s_Weather: 00000000010000000200000003000000040000000500000006000000
   weatherObjects:
   - {fileID: 1135043462}
@@ -56293,6 +56305,10 @@ PrefabInstance:
     - target: {fileID: 1337555957478727601, guid: 83a61b9bed363ba4d86fdbe7e3d36c41, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1337555957478727606, guid: 83a61b9bed363ba4d86fdbe7e3d36c41, type: 3}
+      propertyPath: wordsIndex
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83a61b9bed363ba4d86fdbe7e3d36c41, type: 3}
