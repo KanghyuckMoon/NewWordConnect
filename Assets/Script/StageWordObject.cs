@@ -9,6 +9,9 @@ public class StageWordObject : WordGameObject
     private List<GimicBase> gimiclist = new List<GimicBase>();
     private List<Rigidbody2D> gimicHasLigid = new List<Rigidbody2D>();
     [SerializeField]
+    private Transform areaobjects;
+    private List<StageAreaReset> areaobj = new List<StageAreaReset>();
+    [SerializeField]
     private GameObject gravityobj;
 
     protected override void Start()
@@ -18,14 +21,26 @@ public class StageWordObject : WordGameObject
         rigid = GetComponent<Rigidbody2D>();
         w_collider = GetComponent<Collider2D>();
         Settingvalue();
-        for(int i = 0; i < transform.childCount; i++)
+
+        for(int i = 0; i < areaobjects.childCount; i++)
         {
-            if (transform.GetChild(i).GetComponent<GimicBase>() != null)
+            if(areaobjects.GetChild(i).GetComponent<StageAreaReset>() != null)
             {
-                gimiclist.Add(transform.GetChild(i).GetComponent<GimicBase>());
-                if(transform.GetChild(i).GetComponent<Rigidbody2D>() != null)
+                areaobj.Add(areaobjects.GetChild(i).GetComponent<StageAreaReset>());
+            }
+        }
+
+        for(int i = 0; i < areaobj.Count; i++)
+        {
+            for(int j = 0; j < areaobj[i].transform.childCount; j++)
+            {
+                if (areaobj[i].transform.GetChild(j).GetComponent<GimicBase>() != null)
                 {
-                    gimicHasLigid.Add(transform.GetChild(i).GetComponent<Rigidbody2D>());
+                    gimiclist.Add(areaobj[i].transform.GetChild(j).GetComponent<GimicBase>());
+                }
+                if (areaobj[i].transform.GetChild(j).GetComponent<Rigidbody2D>() != null)
+                {
+                    gimicHasLigid.Add(areaobj[i].transform.GetChild(j).GetComponent<Rigidbody2D>());
                 }
             }
         }
