@@ -68,11 +68,11 @@ public class WordManager : MonoBehaviour
     private List<GameObject> panellistExecution = new List<GameObject>();
 
     [SerializeField]
-    private GameObject barSubject = null;
+    private RectTransform barSubject = null;
     [SerializeField]
-    private GameObject barCondition = null;
+    private RectTransform barCondition = null;
     [SerializeField]
-    private GameObject barExecution = null;
+    private RectTransform barExecution = null;
 
     [SerializeField]
     private Canvas canvas;
@@ -203,6 +203,7 @@ public class WordManager : MonoBehaviour
         chainsXpos[1] = chain[1].anchoredPosition.x;
         chain[0].gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
         chain[1].gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
+        cooltimeImage.color = new Color(1, 1, 1, 0);
     }
 
     private void FindSubjects()
@@ -784,15 +785,10 @@ public class WordManager : MonoBehaviour
         barExecution.GetComponent<Image>().color = new Color(1, 1, 1, 1);
         barSubject.transform.GetChild(1).GetChild(0).GetComponent<ParticleSystem>().Play();
         barCondition.transform.GetChild(1).GetChild(0).GetComponent<ParticleSystem>().Play();
-        //barSubject.transform.GetChild(1).GetComponent<Animator>().SetBool("ChainOn", false);
-        //barCondition.transform.GetChild(1).GetComponent<Animator>().SetBool("ChainOn", false);
-        //chain[0].GetComponent<Animator>().SetBool("ChainOn", false);
-        //chain[1].GetComponent<Animator>().SetBool("ChainOn", false);
         chain[0].DOAnchorPosX(chainsXpos[0], 0.2f);
         chain[0].GetComponent<SpriteRenderer>().DOColor(new Color(1, 1, 1, 0), 0.2f);
         chain[1].DOAnchorPosX(chainsXpos[1], 0.2f);
         chain[1].GetComponent<SpriteRenderer>().DOColor(new Color(1, 1, 1, 0), 0.2f);
-        //barSubject.transform.GetChild(1).GetComponent<RectTransform>().DOAnchorPosX(,1);
         wordSelect.Clear();
         Invoke("CleanBreakEnd", 0.5f);
         OnOffScroll();
@@ -1007,18 +1003,36 @@ public class WordManager : MonoBehaviour
 
     private void AnimationSubject()
     {
-        barSubject.GetComponent<Animator>().SetBool("PanelOn",true);
+        //barSubject.GetComponent<Animator>().SetBool("PanelOn",true);
+        barSubject.localScale = new Vector3(2, 2, 1);
+        barSubject.GetComponent<Image>().DOKill();
+        barSubject.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+        barSubject.DOScale(new Vector2(1, 1), 0.05f).OnComplete
+            (() => barSubject.DOScale(new Vector3(0.9f,0.9f,1),0.02f).OnComplete
+            (() => barSubject.DOScale(new Vector3(1,1,1), 0.08f)));
     }
     private void AnimationCondition()
     {
-        barCondition.GetComponent<Animator>().SetBool("PanelOn", true);
+        barCondition.localScale = new Vector3(2, 2, 1);
+        barCondition.GetComponent<Image>().DOKill();
+        barCondition.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+        barCondition.DOScale(new Vector2(1, 1), 0.05f).OnComplete
+            (() => barCondition.DOScale(new Vector3(0.9f, 0.9f, 1), 0.02f).OnComplete
+            (() => barCondition.DOScale(new Vector3(1, 1, 1), 0.08f)));
+
         chain[0].DOAnchorPosX(chainsXpos[0] + 90, 0.2f);
         chain[0].GetComponent<SpriteRenderer>().DOColor(new Color(1, 1, 1, 1), 0.2f);
         //사슬 움직임
     }
     private void AnimationExecution()
     {
-        barExecution.GetComponent<Animator>().SetBool("PanelOn", true);
+        barExecution.localScale = new Vector3(2, 2, 1);
+        barExecution.GetComponent<Image>().DOKill();
+        barExecution.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+        barExecution.DOScale(new Vector2(1, 1), 0.05f).OnComplete
+            (() => barExecution.DOScale(new Vector3(0.9f, 0.9f, 1), 0.02f).OnComplete
+            (() => barExecution.DOScale(new Vector3(1, 1, 1), 0.08f)));
+
         chain[1].DOAnchorPosX(chainsXpos[1] + 90, 0.2f);
         chain[1].GetComponent<SpriteRenderer>().DOColor(new Color(1, 1, 1, 1), 0.2f);
         //사슬 움직임
@@ -1026,18 +1040,18 @@ public class WordManager : MonoBehaviour
 
     private void BackAnimationSubject()
     {
-        barSubject.GetComponent<Animator>().SetBool("PanelOn", false);
+        barSubject.GetComponent<Image>().DOColor(new Color(1,1,1,0), 0.2f);
     }
     private void BackAnimationCondition()
     {
-        barCondition.GetComponent<Animator>().SetBool("PanelOn", false);
+        barCondition.GetComponent<Image>().DOColor(new Color(1, 1, 1, 0), 0.2f);
         chain[0].DOAnchorPosX(chainsXpos[0], 0.2f);
         chain[0].GetComponent<SpriteRenderer>().DOColor(new Color(1, 1, 1, 0), 0.2f);
         //사슬 움직임
     }
     private void BackAnimationExecution()
     {
-        barExecution.GetComponent<Animator>().SetBool("PanelOn", false);
+        barExecution.GetComponent<Image>().DOColor(new Color(1, 1, 1, 0), 0.2f);
         chain[1].DOAnchorPosX(chainsXpos[1], 0.2f);
         chain[1].GetComponent<SpriteRenderer>().DOColor(new Color(1, 1, 1, 0), 0.2f);
         //사슬 움직임
