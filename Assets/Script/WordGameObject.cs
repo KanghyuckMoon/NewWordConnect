@@ -10,6 +10,8 @@ public class WordGameObject : MonoBehaviour
     protected float friction = 7.5f;
     protected float airfriction = 4.0f;
     protected bool downGravityOn = true;
+    [SerializeField]
+    protected float originJump = 22.5f;
     protected float jump = 22.5f;
     protected float gravityScale = 4.3f;
     protected float realspeed;
@@ -215,7 +217,7 @@ public class WordGameObject : MonoBehaviour
         realspeed = speed;
         rigid.velocity = stopVector;
         gravityScale = 4.3f;
-        jump = 22.5f;
+        jump = originJump;
         rigid.gravityScale = 4.3f;
     }
 
@@ -228,7 +230,7 @@ public class WordGameObject : MonoBehaviour
         friction = 7.5f;
         airfriction = 4.0f;
         downGravityOn = true;
-        jump = 22.5f;
+        jump = originJump;
         gravityScale = 4.3f;
         rigid.gravityScale = gravityScale;
         realspeed = speed;

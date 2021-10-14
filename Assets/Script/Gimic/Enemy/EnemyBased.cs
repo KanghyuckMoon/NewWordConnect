@@ -7,6 +7,7 @@ public class EnemyBased : WordGameObject
     [SerializeField]
     protected float enemymoveSpeed = 1;
 
+
     protected int nexMove = -1;
 
     protected float speedset = 1;
@@ -29,6 +30,7 @@ public class EnemyBased : WordGameObject
     protected Vector2 resetPosition;
     protected bool setAreaReset = false;
     protected Animator animator;
+    protected float originmass;
 
     protected override void Start()
     {
@@ -39,6 +41,7 @@ public class EnemyBased : WordGameObject
         Settingvalue();
         resetPosition = transform.position;
         animator.SetFloat("Speed", speedset);
+        originmass = rigid.mass;
     }
 
     public override void Settingvalue()
@@ -187,7 +190,7 @@ public class EnemyBased : WordGameObject
     {
         gameObject.GetComponent<SpriteRenderer>().enabled = true;
         gameObject.GetComponent<Collider2D>().enabled = true;
-        rigid.mass = 1;
+        rigid.mass = originmass;
 
     }
 }
