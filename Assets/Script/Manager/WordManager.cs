@@ -791,10 +791,10 @@ public class WordManager : MonoBehaviour
         //barCondition.transform.GetChild(1).GetComponent<Animator>().SetBool("ChainOn", false);
         //chain[0].GetComponent<Animator>().SetBool("ChainOn", false);
         //chain[1].GetComponent<Animator>().SetBool("ChainOn", false);
-        chain[0].DOAnchorPosX(chainsXpos[0], 0.1f);
-        chain[0].GetComponent<SpriteRenderer>().DOColor(new Color(1, 1, 1, 0), 0.1f);
-        chain[1].DOAnchorPosX(chainsXpos[1], 0.1f);
-        chain[1].GetComponent<SpriteRenderer>().DOColor(new Color(1, 1, 1, 0), 0.1f);
+        chain[0].DOAnchorPosX(chainsXpos[0], 0.2f);
+        chain[0].GetComponent<SpriteRenderer>().DOColor(new Color(1, 1, 1, 0), 0.2f);
+        chain[1].DOAnchorPosX(chainsXpos[1], 0.2f);
+        chain[1].GetComponent<SpriteRenderer>().DOColor(new Color(1, 1, 1, 0), 0.2f);
         //barSubject.transform.GetChild(1).GetComponent<RectTransform>().DOAnchorPosX(,1);
         wordSelect.Clear();
         Invoke("CleanBreakEnd", 0.5f);
@@ -1015,15 +1015,15 @@ public class WordManager : MonoBehaviour
     private void AnimationCondition()
     {
         barCondition.GetComponent<Animator>().SetBool("PanelOn", true);
-        chain[0].DOAnchorPosX(chainsXpos[0] + 90, 0.1f);
-        chain[0].GetComponent<SpriteRenderer>().DOColor(new Color(1, 1, 1, 1), 0.1f);
+        chain[0].DOAnchorPosX(chainsXpos[0] + 90, 0.2f);
+        chain[0].GetComponent<SpriteRenderer>().DOColor(new Color(1, 1, 1, 1), 0.2f);
         //사슬 움직임
     }
     private void AnimationExecution()
     {
         barExecution.GetComponent<Animator>().SetBool("PanelOn", true);
-        chain[1].DOAnchorPosX(chainsXpos[1] + 90, 0.1f);
-        chain[1].GetComponent<SpriteRenderer>().DOColor(new Color(1, 1, 1, 1), 0.1f);
+        chain[1].DOAnchorPosX(chainsXpos[1] + 90, 0.2f);
+        chain[1].GetComponent<SpriteRenderer>().DOColor(new Color(1, 1, 1, 1), 0.2f);
         //사슬 움직임
     }
 
@@ -1034,16 +1034,15 @@ public class WordManager : MonoBehaviour
     private void BackAnimationCondition()
     {
         barCondition.GetComponent<Animator>().SetBool("PanelOn", false);
-        chain[0].GetComponent<SpriteRenderer>().DOColor(new Color(1, 1, 1, 0), 0.1f);
-        //chain[0].GetComponent<Animator>().SetBool("ChainOn", false);
-        chain[0].DOAnchorPosX(chainsXpos[0], 0.1f);
+        chain[0].DOAnchorPosX(chainsXpos[0], 0.2f);
+        chain[0].GetComponent<SpriteRenderer>().DOColor(new Color(1, 1, 1, 0), 0.2f);
         //사슬 움직임
     }
     private void BackAnimationExecution()
     {
         barExecution.GetComponent<Animator>().SetBool("PanelOn", false);
-        chain[1].DOAnchorPosX(chainsXpos[1], 0.1f);
-        chain[1].GetComponent<SpriteRenderer>().DOColor(new Color(1, 1, 1, 0), 0.1f);
+        chain[1].DOAnchorPosX(chainsXpos[1], 0.2f);
+        chain[1].GetComponent<SpriteRenderer>().DOColor(new Color(1, 1, 1, 0), 0.2f);
         //사슬 움직임
     }
 
