@@ -1557,6 +1557,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 24.5
+  originJump: 22.5
   w_Movetime: 0
   setArea: -1
   isSound: 0
@@ -1566,6 +1567,7 @@ MonoBehaviour:
   isStop: 0
   isObject: 0
   gimiclist: []
+  areaobjects: {fileID: 1088623669}
   gravityobj: {fileID: 1753925254}
 --- !u!66 &263275148
 CompositeCollider2D:
@@ -16938,6 +16940,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 24.5
+  originJump: 22.5
   w_Movetime: 0
   setArea: 0
   isSound: 0
@@ -55566,6 +55569,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 24.5
+  originJump: 22.5
   w_Movetime: 0
   setArea: -1
   isSound: 0
@@ -56163,6 +56167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 24.5
+  originJump: 22.5
   w_Movetime: 0
   setArea: 0
   isSound: 0
