@@ -139,6 +139,9 @@ public class WordManager : MonoBehaviour
     //애니메이션 변수
     [SerializeField]
     private Animator dieAnimation;
+    [SerializeField]
+    private RectTransform[] chain;
+    private float[] chainsXpos = new float[2];
 
     //키세팅 변수
     private bool wasd;
@@ -197,6 +200,11 @@ public class WordManager : MonoBehaviour
         ReCreateWordPanel(subjectUnlock, 0);
         ReCreateWordPanel(conditionUnlock, 1);
         ReCreateWordPanel(executionUnlock, 2);
+
+        chainsXpos[0] = chain[0].anchoredPosition.x;
+        chainsXpos[1] = chain[1].anchoredPosition.x;
+        chain[0].gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
+        chain[1].gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
     }
 
     private void FindSubjects()
@@ -779,8 +787,15 @@ public class WordManager : MonoBehaviour
         barExecution.GetComponent<Image>().color = new Color(1, 1, 1, 1);
         barSubject.transform.GetChild(1).GetChild(0).GetComponent<ParticleSystem>().Play();
         barCondition.transform.GetChild(1).GetChild(0).GetComponent<ParticleSystem>().Play();
-        barSubject.transform.GetChild(1).GetComponent<Animator>().SetBool("ChainOn", false);
-        barCondition.transform.GetChild(1).GetComponent<Animator>().SetBool("ChainOn", false);
+        //barSubject.transform.GetChild(1).GetComponent<Animator>().SetBool("ChainOn", false);
+        //barCondition.transform.GetChild(1).GetComponent<Animator>().SetBool("ChainOn", false);
+        //chain[0].GetComponent<Animator>().SetBool("ChainOn", false);
+        //chain[1].GetComponent<Animator>().SetBool("ChainOn", false);
+        chain[0].DOAnchorPosX(chainsXpos[0], 0.1f);
+        chain[0].GetComponent<SpriteRenderer>().DOColor(new Color(1, 1, 1, 0), 0.1f);
+        chain[1].DOAnchorPosX(chainsXpos[1], 0.1f);
+        chain[1].GetComponent<SpriteRenderer>().DOColor(new Color(1, 1, 1, 0), 0.1f);
+        //barSubject.transform.GetChild(1).GetComponent<RectTransform>().DOAnchorPosX(,1);
         wordSelect.Clear();
         Invoke("CleanBreakEnd", 0.5f);
         OnOffScroll();
@@ -1000,13 +1015,15 @@ public class WordManager : MonoBehaviour
     private void AnimationCondition()
     {
         barCondition.GetComponent<Animator>().SetBool("PanelOn", true);
-        barSubject.transform.GetChild(1).GetComponent<Animator>().SetBool("ChainOn", true);
+        chain[0].DOAnchorPosX(chainsXpos[0] + 90, 0.1f);
+        chain[0].GetComponent<SpriteRenderer>().DOColor(new Color(1, 1, 1, 1), 0.1f);
         //사슬 움직임
     }
     private void AnimationExecution()
     {
         barExecution.GetComponent<Animator>().SetBool("PanelOn", true);
-        barCondition.transform.GetChild(1).GetComponent<Animator>().SetBool("ChainOn", true);
+        chain[1].DOAnchorPosX(chainsXpos[1] + 90, 0.1f);
+        chain[1].GetComponent<SpriteRenderer>().DOColor(new Color(1, 1, 1, 1), 0.1f);
         //사슬 움직임
     }
 
@@ -1017,13 +1034,16 @@ public class WordManager : MonoBehaviour
     private void BackAnimationCondition()
     {
         barCondition.GetComponent<Animator>().SetBool("PanelOn", false);
-        barSubject.transform.GetChild(1).GetComponent<Animator>().SetBool("ChainOn", false);
+        chain[0].GetComponent<SpriteRenderer>().DOColor(new Color(1, 1, 1, 0), 0.1f);
+        //chain[0].GetComponent<Animator>().SetBool("ChainOn", false);
+        chain[0].DOAnchorPosX(chainsXpos[0], 0.1f);
         //사슬 움직임
     }
     private void BackAnimationExecution()
     {
         barExecution.GetComponent<Animator>().SetBool("PanelOn", false);
-        barCondition.transform.GetChild(1).GetComponent<Animator>().SetBool("ChainOn", false);
+        chain[1].DOAnchorPosX(chainsXpos[1], 0.1f);
+        chain[1].GetComponent<SpriteRenderer>().DOColor(new Color(1, 1, 1, 0), 0.1f);
         //사슬 움직임
     }
 
