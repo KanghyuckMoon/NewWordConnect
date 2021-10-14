@@ -2438,7 +2438,7 @@ MonoBehaviour:
   isEvent: 0
   isGameStart: 1
   isInputESC: 0
-  dieAnimation: {fileID: 1957914430}
+  dieAnimation: {fileID: 1957914429}
   chain:
   - {fileID: 996268755}
   - {fileID: 1339373124}
@@ -16931,7 +16931,6 @@ GameObject:
   - component: {fileID: 1957914429}
   - component: {fileID: 1957914432}
   - component: {fileID: 1957914431}
-  - component: {fileID: 1957914430}
   m_Layer: 5
   m_Name: DieResetAnimation
   m_TagString: Untagged
@@ -16958,25 +16957,6 @@ RectTransform:
   m_AnchoredPosition: {x: 640, y: 0}
   m_SizeDelta: {x: 640, y: 480}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &1957914430
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1957914428}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4576e2b33b520ca4caef2e5deed1f6db, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &1957914431
 MonoBehaviour:
   m_ObjectHideFlags: 0

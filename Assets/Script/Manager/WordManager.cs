@@ -137,7 +137,7 @@ public class WordManager : MonoBehaviour
 
     //애니메이션 변수
     [SerializeField]
-    private Animator dieAnimation;
+    private RectTransform dieAnimation;
     [SerializeField]
     private RectTransform[] chain;
     private float[] chainsXpos = new float[2];
@@ -1521,7 +1521,8 @@ public class WordManager : MonoBehaviour
 
     public void PlayToDieResetAnimation()
     {
-        dieAnimation.Play("DieResetAnimation");
+        dieAnimation.anchoredPosition = new Vector2(-640,0);
+        dieAnimation.DOAnchorPosX(640, 2.5f);
     }
 
     //ESC
