@@ -11,9 +11,9 @@ public class StageCharacter : MonoBehaviour
     public StagePin CurrentPin { get; private set; }
     private StagePin targetPin;
     private string inStageName;
-    private LevelSelectMap mapManager;
+    private MapManager mapManager;
 
-    public void Initialise(LevelSelectMap mapManager, StagePin startPin)
+    public void Initialise(MapManager mapManager, StagePin startPin)
     {
         this.mapManager = mapManager;
         SetCurrentPin(startPin);
@@ -71,9 +71,10 @@ public class StageCharacter : MonoBehaviour
         inStageName = pin.StageName;
         transform.position = pin.transform.position;
         isMoving = false;
+        mapManager.SetStageName(pin.StageName);
     }
 
-    public void StageStart()
+    public void StageMoveScene()
     {
         SceneManager.LoadScene(inStageName);
     }

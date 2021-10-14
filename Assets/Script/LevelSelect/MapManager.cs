@@ -3,25 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelSelectMap : MonoBehaviour
+public enum Direction
+{
+	Up,
+	Down,
+	Left,
+	Right
+}
+
+public class MapManager : MonoBehaviour
 {
 	public StageCharacter Character;
 	public StagePin StartPin;
-	public Text SelectedLevelText;
+	private SaveUser saveUser;
+	[SerializeField]
+	private Text stagenameText;
 
 	private void Start()
 	{
-		// Pass a ref and default the player Starting Pin
-		Character.Initialise(this, StartPin);
+		saveUser = SaveManager.Instance.CurrentSaveUser;
+		Character.Initialise(this, StartPin); // 캐릭터 위치 설정
 	}
 
 	private void Update()
 	{
-		// Only check input when character is stopped
-		if (Character.isMoving) return;
+		if (Character.isMoving) return; // 이동 중이면 안 받음
 
-		// First thing to do is try get the player input
-		CheckForInput();
+		CheckForInput(); // 입력 받음
 	}
 
 	private void CheckForInput()
@@ -44,7 +52,12 @@ public class LevelSelectMap : MonoBehaviour
 		}
 		else if (Input.GetKeyDown(KeyCode.Space))
         {
-			Character.StageStart();
+			Character.StageMoveScene();
         }
 	}
+
+	public void SetStageName(string name)
+    {
+		stagenameText.text = name;
+    }
 }

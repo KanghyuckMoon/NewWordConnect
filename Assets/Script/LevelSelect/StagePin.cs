@@ -4,14 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Direction
-{
-	Up,
-	Down,
-	Left,
-	Right
-}
-
 public class StagePin : MonoBehaviour
 {
 	[Header("기타 옵션")]
@@ -40,6 +32,7 @@ public class StagePin : MonoBehaviour
 	[SerializeField]
 	private int stagestat;
 
+
 	private Dictionary<Direction, StagePin> _pinDirections;
 
 	private void Start()
@@ -62,7 +55,7 @@ public class StagePin : MonoBehaviour
 
 	public int ReturnStat()
     {
-		return stagestat;
+		return stagestat = SaveManager.Instance.CurrentSaveUser.stageClear[stageindex];
     }
 
 	public StagePin GetPinInDirection(Direction direction)
