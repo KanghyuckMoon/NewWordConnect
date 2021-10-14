@@ -80,7 +80,6 @@ public class WordManager : MonoBehaviour
     //쿨타임
     [SerializeField]
     private Image cooltimeImage = null;
-    private Animator cooltimeAnimator = null;
     [SerializeField]
     private float cooltime = 0f;
     private bool coolOn = false;
@@ -188,7 +187,6 @@ public class WordManager : MonoBehaviour
         subjectScrollsPanel = subjectScroll.GetChild(0).gameObject;
         conditionScrollsPanel = conditionScroll.GetChild(0).gameObject;
         executionScrollsPanel = executionScroll.GetChild(0).gameObject;
-        cooltimeAnimator = cooltimeImage.GetComponent<Animator>();
 
 
         subjectUnlock = saveUser.subjectGet;
@@ -263,7 +261,7 @@ public class WordManager : MonoBehaviour
     {
         if (!coolOn) return; 
         if (nowWord != 3) return;
-        cooltimeAnimator.SetBool("CoolTimeOn", true);
+        cooltimeImage.DOColor(new Color(1, 1, 1, 1), 1f);
         if (cooltime <= 1)
         {
             cooltime += Time.deltaTime * cooltimeSpeed;
@@ -273,7 +271,7 @@ public class WordManager : MonoBehaviour
         {
             coolOn = false;
             if (cooltimeImage.color.a > 0)
-            cooltimeAnimator.SetBool("CoolTimeOn", false);
+                cooltimeImage.DOColor(new Color(1, 1, 1, 0), 1f);
             wordSetOn = true;
         }
     }
@@ -281,8 +279,7 @@ public class WordManager : MonoBehaviour
     {
         coolOn = false;
         wordSetOn = false;
-        cooltimeAnimator.SetBool("CoolTimeOn", false);
-        cooltimeAnimator.Play("CoolTimeOff");
+        cooltimeImage.DOColor(new Color(1, 1, 1, 0), 1);
     }
 
     public void AllChangeTexts()

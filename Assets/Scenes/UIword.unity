@@ -343,7 +343,7 @@ GameObject:
   - component: {fileID: 161858574}
   - component: {fileID: 161858573}
   m_Layer: 5
-  m_Name: Button
+  m_Name: "\uAC1C\uBC1C\uC790\uC6A9\uBC84\uD2BC"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -940,7 +940,7 @@ GameObject:
   - component: {fileID: 295939108}
   - component: {fileID: 295939107}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: "\uAC1C\uBC1C\uC790\uC6A9\uBC84\uD2BC"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14508,7 +14508,6 @@ GameObject:
   - component: {fileID: 1330774591}
   - component: {fileID: 1330774594}
   - component: {fileID: 1330774593}
-  - component: {fileID: 1330774592}
   - component: {fileID: 1330774595}
   m_Layer: 5
   m_Name: "\uCFE8\uD0C0\uC784"
@@ -14536,25 +14535,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 173}
   m_SizeDelta: {x: 550, y: 7.47}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &1330774592
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1330774590}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 960cf35eeaa59f9478f7ec7259438cc1, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &1330774593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15980,7 +15960,7 @@ GameObject:
   - component: {fileID: 1628783659}
   - component: {fileID: 1628783658}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: "\uAC1C\uBC1C\uC790\uC6A9\uBC84\uD2BC"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
