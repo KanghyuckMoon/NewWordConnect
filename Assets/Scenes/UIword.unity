@@ -2432,6 +2432,10 @@ MonoBehaviour:
   temperImage: {fileID: 707846780}
   WordSystem: {fileID: 1976667112}
   TextSystem: {fileID: 703604348}
+  textsystemRect:
+  - {fileID: 1725866018}
+  - {fileID: 1996853988}
+  - {fileID: 811071173}
   escSystem: {fileID: 1280809726}
   s_timeManager: {fileID: 0}
   c_onesecondCoolTime: 0

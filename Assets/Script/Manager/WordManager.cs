@@ -107,6 +107,9 @@ public class WordManager : MonoBehaviour
     [SerializeField]
     private GameObject TextSystem = null;
     [SerializeField]
+    private RectTransform[] textsystemRect = new RectTransform[3];
+
+    [SerializeField]
     private GameObject escSystem;
 
     //주어용 변수
@@ -1524,7 +1527,11 @@ public class WordManager : MonoBehaviour
         isEvent = true;
         WordSystem.SetActive(false);
         TextSystem.SetActive(true);
-        TextSystem.GetComponent<Animator>().Play("TextOn");
+        textsystemRect[0].anchoredPosition = new Vector2(-700,240);
+        textsystemRect[1].anchoredPosition = new Vector2(700,-190);
+        textsystemRect[2].anchoredPosition = new Vector2(0,200);
+        textsystemRect[0].DOAnchorPosX(0, 0.3f);
+        textsystemRect[1].DOAnchorPosX(0, 0.3f).OnComplete(() => textsystemRect[2].DOAnchorPosY(0,0.15f));
     }
     public void EventOff()
     {
