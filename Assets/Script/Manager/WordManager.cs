@@ -108,7 +108,7 @@ public class WordManager : MonoBehaviour
     private GameObject TextSystem = null;
     [SerializeField]
     private RectTransform[] textsystemRect = new RectTransform[3];
-
+    //
     [SerializeField]
     private GameObject escSystem;
 
