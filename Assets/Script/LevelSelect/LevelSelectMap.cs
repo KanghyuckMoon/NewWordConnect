@@ -11,7 +11,7 @@ public class LevelSelectMap : MonoBehaviour
 	private Text SelectedNameText;
 	[SerializeField]
 	private Text ClearText;
-
+	private bool isEsc;
 
 	private void Start()
 	{
@@ -23,6 +23,9 @@ public class LevelSelectMap : MonoBehaviour
 	{
 		// Only check input when character is stopped
 		if (Character.isMoving) return;
+		InputEsc();
+
+		if (isEsc) return;
 
 		// First thing to do is try get the player input
 		CheckForInput();
@@ -65,4 +68,12 @@ public class LevelSelectMap : MonoBehaviour
 		}
 
 	}
+
+	private void InputEsc()
+    {
+		if(Input.GetKeyDown(KeyCode.Escape))
+        {
+			isEsc = !isEsc;
+        }
+    }
 }

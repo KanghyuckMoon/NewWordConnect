@@ -1,6 +1,6 @@
 ﻿{
     "writingData": true,
-    "playerName": "ㅇ리오  ",
+    "playerName": "께    ",
     "lateDate": "2021-10-16",
     "testing": false,
     "subjectGet": [
@@ -39,5 +39,10 @@
         -1,
         -1
     ],
-    "isstageClears": []
+    "isstageClears": [
+        1,
+        0,
+        0,
+        0
+    ]
 }
