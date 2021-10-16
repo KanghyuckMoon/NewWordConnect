@@ -38,6 +38,8 @@ public class LevelSelectMap : MonoBehaviour
 	[SerializeField]
 	private Text[] EscTexts;
 	[SerializeField]
+	private RectTransform[] Panels;
+	[SerializeField]
 	private Image CharacterImage;
 	[SerializeField]
 	private RectTransform[] getsubjectWords;
@@ -147,6 +149,7 @@ public class LevelSelectMap : MonoBehaviour
 				{
 					EscImages[i].GetComponent<RectTransform>().DOAnchorPosX(-140, 0.3f);
                 }
+				Panels[i].DOAnchorPosX(0, 0.3f);
 			}
 			else
 			{
@@ -160,6 +163,14 @@ public class LevelSelectMap : MonoBehaviour
 				else
 				{
 					EscImages[i].GetComponent<RectTransform>().DOAnchorPosX(-177, 0.3f);
+				}
+				if(i < selectedESC)
+                {
+					Panels[i].DOAnchorPosX(-700, 0.3f);
+                }
+				else
+				{
+					Panels[i].DOAnchorPosX(700, 0.3f);
 				}
 			}
         }
