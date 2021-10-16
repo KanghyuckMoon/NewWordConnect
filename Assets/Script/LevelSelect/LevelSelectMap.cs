@@ -27,6 +27,7 @@ public class LevelSelectMap : MonoBehaviour
 	private Text ClearText;
 	private bool isEsc;
 	private KeySetting keysetting;
+	private SaveUser saveuser;
 
 	//ESC 하위 오브젝트들
 	[SerializeField]
@@ -39,7 +40,11 @@ public class LevelSelectMap : MonoBehaviour
 	[SerializeField]
 	private Image CharacterImage;
 	[SerializeField]
-	private GameObject[] getWords;
+	private RectTransform[] getsubjectWords;
+	[SerializeField]
+	private RectTransform[] getconditionWords;
+	[SerializeField]
+	private RectTransform[] getexecutionWords;
 
 	[SerializeField]
 	private Material[] materials;
@@ -49,7 +54,9 @@ public class LevelSelectMap : MonoBehaviour
 		// Pass a ref and default the player Starting Pin
 		Character.Initialise(this, StartPin);
 		keysetting = SaveManager.Instance.CurrenKeySetting;
+		saveuser = SaveManager.Instance.CurrentSaveUser;
 		SetSizeImage();
+		SetActiveWords();
 	}
 
 	private void Update()
@@ -157,4 +164,45 @@ public class LevelSelectMap : MonoBehaviour
 			}
         }
     }
+
+	private void SetActiveWords()
+    {
+		for(int i = 1; i<saveuser.subjectGet.Count - 1; i++)
+        {
+			if (saveuser.subjectGet[i - 1] - 1 <= -1) continue;
+			getsubjectWords[saveuser.subjectGet[i - 1]-1].gameObject.SetActive(true);
+        }
+		for (int i = 1; i < saveuser.conditionGet.Count; i++)
+		{
+			if (saveuser.conditionGet[i - 1]-1 <= -1) continue;
+			getconditionWords[saveuser.conditionGet[i - 1]-1].gameObject.SetActive(true);
+		}
+		for (int i = 1; i < saveuser.executionGet.Count; i++)
+		{
+			if (saveuser.executionGet[i - 1]-1 <= -1) continue;
+			getexecutionWords[saveuser.executionGet[i - 1]-1].gameObject.SetActive(true);
+		}
+		ShakeWords();
+	}
+
+	private void ShakeWords()
+	{
+		for(int i = 0; i < getsubjectWords.Length; i++)
+        {
+			if(getsubjectWords[i].gameObject.activeSelf)
+				getsubjectWords[i].DOShakeAnchorPos(10, 2, 1,180);
+        }
+		for (int i = 0; i < getconditionWords.Length; i++)
+		{
+			if (getconditionWords[i].gameObject.activeSelf)
+				getconditionWords[i].DOShakeAnchorPos(10, 2, 1,180);
+		}
+		for (int i = 0; i < getexecutionWords.Length; i++)
+		{
+			if (getexecutionWords[i].gameObject.activeSelf)
+				getexecutionWords[i].DOShakeAnchorPos(10, 2, 1,180);
+		}
+
+		Invoke("ShakeWords", 5);
+	}
 }
