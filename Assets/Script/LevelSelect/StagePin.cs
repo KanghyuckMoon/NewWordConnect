@@ -31,7 +31,8 @@ public class StagePin : MonoBehaviour
 	[SerializeField]
 	private StagePin RightPin = null;
 
-	public string StageName = null;
+	public string StageSceneName = null;
+	public string ViewStageName = null;
 
 	[SerializeField]
 	private Sprite[] sprites;
@@ -51,7 +52,7 @@ public class StagePin : MonoBehaviour
 			{ Direction.Left, LeftPin },
 			{ Direction.Right, RightPin }
 		};
-
+		stagestat = SaveManager.Instance.CurrentSaveUser.isstageClears[stageindex];
 		// Hide the icon if needed
 		if (HideStageIcon)
 		{

@@ -11,4 +11,5 @@ public class SaveUser
     public List<int> subjectGet;
     public List<int> conditionGet;
     public List<int> executionGet;
+    public List<int> isstageClears;
 }

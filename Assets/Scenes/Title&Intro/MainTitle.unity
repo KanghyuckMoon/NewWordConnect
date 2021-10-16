@@ -15680,6 +15680,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4411052962741426989, guid: 245a52a6ccf6a124d969d5784ff3058f, type: 3}
+      propertyPath: bgclip.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4411052962741426989, guid: 245a52a6ccf6a124d969d5784ff3058f, type: 3}
+      propertyPath: bgclip.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4411052962741426989, guid: 245a52a6ccf6a124d969d5784ff3058f, type: 3}
+      propertyPath: bgclip.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: cc7631ee7b836f84c95663cd47d094f2, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 245a52a6ccf6a124d969d5784ff3058f, type: 3}
 --- !u!1001 &9102987125175125959

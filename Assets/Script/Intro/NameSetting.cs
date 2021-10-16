@@ -148,6 +148,19 @@ public class NameSetting : MonoBehaviour
                 SaveManager.Instance.CurrentSaveUser.executionGet.Add(-1);
             }
         }
+        //스테이지 리셋
+        for(int i = 0; i < 4; i++)
+        {
+            if(i == 0)
+            {
+                SaveManager.Instance.CurrentSaveUser.isstageClears.Add(1);
+            }
+            else
+            {
+            SaveManager.Instance.CurrentSaveUser.isstageClears.Add(0);
+            }
+        }
+
         SaveManager.Instance.SaveToJson();
         SceneManager.LoadScene("StageSelect");
     }

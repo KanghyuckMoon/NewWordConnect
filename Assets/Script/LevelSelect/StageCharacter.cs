@@ -68,7 +68,7 @@ public class StageCharacter : MonoBehaviour
     {
         CurrentPin = pin;
         targetPin = null;
-        inStageName = pin.StageName;
+        inStageName = pin.StageSceneName;
         transform.position = pin.transform.position;
         isMoving = false;
     }
