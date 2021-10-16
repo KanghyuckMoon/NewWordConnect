@@ -56,6 +56,7 @@ public class StageCharacter : MonoBehaviour
         if (pin == null) return;
         if (pin.ReturnStat() == 0) return;
         MoveToPin(pin);
+        mapManager.SetTexts();
     }
 
     private void MoveToPin(StagePin pin)
@@ -71,6 +72,7 @@ public class StageCharacter : MonoBehaviour
         inStageName = pin.StageSceneName;
         transform.position = pin.transform.position;
         isMoving = false;
+        mapManager.SetTexts();
     }
 
     public void StageStart()

@@ -7,7 +7,11 @@ public class LevelSelectMap : MonoBehaviour
 {
 	public StageCharacter Character;
 	public StagePin StartPin;
-	public Text SelectedLevelText;
+	[SerializeField]
+	private Text SelectedNameText;
+	[SerializeField]
+	private Text ClearText;
+
 
 	private void Start()
 	{
@@ -46,5 +50,19 @@ public class LevelSelectMap : MonoBehaviour
         {
 			Character.StageStart();
         }
+	}
+
+	public void SetTexts()
+    {
+		SelectedNameText.text = Character.CurrentPin.ViewStageName;
+		if (Character.CurrentPin.ReturnStat() == 2)
+        {
+			ClearText.gameObject.SetActive(true);
+        }
+		else
+		{
+			ClearText.gameObject.SetActive(false);
+		}
+
 	}
 }
