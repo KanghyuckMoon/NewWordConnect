@@ -167,17 +167,21 @@ public class LevelSelectMap : MonoBehaviour
 			else if (Input.GetKeyDown(KeyCode.Space))
 			{
 				nowoptionselect = optionselect;
-				if(nowoptionselect == -1)
+				optionselect = 0;
+				if (nowoptionselect == -1)
                 {
 					OptionObjSetActive();
-                }
+					MoveOptionSelect();
+				}
 				else if(nowoptionselect == 0)
 				{
 					OptionObjSetActive();
+					MoveOptionSelect();
 				}
 				else if(nowoptionselect == 1)
 				{
 					OptionObjSetActive();
+					MoveOptionSelect();
 				}
 				else if(nowoptionselect == 2)
                 {
@@ -195,7 +199,9 @@ public class LevelSelectMap : MonoBehaviour
 			else if (Input.GetKeyDown(KeyCode.Backspace))
 			{
 				nowoptionselect = -1;
+				optionselect = 0;
 				OptionObjSetActive();
+				MoveOptionSelect();
 			}
 			else
             {
@@ -314,19 +320,33 @@ public class LevelSelectMap : MonoBehaviour
 
 	private void MoveOptionSelect()
     {
-		selectImage.DOAnchorPosY(optionTexts[optionselect].anchoredPosition.y,0.2f);
-		switch(optionselect)
+		if(nowoptionselect == -1)
         {
-			case 1:
-				selectImage.DOAnchorPosX(-130, 0.2f);
-				break;
-			case 2:
-				selectImage.DOAnchorPosX(-220, 0.2f);
-				break;
-			default:
-				selectImage.DOAnchorPosX(-116, 0.2f);
-				break;
-        }
+			selectImage.DOAnchorPosY(optionTexts[optionselect].anchoredPosition.y, 0.2f);
+			switch (optionselect)
+			{
+				case 1:
+					selectImage.DOAnchorPosX(-130, 0.2f);
+					break;
+				case 2:
+					selectImage.DOAnchorPosX(-220, 0.2f);
+					break;
+				default:
+					selectImage.DOAnchorPosX(-116, 0.2f);
+					break;
+			}
+		}
+		else if (nowoptionselect == 0)
+		{
+			selectImage.DOAnchorPosY(keysettingoptionTexts[optionselect].anchoredPosition.y, 0.2f);
+			selectImage.DOAnchorPosX(-116, 0.2f);
+		}
+		else if (nowoptionselect == 1)
+		{
+			selectImage.DOAnchorPosY(soundsettingoptionTexts[optionselect].anchoredPosition.y, 0.2f);
+			selectImage.DOAnchorPosX(-116, 0.2f);
+		}
+		
     }
 
 	private void OptionObjSetActive()

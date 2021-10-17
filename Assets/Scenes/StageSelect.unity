@@ -306,7 +306,9 @@ MonoBehaviour:
   - {fileID: 1182578159}
   - {fileID: 1546363001}
   soundsettingObj: {fileID: 899969501}
-  soundsettingoptionTexts: []
+  soundsettingoptionTexts:
+  - {fileID: 159247973}
+  - {fileID: 1565960422}
   selectImage: {fileID: 1552808284}
   materials:
   - {fileID: 2100000, guid: f571860b36c7d394cb7d27a179f6ae28, type: 2}
@@ -1976,7 +1978,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &684714112
 RectTransform:
   m_ObjectHideFlags: 0
