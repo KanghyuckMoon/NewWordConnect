@@ -28,6 +28,8 @@ public class LevelSelectMap : MonoBehaviour
 	private bool isEsc;
 	private KeySetting keysetting;
 	private SaveUser saveuser;
+	[SerializeField]
+	private GameObject[] backgroundObj;
 
 	//ESC 하위 오브젝트들
 	[SerializeField]
@@ -116,6 +118,8 @@ public class LevelSelectMap : MonoBehaviour
         {
 			isEsc = !isEsc;
 			EscUI.SetActive(isEsc);
+			backgroundObj[0].SetActive(!isEsc);
+			backgroundObj[1].SetActive(!isEsc);
         }
 		else
 		{
@@ -149,7 +153,7 @@ public class LevelSelectMap : MonoBehaviour
 				{
 					EscImages[i].GetComponent<RectTransform>().DOAnchorPosX(-140, 0.3f);
                 }
-				Panels[i].DOAnchorPosX(0, 0.3f);
+				Panels[i - 1].DOAnchorPosX(0, 0.3f);
 			}
 			else
 			{
@@ -166,11 +170,11 @@ public class LevelSelectMap : MonoBehaviour
 				}
 				if(i < selectedESC)
                 {
-					Panels[i].DOAnchorPosX(-700, 0.3f);
+					Panels[i - 1].DOAnchorPosX(-700, 0.3f);
                 }
 				else
 				{
-					Panels[i].DOAnchorPosX(700, 0.3f);
+					Panels[i - 1].DOAnchorPosX(700, 0.3f);
 				}
 			}
         }

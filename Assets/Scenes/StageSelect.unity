@@ -249,6 +249,9 @@ MonoBehaviour:
   StartPin: {fileID: 1443328027}
   SelectedNameText: {fileID: 229057143}
   ClearText: {fileID: 582306200}
+  backgroundObj:
+  - {fileID: 2063486525}
+  - {fileID: 1348203698}
   EscUI: {fileID: 684714111}
   EscImages:
   - {fileID: 0}
@@ -258,7 +261,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 1355184608}
   - {fileID: 1828004163}
-  Panels: []
+  Panels:
+  - {fileID: 888098900}
+  - {fileID: 2056489400}
   CharacterImage: {fileID: 0}
   getsubjectWords:
   - {fileID: 906897224}
@@ -1594,7 +1599,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &684714112
 RectTransform:
   m_ObjectHideFlags: 0

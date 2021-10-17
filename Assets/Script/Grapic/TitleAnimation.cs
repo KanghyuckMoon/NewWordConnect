@@ -288,7 +288,7 @@ public class TitleAnimation : MonoBehaviour
     {
         loadingOn = false;
         SaveManager.Instance.SetSaveUserData(index);
-        Startbar.DOAnchorPosX(-1500, 2).OnComplete(() => GoToStageSelect());
+        Startbar.DOAnchorPosX(-900, 1.5f).OnComplete(() => GoToStageSelect());
     }
 
     private void SetLoadingEnd()
