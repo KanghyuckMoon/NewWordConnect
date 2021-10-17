@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using DG.Tweening;
 
 public class LevelSelectMap : MonoBehaviour
@@ -51,10 +52,23 @@ public class LevelSelectMap : MonoBehaviour
 	private RectTransform[] getexecutionWords;
 	//옵션 패널
 	[SerializeField]
+	private GameObject optionTextObj;
+	[SerializeField]
 	private RectTransform[] optionTexts;
+	[SerializeField]
+	private GameObject keysettingObj;
+	[SerializeField]
+	private GameObject[] keysettingBtn;
+	[SerializeField]
+	private RectTransform[] keysettingoptionTexts;
+	[SerializeField]
+	private GameObject soundsettingObj;
+	[SerializeField]
+	private RectTransform[] soundsettingoptionTexts;
 	[SerializeField]
 	private RectTransform selectImage;
 	private int optionselect = 0;
+	private int nowoptionselect = -1;
 
 	[SerializeField]
 	private Material[] materials;
@@ -67,6 +81,7 @@ public class LevelSelectMap : MonoBehaviour
 		saveuser = SaveManager.Instance.CurrentSaveUser;
 		SetSizeImage();
 		SetActiveWords();
+		OptionObjSetActive();
 	}
 
 	private void Update()
@@ -148,6 +163,39 @@ public class LevelSelectMap : MonoBehaviour
 					return;
 				}
 				MoveOptionSelect();
+			}
+			else if (Input.GetKeyDown(KeyCode.Space))
+			{
+				nowoptionselect = optionselect;
+				if(nowoptionselect == -1)
+                {
+					OptionObjSetActive();
+                }
+				else if(nowoptionselect == 0)
+				{
+					OptionObjSetActive();
+				}
+				else if(nowoptionselect == 1)
+				{
+					OptionObjSetActive();
+				}
+				else if(nowoptionselect == 2)
+                {
+					SceneManager.LoadScene("MainTitle");
+                }
+				else if(nowoptionselect == 3)
+				{
+					#if UNITY_EDITOR
+					UnityEditor.EditorApplication.isPlaying = false;
+					#else
+                            Application.Quit(); // 어플리케이션 종료
+					#endif
+				}
+			}
+			else if (Input.GetKeyDown(KeyCode.Backspace))
+			{
+				nowoptionselect = -1;
+				OptionObjSetActive();
 			}
 			else
             {
@@ -269,15 +317,43 @@ public class LevelSelectMap : MonoBehaviour
 		selectImage.DOAnchorPosY(optionTexts[optionselect].anchoredPosition.y,0.2f);
 		switch(optionselect)
         {
-			case 2:
+			case 1:
 				selectImage.DOAnchorPosX(-130, 0.2f);
 				break;
-			case 3:
+			case 2:
 				selectImage.DOAnchorPosX(-220, 0.2f);
 				break;
 			default:
 				selectImage.DOAnchorPosX(-116, 0.2f);
 				break;
         }
+    }
+
+	private void OptionObjSetActive()
+    {
+		if(nowoptionselect == -1)
+        {
+			keysettingObj.SetActive(false);
+			keysettingBtn[0].SetActive(false);
+			keysettingBtn[1].SetActive(false);
+			soundsettingObj.SetActive(false);
+			optionTextObj.SetActive(true);
+        }
+		else if (nowoptionselect == 0)
+		{
+			keysettingObj.SetActive(true);
+			keysettingBtn[0].SetActive(false);
+			keysettingBtn[1].SetActive(false);
+			soundsettingObj.SetActive(false);
+			optionTextObj.SetActive(false);
+		}
+		else if (nowoptionselect == 1)
+		{
+			keysettingObj.SetActive(false);
+			keysettingBtn[0].SetActive(false);
+			keysettingBtn[1].SetActive(false);
+			soundsettingObj.SetActive(true);
+			optionTextObj.SetActive(false);
+		}
     }
 }
