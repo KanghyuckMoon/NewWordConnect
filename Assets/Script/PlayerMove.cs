@@ -29,6 +29,10 @@ public class PlayerMove : WordGameObject
     private bool win;
     private Vector2 frontvec;
     private RaycastHit2D rayHit;
+    [SerializeField]
+    private int[] NextStageUnLockList;
+    [SerializeField]
+    private int NowStageIndex;
 
     protected override void Start()
     {
@@ -235,6 +239,14 @@ public class PlayerMove : WordGameObject
         win = true;
         isInvincibility = true;
         wordManager.WinGame();
+        for(int i = 0; i < NextStageUnLockList.Length; i++)
+        {
+            if(SaveManager.Instance.CurrentSaveUser.isstageClears[NextStageUnLockList[i]] == 0)
+            {
+            SaveManager.Instance.CurrentSaveUser.isstageClears[NextStageUnLockList[i]] = 1;
+            }
+        }
+        SaveManager.Instance.CurrentSaveUser.isstageClears[NowStageIndex] = 2;
         Invoke("MoveStageSelect",2f);
     }
 

@@ -11,7 +11,7 @@ public class TimeManager : WordGameObject
     public bool isRewinding = false;
     public bool isStartRecord = false;
     public bool isRecord = false;
-    private WaitForSecondsRealtime waitForSeconds;
+    private WaitForSecondsRealtime waitForSeconde;
     [SerializeField]
     private List<Vector2> positions = new List<Vector2>();
     private Transform playerTransform;
@@ -19,7 +19,7 @@ public class TimeManager : WordGameObject
 
     protected override void Start()
     {
-        waitForSeconds = new WaitForSecondsRealtime(0.1f);
+        waitForSeconde = new WaitForSecondsRealtime(0.1f);
         playerTransform = player.transform;
     }
 
