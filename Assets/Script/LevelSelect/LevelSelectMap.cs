@@ -384,12 +384,12 @@ public class LevelSelectMap : MonoBehaviour
 		else if (nowoptionselect == 0)
 		{
 			selectImage.DOAnchorPosY(keysettingoptionTexts[optionselect].anchoredPosition.y, 0.2f);
-			selectImage.DOAnchorPosX(-116, 0.2f);
+			selectImage.DOAnchorPosX(-220, 0.2f);
 		}
 		else if (nowoptionselect == 1)
 		{
 			selectImage.DOAnchorPosY(soundsettingoptionTexts[optionselect].anchoredPosition.y, 0.2f);
-			selectImage.DOAnchorPosX(-116, 0.2f);
+			selectImage.DOAnchorPosX(-140, 0.2f);
 		}
 		
     }
