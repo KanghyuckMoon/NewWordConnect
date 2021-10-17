@@ -267,5 +267,17 @@ public class LevelSelectMap : MonoBehaviour
 	private void MoveOptionSelect()
     {
 		selectImage.DOAnchorPosY(optionTexts[optionselect].anchoredPosition.y,0.2f);
+		switch(optionselect)
+        {
+			case 2:
+				selectImage.DOAnchorPosX(-130, 0.2f);
+				break;
+			case 3:
+				selectImage.DOAnchorPosX(-220, 0.2f);
+				break;
+			default:
+				selectImage.DOAnchorPosX(-116, 0.2f);
+				break;
+        }
     }
 }
