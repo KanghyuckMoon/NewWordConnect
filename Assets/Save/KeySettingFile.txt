@@ -3,5 +3,11 @@
     "Numpad": true,
     "writingData": true,
     "backgroundvolume": 7,
-    "effectvolume": 7
+    "effectvolume": 7,
+    "wasdKeyCodes": [
+        119,
+        115,
+        100,
+        97
+    ]
 }

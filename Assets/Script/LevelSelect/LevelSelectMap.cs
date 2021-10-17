@@ -69,6 +69,7 @@ public class LevelSelectMap : MonoBehaviour
 	private RectTransform selectImage;
 	private int optionselect = 0;
 	private int nowoptionselect = -1;
+	private bool isKeySetting;
 
 	[SerializeField]
 	private Material[] materials;
@@ -82,11 +83,13 @@ public class LevelSelectMap : MonoBehaviour
 		SetSizeImage();
 		SetActiveWords();
 		OptionObjSetActive();
+		WASDKeySetting(keysetting.Wasd);
 	}
 
 	private void Update()
 	{
 		// Only check input when character is stopped
+		if (isKeySetting) return;
 		if (Character.isMoving) return;
 		InputEsc();
 		if (isEsc) return;
@@ -97,19 +100,19 @@ public class LevelSelectMap : MonoBehaviour
 
 	private void CheckForInput()
 	{
-		if (Input.GetKeyUp(KeyCode.UpArrow))
+		if (Input.GetKeyUp((KeyCode)keysetting.wasdKeyCodes[0]))
 		{
 			Character.TrySetDirection(Direction.Up);
 		}
-		else if (Input.GetKeyUp(KeyCode.DownArrow))
+		else if (Input.GetKeyUp((KeyCode)keysetting.wasdKeyCodes[1]))
 		{
 			Character.TrySetDirection(Direction.Down);
 		}
-		else if (Input.GetKeyUp(KeyCode.LeftArrow))
+		else if (Input.GetKeyUp((KeyCode)keysetting.wasdKeyCodes[2]))
 		{
 			Character.TrySetDirection(Direction.Left);
 		}
-		else if (Input.GetKeyUp(KeyCode.RightArrow))
+		else if (Input.GetKeyUp((KeyCode)keysetting.wasdKeyCodes[3]))
 		{
 			Character.TrySetDirection(Direction.Right);
 		}
@@ -144,7 +147,7 @@ public class LevelSelectMap : MonoBehaviour
         }
 		else if(selectedESC == 2 && isEsc)
         {
-			if(Input.GetKeyDown(KeyCode.W))
+			if(Input.GetKeyDown((KeyCode)keysetting.wasdKeyCodes[0])) // W
             {
 				optionselect--;
 				if (optionselect < 0)
@@ -154,22 +157,41 @@ public class LevelSelectMap : MonoBehaviour
 				}
 				MoveOptionSelect();
 			}
-			else if(Input.GetKeyDown(KeyCode.S))
+			else if(Input.GetKeyDown((KeyCode)keysetting.wasdKeyCodes[1])) // S
 			{
 				optionselect++;
-				if (optionselect > optionTexts.Length - 1)
+				if(nowoptionselect == -1)
 				{
-					optionselect = optionTexts.Length - 1;
-					return;
+					if (optionselect > optionTexts.Length - 1)
+					{
+						optionselect = optionTexts.Length - 1;
+						return;
+					}
+				}
+				else if(nowoptionselect == 0)
+                {
+					if (optionselect > keysettingoptionTexts.Length - 1)
+					{
+						optionselect = keysettingoptionTexts.Length - 1;
+						return;
+					}
+				}
+				else if (nowoptionselect == 1)
+				{
+					if (optionselect > soundsettingoptionTexts.Length - 1)
+					{
+						optionselect = soundsettingoptionTexts.Length - 1;
+						return;
+					}
 				}
 				MoveOptionSelect();
 			}
 			else if (Input.GetKeyDown(KeyCode.Space))
 			{
-				nowoptionselect = optionselect;
-				optionselect = 0;
 				if (nowoptionselect == -1)
                 {
+					nowoptionselect = optionselect;
+					optionselect = 0;
 					OptionObjSetActive();
 					MoveOptionSelect();
 				}
@@ -177,11 +199,23 @@ public class LevelSelectMap : MonoBehaviour
 				{
 					OptionObjSetActive();
 					MoveOptionSelect();
+					if(optionselect == 0)
+                    {
+						keysettingBtn[0].SetActive(true);
+						keysettingBtn[1].SetActive(false);
+						isKeySetting = true;
+                    }
+					else if(optionselect == 1)
+					{
+						keysettingBtn[0].SetActive(false);
+						keysettingBtn[1].SetActive(true);
+						isKeySetting = true;
+					}
+					optionselect = 0;
 				}
 				else if(nowoptionselect == 1)
 				{
-					OptionObjSetActive();
-					MoveOptionSelect();
+
 				}
 				else if(nowoptionselect == 2)
                 {
@@ -209,7 +243,18 @@ public class LevelSelectMap : MonoBehaviour
 				{
 					if (Input.GetKeyDown(keyCodes[i] - (keysetting.Numpad ? 0 : 208)))
 					{
-						if (i < 3 && i > 0)
+						if(nowoptionselect == 1)
+                        {
+							if(optionselect == 0)
+                            {
+								SetBackGroundVolume(i);
+                            }
+							else
+                            {
+								SetEffectVolume(i);
+                            }
+                        }
+						else if (i < 3 && i > 0)
 						{
 							selectedESC = i;
 							SetSizeImage();
@@ -224,11 +269,11 @@ public class LevelSelectMap : MonoBehaviour
 			{
 				if (Input.GetKeyDown(keyCodes[i] - (keysetting.Numpad ? 0 : 208)))
 				{
-					if (i < 3 && i > 0)
-					{
-						selectedESC = i;
-						SetSizeImage();
-					}
+						if (i < 3 && i > 0)
+						{
+							selectedESC = i;
+							SetSizeImage();
+						}
 				}
 			}
 		}
@@ -375,5 +420,66 @@ public class LevelSelectMap : MonoBehaviour
 			soundsettingObj.SetActive(true);
 			optionTextObj.SetActive(false);
 		}
-    }
+	}
+
+	public void SetWASD(bool input)
+	{
+		keysetting.Wasd = input;
+		SaveManager.Instance.SaveKeySetting();
+		isKeySetting = false;
+		WASDKeySetting(input);
+		keysettingBtn[0].SetActive(false);
+		keysettingBtn[1].SetActive(false);
+	}
+	public void SetKeyPad(bool input)
+	{
+		keysetting.Numpad = input;
+		SaveManager.Instance.SaveKeySetting();
+		isKeySetting = false;
+		keysettingBtn[0].SetActive(false);
+		keysettingBtn[1].SetActive(false);
+	}
+
+	private void WASDKeySetting(bool input)
+    {
+		if (input)
+		{
+			keysetting.wasdKeyCodes[0] = (int)KeyCode.W;
+			keysetting.wasdKeyCodes[1] = (int)KeyCode.S;
+			keysetting.wasdKeyCodes[2] = (int)KeyCode.D;
+			keysetting.wasdKeyCodes[3] = (int)KeyCode.A;
+		}
+		else
+		{
+			keysetting.wasdKeyCodes[0] = (int)KeyCode.UpArrow;
+			keysetting.wasdKeyCodes[1] = (int)KeyCode.DownArrow;
+			keysetting.wasdKeyCodes[2] = (int)KeyCode.LeftArrow;
+			keysetting.wasdKeyCodes[3] = (int)KeyCode.RightArrow;
+		}
+	}
+
+	private void SetBackGroundVolume(int num)
+	{
+		SoundManager.Instance.SetBgSoundVolume(num);
+		if (num == 9)
+		{
+			soundsettingoptionTexts[0].GetComponent<Text>().text = "배경음악 - " + 100;
+		}
+		else
+		{
+			soundsettingoptionTexts[0].GetComponent<Text>().text = "배경음악 - " + (num * 10);
+		}
+	}
+	private void SetEffectVolume(int num)
+	{
+		SoundManager.Instance.SetEffectSoundVolume(num);
+		if (num == 9)
+		{
+			soundsettingoptionTexts[1].GetComponent<Text>().text = "효과음 - " + 100;
+		}
+		else
+		{
+			soundsettingoptionTexts[1].GetComponent<Text>().text = "효과음 - " + (num * 10);
+		}
+	}
 }

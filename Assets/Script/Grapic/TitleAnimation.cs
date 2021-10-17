@@ -59,8 +59,6 @@ public class TitleAnimation : MonoBehaviour
     [SerializeField]
     private GameObject numpadset;
 
-    private KeyCode[] wasdkeycodes = new KeyCode[5];
-
     private bool optionOn;
 
     private void Awake()
@@ -77,17 +75,17 @@ public class TitleAnimation : MonoBehaviour
         SetEffectVolume(keysetting.effectvolume);
         if (keysetting.Wasd)
         {
-            wasdkeycodes[0] = KeyCode.W;
-            wasdkeycodes[1] = KeyCode.S;
-            wasdkeycodes[2] = KeyCode.D;
-            wasdkeycodes[3] = KeyCode.A;
+            keysetting.wasdKeyCodes[0] = (int)KeyCode.W;
+            keysetting.wasdKeyCodes[1] = (int)KeyCode.S;
+            keysetting.wasdKeyCodes[2] = (int)KeyCode.D;
+            keysetting.wasdKeyCodes[3] = (int)KeyCode.A;
         }
         else
         {
-            wasdkeycodes[0] = KeyCode.UpArrow;
-            wasdkeycodes[1] = KeyCode.DownArrow;
-            wasdkeycodes[2] = KeyCode.RightArrow;
-            wasdkeycodes[3] = KeyCode.LeftArrow;
+            keysetting.wasdKeyCodes[0] = (int)KeyCode.UpArrow;
+            keysetting.wasdKeyCodes[1] = (int)KeyCode.DownArrow;
+            keysetting.wasdKeyCodes[2] = (int)KeyCode.LeftArrow;
+            keysetting.wasdKeyCodes[3] = (int)KeyCode.RightArrow;
         }
     }
 
@@ -179,12 +177,12 @@ public class TitleAnimation : MonoBehaviour
 
             if(nowbarselect == 1)
             {
-                if(Input.GetKeyDown(wasdkeycodes[0]))
+                if(Input.GetKeyDown((KeyCode)keysetting.wasdKeyCodes[0]))
                 {
                     OptionSelect(-1);
                     MoveOption();
                 }
-                else if(Input.GetKeyDown(wasdkeycodes[1]))
+                else if(Input.GetKeyDown((KeyCode)keysetting.wasdKeyCodes[1]))
                 {
                     OptionSelect(1);
                     MoveOption();
@@ -380,19 +378,19 @@ public class TitleAnimation : MonoBehaviour
             wasdset.gameObject.SetActive(false);
             loadingOn = true;
             SetTexts();
-            if(input)
+            if (input)
             {
-                wasdkeycodes[0] = KeyCode.W;
-                wasdkeycodes[1] = KeyCode.S;
-                wasdkeycodes[2] = KeyCode.D;
-                wasdkeycodes[3] = KeyCode.A;
+                keysetting.wasdKeyCodes[0] = (int)KeyCode.W;
+                keysetting.wasdKeyCodes[1] = (int)KeyCode.S;
+                keysetting.wasdKeyCodes[2] = (int)KeyCode.D;
+                keysetting.wasdKeyCodes[3] = (int)KeyCode.A;
             }
             else
             {
-                wasdkeycodes[0] = KeyCode.UpArrow;
-                wasdkeycodes[1] = KeyCode.DownArrow;
-                wasdkeycodes[2] = KeyCode.RightArrow;
-                wasdkeycodes[3] = KeyCode.LeftArrow;
+                keysetting.wasdKeyCodes[0] = (int)KeyCode.UpArrow;
+                keysetting.wasdKeyCodes[1] = (int)KeyCode.DownArrow;
+                keysetting.wasdKeyCodes[2] = (int)KeyCode.LeftArrow;
+                keysetting.wasdKeyCodes[3] = (int)KeyCode.RightArrow;
             }
         }
     }
