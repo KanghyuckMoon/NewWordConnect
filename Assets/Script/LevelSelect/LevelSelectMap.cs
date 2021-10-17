@@ -49,6 +49,12 @@ public class LevelSelectMap : MonoBehaviour
 	private RectTransform[] getconditionWords;
 	[SerializeField]
 	private RectTransform[] getexecutionWords;
+	//옵션 패널
+	[SerializeField]
+	private RectTransform[] optionTexts;
+	[SerializeField]
+	private RectTransform selectImage;
+	private int optionselect = 0;
 
 	[SerializeField]
 	private Material[] materials;
@@ -120,6 +126,43 @@ public class LevelSelectMap : MonoBehaviour
 			EscUI.SetActive(isEsc);
 			backgroundObj[0].SetActive(!isEsc);
 			backgroundObj[1].SetActive(!isEsc);
+        }
+		else if(selectedESC == 2 && isEsc)
+        {
+			if(Input.GetKeyDown(KeyCode.W))
+            {
+				optionselect--;
+				if (optionselect < 0)
+                {
+					optionselect = 0;
+					return;
+				}
+				MoveOptionSelect();
+			}
+			else if(Input.GetKeyDown(KeyCode.S))
+			{
+				optionselect++;
+				if (optionselect > optionTexts.Length - 1)
+				{
+					optionselect = optionTexts.Length - 1;
+					return;
+				}
+				MoveOptionSelect();
+			}
+			else
+            {
+				for (int i = 0; i < keyCodes.Length; i++)
+				{
+					if (Input.GetKeyDown(keyCodes[i] - (keysetting.Numpad ? 0 : 208)))
+					{
+						if (i < 3 && i > 0)
+						{
+							selectedESC = i;
+							SetSizeImage();
+						}
+					}
+				}
+			}
         }
 		else
 		{
@@ -220,4 +263,9 @@ public class LevelSelectMap : MonoBehaviour
 
 		Invoke("ShakeWords", 5);
 	}
+
+	private void MoveOptionSelect()
+    {
+		selectImage.DOAnchorPosY(optionTexts[optionselect].anchoredPosition.y,0.2f);
+    }
 }
