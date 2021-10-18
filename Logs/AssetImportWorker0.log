@@ -242,3 +242,52 @@ Received Import Request.
 Start importing Assets/Scenes/StageSelect.unity using Guid(11d3eb4d23ca82f4d899d43f6865da82) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c4a41289322b9610bc36ee6076141848') in 0.009759 seconds 
   Import took 0.024455 seconds .
 
+========================================================================
+Received Import Request.
+  Time since last request: 56.416750 seconds.
+  path: Assets/Scenes/Stage1/Stage1-3.unity
+  artifactKey: Guid(9f782331019fe1042b27af791f9a144b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Stage1/Stage1-3.unity using Guid(9f782331019fe1042b27af791f9a144b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '77d44912b065af6a849ef9f137a47a7c') in 0.007869 seconds 
+  Import took 0.020983 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 660.722442 seconds.
+  path: Assets/Grapic/Sprite/box.png
+  artifactKey: Guid(8856bb063af14224cbbae680255d6c3d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Grapic/Sprite/box.png using Guid(8856bb063af14224cbbae680255d6c3d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '130977465b50627628193ba86cca97af') in 0.026615 seconds 
+  Import took 0.034383 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 6.340787 seconds.
+  path: Assets/Grapic/Sprite/box.png
+  artifactKey: Guid(8856bb063af14224cbbae680255d6c3d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Grapic/Sprite/box.png using Guid(8856bb063af14224cbbae680255d6c3d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '12cd06f11f57e92ff8fb97f1c7e3961a') in 0.016520 seconds 
+  Import took 0.023516 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 659.474886 seconds.
+  path: Assets/Grapic/Sprite/door.png
+  artifactKey: Guid(c2127f76457c82b4ca90f23979afbc81) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Grapic/Sprite/door.png using Guid(c2127f76457c82b4ca90f23979afbc81) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dd475b8fb178fa731373a39ee65eae06') in 0.023464 seconds 
+  Import took 0.030425 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.002573 seconds.
+  path: Assets/Grapic/Sprite/door.png
+  artifactKey: Guid(c2127f76457c82b4ca90f23979afbc81) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Grapic/Sprite/door.png using Guid(c2127f76457c82b4ca90f23979afbc81) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dd475b8fb178fa731373a39ee65eae06') in 0.018698 seconds 
+  Import took 0.025933 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 6.050273 seconds.
+  path: Assets/Grapic/Sprite/door.png
+  artifactKey: Guid(c2127f76457c82b4ca90f23979afbc81) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Grapic/Sprite/door.png using Guid(c2127f76457c82b4ca90f23979afbc81) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f78bc9430a0246b9c3dc1b02eef2218d') in 0.019268 seconds 
+  Import took 0.025946 seconds .
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
