@@ -198,7 +198,10 @@ public class PlayerMove : WordGameObject
         base.OnTriggerStay2D(collision);
         if (collision.gameObject.CompareTag("TextObj"))
         {
+            if(Input.GetKeyDown(KeyCode.W))
+            {
             TriggerStayTextobj(collision.gameObject);
+            }
         }
     }
 
@@ -229,6 +232,9 @@ public class PlayerMove : WordGameObject
                 break;
             case "ColorBlock":
                 TriggerEnterColorBlock(collision.gameObject);
+                break;
+            case "AutoTextObj":
+                TriggerStayTextobj(collision.gameObject);
                 break;
         }
     }
@@ -398,10 +404,7 @@ public class PlayerMove : WordGameObject
     protected virtual void TriggerStayTextobj(GameObject collision)
     {
         if (wordManager.isEvent) return;
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            textManager.ChatStart(collision.GetComponent<TextObject>().ReturnTextIndex());
-        }
+        textManager.ChatStart(collision.GetComponent<TextObject>().ReturnTextIndex());
     }
     protected virtual void TriggerEnterCameraLock(GameObject collision)
     {

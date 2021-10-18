@@ -17,6 +17,7 @@ TagManager:
   - GetWord
   - ColorBlock
   - MovingTile
+  - AutoTextObj
   layers:
   - Default
   - TransparentFX

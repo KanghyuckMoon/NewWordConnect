@@ -2384,6 +2384,11 @@ MonoBehaviour:
     - "001 \uC548\uB155"
     - "002 \u3147\u3141\u3139\u3134\u3147\u3139"
     - "003 \uD14C\uC2BD"
+  - data:
+    - "000 \uC804\uB300 \uC6A9\uC0AC\uAC00 \uC8FD\uC5C8\uB2E4"
+    - "000 \uC774\uC81C \uB0B4\uAC00 \uB9C8\uC655\uC744 \uC8FD\uC5EC\uC57C \uD55C\uB2E4"
+    - "000 \uB2E8\uC5B4\uC758 \uD798\uC744 \uAC01\uC131\uD558\uC790"
+    - "000 \uC22B\uC790 \uD0A4\uB97C \uB20C\uB7EC \uB2E8\uC5B4\uB97C \uC870\uD569\uD558\uC790"
 --- !u!114 &704011405
 MonoBehaviour:
   m_ObjectHideFlags: 0
