@@ -333,6 +333,14 @@ public class PlayerMove : WordGameObject
         }
     }
 
+    public override void SpeedUp()
+    {
+        realspeed = speed * 3.5f;
+        ChangeMaterial(1);
+        PlaySound(0.5f, 2);
+        Invoke("SpeedReset", 1f);
+    }
+
     public override void SizeUp()
     {
         if (sizeIndex < 2)
