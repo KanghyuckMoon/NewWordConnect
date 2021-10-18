@@ -255,7 +255,7 @@ public class PlayerMove : WordGameObject
         SceneManager.LoadScene("StageSelect");
     }
 
-    public void Died()
+    public override void Died()
     {
         if (isInvincibility) return;
         cloth.gameObject.SetActive(false);
@@ -367,7 +367,7 @@ public class PlayerMove : WordGameObject
         if (collision.transform.position.y + 0.1f < transform.position.y)
         {
             Jump();
-            collision.gameObject.GetComponent<EnemyBased>().Die();
+            collision.gameObject.GetComponent<EnemyBased>().Died();
             maincam.Shakecam(2f, 0.2f);
         }
         else

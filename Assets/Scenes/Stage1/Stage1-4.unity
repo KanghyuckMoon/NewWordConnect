@@ -19685,7 +19685,7 @@ MonoBehaviour:
   isStop: 0
   isObject: 0
   downmoveOn: 0
-  lightRays2D: {fileID: 0}
+  lightRays2D: {fileID: 1193139979}
 --- !u!50 &2016849913
 Rigidbody2D:
   serializedVersion: 4

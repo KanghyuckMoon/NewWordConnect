@@ -175,16 +175,17 @@ public class EnemyBased : WordGameObject
         base.SpeedStopnotinvoke();
     }
 
-    public virtual void Die()
+    public override void Died()
     {
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
         gameObject.GetComponent<Collider2D>().enabled = false;
         rigid.mass = 0;
-        if(isBloon)
+        if (isBloon)
         {
             bloon.BloonisNotJoint();
         }
     }
+
 
     public virtual void ResetArea()
     {

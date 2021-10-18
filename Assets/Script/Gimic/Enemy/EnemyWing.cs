@@ -42,9 +42,9 @@ public class EnemyWing : EnemyBased
         }
     }
 
-    public override void Die()
+    public override void Died()
     {
-        base.Die();
+        base.Died();
         wing.enabled = false;
     }
 

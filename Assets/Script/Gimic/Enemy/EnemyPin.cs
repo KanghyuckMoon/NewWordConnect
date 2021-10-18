@@ -93,7 +93,7 @@ public class EnemyPin : EnemyBased
 	{ 
 		if (attack)
 		{
-			Die();
+			Died();
 		}
 	}
 }

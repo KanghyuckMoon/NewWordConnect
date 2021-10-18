@@ -148,6 +148,13 @@ public class WordGameObject : MonoBehaviour
         {
             TriggerEnterBreakBlock(collision.gameObject);
         }
+        else if (collision.CompareTag("Spike"))
+        {
+            if(isObject)
+            {
+                Died();
+            }
+        }
 
     }
 
@@ -521,5 +528,10 @@ public class WordGameObject : MonoBehaviour
     protected virtual void TriggerEnterWind()
     {
         rigid.AddForce(Vector2.right * 2f);
+    }
+
+    public virtual void Died()
+    {
+
     }
 }
