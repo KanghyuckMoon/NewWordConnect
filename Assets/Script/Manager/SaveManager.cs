@@ -148,7 +148,7 @@ public class SaveManager : MonoSingleton<SaveManager>
 
     public void LoadKeySetting()
     {
-        if (File.Exists(Save_Path + Now_Save_FileName))
+        if (File.Exists(Save_Path + Save_KeySettingFileName))
         {
             string json = File.ReadAllText(Save_Path + Save_KeySettingFileName);
             keysetting = JsonUtility.FromJson<KeySetting>(json);

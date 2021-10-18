@@ -42,51 +42,28 @@ public class TitleAnimation : MonoBehaviour
     [SerializeField]
     private RectTransform Optionbar = null;
 
-    [SerializeField]
-    private RectTransform optionarrow = null;
-    [SerializeField]
-    private RectTransform[] optionRectTexts = null;
-    [SerializeField]
-    private Text[] optionTexts = null;
-
     private KeySetting keysetting;
+
+    [SerializeField]
+    private OptionPanel optionPanel;
 
     [SerializeField]
     private AudioClip testClip;
 
-    [SerializeField]
-    private GameObject wasdset;
-    [SerializeField]
-    private GameObject numpadset;
-
-    private bool optionOn;
-
     private void Awake()
     {
         images = GetComponent<Image>();
+    }
+    
+    public void StartInvisible()
+    {
+        StartCoroutine(AnimationTitle());
     }
 
     private void Start()
     {
         StartCoroutine(AnimationTitle());
         keysetting = SaveManager.Instance.CurrenKeySetting;
-        SetTexts();
-        SetBackGroundVolume(keysetting.backgroundvolume);
-        SetEffectVolume(keysetting.effectvolume);
-        if (keysetting.Wasd)
-        {
-            keysetting.wasdKeyCodes[0] = (int)KeyCode.W;
-            keysetting.wasdKeyCodes[1] = (int)KeyCode.S;
-            keysetting.wasdKeyCodes[2] = (int)KeyCode.D;
-            keysetting.wasdKeyCodes[3] = (int)KeyCode.A;
-        }
-        else
-        {
-            keysetting.wasdKeyCodes[0] = (int)KeyCode.UpArrow;
-            keysetting.wasdKeyCodes[1] = (int)KeyCode.DownArrow;
-            keysetting.wasdKeyCodes[2] = (int)KeyCode.LeftArrow;
-            keysetting.wasdKeyCodes[3] = (int)KeyCode.RightArrow;
-        }
     }
 
     private IEnumerator AnimationTitle()
@@ -117,6 +94,7 @@ public class TitleAnimation : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.Backspace))
                 {
+                    optionPanel.isEnabled = false;
                     select = 0;
                     spacetext.color = new Color(1, 1, 1, 0);
                     spacetext.DOKill();
@@ -127,16 +105,7 @@ public class TitleAnimation : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(keyCodes[i] - (keysetting.Numpad ? 0 : 208)))
                 {
-                    if(nowbarselect == 1)
-                    {
-                        if (optionselect == 2) SetBackGroundVolume(i);
-                        else if (optionselect == 3)
-                        {
-                            SetEffectVolume(i);
-                            SoundManager.Instance.SFXPlay(2);
-                        }
-                    }
-                    else if(i < 4)
+                    if(i < 4)
                     {
                         select = i;
                         MoveWord(select);
@@ -144,12 +113,7 @@ public class TitleAnimation : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    if (nowbarselect == 1)
-                    {
-                        if (optionselect == 0) ShowWasdSet();
-                        else if (optionselect == 1) ShowNumpadSet();
-                    }
-                    else if (nowbarselect == 0)
+                    if (nowbarselect == 0)
                     {
                         if (select == 3)
                         {
@@ -159,10 +123,17 @@ public class TitleAnimation : MonoBehaviour
                             Application.Quit(); // 어플리케이션 종료
                             #endif
                         }
+                        else if(select == 1)
+                        {
+                            loadingOn = false;
+                            MoveScreen(select);
+                            select = 0;
+                            optionselect = 0;
+                            return;
+                        }
                         else
                         {
                             loadingOn = false;
-                            optionOn = false;
                             MoveScreen(select);
                             select = 0;
                             optionselect = 0;
@@ -172,20 +143,6 @@ public class TitleAnimation : MonoBehaviour
                     {
                         StartGame(select);
                     }
-                }
-            }
-
-            if(nowbarselect == 1)
-            {
-                if(Input.GetKeyDown((KeyCode)keysetting.wasdKeyCodes[0]))
-                {
-                    OptionSelect(-1);
-                    MoveOption();
-                }
-                else if(Input.GetKeyDown((KeyCode)keysetting.wasdKeyCodes[1]))
-                {
-                    OptionSelect(1);
-                    MoveOption();
                 }
             }
         }
@@ -270,18 +227,6 @@ public class TitleAnimation : MonoBehaviour
         }
     }
 
-    private void MoveOption()
-    {
-        optionarrow.DOAnchorPosY(optionRectTexts[optionselect].anchoredPosition.y,0.2f);
-    }
-
-    private void OptionSelect(int i)
-    {
-        if (optionselect + i < 0) return;
-        if (optionselect + i > optionRectTexts.Length - 1) return;
-        optionselect += i;
-    }
-
     private void StartGame(int index)
     {
         loadingOn = false;
@@ -293,7 +238,7 @@ public class TitleAnimation : MonoBehaviour
     {
         if(nowbarselect == 1)
         {
-        optionOn = true;
+            optionPanel.isEnabled = true;
         }
         loadingOn = true;
     }
@@ -307,102 +252,6 @@ public class TitleAnimation : MonoBehaviour
         else
         {
             SceneManager.LoadScene("StoryIntro");
-        }
-    }
-
-    private void SetTexts()
-    {
-        SetTextWASD();
-        SetTextNumpad();
-    }
-
-    private void SetTextWASD()
-    {
-        optionTexts[0].text = "WASD/방향키 - " + (keysetting.Wasd ? "WASD" : "방향키");
-    }
-
-    private void SetTextNumpad()
-    {
-        optionTexts[1].text = "넘패드/키패드 - " + (keysetting.Numpad ? "넘패드" : "키패드");
-    }
-
-    private void SetBackGroundVolume(int num)
-    {
-        SoundManager.Instance.SetBgSoundVolume(num);
-        if(num == 9)
-        {
-            optionTexts[2].text = "배경음악 - " + 100;
-        }
-        else
-        {
-        optionTexts[2].text = "배경음악 - " + (num * 10);
-        }
-    }
-    private void SetEffectVolume(int num)
-    {
-        SoundManager.Instance.SetEffectSoundVolume(num);
-        if (num == 9)
-        {
-            optionTexts[3].text = "효과음 - " + 100;
-        }
-        else
-        {
-            optionTexts[3].text = "효과음 - " + (num * 10);
-        }
-    }
-
-    public void ShowWasdSet()
-    {
-        if(optionOn)
-        {
-            wasdset.gameObject.SetActive(true);
-            loadingOn = false;
-        }
-    }
-
-    public void ShowNumpadSet()
-    {
-        if(optionOn)
-        {
-            numpadset.gameObject.SetActive(true);
-            loadingOn = false;
-        }
-    }
-
-    public void SetWasd(bool input)
-    {
-        if(optionOn)
-        {
-            keysetting.Wasd = input;
-            SaveManager.Instance.SaveKeySetting();
-            wasdset.gameObject.SetActive(false);
-            loadingOn = true;
-            SetTexts();
-            if (input)
-            {
-                keysetting.wasdKeyCodes[0] = (int)KeyCode.W;
-                keysetting.wasdKeyCodes[1] = (int)KeyCode.S;
-                keysetting.wasdKeyCodes[2] = (int)KeyCode.D;
-                keysetting.wasdKeyCodes[3] = (int)KeyCode.A;
-            }
-            else
-            {
-                keysetting.wasdKeyCodes[0] = (int)KeyCode.UpArrow;
-                keysetting.wasdKeyCodes[1] = (int)KeyCode.DownArrow;
-                keysetting.wasdKeyCodes[2] = (int)KeyCode.LeftArrow;
-                keysetting.wasdKeyCodes[3] = (int)KeyCode.RightArrow;
-            }
-        }
-    }
-    public void SetKeyPad(bool input)
-    {
-        if(optionOn)
-        {
-            keysetting.Numpad = input;
-            SaveManager.Instance.SaveKeySetting();
-            numpadset.gameObject.SetActive(false);
-            loadingOn = true;
-            SetTexts();
         }
     }
 }

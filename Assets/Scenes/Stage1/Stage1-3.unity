@@ -182,7 +182,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8856bb063af14224cbbae680255d6c3d, type: 3}
   m_Color: {r: 1, g: 0.602824, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1087,7 +1087,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4763583815651505556, guid: 6733f460489a80245b01a0825690aaa2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 20.91
+      value: 18.09
       objectReference: {fileID: 0}
     - target: {fileID: 4763583815651505556, guid: 6733f460489a80245b01a0825690aaa2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -33671,7 +33671,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 561644164}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -24.160004, y: 16.91, z: 10}
+  m_LocalPosition: {x: -20.75, y: 11.35, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 334722425}
@@ -50989,6 +50989,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1102904517}
     m_Modifications:
+    - target: {fileID: 4724354811251909382, guid: c3c0e470761a013449ed51d8bbc38b50, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4724354811251909382, guid: c3c0e470761a013449ed51d8bbc38b50, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4724354811251909383, guid: c3c0e470761a013449ed51d8bbc38b50, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -57136,10 +57144,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PasswordBlock
       objectReference: {fileID: 0}
-    - target: {fileID: 271639418462701053, guid: ca049f2450f8f8e4181f99060830a2fc, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca049f2450f8f8e4181f99060830a2fc, type: 3}
 --- !u!4 &271639419594820061 stripped
@@ -62033,18 +62037,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1875998373}
     m_Modifications:
-    - target: {fileID: 4724354811251909382, guid: c3c0e470761a013449ed51d8bbc38b50, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4724354811251909382, guid: c3c0e470761a013449ed51d8bbc38b50, type: 3}
-      propertyPath: m_Color.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4724354811251909382, guid: c3c0e470761a013449ed51d8bbc38b50, type: 3}
-      propertyPath: m_Color.r
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4724354811251909383, guid: c3c0e470761a013449ed51d8bbc38b50, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -62092,10 +62084,6 @@ PrefabInstance:
     - target: {fileID: 4724354811251909401, guid: c3c0e470761a013449ed51d8bbc38b50, type: 3}
       propertyPath: m_Name
       value: ColorBlock
-      objectReference: {fileID: 0}
-    - target: {fileID: 4724354811251909401, guid: c3c0e470761a013449ed51d8bbc38b50, type: 3}
-      propertyPath: m_Layer
-      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3c0e470761a013449ed51d8bbc38b50, type: 3}
@@ -62290,10 +62278,6 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5835416907025169275, guid: 9628d479ec34f0f46aa8b87382f409ae, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5835416907025169275, guid: 9628d479ec34f0f46aa8b87382f409ae, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.5
       objectReference: {fileID: 0}
@@ -62334,20 +62318,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5835416907025169279, guid: 9628d479ec34f0f46aa8b87382f409ae, type: 3}
-      propertyPath: passwordColor
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5835416907025169279, guid: 9628d479ec34f0f46aa8b87382f409ae, type: 3}
-      propertyPath: gimicPassWords.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5835416907025169279, guid: 9628d479ec34f0f46aa8b87382f409ae, type: 3}
       propertyPath: gimicPassWords.Array.data[0]
       value: 
       objectReference: {fileID: 697613490}
-    - target: {fileID: 5835416907025169279, guid: 9628d479ec34f0f46aa8b87382f409ae, type: 3}
-      propertyPath: gimicPassWords.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9628d479ec34f0f46aa8b87382f409ae, type: 3}

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4724354811251909383}
   - component: {fileID: 4724354811251909382}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ColorBlock
   m_TagString: ColorBlock
   m_Icon: {fileID: 0}
@@ -71,12 +71,12 @@ SpriteRenderer:
   m_SortingLayerID: 1426724731
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  m_Color: {r: 0, g: 1, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 76d62d085397bf542afd8ce8184b006f, type: 3}
+  m_Color: {r: 0, g: 0, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.32, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
