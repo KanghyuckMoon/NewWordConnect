@@ -54,6 +54,11 @@ public class TitleAnimation : MonoBehaviour
     {
         images = GetComponent<Image>();
     }
+    
+    public void StartInvisible()
+    {
+        StartCoroutine(AnimationTitle());
+    }
 
     private void Start()
     {

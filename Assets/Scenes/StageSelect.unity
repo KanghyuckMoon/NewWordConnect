@@ -321,6 +321,7 @@ MonoBehaviour:
   keysettingoptionTexts:
   - {fileID: 1182578159}
   - {fileID: 1546363001}
+  optionType: 0
   soundsettingObj: {fileID: 899969501}
   soundsettingoptionTexts:
   - {fileID: 159247973}
@@ -1993,7 +1994,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &684714112
 RectTransform:
   m_ObjectHideFlags: 0
