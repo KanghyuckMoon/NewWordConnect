@@ -212,6 +212,7 @@ GameObject:
   m_Component:
   - component: {fileID: 26691577}
   - component: {fileID: 26691578}
+  - component: {fileID: 26691579}
   m_Layer: 0
   m_Name: MapManager
   m_TagString: Untagged
@@ -292,6 +293,21 @@ MonoBehaviour:
   - {fileID: 1605703214}
   - {fileID: 287622883}
   - {fileID: 1805426382}
+  materials:
+  - {fileID: 2100000, guid: f571860b36c7d394cb7d27a179f6ae28, type: 2}
+  - {fileID: 2100000, guid: 41a92cc056096c24492a1b681e5c3f46, type: 2}
+--- !u!114 &26691579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 26691576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de6545b7816ed94429322174a2c77cc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   optionTextObj: {fileID: 59405937}
   optionTexts:
   - {fileID: 388022138}
@@ -310,9 +326,8 @@ MonoBehaviour:
   - {fileID: 159247973}
   - {fileID: 1565960422}
   selectImage: {fileID: 1552808284}
-  materials:
-  - {fileID: 2100000, guid: f571860b36c7d394cb7d27a179f6ae28, type: 2}
-  - {fileID: 2100000, guid: 41a92cc056096c24492a1b681e5c3f46, type: 2}
+  isEnabled: 0
+  isDontNum: 0
 --- !u!1 &59405937
 GameObject:
   m_ObjectHideFlags: 0
@@ -434,8 +449,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 26691578}
-        m_TargetAssemblyTypeName: LevelSelectMap, Assembly-CSharp
+      - m_Target: {fileID: 26691579}
+        m_TargetAssemblyTypeName: OptionPanel, Assembly-CSharp
         m_MethodName: SetWASD
         m_Mode: 6
         m_Arguments:
@@ -2807,8 +2822,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 26691578}
-        m_TargetAssemblyTypeName: LevelSelectMap, Assembly-CSharp
+      - m_Target: {fileID: 26691579}
+        m_TargetAssemblyTypeName: OptionPanel, Assembly-CSharp
         m_MethodName: SetWASD
         m_Mode: 6
         m_Arguments:
@@ -3201,8 +3216,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 26691578}
-        m_TargetAssemblyTypeName: LevelSelectMap, Assembly-CSharp
+      - m_Target: {fileID: 26691579}
+        m_TargetAssemblyTypeName: OptionPanel, Assembly-CSharp
         m_MethodName: SetKeyPad
         m_Mode: 6
         m_Arguments:
@@ -3736,8 +3751,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 26691578}
-        m_TargetAssemblyTypeName: LevelSelectMap, Assembly-CSharp
+      - m_Target: {fileID: 26691579}
+        m_TargetAssemblyTypeName: OptionPanel, Assembly-CSharp
         m_MethodName: SetKeyPad
         m_Mode: 6
         m_Arguments:
