@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
+using System.IO;
 
 public class OptionPanel : MonoBehaviour
 {
@@ -21,8 +22,16 @@ public class OptionPanel : MonoBehaviour
 	KeyCode.Keypad9,
 	};
 
+	private enum OptionType
+    {
+		MainTitle,
+		InGame,
+		StageSelect
+    }
+
 	private KeySetting keysetting;
 	private SaveUser saveuser;
+
 	//옵션 패널
 	[SerializeField]
 	private GameObject optionTextObj;
@@ -34,6 +43,9 @@ public class OptionPanel : MonoBehaviour
 	private GameObject[] keysettingBtn;
 	[SerializeField]
 	private RectTransform[] keysettingoptionTexts;
+	[SerializeField]
+	private OptionType optionType;
+
 	//사운드 관련
 	[SerializeField]
 	private GameObject soundsettingObj;
@@ -52,6 +64,14 @@ public class OptionPanel : MonoBehaviour
     private void Start() //데이터를 가져옴
     {
 		keysetting = SaveManager.Instance.CurrenKeySetting;
+		if(keysetting == null)
+        {
+			if (File.Exists(Application.dataPath + "/Save/KeySettingFile.txt"))
+			{
+				string json = File.ReadAllText(Application.dataPath + "/Save/KeySettingFile.txt");
+				keysetting = JsonUtility.FromJson<KeySetting>(json);
+			}
+		}
 		saveuser = SaveManager.Instance.CurrentSaveUser;
 		MoveOptionSelect();
 		OptionObjSetActive();
@@ -151,7 +171,14 @@ public class OptionPanel : MonoBehaviour
 				}
 				else if (nowoptionselect == 2)
 				{
-					SceneManager.LoadScene("MainTitle");
+					if(optionType == OptionType.InGame)
+					{
+						SceneManager.LoadScene("StageSelect");
+					}
+					else
+                    {
+						SceneManager.LoadScene("MainTitle");
+                    }
 				}
 				else if (nowoptionselect == 3)
 				{

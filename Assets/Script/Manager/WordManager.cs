@@ -148,14 +148,6 @@ public class WordManager : MonoBehaviour
     //키세팅 변수
     private bool wasd;
     private bool keypad;
-
-    private int optionselect = 0;
-    [SerializeField]
-    private RectTransform optionarrow = null;
-    [SerializeField]
-    private RectTransform[] optionRectTexts = null;
-    [SerializeField]
-    private Text[] optionTexts = null;
     private KeySetting keysetting;
     private SaveUser saveUser;
 
@@ -170,6 +162,9 @@ public class WordManager : MonoBehaviour
     //쉐이더
     [SerializeField]
     private List<Material> materials;
+
+    [SerializeField]
+    private OptionPanel optionPanel;
 
     private void Awake()
     {
@@ -244,10 +239,7 @@ public class WordManager : MonoBehaviour
             isInputESC = !isInputESC;
             s_player.isStop = isInputESC;
             escSystem.SetActive(isInputESC);
-        }
-        if(isInputESC)
-        {
-            OptionInput();
+            optionPanel.isEnabled = isInputESC;
         }
         if (isInputESC) return;
         InputWordKey();
@@ -1546,86 +1538,6 @@ public class WordManager : MonoBehaviour
         dieAnimation.DOAnchorPosX(640, 2.5f);
     }
 
-    //ESC
-
-
-    private void SetTexts()
-    {
-        SetTextWASD();
-        SetTextNumpad();
-    }
-
-    private void SetTextWASD()
-    {
-        optionTexts[0].text = "WASD/방향키 - " + (keysetting.Wasd ? "WASD" : "방향키");
-    }
-
-    private void SetTextNumpad()
-    {
-        optionTexts[1].text = "넘패드/키패드 - " + (keysetting.Numpad ? "넘패드" : "키패드");
-    }
-
-    private void SetBackGroundVolume(int num)
-    {
-        SoundManager.Instance.SetBgSoundVolume(num);
-        if (num == 9)
-        {
-            optionTexts[2].text = "배경음악 - " + 100;
-        }
-        else
-        {
-            optionTexts[2].text = "배경음악 - " + (num * 10);
-        }
-    }
-    private void SetEffectVolume(int num)
-    {
-        SoundManager.Instance.SetEffectSoundVolume(num);
-        if (num == 9)
-        {
-            optionTexts[3].text = "효과음 - " + 100;
-        }
-        else
-        {
-            optionTexts[3].text = "효과음 - " + (num * 10);
-        }
-    }
-    private void MoveOption()
-    {
-        optionarrow.DOAnchorPosY(optionRectTexts[optionselect].anchoredPosition.y, 0.2f);
-    }
-
-    private void OptionSelect(int i)
-    {
-        if (optionselect + i < 0) return;
-        if (optionselect + i > optionRectTexts.Length - 1) return;
-        optionselect += i;
-    }
-
-    private void OptionInput()
-    {
-        for (int i = 0; i < keyCodes.Length; i++)
-        {
-            if (Input.GetKeyDown(keyCodes[i] - (keysetting.Numpad ? 0 : 208)))
-            {
-                    if (optionselect == 2) SetBackGroundVolume(i);
-                    if (optionselect == 3)
-                    {
-                        SetEffectVolume(i);
-                        SoundManager.Instance.SFXPlay(2);
-                    }
-            }
-        }
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                OptionSelect(-1);
-                MoveOption();
-            }
-            else if (Input.GetKeyDown(KeyCode.S))
-            {
-                OptionSelect(1);
-                MoveOption();
-            }
-    }
 
     public void WinGame()
     {
