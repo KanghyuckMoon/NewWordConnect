@@ -162,7 +162,7 @@ public class NameSetting : MonoBehaviour
         }
 
         SaveManager.Instance.SaveToJson();
-        SceneManager.LoadScene("StageSelect");
+        SceneManager.LoadScene("StageTutorial");
     }
 
     private void SetNameObj()

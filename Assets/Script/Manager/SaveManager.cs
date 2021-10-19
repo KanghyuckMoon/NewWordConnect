@@ -77,7 +77,7 @@ public class SaveManager : MonoSingleton<SaveManager>
 
     private void Awake()
     {
-        Save_Path = Application.dataPath + "/Save";
+        Save_Path = Application.persistentDataPath + "/Save";
         if (!Directory.Exists(Save_Path))
         {
             Directory.CreateDirectory(Save_Path);
