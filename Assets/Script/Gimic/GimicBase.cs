@@ -9,6 +9,8 @@ public class GimicBase : MonoBehaviour
     protected SpriteRenderer spriteRenderer;
     [SerializeField]
     private string animationName = null;
+    [SerializeField]
+    private bool isanimation = true;
 
     protected virtual void Start()
     {
@@ -18,7 +20,10 @@ public class GimicBase : MonoBehaviour
     public virtual void SetGimicSpeed(float speed)
     {
         realSpeed = speed;
+        if(isanimation)
+        {
         animator.SetFloat(animationName, realSpeed);
+        }
     }
 
     public virtual void AreaReset()
