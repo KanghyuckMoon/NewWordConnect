@@ -373,6 +373,7 @@ public class WordGameObject : MonoBehaviour
         w_pause = false;
         if (isObject)
         {
+            if(spriteRenderer != null)
             spriteRenderer.material = wordManager.ReturnMaterials(0);
             Settingvalue();
             rigid.velocity = pausevector;
@@ -498,6 +499,7 @@ public class WordGameObject : MonoBehaviour
     {
         if (isObject)
         {
+            if (spriteRenderer == null) return;
             spriteRenderer.material = wordManager.ReturnMaterials(index);
         }
     }

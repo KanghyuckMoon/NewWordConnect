@@ -13,19 +13,10 @@ public class GameLoadManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.R))
-        {
-            ReLoadScene();
-        }
     }
 
     private void LoadUI()
     {
         SceneManager.LoadScene("UIword", LoadSceneMode.Additive);
-    }
-
-    private void ReLoadScene()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

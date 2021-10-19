@@ -1544,7 +1544,7 @@ public class WordManager : MonoBehaviour
     {
         wingame.SetActive(true);
         WordSystem.SetActive(false);
-        wintext.GetComponent<Text>().text = "stage 1-1클리어";
+        wintext.GetComponent<Text>().text = "스테이지 클리어";
         wintext.anchoredPosition = new Vector2(-100, wintext.anchoredPosition.y);
         winbackground.anchoredPosition = new Vector2(-100, winbackground.anchoredPosition.y);
         wintext.DOAnchorPosX(0, 1);

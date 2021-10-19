@@ -78,7 +78,7 @@ public class PlayerMove : WordGameObject
         if (die) return;
         if (wordManager.isEvent) return;
         if (w_pause) return;
-        InputJump();
+        InputDied();
         InputMove();
     }
 
@@ -98,12 +98,12 @@ public class PlayerMove : WordGameObject
     }
     
 
-    private void InputJump()
+    private void InputDied()
     {
-            if(Input.GetKeyDown(KeyCode.Space))
-            {
-                Jump();
-            }
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            Died();
+        }
     }
 
     private void InputMove()
@@ -245,14 +245,21 @@ public class PlayerMove : WordGameObject
         win = true;
         isInvincibility = true;
         wordManager.WinGame();
-        for(int i = 0; i < NextStageUnLockList.Length; i++)
+        if(NowStageIndex == -1)
         {
-            if(SaveManager.Instance.CurrentSaveUser.isstageClears[NextStageUnLockList[i]] == 0)
-            {
-            SaveManager.Instance.CurrentSaveUser.isstageClears[NextStageUnLockList[i]] = 1;
-            }
+
         }
-        SaveManager.Instance.CurrentSaveUser.isstageClears[NowStageIndex] = 2;
+        else
+        {
+            for (int i = 0; i < NextStageUnLockList.Length; i++)
+            {
+                if (SaveManager.Instance.CurrentSaveUser.isstageClears[NextStageUnLockList[i]] == 0)
+                {
+                    SaveManager.Instance.CurrentSaveUser.isstageClears[NextStageUnLockList[i]] = 1;
+                }
+            }
+            SaveManager.Instance.CurrentSaveUser.isstageClears[NowStageIndex] = 2;
+        }
         Invoke("MoveStageSelect",2f);
     }
 

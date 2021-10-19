@@ -33,6 +33,7 @@ public class GimicBase : MonoBehaviour
 
     public virtual void SetMaterial(Material material)
     {
+        if(spriteRenderer != null)
         spriteRenderer.material = material;
     }
 }

@@ -130,6 +130,7 @@ public class StageWordObject : WordGameObject
     public override void SpeedUp()
     {
         base.SpeedUp();
+        realspeed = 1.5f;
         GimicListSendRealSpeed();
         GimicListSendMaterial(1);
     }
@@ -137,6 +138,7 @@ public class StageWordObject : WordGameObject
     public override void SpeedDown()
     {
         base.SpeedDown();
+        realspeed = 0.5f;
         GimicListSendRealSpeed();
         GimicListSendMaterial(3);
     }
