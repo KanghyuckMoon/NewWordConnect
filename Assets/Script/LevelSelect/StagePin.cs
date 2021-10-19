@@ -40,6 +40,8 @@ public class StagePin : MonoBehaviour
 	private int stageindex = 0;
 	[SerializeField]
 	private int stagestat;
+	[SerializeField]
+	private Material material;
 
 	private Dictionary<Direction, StagePin> _pinDirections;
 
@@ -53,12 +55,47 @@ public class StagePin : MonoBehaviour
 			{ Direction.Right, RightPin }
 		};
 		stagestat = SaveManager.Instance.CurrentSaveUser.isstageClears[stageindex];
-		// Hide the icon if needed
 		if (HideStageIcon)
 		{
 			GetComponent<SpriteRenderer>().enabled = false;
 		}
 		GetComponent<SpriteRenderer>().sprite = sprites[stagestat];
+		if(stagestat > 1)
+		{
+			int index = 0;
+			LineRenderer lineRenderer = gameObject.AddComponent<LineRenderer>();
+			lineRenderer.material = material;
+			lineRenderer.SetWidth(0.5f, 0.5f);
+			lineRenderer.positionCount--;
+			lineRenderer.SetPosition(index, new Vector2(transform.position.x,transform.position.y - 0.5f));
+			if (UpPin != null)
+			{
+				LineRender(ref index, lineRenderer,UpPin);
+			}
+			if (DownPin != null)
+			{
+				LineRender(ref index, lineRenderer,DownPin);
+			}
+			if (RightPin != null)
+			{
+				LineRender(ref index, lineRenderer,RightPin);
+			}
+			if (LeftPin != null)
+			{
+				LineRender(ref index, lineRenderer,LeftPin);
+			}
+
+		}
+	}
+
+	private void LineRender(ref int index, LineRenderer lineRenderer, StagePin pin)
+	{
+		index++;
+		lineRenderer.positionCount++;
+		lineRenderer.SetPosition(index, new Vector2(pin.transform.position.x, pin.transform.position.y - 0.5f));
+		index++;
+		lineRenderer.positionCount++;
+		lineRenderer.SetPosition(index, new Vector2(transform.position.x, transform.position.y - 0.5f));
 	}
 
 	public int ReturnStat()
