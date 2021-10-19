@@ -25362,6 +25362,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ReturnMovingTile  (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 902226940090749931, guid: 711b49d6992375044a9b2dc37b8297c8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 711b49d6992375044a9b2dc37b8297c8, type: 3}
 --- !u!4 &722214971 stripped
@@ -43103,6 +43107,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'ReturnMovingTile '
       objectReference: {fileID: 0}
+    - target: {fileID: 902226940090749931, guid: 711b49d6992375044a9b2dc37b8297c8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 711b49d6992375044a9b2dc37b8297c8, type: 3}
 --- !u!1001 &5060464967111154086
@@ -43479,7 +43487,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5981399910514388004, guid: 3cc3d982df3805c48b65c14accfff37a, type: 3}
       propertyPath: rotationSpeed
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5981399910514388005, guid: 3cc3d982df3805c48b65c14accfff37a, type: 3}
       propertyPath: m_RootOrder
