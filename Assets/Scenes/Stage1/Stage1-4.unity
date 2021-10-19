@@ -553,7 +553,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6752781387828421430, guid: 5266f2b06c221e94fb62585665c84b4e, type: 3}
       propertyPath: camSizeSet
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6752781387828421430, guid: 5266f2b06c221e94fb62585665c84b4e, type: 3}
       propertyPath: cameraLock
@@ -810,7 +810,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6752781387828421430, guid: 5266f2b06c221e94fb62585665c84b4e, type: 3}
       propertyPath: camSizeSet
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6752781387828421430, guid: 5266f2b06c221e94fb62585665c84b4e, type: 3}
       propertyPath: cameraLock
@@ -866,7 +866,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8813616485331644609, guid: 5266f2b06c221e94fb62585665c84b4e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5266f2b06c221e94fb62585665c84b4e, type: 3}
@@ -18206,7 +18206,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6752781387828421430, guid: 5266f2b06c221e94fb62585665c84b4e, type: 3}
       propertyPath: camSizeSet
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6752781387828421430, guid: 5266f2b06c221e94fb62585665c84b4e, type: 3}
       propertyPath: cameraLock
@@ -19453,7 +19453,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6752781387828421430, guid: 5266f2b06c221e94fb62585665c84b4e, type: 3}
       propertyPath: camSizeSet
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6752781387828421430, guid: 5266f2b06c221e94fb62585665c84b4e, type: 3}
       propertyPath: cameraLock
@@ -22538,7 +22538,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2016849910}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a2fba25a5cd15594e8f050a11e386c80, type: 3}
   m_Name: 
