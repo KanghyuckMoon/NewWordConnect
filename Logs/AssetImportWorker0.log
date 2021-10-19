@@ -260,3 +260,132 @@ AssetImportParameters requested are different than current active one (requested
   custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 152.723858 seconds.
+  path: Assets/Scenes/Stage1/Stage1-2.unity
+  artifactKey: Guid(f2c7900bf5d96364887957d36fc77a27) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Stage1/Stage1-2.unity using Guid(f2c7900bf5d96364887957d36fc77a27) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e65a802e538aa80387edfb8066e9cfab') in 0.023937 seconds 
+  Import took 0.029766 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 577.539229 seconds.
+  path: Assets/Scenes/Stage1/Stage1-1.unity
+  artifactKey: Guid(5a592007af6f39e41af4d32493f00f77) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Stage1/Stage1-1.unity using Guid(5a592007af6f39e41af4d32493f00f77) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '33d5393d43dc9df6eae4b76b2c97baa3') in 0.006228 seconds 
+  Import took 0.014498 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 8.769834 seconds.
+  path: Assets/Scenes/Stage1/Stage1-3.unity
+  artifactKey: Guid(9f782331019fe1042b27af791f9a144b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Stage1/Stage1-3.unity using Guid(9f782331019fe1042b27af791f9a144b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3ee18d4d28c777d2fcdf1e1de09728b8') in 0.012401 seconds 
+  Import took 0.028096 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 88.368485 seconds.
+  path: Assets/Scenes/Stage1/Stage1-3.unity
+  artifactKey: Guid(9f782331019fe1042b27af791f9a144b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Stage1/Stage1-3.unity using Guid(9f782331019fe1042b27af791f9a144b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f77d65ac448ba36f101e0a4f990316d3') in 0.005326 seconds 
+  Import took 0.020823 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.035823 seconds.
+  path: Assets/Scenes/Stage1/Stage1-4.unity
+  artifactKey: Guid(bb04197e5ea338b4390d4dc20814b4c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Stage1/Stage1-4.unity using Guid(bb04197e5ea338b4390d4dc20814b4c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6beb5aa4b0b698cccbb68bf9fbdcd3b7') in 0.005360 seconds 
+  Import took 0.019800 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 990.928443 seconds.
+  path: Assets/Prefebs/BreakBlock.prefab
+  artifactKey: Guid(370c3d41fa17ae148a299850e80710a1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefebs/BreakBlock.prefab using Guid(370c3d41fa17ae148a299850e80710a1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7d68c42208481298798d2dbea540cf53') in 0.218925 seconds 
+  Import took 0.226494 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000366 seconds.
+  path: Assets/Prefebs/Spike.prefab
+  artifactKey: Guid(060b33ae626e7914c817d4aa6cf4e0cc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefebs/Spike.prefab using Guid(060b33ae626e7914c817d4aa6cf4e0cc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '95f5ca52dfe78dec19cbabaddac24838') in 0.022960 seconds 
+  Import took 0.029279 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000391 seconds.
+  path: Assets/Prefebs/RotationTrap.prefab
+  artifactKey: Guid(3cc3d982df3805c48b65c14accfff37a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefebs/RotationTrap.prefab using Guid(3cc3d982df3805c48b65c14accfff37a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '829d8147b164bab21cdb107bc8d4d4f2') in 0.024908 seconds 
+  Import took 0.033505 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000416 seconds.
+  path: Assets/Prefebs/MovingTile 1.prefab
+  artifactKey: Guid(4172b317ccc39844c9444c5bddf74fcf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefebs/MovingTile 1.prefab using Guid(4172b317ccc39844c9444c5bddf74fcf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '56c1888066ce8fe1fbd908365ead6f22') in 0.024602 seconds 
+  Import took 0.033923 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000378 seconds.
+  path: Assets/Prefebs/ReturnMovingTile .prefab
+  artifactKey: Guid(711b49d6992375044a9b2dc37b8297c8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefebs/ReturnMovingTile .prefab using Guid(711b49d6992375044a9b2dc37b8297c8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '396107eec62d267990269efbb3ddc43b') in 0.020125 seconds 
+  Import took 0.027557 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000229 seconds.
+  path: Assets/Prefebs/SpikeMove.prefab
+  artifactKey: Guid(3b169e14ff8e68d4199d8a337f0629fd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefebs/SpikeMove.prefab using Guid(3b169e14ff8e68d4199d8a337f0629fd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '49c7d0c24c7cf26c4f7d61a9e3ac9ee6') in 0.022833 seconds 
+  Import took 0.029957 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000395 seconds.
+  path: Assets/Prefebs/Spring.prefab
+  artifactKey: Guid(c881fa2bbd15c0b43ba78c337c8781ba) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefebs/Spring.prefab using Guid(c881fa2bbd15c0b43ba78c337c8781ba) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '183c9f8483625c2904e464fcd26d761f') in 0.018384 seconds 
+  Import took 0.026527 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000250 seconds.
+  path: Assets/Prefebs/MovingTile.prefab
+  artifactKey: Guid(4f1e42459d3fa1f408fd94ed2d93040a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefebs/MovingTile.prefab using Guid(4f1e42459d3fa1f408fd94ed2d93040a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '976b5beec4cf8194e3be72edaa015a1d') in 0.019230 seconds 
+  Import took 0.026852 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000344 seconds.
+  path: Assets/Prefebs/PasswordBlock.prefab
+  artifactKey: Guid(ca049f2450f8f8e4181f99060830a2fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefebs/PasswordBlock.prefab using Guid(ca049f2450f8f8e4181f99060830a2fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e3694c1ff6df18faca7fab91841eb4b1') in 0.018377 seconds 
+  Import took 0.026922 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 401.912168 seconds.
+  path: Assets/Prefebs/Spike.prefab
+  artifactKey: Guid(060b33ae626e7914c817d4aa6cf4e0cc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefebs/Spike.prefab using Guid(060b33ae626e7914c817d4aa6cf4e0cc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1236b274d10c1072353d9aeac96eafe5') in 0.019649 seconds 
+  Import took 0.027137 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.034195 seconds.
+  path: Assets/Prefebs/Spike.prefab
+  artifactKey: Guid(060b33ae626e7914c817d4aa6cf4e0cc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefebs/Spike.prefab using Guid(060b33ae626e7914c817d4aa6cf4e0cc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1236b274d10c1072353d9aeac96eafe5') in 0.011703 seconds 
+  Import took 0.017064 seconds .
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
