@@ -202,6 +202,7 @@ public class WordManager : MonoBehaviour
         chain[0].gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
         chain[1].gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
         cooltimeImage.color = new Color(1, 1, 1, 0);
+        CleanSelectChainBreak();
     }
 
     private void FindSubjects()
