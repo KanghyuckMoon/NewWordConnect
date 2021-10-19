@@ -14,6 +14,7 @@ public class AreaSmoke : MonoBehaviour
     private bool isParticle = false;
     [SerializeField]
     private ParticleSystem particle;
+    private bool isOpen;
     //
     private void Start()
     {
@@ -42,6 +43,7 @@ public class AreaSmoke : MonoBehaviour
         {
             particle.startLifetime = 0.5f;
             particle.Stop();
+            isOpen = true;
         }
     }
 
@@ -71,6 +73,7 @@ public class AreaSmoke : MonoBehaviour
                 }
             }
             yield return null;
+            if (isOpen) break;
         }
     }
 }

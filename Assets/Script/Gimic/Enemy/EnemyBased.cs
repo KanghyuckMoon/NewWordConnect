@@ -31,6 +31,7 @@ public class EnemyBased : WordGameObject
     protected bool setAreaReset = false;
     protected Animator animator;
     protected float originmass;
+    protected float origingravity;
 
     protected override void Start()
     {
@@ -42,6 +43,7 @@ public class EnemyBased : WordGameObject
         resetPosition = transform.position;
         animator.SetFloat("Speed", speedset);
         originmass = rigid.mass;
+        origingravity = rigid.gravityScale;
     }
 
     public override void Settingvalue()
@@ -67,6 +69,7 @@ public class EnemyBased : WordGameObject
         }
         else
         {
+            Died();
             setAreaReset = false;
         }
     }
@@ -180,6 +183,7 @@ public class EnemyBased : WordGameObject
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
         gameObject.GetComponent<Collider2D>().enabled = false;
         rigid.mass = 0;
+        rigid.gravityScale = 0;
         if (isBloon)
         {
             bloon.BloonisNotJoint();
@@ -192,6 +196,6 @@ public class EnemyBased : WordGameObject
         gameObject.GetComponent<SpriteRenderer>().enabled = true;
         gameObject.GetComponent<Collider2D>().enabled = true;
         rigid.mass = originmass;
-
+        rigid.gravityScale = origingravity;
     }
 }

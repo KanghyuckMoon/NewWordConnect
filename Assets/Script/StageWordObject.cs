@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class StageWordObject : WordGameObject
 {
@@ -13,6 +14,7 @@ public class StageWordObject : WordGameObject
     private List<StageAreaReset> areaobj = new List<StageAreaReset>();
     [SerializeField]
     private GameObject gravityobj;
+    private Vector2 originalPosition;
 
     protected override void Start()
     {
@@ -20,6 +22,7 @@ public class StageWordObject : WordGameObject
         stageManager = FindObjectOfType<StageManager>();
         rigid = GetComponent<Rigidbody2D>();
         w_collider = GetComponent<Collider2D>();
+        originalPosition = transform.position;
         Settingvalue();
 
         for(int i = 0; i < areaobjects.childCount; i++)
@@ -55,7 +58,7 @@ public class StageWordObject : WordGameObject
     public override void Jump()
     {
         base.Jump();
-        for(int i = 0; i < gimicHasLigid.Count;i++)
+        for (int i = 0; i < gimicHasLigid.Count;i++)
         {
             gimicHasLigid[i].velocity = new Vector2(gimicHasLigid[i].velocity.x, 0);
             gimicHasLigid[i].AddForce(Vector2.up * jump, ForceMode2D.Impulse);

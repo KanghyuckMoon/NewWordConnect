@@ -1911,6 +1911,7 @@ MonoBehaviour:
     subjectGet: 
     conditionGet: 
     executionGet: 
+    isstageClears: 
   saveUser2:
     writingData: 0
     playerName: None
@@ -1919,6 +1920,7 @@ MonoBehaviour:
     subjectGet: 
     conditionGet: 
     executionGet: 
+    isstageClears: 
   saveUser3:
     writingData: 0
     playerName: None
@@ -1927,12 +1929,14 @@ MonoBehaviour:
     subjectGet: 
     conditionGet: 
     executionGet: 
+    isstageClears: 
   keysetting:
     Wasd: 1
     Numpad: 0
-    writingData: 1
+    writingData: 0
     backgroundvolume: 7
     effectvolume: 7
+    wasdKeyCodes: 77000000730000006400000061000000
 --- !u!4 &1126261153
 Transform:
   m_ObjectHideFlags: 0
