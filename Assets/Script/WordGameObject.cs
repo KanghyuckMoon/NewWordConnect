@@ -139,10 +139,6 @@ public class WordGameObject : MonoBehaviour
         {
             CollisionBreakBlock(collision.gameObject);
         }
-        else if(collision.gameObject.CompareTag("ColorBlock"))
-        {
-            TriggerEnterColorBlock(collision.gameObject);
-        }
 
     }
 
@@ -159,7 +155,10 @@ public class WordGameObject : MonoBehaviour
                 Died();
             }
         }
-
+        else if (collision.gameObject.CompareTag("ColorBlock"))
+        {
+            TriggerEnterColorBlock(collision.gameObject);
+        }
     }
 
     protected virtual void OnCollisionStay2D(Collision2D collision)
