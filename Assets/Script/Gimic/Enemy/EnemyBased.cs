@@ -137,6 +137,14 @@ public class EnemyBased : WordGameObject
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
         base.OnCollisionEnter2D(collision);
+        if(collision.gameObject.CompareTag("Enemy"))
+        {
+            if (collision.transform.position.y + 0.1f < transform.position.y)
+            {
+                Jump();
+                collision.gameObject.GetComponent<EnemyBased>().Died();
+            }
+        }
     }
 
     public override void SpeedUp()
