@@ -95,7 +95,6 @@ public class WordManager : MonoBehaviour
     private Text tempSetSizeText = null;
     private Image tempSetSizeImage = null;
     private GameObject backPanel = null;
-    private GameObject newPanel = null;
     private GameObject subjectScrollsPanel = null;
     private GameObject conditionScrollsPanel = null;
     private GameObject executionScrollsPanel = null;
@@ -314,7 +313,7 @@ public class WordManager : MonoBehaviour
 
     public void CreatePanel()
     {
-        newPanel = null;
+        GameObject newPanel = null;
         switch (nowWord)
         {
             case 0:
@@ -346,6 +345,7 @@ public class WordManager : MonoBehaviour
 
     public void AddSubjectWord(int index)
     {
+        GameObject newPanel = null;
         newPanel = CreatePanel_Pull(0);
         newPanel.SetActive(true);
         panellistSubject.Add(newPanel);
@@ -355,15 +355,18 @@ public class WordManager : MonoBehaviour
             {
                 subjectUnlock[i] = index;
                 SortList(subjectUnlock);
+                SetSizeListUI();
                 return;
             }
         }
         newPanel.transform.GetChild(1).GetComponent<Text>().text = subjectlist[subjectUnlock[index]];
         SortList(subjectUnlock);
+        SetSizeListUI();
     }
     public void ReCreateWordPanel(List<int> list, int type)
     {
-        for(int i = 2; i < list.Count; i++)
+        GameObject newPanel = null;
+        for (int i = 2; i < list.Count; i++)
         {
             if(list[i] == -1)
             {
@@ -393,7 +396,8 @@ public class WordManager : MonoBehaviour
 
     public void AddConditionWord(int index)
     {
-        newPanel = CreatePanel_Pull(0);
+        GameObject newPanel = null;
+        newPanel = CreatePanel_Pull(1);
         newPanel.SetActive(true);
         panellistCondition.Add(newPanel);
         for (int i = 0; i < conditionUnlock.Count; i++)
@@ -402,16 +406,19 @@ public class WordManager : MonoBehaviour
             {
                 conditionUnlock[i] = index;
                 SortList(conditionUnlock);
+                SetSizeListUI();
                 return;
             }
         }
         newPanel.transform.GetChild(1).GetComponent<Text>().text = conditionlist[conditionUnlock[index]];
         SortList(conditionUnlock);
+        SetSizeListUI();
     }
 
     public void AddExecutionWord(int index)
     {
-        newPanel = CreatePanel_Pull(0);
+        GameObject newPanel = null;
+        newPanel = CreatePanel_Pull(2);
         newPanel.SetActive(true);
         panellistExecution.Add(newPanel);
         for (int i = 0; i < executionUnlock.Count; i++)
@@ -420,11 +427,13 @@ public class WordManager : MonoBehaviour
             {
                 executionUnlock[i] = index;
                 SortList(executionUnlock);
+                SetSizeListUI();
                 return;
             }
         }
         newPanel.transform.GetChild(1).GetComponent<Text>().text = executionlist[executionUnlock[index]];
         SortList(executionUnlock);
+        SetSizeListUI();
     }
 
     public void SortList(List<int> list)
@@ -591,8 +600,8 @@ public class WordManager : MonoBehaviour
 
     private void SetSizeListUI()
     {
-        //SetSizeListImage();
         SetSizeListText();
+        SetNumListImage();
     }
 
     private void SetNumListImage()
@@ -601,168 +610,113 @@ public class WordManager : MonoBehaviour
         {
             tempSetSizeImage = panellistSubject[i].transform.GetChild(0).GetComponent<Image>();
             tempSetSizeImage.sprite = numSprites[i];
+            tempSetSizeImage.GetComponent<RectTransform>().sizeDelta = new Vector2(ReturnImageSizeDelta(panellistSubject.Count), ReturnImageSizeDelta(panellistSubject.Count));
         }
         for (int i = 0; i < panellistCondition.Count; i++)
         {
             tempSetSizeImage = panellistCondition[i].transform.GetChild(0).GetComponent<Image>();
             tempSetSizeImage.sprite = numSprites[i];
+            tempSetSizeImage.GetComponent<RectTransform>().sizeDelta = new Vector2(ReturnImageSizeDelta(panellistCondition .Count), ReturnImageSizeDelta(panellistSubject.Count));
         }
         for (int i = 0; i < panellistExecution.Count; i++)
         {
             tempSetSizeImage = panellistExecution[i].transform.GetChild(0).GetComponent<Image>();
             tempSetSizeImage.sprite = numSprites[i];
+            tempSetSizeImage.GetComponent<RectTransform>().sizeDelta = new Vector2(ReturnImageSizeDelta(panellistExecution.Count), ReturnImageSizeDelta(panellistSubject.Count));
+            Debug.Log(tempSetSizeImage);
         }
     }
-    
-
-    private void SetSizeListImage() // 패널의 이미지 조절 완료
-    {
-        tempSetSizeImage = null;
-        switch (nowWord)
-        {
-            case 0:
-                for (int i = 0; i < panellistSubject.Count; i++)
-                {
-                    tempSetSizeImage = panellistSubject[i].transform.GetChild(0).GetComponent<Image>();
-                    if (panellistSubject.Count == 1)
-                    {
-                        tempSetSizeImage.rectTransform.sizeDelta = new Vector2(100, 100);
-                        return;
-                    }
-                    if (panellistSubject.Count == 0) return;
-                    tempSetSizeImage.rectTransform.sizeDelta = SetSizeListImage_OutVector(panellistSubject.Count);
-                }
-                break;
-
-            case 1:
-                for (int i = 0; i < panellistCondition.Count; i++)
-                {
-                    tempSetSizeImage = panellistCondition[i].transform.GetChild(0).GetComponent<Image>();
-                    if (panellistCondition.Count == 1)
-                    {
-                        tempSetSizeImage.rectTransform.sizeDelta = new Vector2(100, 100);
-                        return;
-                    }
-                    if (panellistCondition.Count == 0) return;
-                    tempSetSizeImage.rectTransform.sizeDelta = SetSizeListImage_OutVector(panellistCondition.Count);
-                }
-                break;
-
-            case 2:
-                for (int i = 0; i < panellistExecution.Count; i++)
-                {
-                    tempSetSizeImage = panellistExecution[i].transform.GetChild(0).GetComponent<Image>();
-                    if (panellistExecution.Count == 1)
-                    {
-                        tempSetSizeImage.rectTransform.sizeDelta = new Vector2(100, 100);
-                        return;
-                    }
-                    if (panellistExecution.Count == 0) return;
-                    tempSetSizeImage.rectTransform.sizeDelta = SetSizeListImage_OutVector(panellistExecution.Count);
-                }
-                break;
-        }
-
-    }
-    private Vector2 SetSizeListImage_OutVector(int count)
-    {
-        return new Vector2(100 / (count * 0.5f), 100 / (count * 0.5f));
-    } //하위 함수
-
     private void SetSizeListText() //패널의 텍스트 사이즈 조절
     {
         tempSetSizeText = null;
-        switch (nowWord)
+        for (int i = 0; i < panellistSubject.Count; i++)
         {
-            case 0:
-                for (int i = 0; i < panellistSubject.Count; i++)
-                {
-                    tempSetSizeText = panellistSubject[i].transform.GetChild(1).GetComponent<Text>();
-                    if (panellistSubject.Count == 1)
-                    {
-                        tempSetSizeText.rectTransform.sizeDelta = SetSizeListText_OutVector(i,0);
-                        panellistSubject[i].transform.GetChild(1).GetComponent<Text>().fontSize = 60;
-                        return;
-                    }
-                    tempSetSizeText.rectTransform.sizeDelta = SetSizeListText_OutVector(i,0);
-                    tempSetSizeText.fontSize = SetSizeListText_OutFontSize(panellistSubject.Count);
-                }
+            tempSetSizeText = panellistSubject[i].transform.GetChild(1).GetComponent<Text>();
+            if (panellistSubject.Count == 1)
+            {
+                tempSetSizeText.rectTransform.sizeDelta = new Vector2(ReturnSizeDelta(panellistSubject.Count) - ReturnImageSizeDelta(panellistSubject.Count), 40);
+                tempSetSizeText.rectTransform.anchoredPosition = new Vector2(ReturnImageSizeDelta(panellistSubject.Count) * 0.5f, -15);
                 break;
-
-            case 1:
-                for (int i = 0; i < panellistCondition.Count; i++)
-                {
-                    tempSetSizeText = panellistCondition[i].transform.GetChild(1).GetComponent<Text>();
-                    if (panellistCondition.Count == 1)
-                    {
-                        tempSetSizeText.rectTransform.sizeDelta = SetSizeListText_OutVector(i,1);
-                        tempSetSizeText.fontSize = 60;
-                        return;
-                    }
-                    tempSetSizeText.rectTransform.sizeDelta = SetSizeListText_OutVector(i,1);
-                    tempSetSizeText.fontSize = SetSizeListText_OutFontSize(panellistCondition.Count);
-                }
-                break;
-
-            case 2:
-                for (int i = 0; i < panellistExecution.Count; i++)
-                {
-                    tempSetSizeText = panellistExecution[i].transform.GetChild(1).GetComponent<Text>();
-                    if (panellistExecution.Count == 1)
-                    {
-                        tempSetSizeText.rectTransform.sizeDelta = SetSizeListText_OutVector(i,2);
-                        tempSetSizeText.fontSize = 60;
-                        return;
-                    }
-                    tempSetSizeText.rectTransform.sizeDelta = SetSizeListText_OutVector(i,2);
-                    tempSetSizeText.fontSize = SetSizeListText_OutFontSize(panellistExecution.Count);
-                }
-                break;
+            }
+            tempSetSizeText.rectTransform.sizeDelta = new Vector2(ReturnSizeDelta(panellistSubject.Count) - ReturnImageSizeDelta(panellistSubject.Count), 40);
+            tempSetSizeText.rectTransform.anchoredPosition = new Vector2(ReturnImageSizeDelta(panellistSubject.Count) * 0.5f, -15);
         }
-
+        for (int i = 0; i < panellistCondition.Count; i++)
+        {
+            tempSetSizeText = panellistCondition[i].transform.GetChild(1).GetComponent<Text>();
+            if (panellistCondition.Count == 1)
+            {
+                tempSetSizeText.rectTransform.sizeDelta = new Vector2(ReturnSizeDelta(panellistCondition.Count) - ReturnImageSizeDelta(panellistCondition.Count), 40);
+                tempSetSizeText.rectTransform.anchoredPosition = new Vector2(ReturnImageSizeDelta(panellistSubject.Count) * 0.5f, -15);
+                break;
+            }
+            tempSetSizeText.rectTransform.sizeDelta = new Vector2(ReturnSizeDelta(panellistCondition.Count) - ReturnImageSizeDelta(panellistCondition.Count), 40);
+            tempSetSizeText.rectTransform.anchoredPosition = new Vector2(ReturnImageSizeDelta(panellistSubject.Count) * 0.5f, -15);
+        }
+        for (int i = 0; i < panellistExecution.Count; i++)
+        {
+            tempSetSizeText = panellistExecution[i].transform.GetChild(1).GetComponent<Text>();
+            if (panellistExecution.Count == 1)
+            {
+                tempSetSizeText.rectTransform.sizeDelta = new Vector2(ReturnSizeDelta(panellistExecution.Count) - ReturnImageSizeDelta(panellistExecution.Count), 40);
+                tempSetSizeText.rectTransform.anchoredPosition = new Vector2(ReturnImageSizeDelta(panellistSubject.Count) * 0.5f, -15);
+                break;
+            }
+            tempSetSizeText.rectTransform.sizeDelta = new Vector2(ReturnSizeDelta(panellistExecution.Count) - ReturnImageSizeDelta(panellistExecution.Count), 40);
+            tempSetSizeText.rectTransform.anchoredPosition = new Vector2(ReturnImageSizeDelta(panellistSubject.Count) * 0.5f, -15);
+        }
     }
-    private Vector2 SetSizeListText_OutVector(int i, int type)
-    {
-        switch(type)
-        {
-            case 0:
-                return new Vector2(640 / panellistSubject.Count, panellistSubject[i].transform.GetChild(1).GetComponent<Text>().rectTransform.rect.height);
 
-            case 1:
-                return new Vector2(640 / panellistCondition.Count, panellistCondition[i].transform.GetChild(1).GetComponent<Text>().rectTransform.rect.height);
-
-            case 2:
-                return new Vector2(640 / panellistExecution.Count, panellistExecution[i].transform.GetChild(1).GetComponent<Text>().rectTransform.rect.height);
-            default:
-                return new Vector2(0,0);
-        }
-        
-    } // 하위 함수
-    private int SetSizeListText_OutFontSize(int count) // 하위 함수 폰트 수치
+    private float ReturnSizeDelta(int count)
     {
         switch (count)
         {
             case 1:
-                return 60;
+                return 620;
             case 2:
-                return 50;
+                return 310;
             case 3:
-                return 40;
+                return 206;
             case 4:
-                return 35;
+                return 155;
             case 5:
-                return 30;
+                return 124;
             case 6:
-                return 26;
+                return 103;
             case 7:
-                return 24;
+                return 88;
             case 8:
-                return 22;
+                return 77;
             case 9:
-                return 20;
-            default:
-                return 20;
+                return 68;
         }
+        return 0;
+    }
+
+    private float ReturnImageSizeDelta(int count)
+    {
+        switch (count)
+        {
+            case 1:
+                return 40;
+            case 2:
+                return 40;
+            case 3:
+                return 35;
+            case 4:
+                return 30;
+            case 5:
+                return 28;
+            case 6:
+                return 25;
+            case 7:
+                return 23;
+            case 8:
+                return 21;
+            case 9:
+                return 19;
+        }
+        return 0;
     }
 
     private void CleanSelect() // 초기화

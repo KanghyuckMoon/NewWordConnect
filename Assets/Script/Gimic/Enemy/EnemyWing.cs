@@ -29,7 +29,7 @@ public class EnemyWing : EnemyBased
         {
             updown = false;
         }
-        rigid.AddForce(Vector2.up * enemymoveSpeed * (float)(updown ? -1 : 1), ForceMode2D.Impulse);
+        rigid.AddForce(Vector2.up * enemymoveSpeed * (float)(updown ? -1 : 1) * (realspeed > 0 ? 1 : 0), ForceMode2D.Impulse);
     }
 
     public override void Settingvalue()

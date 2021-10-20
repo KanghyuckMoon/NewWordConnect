@@ -440,13 +440,4 @@ public class PlayerMove : WordGameObject
     {
 
     }
-    protected virtual void TriggerEnterColorBlock(GameObject collision)
-    {
-        if (!(rigid.velocity.y <= 0) && collision.transform.position.y >= transform.position.y)
-        {
-            collision.GetComponent<GimicPassWord>().ChangeColor();
-            rigid.velocity = new Vector2(rigid.velocity.x, 0);
-            rigid.AddForce(Vector2.down * 3f, ForceMode2D.Impulse);
-        }
-    }
 }
