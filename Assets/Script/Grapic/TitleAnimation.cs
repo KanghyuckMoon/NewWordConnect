@@ -111,7 +111,7 @@ public class TitleAnimation : MonoBehaviour
                         MoveWord(select);
                     }
                 }
-                else if (Input.GetKeyDown(KeyCode.Space))
+                else if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return))
                 {
                     if (nowbarselect == 0)
                     {

@@ -135,7 +135,7 @@ public class OptionPanel : MonoBehaviour
 				}
 				MoveOptionSelect();
 			}
-			else if (Input.GetKeyDown(KeyCode.Space))
+			else if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return))
 			{
 				if (nowoptionselect == -1)
 				{

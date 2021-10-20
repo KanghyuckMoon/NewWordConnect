@@ -111,6 +111,8 @@ public class WordManager : MonoBehaviour
     //
     [SerializeField]
     private GameObject escSystem;
+    [SerializeField]
+    private Sprite[] numSprites;
 
     //주어용 변수
     private PlayerMove s_player;
@@ -393,7 +395,7 @@ public class WordManager : MonoBehaviour
     {
         newPanel = CreatePanel_Pull(0);
         newPanel.SetActive(true);
-        panellistSubject.Add(newPanel);
+        panellistCondition.Add(newPanel);
         for (int i = 0; i < conditionUnlock.Count; i++)
         {
             if (conditionUnlock[i] == -1)
@@ -411,7 +413,7 @@ public class WordManager : MonoBehaviour
     {
         newPanel = CreatePanel_Pull(0);
         newPanel.SetActive(true);
-        panellistSubject.Add(newPanel);
+        panellistExecution.Add(newPanel);
         for (int i = 0; i < executionUnlock.Count; i++)
         {
             if (executionUnlock[i] == -1)
@@ -589,10 +591,28 @@ public class WordManager : MonoBehaviour
 
     private void SetSizeListUI()
     {
-        SetSizeListImage();
+        //SetSizeListImage();
         SetSizeListText();
     }
 
+    private void SetNumListImage()
+    {
+        for (int i = 0; i < panellistSubject.Count; i++)
+        {
+            tempSetSizeImage = panellistSubject[i].transform.GetChild(0).GetComponent<Image>();
+            tempSetSizeImage.sprite = numSprites[i];
+        }
+        for (int i = 0; i < panellistCondition.Count; i++)
+        {
+            tempSetSizeImage = panellistCondition[i].transform.GetChild(0).GetComponent<Image>();
+            tempSetSizeImage.sprite = numSprites[i];
+        }
+        for (int i = 0; i < panellistExecution.Count; i++)
+        {
+            tempSetSizeImage = panellistExecution[i].transform.GetChild(0).GetComponent<Image>();
+            tempSetSizeImage.sprite = numSprites[i];
+        }
+    }
     
 
     private void SetSizeListImage() // 패널의 이미지 조절 완료

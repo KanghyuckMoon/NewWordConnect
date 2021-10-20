@@ -70,32 +70,51 @@ public class StagePin : MonoBehaviour
 			lineRenderer.SetPosition(index, new Vector2(transform.position.x,transform.position.y - 0.5f));
 			if (UpPin != null)
 			{
-				LineRender(ref index, lineRenderer,UpPin);
+				LineRender(ref index, lineRenderer,UpPin, transform.position);
 			}
 			if (DownPin != null)
 			{
-				LineRender(ref index, lineRenderer,DownPin);
+				LineRender(ref index, lineRenderer,DownPin, transform.position);
 			}
 			if (RightPin != null)
 			{
-				LineRender(ref index, lineRenderer,RightPin);
+				LineRender(ref index, lineRenderer,RightPin, transform.position);
 			}
 			if (LeftPin != null)
 			{
-				LineRender(ref index, lineRenderer,LeftPin);
+				LineRender(ref index, lineRenderer,LeftPin, transform.position);
 			}
 
 		}
 	}
 
-	private void LineRender(ref int index, LineRenderer lineRenderer, StagePin pin)
+	private void LineRender(ref int index, LineRenderer lineRenderer, StagePin pin,Vector2 backPosition)
 	{
 		index++;
 		lineRenderer.positionCount++;
 		lineRenderer.SetPosition(index, new Vector2(pin.transform.position.x, pin.transform.position.y - 0.5f));
+		if(pin.isAutomatic)
+        {
+			if(pin.UpPin != null)
+			{
+				LineRender(ref index, lineRenderer, pin.UpPin,pin.transform.position);
+			}
+			if (pin.DownPin != null)
+			{
+				LineRender(ref index, lineRenderer, pin.DownPin, pin.transform.position);
+			}
+			if (pin.RightPin != null)
+			{
+				LineRender(ref index, lineRenderer, pin.RightPin, pin.transform.position);
+			}
+			if (pin.LeftPin != null)
+			{
+				LineRender(ref index, lineRenderer, pin.LeftPin, pin.transform.position);
+			}
+		}
 		index++;
 		lineRenderer.positionCount++;
-		lineRenderer.SetPosition(index, new Vector2(transform.position.x, transform.position.y - 0.5f));
+		lineRenderer.SetPosition(index, new Vector2(backPosition.x, backPosition.y - 0.5f));
 	}
 
 	public int ReturnStat()

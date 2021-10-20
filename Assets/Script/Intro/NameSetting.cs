@@ -135,7 +135,7 @@ public class NameSetting : MonoBehaviour
         SaveManager.Instance.CurrentSaveUser.writingData = true;
         for(int i = 0; i < 10; i++)
         {
-            if(i < 4)
+            if(i < 2)
             {
                 SaveManager.Instance.CurrentSaveUser.subjectGet.Add(i);
                 SaveManager.Instance.CurrentSaveUser.conditionGet.Add(i);
@@ -215,7 +215,7 @@ public class NameSetting : MonoBehaviour
             x++;
             MoveBox();
         }
-        else if (Input.GetKeyDown(KeyCode.Space))
+        else if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return))
         {
             SetName();
         }
